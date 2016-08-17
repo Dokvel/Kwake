@@ -9,10 +9,14 @@ import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import GoogleButton from './components/GoogleButton/GoogleButton';
 
 // Import Actions
 import { toggleAddPost } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
+
+// Import Selectors
+import { getCurrentUser } from './AppReducer';
 
 export class App extends Component {
   constructor(props) {
@@ -54,6 +58,7 @@ export class App extends Component {
             toggleAddPost={this.toggleAddPostSection}
           />
           <div className={styles.container}>
+            <GoogleButton currentUser={this.props.currentUser} dispatch={this.props.dispatch}/>
             {this.props.children}
           </div>
           <Footer />
@@ -73,6 +78,7 @@ App.propTypes = {
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    currentUser: getCurrentUser(store),
   };
 }
 

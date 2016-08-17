@@ -33,6 +33,7 @@ import Helmet from 'react-helmet';
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
 import posts from './routes/post.routes';
+import auth from './routes/auth.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
 
@@ -56,6 +57,7 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use('/api', posts);
+app.use('/api', auth);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -75,6 +77,7 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
+        <meta name="google-signin-client_id" content="452279282281-5so873vs9uunojpmo12badkqb10lfr7j.apps.googleusercontent.com">
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
         <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
@@ -87,9 +90,16 @@ const renderFullPage = (html, initialState) => {
           `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
-        </script>
-        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
-        <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
+      </script>
+      <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
+      <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
+      <script type="text/javascript">
+        function triggerGoogleLoaded() {
+          window.dispatchEvent(new Event('google-loaded'));
+        }
+      </script>     
+       <script src="https://apis.google.com/js/client.js"></script>
+      <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async defer></script>
       </body>
     </html>
   `;
