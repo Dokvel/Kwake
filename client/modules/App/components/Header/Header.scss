@@ -1,0 +1,27 @@
+@import "../../../../main.scss";
+
+.content {
+  font-family: $futuraFontFamily;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  max-width: 1240px;
+  overflow: auto;
+  margin: auto;
+  flex-flow: row wrap;
+  align-items: center;
+  flex: 1 100%;
+}
+
+.auth {
+  align-self: flex-end;
+}
+
+.brand {
+  align-self: flex-start;
+}
+
+.brand a {
+  text-decoration: none;
+  color: #FFF;
+}
