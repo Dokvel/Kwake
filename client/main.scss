@@ -9,6 +9,7 @@ $dark-grey   : #424754;
 $light-black : #13151a;
 $black       : #07090C;
 
+$backgroundColor: #101114;
 // Font configuration
 $baseFontColor    : $grey;
 
@@ -27,4 +28,5 @@ body {
   color       : $baseFontColor;
   font-family : $baseFontFamily;
   font-size   : $baseFontSize-M;
+  background-color: $backgroundColor;
 }
