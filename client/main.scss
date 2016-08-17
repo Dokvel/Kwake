@@ -1,0 +1,30 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300,300italic);
+
+// Color palette
+$blue      : #0060ff;
+$green     : #43b351;
+
+$grey        : #fefefe;
+$dark-grey   : #424754;
+$light-black : #13151a;
+$black       : #07090C;
+
+// Font configuration
+$baseFontColor    : $grey;
+
+$baseFontFamily   : 'Open Sans', sans-serif;
+$futuraFontFamily : "futura-pt", sans-serif;
+
+$baseFontSize-L   : 36px;
+$baseFontSize-M   : 16px;
+$baseFontSize-S   : 14px;
+$baseFontSize-XS  : 12px;
+
+body {
+  margin  : 0;
+  padding : 0;
+
+  color       : $baseFontColor;
+  font-family : $baseFontFamily;
+  font-size   : $baseFontSize-M;
+}
