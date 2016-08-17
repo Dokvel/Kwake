@@ -19,11 +19,23 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: 'style-loader!css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
-      },
-      {
+        loader: [
+          'style-loader',
+          'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
+          'postcss-loader'
+        ],
+      }, {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loaders: [
+          'style-loader',
+          'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
+          'sass-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
+          'postcss-loader'
+        ],
+      }, {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=10000'
       },
     ],
   },
