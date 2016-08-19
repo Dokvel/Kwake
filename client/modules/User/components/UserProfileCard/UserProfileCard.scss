@@ -6,6 +6,7 @@
 
   width: 440px;
 
+  margin-top: 200px;
   padding: 40px 50px;
 
   border-radius: 8px;
@@ -47,24 +48,8 @@
   }
 
   &_btnAsk {
-    display: block;
-
-    width: 258px;
-    height: 40px;
-
-    margin: 22px auto 0 auto;
-
-    color: $grey;
-    font-family: $futuraFontFamily;
-    font-size: $baseFontSize-M;
-    line-height: 40px;
+    margin-top: 22px;
     text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    border-radius: 20px;
-    background-color: $blue;
-    box-shadow: 0px 10px 18px 0px rgba(0, 0, 0, 0.5);
   }
 
   &_desc {
@@ -76,7 +61,7 @@
       float: left;
 
       & > i {
-        color: $dark-grey;
+        color: $cardLockIconColor;
         font-size: 64px;
       }
     }
@@ -117,7 +102,7 @@
 
       & .score {
         float: right;
-
+        color: $cardLockIconColor;
         font-size: 18px;
       }
     }
@@ -146,7 +131,7 @@
       text-align: center;
 
       & > i {
-        color: $dark-grey;
+        color: $cardLockIconColor;
         font-size: 40px;
       }
     }

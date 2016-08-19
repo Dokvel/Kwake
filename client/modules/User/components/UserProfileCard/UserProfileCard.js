@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 
 // Import Components
 import RadarChart from './components/RadarChart/RadarChart';
+import Button from '../../../../components/Button/Button';
 
 // Import Style
 import styles from './UserProfileCard.scss';
@@ -18,7 +19,9 @@ function UserProfileCard() {
       <div className={styles.card_type}>
         Individualist
       </div>
-      <a className={styles.card_btnAsk} href="#">Ask for a review</a>
+      <div className={styles.card_btnAsk}>
+        <Button rightIcon="bi_interface-arrow-right">Ask for a review</Button>
+      </div>
       <div className={styles.card_desc}>
         <div className={styles.card_desc_score}>
           <i className="fa fa-lock"></i>
