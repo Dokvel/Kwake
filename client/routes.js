@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
+import DefaultLayout from './components/DefaultLayout/DefaultLayout';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -11,13 +12,16 @@ if (typeof require.ensure !== 'function') {
 }
 
 /* Workaround for async react routes to work with react-hot-reloader till
-  https://github.com/reactjs/react-router/issues/2182 and
-  https://github.com/gaearon/react-hot-loader/issues/288 is fixed.
+ https://github.com/reactjs/react-router/issues/2182 and
+ https://github.com/gaearon/react-hot-loader/issues/288 is fixed.
  */
 if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./modules/Post/pages/PostListPage/PostListPage');
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
+  require('./modules/User/pages/SetupAccountPage/SetupAccountPage');
+  require('./modules/App/pages/LandingPage/LandingPage');
+  require('./components/DefaultLayout/DefaultLayout');
 }
 
 // react-router setup with code-splitting
@@ -27,17 +31,19 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
+          cb(null, require('./modules/App/pages/LandingPage/LandingPage').default);
         });
       }}
     />
-    <Route
-      path="/posts/:slug-:cuid"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostDetailPage/PostDetailPage').default);
-        });
-      }}
-    />
+    <Route component={DefaultLayout}>
+      <Route
+        path="/users/setup"
+        getComponent={(nextState, cb) => {
+          require.ensure([], require => {
+            cb(null, require('./modules/User/pages/SetupAccountPage/SetupAccountPage').default);
+          });
+        }}
+      />
+    </Route>
   </Route>
 );

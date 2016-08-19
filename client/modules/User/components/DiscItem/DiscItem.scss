@@ -1,0 +1,63 @@
+@import "../../../../main.scss";
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  color: $grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  > * {
+    flex: 1 100%;
+    align-items: center;
+  }
+  .name {
+    font-family: $futuraFontFamily;
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $grey;
+  }
+
+  .description {
+    text-align: center;
+    font-size: $baseFontSize-M;
+    color: $grey;
+    opacity: 0.5;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+  }
+
+  .controls {
+    display: flex;
+    flex-flow: row wrap;
+    color: $grey;
+    > * {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      align-self: center;
+    }
+    .manage-button-minus,
+    .manage-button-plus {
+      font-size: 31px;
+      opacity: 0.4;
+      cursor: pointer;
+    }
+    .manage-button-plus {
+      align-self: flex-start;
+      flex: none;
+    }
+
+    .manage-button-minus {
+      align-self: flex-end;
+      flex: none;
+    }
+    .manage-button-minus--selected,
+    .manage-button-plus--selected {
+      opacity: 1;
+    }
+  }
+}
+
+

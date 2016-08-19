@@ -1,0 +1,42 @@
+@import "../../../../main.scss";
+
+.container {
+  margin-top: 40px;
+  .headers {
+    color: $grey;
+    opacity: 0.3;
+    font-size: 18px;
+    display: flex;
+    flex-flow: row;
+    > * {
+      flex: 1 100%;
+    }
+
+    .high-header,
+    .low-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      min-width: 45px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.title {
+  justify-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  font-size: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}

@@ -7,12 +7,11 @@ import styles from './App.css';
 // Import Components
 import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 
 // Import Actions
-import { toggleAddPost } from './AppActions';
-import { switchLanguage } from '../../modules/Intl/IntlActions';
+
+// Import Selectors
+import { getCurrentUser } from './AppReducer';
 
 export class App extends Component {
   constructor(props) {
@@ -21,12 +20,8 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({isMounted: true}); // eslint-disable-line
+    this.setState({ isMounted: true }); // eslint-disable-line
   }
-
-  toggleAddPostSection = () => {
-    this.props.dispatch(toggleAddPost());
-  };
 
   render() {
     return (
@@ -34,8 +29,8 @@ export class App extends Component {
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>
           <Helmet
-            title="MERN Starter - Blog App"
-            titleTemplate="%s - Blog App"
+            title="KWAKE"
+            titleTemplate="%s - Kwake App"
             meta={[
               { charset: 'utf-8' },
               {
@@ -48,15 +43,7 @@ export class App extends Component {
               },
             ]}
           />
-          <Header
-            switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-            intl={this.props.intl}
-            toggleAddPost={this.toggleAddPostSection}
-          />
-          <div className={styles.container}>
-            {this.props.children}
-          </div>
-          <Footer />
+          {this.props.children}
         </div>
       </div>
     );
@@ -73,6 +60,7 @@ App.propTypes = {
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    currentUser: getCurrentUser(store),
   };
 }
 
