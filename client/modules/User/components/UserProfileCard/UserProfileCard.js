@@ -1,11 +1,17 @@
 import React, { PropTypes } from 'react';
 
+// Import Components
+import RadarChart from './components/RadarChart/RadarChart';
+
 // Import Style
 import styles from './UserProfileCard.scss';
 
 function UserProfileCard() {
   return (
     <div className={styles.card}>
+      <div className={styles.card_chart}>
+        <RadarChart />
+      </div>
       <div className={styles.card_user}>
         Kate Mayinnsee <span className={styles.card_user_isa}>is a</span>
       </div>
@@ -67,11 +73,6 @@ function UserProfileCard() {
           <br />
           <span className={styles.card_info_desc_text}>Willfully sets off in new directions and relies on their own wits, resources for success.</span>
         </div>
-      </div>
-      <div className={styles.card_actions}>
-        <div className={styles.card_actions_action}>acting</div>
-        <div className={styles.card_actions_action}>thinking</div>
-        <div className={styles.card_actions_action}>moving</div>
       </div>
     </div>
   );

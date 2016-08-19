@@ -86,6 +86,7 @@ const renderFullPage = (html, initialState) => {
         <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
         <script src="https://use.fontawesome.com/2e5e07ef2f.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
       </head>
       <body>
         <div id="root">${html}</div>
@@ -103,7 +104,7 @@ const renderFullPage = (html, initialState) => {
           window.dispatchEvent(new Event('google-loaded'));
         }
       </script>
-       <script src="https://apis.google.com/js/client.js"></script>
+      <script src="https://apis.google.com/js/client.js"></script>
       <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async defer></script>
       </body>
     </html>

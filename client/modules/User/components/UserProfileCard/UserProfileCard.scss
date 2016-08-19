@@ -2,9 +2,9 @@
 
 .card {
   box-sizing: border-box;
+  position: relative;
 
   width: 440px;
-  height: 925px;
 
   padding: 40px 50px;
 
@@ -13,8 +13,17 @@
 
   box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
+  &_chart {
+    position: absolute;
+    top: -220px;
+    left: 20px;
+
+    font-family: $futuraFontFamily;
+    text-transform: uppercase;
+  }
+
   &_user {
-    margin-top: 104px;
+    margin-top: 120px;
 
     font-family: $futuraFontFamily;
     font-size: $baseFontSize-M;
@@ -156,26 +165,6 @@
       &_text {
         font-weight: 300;
       }
-    }
-  }
-
-  &_actions {
-    margin-top: 40px;
-
-    text-align: center;
-
-    &_action {
-      display: inline-block;
-
-      margin-right: 4px;
-      padding: 4px 12px;
-
-      font-size: $baseFontSize-XS;
-      font-weight: 300;
-      text-transform: lowercase;
-
-      border-radius: 13px;
-      background-color: #1d2128;
     }
   }
 }

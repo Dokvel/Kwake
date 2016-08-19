@@ -1,0 +1,18 @@
+@import "../../../../../../main.scss";
+
+.chart {
+  position: relative;
+}
+
+.userPhoto {
+  position: absolute;
+  top: 160px;
+  left: 162px;
+
+  width: 75px;
+  height: 75px;
+
+  border-radius: 50%;
+  background-image: url('https://randomuser.me/api/portraits/women/44.jpg');
+  background-size: contain;
+}
