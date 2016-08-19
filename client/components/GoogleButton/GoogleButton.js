@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { signOut } from '../../../../util/google-api'
-import styles from './GoogleButton.css';
-import cn from 'classnames'
-import { signIn, notAuthenticated } from '../../AppActions';
+import { signIn } from '../../modules/App/AppActions';
 
 export default class GoogleButton extends Component {
   constructor(props) {
@@ -11,6 +8,9 @@ export default class GoogleButton extends Component {
 
   componentDidMount() {
     window.addEventListener('google-loaded', this.renderGoogleLoginButton.bind(this));
+    if (window.gapi && gapi.signin2) {
+      this.renderGoogleLoginButton()
+    }
   }
 
   renderGoogleLoginButton() {
@@ -37,24 +37,10 @@ export default class GoogleButton extends Component {
     });
   }
 
-  clickSignOut() {
-    signOut(() => {
-      console.log('User signed out.');
-      this.props.dispatch(notAuthenticated())
-    })
-  }
-
   render() {
-    let classes = cn({ [styles.gb_authenticated]: this.props.currentUser })
     return (
       <div>
-        {this.props.currentUser &&
-        <div>
-          Logged in as {this.props.currentUser.givenName} {this.props.currentUser.familyName}
-          ({this.props.currentUser.email})
-          <a href="#" onClick={this.clickSignOut.bind(this)}>Sign out</a>
-        </div>}
-        <div className={classes} id="my-signin2"></div>
+        <div id="my-signin2"></div>
       </div>
     );
   }

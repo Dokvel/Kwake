@@ -1,4 +1,7 @@
 import callApi from '../../util/apiCaller';
+import { browserHistory } from 'react-router';
+
+import { hasProfileCompleted } from './AppReducer';
 
 // Export Constants
 export const TOGGLE_ADD_POST = 'TOGGLE_ADD_POST';
@@ -15,7 +18,14 @@ export function toggleAddPost() {
 export function signIn(user) {
   return (dispatch) => {
     return callApi('signIn', 'post', { user })
-      .then(res => dispatch(authenticated(res.user)));
+      .then(res => {
+        dispatch(authenticated(res.user));
+        if (!hasProfileCompleted(res.user)) {
+          browserHistory.push('/users/setup');
+        } else {
+          browserHistory.push('/profile');
+        }
+      });
   };
 }
 

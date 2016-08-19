@@ -7,7 +7,6 @@ import styles from './App.css';
 // Import Components
 import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
-import Header from './components/Header/Header';
 
 // Import Actions
 
@@ -44,10 +43,7 @@ export class App extends Component {
               },
             ]}
           />
-          <Header currentUser={this.props.currentUser} dispatch={this.props.dispatch}/>
-          <div className={styles.container}>
-            {this.props.children}
-          </div>
+          {this.props.children}
         </div>
       </div>
     );

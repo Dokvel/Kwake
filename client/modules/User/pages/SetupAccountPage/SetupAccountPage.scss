@@ -1,0 +1,19 @@
+@import "../../../../main.scss";
+
+.stage {
+  text-transform: uppercase;
+  text-align: center;
+  font-family: $futuraFontFamily;
+  font-size: $baseFontSize-S;
+  color: $grey;
+  opacity: 0.4;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.wrapper > * {
+  flex: 1 100%;
+}

@@ -9,6 +9,11 @@ const userSchema = new Schema({
   googleId: { type: 'String', required: true },
   cuid: { type: 'String', required: true },
   dateAdded: { type: 'Date', default: Date.now, required: true },
+  talents: [],
+  dominance: { type: 'Number' },
+  influence: { type: 'Number' },
+  steadiness: { type: 'Number' },
+  conscientiousness: { type: 'Number' }
 });
 
 export default mongoose.model('User', userSchema);

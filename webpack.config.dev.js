@@ -38,7 +38,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /vendor/],
         loader: [
           'style-loader',
           'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
@@ -46,14 +46,14 @@ module.exports = {
         ],
       }, {
         test: /\.css$/,
-        include: /node_modules/,
+        include: [/node_modules/, /vendor/],
         loaders: [
           'style-loader',
           'css-loader'
         ],
       }, {
         test: /\.scss$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /vendor/],
         loaders: [
           'style-loader',
           'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
@@ -65,12 +65,16 @@ module.exports = {
         exclude: [/node_modules/, /.+\.config.js/],
         loader: 'babel'
       }, {
-        test: /\.(jpe?g|gif|png|svg)$/i,
+        test: /\.(jpe?g|gif|png)$/i,
         loader: 'url-loader?limit=10000'
       }, {
         test: /\.json$/,
         loader: 'json-loader'
       },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file?name=public/fonts/[name].[ext]'
+      }
     ],
   },
 
