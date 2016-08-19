@@ -1,4 +1,4 @@
-@import "../../../../main.scss";
+@import "../../main.scss";
 
 .content {
   font-family: $futuraFontFamily;
@@ -13,15 +13,23 @@
   flex: 1 100%;
 }
 
-.auth {
-  align-self: flex-end;
-}
-
 .brand {
+  display: flex;
+  flex: 1;
   align-self: flex-start;
 }
 
 .brand a {
   text-decoration: none;
   color: #FFF;
+}
+
+.user-menu {
+  align-self: flex-end;
+  display: flex;
+}
+
+.user-info {
+  display: flex;
+  align-self: flex-end;
 }

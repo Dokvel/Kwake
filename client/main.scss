@@ -20,13 +20,3 @@ $baseFontSize-L   : 36px;
 $baseFontSize-M   : 16px;
 $baseFontSize-S   : 14px;
 $baseFontSize-XS  : 12px;
-
-body {
-  margin  : 0;
-  padding : 0;
-
-  color       : $baseFontColor;
-  font-family : $baseFontFamily;
-  font-size   : $baseFontSize-M;
-  background-color: $backgroundColor;
-}
