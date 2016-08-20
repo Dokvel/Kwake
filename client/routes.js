@@ -22,6 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/User/pages/SetupAccountPage/SetupAccountPage');
   require('./modules/App/pages/LandingPage/LandingPage');
   require('./components/DefaultLayout/DefaultLayout');
+  require('./modules/User/pages/UserProfilePage/UserProfilePage');
 }
 
 // react-router setup with code-splitting
@@ -42,6 +43,14 @@ export default (
           require.ensure([], require => {
             cb(null, require('./modules/User/pages/SetupAccountPage/SetupAccountPage').default);
           });
+        }}
+      />
+      <Route
+        path="/profile"
+        getComponent={(nextState, cb) => {
+          require.ensure([], require => {
+            cb(null, require('./modules/User/pages/UserProfilePage/UserProfilePage').default);
+        });
         }}
       />
     </Route>
