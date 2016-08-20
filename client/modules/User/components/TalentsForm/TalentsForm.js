@@ -2,8 +2,7 @@
  * Created by alex on 18.08.16.
  */
 
-import React, { Component, PropTypes } from 'react';
-import _ from 'lodash'
+import React, { Component } from 'react';
 
 // Import Style
 import styles from './TalentsForm.scss';

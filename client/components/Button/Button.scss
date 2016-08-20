@@ -45,9 +45,13 @@
 }
 
 .button:hover {
-  background: #1ECD97;
+  background: $buttonGreen;
 }
 
 .button:focus {
   outline: none;
+}
+
+.button--blue, .button--blue:hover {
+  background: $buttonBlue;
 }
