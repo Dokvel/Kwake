@@ -35,3 +35,14 @@ export function setupProfile(req, res) {
     );
   }
 }
+
+export function dropAll(req, res) {
+  User.remove({}).exec((err, result) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.redirect('/');
+      }
+    }
+  );
+}
