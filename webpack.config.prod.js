@@ -43,7 +43,7 @@ module.exports = {
       }, {
         test: /\.css$/,
         include: [/node_modules/, /vendor/],
-        loaders: ['style-loader', 'css-loader'],
+        loaders: ['style-loader', 'css-loader']
       }, {
         test: /\.scss$/,
         exclude: [/node_modules/, /vendor/],
@@ -56,15 +56,14 @@ module.exports = {
       }, {
         test: /\.jsx*$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel'
       }, {
         test: /\.(jpe?g|gif|png|svg)$/i,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=10000'
       }, {
         test: /\.json$/,
-        loader: 'json-loader',
-      },
-      {
+        loader: 'json-loader'
+      }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         loader: 'file?name=public/fonts/[name].[ext]'
       }

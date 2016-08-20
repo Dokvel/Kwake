@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // Import Style
-import styles from './App.css';
+import styles from './App.scss';
 
 // Import Components
 import Helmet from 'react-helmet';
