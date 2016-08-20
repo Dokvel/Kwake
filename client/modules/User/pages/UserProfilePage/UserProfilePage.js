@@ -10,12 +10,21 @@ import UserProfileCard from '../../components/UserProfileCard/UserProfileCard';
 // Import Actions
 
 // Import Selectors
+import { getCurrentUser } from '../../../App/AppReducer';
 
 class UserProfilePage extends Component {
+
+  componentDidMount() {
+    let { currentUser } = this.props;
+    if (!currentUser) {
+      this.context.router.push('/');
+    }
+  }
+
   render() {
     return (
       <div className={styles.container}>
-        <UserProfileCard />
+        {this.props.currentUser && <UserProfileCard user={this.props.currentUser}/>}
       </div>
     );
   }
@@ -26,7 +35,7 @@ class UserProfilePage extends Component {
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
-    null
+    currentUser: getCurrentUser(state)
   };
 }
 

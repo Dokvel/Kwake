@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 // Import Style
 import styles from './RadarChart.scss';
 
 // Import Functions
-import { RadarChartFunc } from './RadarChartFunc';
+import { RadarChartFunc } from '../../util/charts/RadarChart';
 
 export default class RadarChart extends Component {
   componentDidMount() {
