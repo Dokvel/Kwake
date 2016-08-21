@@ -49,9 +49,7 @@ export class TalentsForm extends Component {
     return (
       <div>
         <div className={styles.title}>
-          Select
-          <b>{AMOUNT_SELECT_TALENTS - this.state.selectedTalents.length}</b>
-          talents that characterize you:
+          <span>Select <b>{AMOUNT_SELECT_TALENTS - this.state.selectedTalents.length}</b> talents that characterize you:</span>
         </div>
         {/*<pre>{JSON.stringify(this.state)}</pre>*/}
         <div className={styles.container}>
