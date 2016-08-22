@@ -3,8 +3,11 @@ import * as UserController from '../controllers/user.controller';
 
 const router = new Router();
 
+import passport from 'passport';
+
 // Add a new Post
-router.route('/profile').put(UserController.setupProfile);
+router.put('/profile', /*passport.authenticate('bearer', { session: false }),*/ UserController.setupProfile);
+
 if (process.env.DEMO_MODE) {
   router.route('/drop_all').get(UserController.dropAll);
 }

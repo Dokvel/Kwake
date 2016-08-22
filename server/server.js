@@ -5,6 +5,10 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
+//Auth
+import User from './models/user';
+import passport from 'passport';
+
 // Webpack Requirements
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
@@ -37,6 +41,9 @@ import auth from './routes/auth.routes';
 import users from './routes/user.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
+import bearer from 'passport-http-bearer';
+
+var BearerStrategy = bearer.Strategy;
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -51,6 +58,20 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
   // feed some dummy data in DB.
   dummyData();
 });
+
+passport.use(new BearerStrategy(
+  (token, done) => {
+    User.findOne({ authenticationToken: token }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      return done(null, user, { scope: 'all' });
+    });
+  }
+));
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
@@ -79,7 +100,6 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
-        <meta name="google-signin-client_id" content="452279282281-5so873vs9uunojpmo12badkqb10lfr7j.apps.googleusercontent.com">
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
 
         <script src='https://use.typekit.net/dor3mna.js'></script>
@@ -93,7 +113,7 @@ const renderFullPage = (html, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
-          `//<![CDATA[
+    `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
       </script>
@@ -104,8 +124,7 @@ const renderFullPage = (html, initialState) => {
           window.dispatchEvent(new Event('google-loaded'));
         }
       </script>
-      <script src="https://apis.google.com/js/client.js"></script>
-      <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async defer></script>
+      <script src="https://apis.google.com/js/client:platform.js?onload=triggerGoogleLoaded" async defer></script>
       </body>
     </html>
   `;

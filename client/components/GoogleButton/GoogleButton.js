@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { signIn } from '../../modules/App/AppActions';
+import { googleSignIn } from '../../modules/App/AppActions';
+import googleCreds from '../../../data/google_creds.json';
+import Button from '../Button/Button';
+
+import { getAuthenticationToken } from '../../util/apiCaller';
 
 export default class GoogleButton extends Component {
   constructor(props) {
@@ -7,32 +11,27 @@ export default class GoogleButton extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('google-loaded', this.renderGoogleLoginButton.bind(this));
-    if (window.gapi && gapi.signin2) {
-      this.renderGoogleLoginButton()
+    window.addEventListener('google-loaded', this.initGoogleAuth2.bind(this));
+    if (window.gapi) {
+      this.initGoogleAuth2()
     }
   }
 
-  renderGoogleLoginButton() {
-    gapi.signin2.render('my-signin2', {
-      'scope': 'profile email https://www.googleapis.com/auth/calendar.readonly',
-      'width': 240,
-      'height': 50,
-      'longtitle': true,
-      'onsuccess': (googleUser) => {
-        let profile = googleUser.getBasicProfile()
-        console.log('Logged in as: ' + profile.getName());
-        let user = {
-          givenName: profile.getGivenName(),
-          familyName: profile.getFamilyName(),
-          googleId: profile.getId(),
-          image: profile.getImageUrl(),
-          email: profile.getEmail()
-        }
-        this.props.dispatch(signIn(user))
-      },
-      'onfailure': (error) => {
-        console.log(error);
+  initGoogleAuth2() {
+    window.gapi.load('auth2', () => {
+      window.auth2 = gapi.auth2.init({
+        client_id: googleCreds.client_id,
+        scope: 'profile email https://www.googleapis.com/auth/calendar.readonly'
+      });
+    });
+  }
+
+  onGoogleSignIn() {
+    window.auth2.grantOfflineAccess({ 'redirect_uri': 'postmessage' }).then((authResult)=> {
+      if (authResult['code']) {
+        this.props.dispatch(googleSignIn(authResult['code']))
+      } else {
+        // There was an error.
       }
     });
   }
@@ -40,7 +39,12 @@ export default class GoogleButton extends Component {
   render() {
     return (
       <div>
-        <div id="my-signin2"></div>
+        <Button color={Button.COLOR_RED}
+                onClick={this.onGoogleSignIn.bind(this)}
+                rightIcon="bi_interface-arrow-right"
+                leftIcon=" bi_logo-picasa">
+          Sign in with Google
+        </Button>
       </div>
     );
   }

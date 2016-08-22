@@ -15,16 +15,17 @@ export function toggleAddPost() {
   };
 }
 
-export function signIn(user) {
+export function googleSignIn(code) {
   return (dispatch) => {
-    return callApi('signIn', 'post', { user })
+    return callApi('auth/google/callback', 'post', { code: code })
       .then(res => {
         dispatch(authenticated(res.user));
+        //localStorage.authentication_token = res.authenticationToken;
         if (!hasProfileCompleted(res.user)) {
-          browserHistory.push('/users/setup');
-        } else {
-          browserHistory.push('/profile');
-        }
+         browserHistory.push('/users/setup');
+         } else {
+         browserHistory.push('/profile');
+         }
       });
   };
 }

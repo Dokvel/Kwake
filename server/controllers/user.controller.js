@@ -10,29 +10,27 @@ export function setupProfile(req, res) {
     res.status(403).end();
   } else {
     User.findOne({ email: req.body.user.email }).exec((err, user) => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
+      if (err) {
+        res.status(500).send(err);
+      } else {
 
-          if (user) {
-            user.talents = [...req.body.user.talents];
-            user.influence = req.body.user.influence;
-            user.dominance = req.body.user.dominance;
-            user.steadiness = req.body.user.steadiness;
-            user.conscientiousness = req.body.user.conscientiousness;
+        if (user) {
+          user.talents = [...req.body.user.talents];
+          user.influence = req.body.user.influence;
+          user.dominance = req.body.user.dominance;
+          user.steadiness = req.body.user.steadiness;
+          user.conscientiousness = req.body.user.conscientiousness;
 
-            user.save((err, saved) => {
-              if (err) {
-                res.status(500).send(err);
-              } else {
-                res.json({ user: saved });
-              }
-            });
-          }
+          user.save((err, saved) => {
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              res.json({ user: saved });
+            }
+          });
         }
-
       }
-    );
+    });
   }
 }
 

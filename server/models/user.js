@@ -7,6 +7,8 @@ const userSchema = new Schema({
   image: { type: 'String', required: true },
   email: { type: 'String', required: true },
   googleId: { type: 'String', required: true },
+  googleAccessToken: { type: 'String', required: true },
+  authenticationToken: { type: 'String' },
   cuid: { type: 'String', required: true },
   dateAdded: { type: 'Date', default: Date.now, required: true },
   talents: [],

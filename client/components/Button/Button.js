@@ -31,4 +31,6 @@ Button.defaultProps = {
 };
 
 Button.COLOR_BLUE = 'blue';
+Button.COLOR_RED = 'red';
+
 export default Button;

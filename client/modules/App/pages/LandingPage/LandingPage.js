@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 // Import Styles
 
-
+import { isLoggedIn } from '../../../../util/apiCaller';
 
 // Import Actions
 
@@ -22,6 +22,7 @@ export class LandingPage extends Component {
     );
   }
 }
+
 LandingPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
