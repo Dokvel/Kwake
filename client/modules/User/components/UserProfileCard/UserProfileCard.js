@@ -6,19 +6,19 @@ import cn from 'classnames';
 import RadarChart from '../../../../components/RadarChart/RadarChart';
 import Button from '../../../../components/Button/Button';
 
+// Import Functions
+import { generateDiscKey } from '../../../../util/generateDiscKey';
+
 // Import Style
 import styles from './UserProfileCard.scss';
 
 // Import Static Data
 import talents from '../../../../../data/talents';
-import personalityTypes from '../../../../../data/personalityTypes';
 
 function UserProfileCard(props) {
   let talentsObj = _.keyBy(talents, 'key');
-  let personalityTypesObj = _.keyBy(personalityTypes, 'key');
-
   let user = props.user;
-  let userType = personalityTypesObj[`${user.dominance}${user.influence}${user.steadiness}${user.conscientiousness}`];
+  let userType = generateDiscKey(user);
 
   return (
     <div className={styles.card}>

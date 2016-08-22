@@ -19,34 +19,37 @@ export default class RadarChart extends Component {
     let talentsObj = _.keyBy(dataTalents, 'key');
     let { talents } = this.props.user;
 
-    let point_1 = 5,
-    		point_3 = 4,
-    		point_5 = 3.5,
-    		point_7 = 5,
-    		point_9 = 4.75;
-
+    let points = [ 5, 4, 3.5, 5, 4.75 ];
     let baseMult = 3.75;
 
-    let point_2  = (point_1+point_3)/baseMult,
-    		point_4  = (point_3+point_5)/baseMult,
-    		point_6  = (point_5+point_7)/baseMult,
-    		point_8  = (point_7+point_9)/baseMult,
-    		point_10 = (point_9+point_1)/baseMult;
+    let subPoints = [];
+    let subPoint = null;
+    let data = [[]];
+    let item = {};
 
-    let data = [
-    	[
-    		{axis: talentsObj[talents[0]].abbreviation, value: point_1},
-    		{axis: "", value: point_2},
-    		{axis: talentsObj[talents[1]].abbreviation, value: point_3},
-    		{axis: "", value: point_4},
-    		{axis: talentsObj[talents[2]].abbreviation, value: point_5},
-    		{axis: "", value: point_6},
-    		{axis: talentsObj[talents[3]].abbreviation, value: point_7},
-    		{axis: "", value: point_8},
-    		{axis: talentsObj[talents[4]].abbreviation, value: point_9},
-    		{axis: "", value: point_10}
-    	]
-    ];
+    for (var i = 0; i < points.length; i++) {
+      if (i === (points.length - 1)) {
+        subPoint = (points[i] + points[0])/baseMult;
+        subPoints.push(subPoint);
+      } else {
+        subPoint = (points[i] + points[i+1])/baseMult;
+        subPoints.push(subPoint);
+      }
+    }
+
+    for (var i = 0; i < talents.length; i++) {
+      item = {
+        axis: talentsObj[talents[i]].abbreviation,
+        value: points[i]
+      }
+      data[0].push(item);
+
+      item = {
+        axis: "",
+        value: subPoints[i]
+      }
+      data[0].push(item);
+    }
 
     let color = d3.scale.ordinal().range(["here will be color"]);
 
