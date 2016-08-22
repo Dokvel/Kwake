@@ -24,7 +24,7 @@ class UserProfilePage extends Component {
   render() {
     return (
       <div className={styles.container}>
-        {this.props.currentUser && <UserProfileCard user={this.props.currentUser}/>}
+        {this.props.currentUser && <UserProfileCard user={this.props.currentUser} />}
       </div>
     );
   }
