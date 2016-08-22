@@ -1,64 +1,77 @@
 import React, { Component } from 'react';
-
-// Import Style
-import styles from './RadarChart.scss';
+import _ from 'lodash';
 
 // Import Functions
 import { RadarChartFunc } from '../../util/charts/RadarChart';
 
+// Import Style
+import styles from './RadarChart.scss';
+
+// Import Static Data
+import dataTalents from '../../../data/talents';
+
 export default class RadarChart extends Component {
   componentDidMount() {
-    var margin = {top: 50, right: 50, bottom: 50, left: 50},
+    let margin = {top: 50, right: 50, bottom: 50, left: 50},
     		width  = 300,
     		height = 300;
 
-    var stg = 5,
-    		ach = 4,
-    		com = 3.5,
-    		inc = 5,
-    		har = 4.75;
+    let talentsObj = _.keyBy(dataTalents, 'key');
+    let { talents } = this.props.user;
 
-    var baseMult = 3.75;
+    let points = [ 5, 4, 3.5, 5, 4.75 ];
+    let baseMult = 3.75;
 
-    var stg_ach = ((stg+ach)/baseMult)*1.1,
-    		ach_com = (ach+com)/baseMult,
-    		com_inc = (com+inc)/baseMult,
-    		inc_har = (inc+har)/baseMult,
-    		har_stg = (har+stg)/baseMult;
+    let subPoints = [];
+    let subPoint = null;
+    let data = [[]];
+    let item = {};
 
-    var data = [
-    	[
-    		{axis:"stg",value:stg},
-    		{axis:"",value:stg_ach},
-    		{axis:"ach",value:ach},
-    		{axis:"",value:ach_com},
-    		{axis:"com",value:com},
-    		{axis:"",value:com_inc},
-    		{axis:"inc",value:inc},
-    		{axis:"",value:inc_har},
-    		{axis:"har",value:har},
-    		{axis:"",value:har_stg}
-    	]
-    ];
+    for (var i = 0; i < points.length; i++) {
+      if (i === (points.length - 1)) {
+        subPoint = (points[i] + points[0])/baseMult;
+        subPoints.push(subPoint);
+      } else {
+        subPoint = (points[i] + points[i+1])/baseMult;
+        subPoints.push(subPoint);
+      }
+    }
 
-    var color = d3.scale.ordinal().range(["here will be color"]);
+    for (var i = 0; i < talents.length; i++) {
+      item = {
+        axis: talentsObj[talents[i]].abbreviation,
+        value: points[i]
+      }
+      data[0].push(item);
 
-    var radarChartOptions = {
+      item = {
+        axis: "",
+        value: subPoints[i]
+      }
+      data[0].push(item);
+    }
+
+    let color = d3.scale.ordinal().range(["here will be color"]);
+
+    let radarChartOptions = {
     	w: width,
     	h: height,
     	margin: margin,
     	color: color
     };
 
-    //Call function to draw the Radar chart
     RadarChartFunc(".radarChart", data, radarChartOptions);
   }
 
   render() {
+      let userPhotoStyle = {
+      backgroundImage: 'url(' + this.props.user.image + ')'
+    };
+
     return (
       <div className={styles.chart}>
         <div className="radarChart">
-          <div className={styles.userPhoto}></div>
+          <div className={styles.userPhoto} style={userPhotoStyle}></div>
         </div>
       </div>
     );

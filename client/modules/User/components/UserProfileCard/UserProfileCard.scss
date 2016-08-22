@@ -33,7 +33,6 @@
 
     &_isa {
       color: $dark-grey;
-      font-weight: 600;
     }
   }
 
@@ -87,7 +86,7 @@
 
       list-style-type: none;
       border-bottom-style: solid;
-      border-bottom-color: $dark-grey;
+      border-bottom-color: $cardDarkGreyBorderColor;
       border-bottom-width: 1px;
 
       &:last-child {
@@ -112,20 +111,20 @@
     margin-top: 32px;
 
     &_troubleshooting {
-      margin-top: 24px;
+      margin-top: 36px;
     }
 
     &_score {
       margin-right: 24px;
       float: left;
 
-      $scoreSize: 76px;
+      $scoreSize: 78px;
 
       height: $scoreSize;
       width: $scoreSize;
       line-height: calc(#{$scoreSize} * 1.2);
 
-      border: 2px solid $dark-grey;
+      border: 2px solid $cardDarkGreyBorderColor;
       border-radius: 50%;
 
       text-align: center;
