@@ -4,17 +4,14 @@ import React from 'react';
 import styles from './Star.scss';
 
 // Usage
-// set 'state="checked"' for filled star or
-// set 'state="unchecked"' for empty bordered star
+// set 'checked="true"' for filled Star
+// set 'checked="false"' for empty bordered star
 
 function Star(props) {
-  let fill, stroke = '';
-  if (props.state === 'checked') {
+  let fill = 'none', stroke = '#434448';
+  if (props.checked === true) {
     fill = 'url(#lgrad)';
     stroke = 'none';
-  } else if (props.state === 'unchecked') {
-    fill = 'none';
-    stroke = '#434448';
   }
 
   let stop_1_style = {
