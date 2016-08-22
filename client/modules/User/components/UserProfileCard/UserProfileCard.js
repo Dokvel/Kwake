@@ -3,8 +3,8 @@ import _ from 'lodash';
 import cn from 'classnames';
 
 // Import Components
-import RadarChart from '../../../../components/RadarChart/RadarChart';
 import Button from '../../../../components/Button/Button';
+import RadarChart from '../../../../components/RadarChart/RadarChart';
 
 // Import Functions
 import { generateDiscKey } from '../../../../util/disc_helpers';

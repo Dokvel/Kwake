@@ -20,7 +20,7 @@ export default class RadarChart extends Component {
     let { talents } = this.props.user;
 
     let points = [ 5, 4, 3.5, 5, 4.75 ];
-    let baseMult = 3.75;
+    let baseMult = 3;
 
     let subPoints = [];
     let subPoint = null;
