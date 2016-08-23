@@ -43,7 +43,7 @@ function UserProfileCard(props) {
           <i className="fa fa-lock"></i>
         </div>
         <div className={styles.card_desc_text}>
-          Ability to quickly identify multiple options when evaluating solutions; and assure viability.
+          {userType.description}
         </div>
       </div>
       <ul className={styles.card_talentsList}>

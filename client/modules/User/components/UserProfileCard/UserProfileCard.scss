@@ -52,12 +52,16 @@
   }
 
   &_desc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
     margin-top: 32px;
-    padding: 0 18px;
 
     &_score {
-      margin-right: 38px;
-      float: left;
+      width: 74px;
+      margin-right: 24px;
+      text-align: center;
 
       & > i {
         color: $cardLockIconColor;
@@ -66,6 +70,7 @@
     }
 
     &_text {
+      width: 240px;
       font-size: $baseFontSize-S;
       font-weight: 300;
       line-height: 22px;
@@ -108,17 +113,20 @@
   }
 
   &_info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
     margin-top: 32px;
 
     &_troubleshooting {
-      margin-top: 36px;
+      margin-top: 24px;
     }
 
     &_score {
       margin-right: 24px;
-      float: left;
 
-      $scoreSize: 78px;
+      $scoreSize: 74px;
 
       height: $scoreSize;
       width: $scoreSize;
@@ -136,6 +144,8 @@
     }
 
     &_desc {
+      width: 240px;
+
       font-size: $baseFontSize-S;
       line-height: 22px;
 
