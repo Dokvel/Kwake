@@ -1,0 +1,87 @@
+@import "../../main.scss";
+
+.container_talent {
+  display: flex;
+  align-items: center;
+
+  .talent {
+    margin-right: 20px;
+
+    color: $grey;
+    font-family: $futuraFontFamily;
+    font-size: $baseFontSize-S;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .icon {
+    $superSize: 50px;
+
+    width: $superSize;
+    height: $superSize;
+    margin-right: 5px;
+
+    border: 1px solid $darkGreyBorderColor;
+    border-radius: 50%;
+
+    line-height: calc(#{$superSize} * 1.05);
+    text-align: center;
+
+    & > i {
+      color: $grey;
+      font-size: 25px;
+    }
+  }
+
+  .star {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 25px;
+  }
+}
+
+.container_statement {
+  .info {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 30px;
+
+    .icon {
+      $superSize: 50px;
+
+      width: $superSize;
+      height: $superSize;
+      margin-right: 30px;
+
+      border: 1px solid $darkGreyBorderColor;
+      border-radius: 50%;
+
+      line-height: calc(#{$superSize} * 1.05);
+      text-align: center;
+
+      & > i {
+        color: $grey;
+        font-size: 25px;
+      }
+    }
+
+    .desc {
+      width: 475px;
+
+      font-family: $baseFontFamily;
+      font-weight: 300;
+      line-height: 24px;
+    }
+  }
+
+  .starLine {
+    text-align: center;
+
+    .star {
+      cursor: pointer;
+      display: inline-block;
+      margin: 0 25px;
+    }
+  }
+}
