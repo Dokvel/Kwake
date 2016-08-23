@@ -32,7 +32,7 @@ export default class RateItemTalent extends Component {
         {
           this.state.values.map(value => (
             <div key={value} className={styles.star} onClick={ () => this.props.onRate(value) }>
-              <Star checked={ value <= this.props.rating ? true : false }/>
+              <Star checked={ this.props.rating && value <= this.props.rating }/>
             </div>
           ))
         }
