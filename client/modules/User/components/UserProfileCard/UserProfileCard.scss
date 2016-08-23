@@ -91,7 +91,7 @@
 
       list-style-type: none;
       border-bottom-style: solid;
-      border-bottom-color: $cardDarkGreyBorderColor;
+      border-bottom-color: $darkGreyBorderColor;
       border-bottom-width: 1px;
 
       &:last-child {
@@ -132,7 +132,7 @@
       width: $scoreSize;
       line-height: calc(#{$scoreSize} * 1.2);
 
-      border: 2px solid $cardDarkGreyBorderColor;
+      border: 2px solid $darkGreyBorderColor;
       border-radius: 50%;
 
       text-align: center;
