@@ -15,28 +15,28 @@ export default [
   },
   {
     key: "1001",
-    name: "Creative",
+    name: "Innovator",
     description: "A decisive explorer that forcefully pursues uncommon feats with lasting impact.",
     team: "Change agent that brings discplined planning to execution.",
     troubleshooting: "Ability to quickly identify multiple options when evaluating solutions; and assure viability."
   },
   {
     key: "1100",
-    name: "Combined",
+    name: "Smooth Persuader",
     description: "Let's get it done, but seeks input while influencing others.",
     team: "Establishes urgency and a can do attitude, motivates people to engage through multiple means.",
     troubleshooting: "Pressure prompted problem solving without constraints, uses data with people well."
   },
   {
     key: "1101",
-    name: "Unnamed#1",
+    name: "Adaptive Driver",
     description: "Moves from driver in formal settings to amiable in more social settings, with quick success at heart.",
     team: "Establishes time sensitivity while encouraging others to stay within the lines. Converts possibility to practicality.",
     troubleshooting: "While adaptive to different settings, will challenge and coax ideas and action while being practical on constraints."
   },
   {
     key: "1110",
-    name: "Unnamed#2",
+    name: "Detective",
     description: "Will work flexibly and steadily with others, may assert leadership  to realize own interests, use skills freely.",
     team: "Competent facilitator that balances engaging others with making progress and not getting caught in the weeds.",
     troubleshooting: "Adept at discovering multiple options, draws out ideas and converts to assigned tasks and decisions."
@@ -64,14 +64,14 @@ export default [
   },
   {
     key: "0101",
-    name: "Appraiser",
+    name: "Evaluator",
     description: "Puts imagination in service to useful applications; Forward and firm in convincing, not commanding, others to engage.",
     team: "Willing to move the team forward to achieve objectives and take steps to gain broad buy-in and cooperation.",
     troubleshooting: "Strong critical thinking skills that can explain things in order or sequence, such as a critical path."
   },
   {
     key: "0110",
-    name: "Combinded",
+    name: "Agent",
     description: "A helpful and hopeful people person that balances people and work duties to optimal effect.",
     team: "Available for cultivating relationships with \"open-door\" approach and recognizing individuals contributions.",
     troubleshooting: "Watchful for how issues affect people, will complement task-oriented focus; suggestive not directive with solutions."
