@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import googleCreds from '../../../data/google_creds.json';
 
 // Import Style
 import styles from './App.scss';
@@ -8,8 +8,10 @@ import styles from './App.scss';
 // Import Components
 import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
-
+import { isLoggedIn } from '../../util/apiCaller';
 // Import Actions
+import { authenticated } from './AppActions';
+import callApi from '../../util/apiCaller';
 
 // Import Selectors
 import { getCurrentUser } from './AppReducer';
@@ -20,14 +22,35 @@ export class App extends Component {
     this.state = { isMounted: false };
   }
 
+  componentWillMount() {
+    if (isLoggedIn()) {
+      callApi('user_info', 'get').then(userInfo => {
+        this.props.dispatch(authenticated(userInfo.user));
+      });
+    }
+  }
+
   componentDidMount() {
     this.setState({ isMounted: true }); // eslint-disable-line
+    window.addEventListener('google-loaded', this.initGoogleAuth2.bind(this));
+    if (window.gapi) {
+      this.initGoogleAuth2()
+    }
+  }
+
+  initGoogleAuth2() {
+    window.gapi.load('auth2', () => {
+      window.auth2 = gapi.auth2.init({
+        client_id: googleCreds.client_id,
+        scope: 'profile email https://www.googleapis.com/auth/calendar.readonly'
+      });
+    });
   }
 
   render() {
     return (
       <div>
-        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
+        {/*this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />*/}
         <div>
           <Helmet
             title="KWAKE"
@@ -55,6 +78,10 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+};
+
+App.contextTypes = {
+  router: React.PropTypes.object,
 };
 
 // Retrieve data from store as props

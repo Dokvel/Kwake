@@ -12,12 +12,11 @@ import { signOut } from '../../util/google-api'
 import { notAuthenticated } from '../../modules/App/AppActions';
 
 export class Header extends Component {
-  clickSignOut() {
-    signOut(() => {
-      console.log('User signed out.');
-      this.props.dispatch(notAuthenticated());
+  clickSignOut(event) {
+    this.props.dispatch(notAuthenticated());
+    window.gapi.auth2.getAuthInstance().signOut().then(() => {
       this.context.router.push('/');
-    })
+    });
   }
 
   render() {
@@ -28,7 +27,8 @@ export class Header extends Component {
         </div>
         { this.props.currentUser &&
         <div className={styles['user-info']}>
-          <span>Logged in as {this.props.currentUser.givenName} {this.props.currentUser.familyName} ({this.props.currentUser.email})</span>
+          <span>Logged in as {this.props.currentUser.givenName} {this.props.currentUser.familyName}
+            ({this.props.currentUser.email})</span>
         </div>
         }
         <a className={styles['user-menu']} href="#" onClick={this.clickSignOut.bind(this)}>Sign out</a>

@@ -1,9 +1,15 @@
-import Express from 'express';
+import Express, { Router } from 'express';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
+
+//Auth
+import User from './models/user';
+import passport from 'passport';
+import bearer from 'passport-http-bearer';
+var BearerStrategy = bearer.Strategy;
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -32,11 +38,18 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
+import dummyData from './dummyData';
+import serverConfig from './config';
+
+// Import routes
 import posts from './routes/post.routes';
 import auth from './routes/auth.routes';
 import users from './routes/user.routes';
-import dummyData from './dummyData';
-import serverConfig from './config';
+
+const useRoutes = (routes) => {
+  let protectedMiddleware = passport.authenticate('bearer', { session: false })
+  app.use('/api', routes(new Router(), protectedMiddleware))
+};
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -49,17 +62,33 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
   }
 
   // feed some dummy data in DB.
-  dummyData();
+  //dummyData();
 });
+
+//TODO: Make JWT auth strategy
+passport.use(new BearerStrategy(
+  (token, done) => {
+    User.findOne({ authenticationToken: token }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      return done(null, user, { scope: 'all' });
+    });
+  }
+));
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
-app.use('/api', posts);
-app.use('/api', auth);
-app.use('/api', users);
+
+useRoutes(posts);
+useRoutes(auth);
+useRoutes(users);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -79,7 +108,6 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
-        <meta name="google-signin-client_id" content="452279282281-5so873vs9uunojpmo12badkqb10lfr7j.apps.googleusercontent.com">
         ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
 
         <script src='https://use.typekit.net/dor3mna.js'></script>
@@ -93,7 +121,7 @@ const renderFullPage = (html, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
-          `//<![CDATA[
+    `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
       </script>
@@ -104,8 +132,7 @@ const renderFullPage = (html, initialState) => {
           window.dispatchEvent(new Event('google-loaded'));
         }
       </script>
-      <script src="https://apis.google.com/js/client.js"></script>
-      <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async defer></script>
+      <script src="https://apis.google.com/js/client:platform.js?onload=triggerGoogleLoaded" async defer></script>
       </body>
     </html>
   `;
@@ -158,7 +185,7 @@ app.use((req, res, next) => {
 // start app
 app.listen(serverConfig.port, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
+    console.log(`Server is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
   }
 });
 

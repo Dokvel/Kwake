@@ -10,21 +10,20 @@ import UserProfileCard from '../../components/UserProfileCard/UserProfileCard';
 // Import Actions
 
 // Import Selectors
-import { getCurrentUser } from '../../../App/AppReducer';
+import { getCurrentUser, hasProfileCompleted } from '../../../App/AppReducer';
 
 class UserProfilePage extends Component {
 
-  componentDidMount() {
-    let { currentUser } = this.props;
-    if (!currentUser) {
-      this.context.router.push('/');
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.currentUser && nextProps.currentUser && !hasProfileCompleted(nextProps.currentUser)) {
+      this.context.router.push('/users/setup');
     }
   }
 
   render() {
     return (
       <div className={styles.container}>
-        {this.props.currentUser && <UserProfileCard user={this.props.currentUser} />}
+        {this.props.currentUser && <UserProfileCard user={this.props.currentUser}/>}
       </div>
     );
   }
