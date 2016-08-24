@@ -59,7 +59,7 @@ export default class RadarChart extends Component {
           subPoint = subPoint*(baseMult/3.61);
         }
         // 1 | 4
-        if ((baseMult/2.24 <= subPoint && subPoint < baseMult/1.79) && (points[i+1]>baseMult*1.3 || points[0]>baseMult*1.3)) {
+        if ((baseMult/2.24 <= subPoint && subPoint < baseMult/1.799) && (points[i+1]>baseMult*1.3 || points[0]>baseMult*1.3)) {
           subPoint = subPoint*(baseMult/3.7);
         }
         // 1 | 3
