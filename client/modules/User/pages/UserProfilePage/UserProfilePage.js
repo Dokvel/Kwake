@@ -15,7 +15,7 @@ import { getCurrentUser, hasProfileCompleted } from '../../../App/AppReducer';
 class UserProfilePage extends Component {
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser && !hasProfileCompleted(nextProps.currentUser)) {
+    if (!this.props.currentUser && nextProps.currentUser && !hasProfileCompleted(nextProps.currentUser)) {
       this.context.router.push('/users/setup');
     }
   }

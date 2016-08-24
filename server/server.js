@@ -65,6 +65,7 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
   //dummyData();
 });
 
+//TODO: Make JWT auth strategy
 passport.use(new BearerStrategy(
   (token, done) => {
     User.findOne({ authenticationToken: token }, (err, user) => {

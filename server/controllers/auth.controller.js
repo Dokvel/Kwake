@@ -21,20 +21,22 @@ export function signIn(req, res) {
   oauth2Client.getToken(req.body.code, (err, tokens) => {
     if (err) {
       res.status(500).send(err);
-    } else {
+    }
+
+    if (tokens) {
       oauth2Client.setCredentials(tokens);
       auth2.userinfo.get({ auth: oauth2Client }, (err, userInfo)=> {
-        var authenticationToken = generateRandomToken(); //Our api token
+        if (err) {
+          res.status(500).send(err);
+        }
 
-        const user = new User({
+        let user = new User({
           cuid: cuid(),
           googleId: userInfo.id,
           email: userInfo.email,
           image: userInfo.picture,
           givenName: userInfo.given_name,
           familyName: userInfo.family_name,
-          googleAccessToken: tokens.access_token,
-          authenticationToken
         });
 
         User.findOne({ googleId: user.googleId }).exec((err, existUser) => {
@@ -43,30 +45,26 @@ export function signIn(req, res) {
           }
 
           if (existUser) {
-            existUser.googleAccessToken = tokens.access_token;
-            existUser.authenticationToken = authenticationToken;
-            existUser.save((err, saved) => {
-              if (err) {
-                res.status(500).send(err);
-              }
-              //res.json({ user: saved })
-              res.json({ authenticationToken: saved.authenticationToken });
-            });
-          } else {
-            user.save((err, saved) => {
-              if (err) {
-                res.status(500).send(err);
-              }
-              //res.json({ user: saved })
-              res.json({ authenticationToken: saved.authenticationToken });
-            });
+            user = existUser
           }
+
+          user.googleAccessToken = tokens.access_token;
+          user.authenticationToken = generateRandomToken(); //Our api token
+
+          user.save((err, saved) => {
+            if (err) {
+              res.status(500).send(err);
+            }
+            res.json({ authenticationToken: saved.authenticationToken });
+          });
         });
       });
+    } else {
+      res.status(403).end();
     }
   });
 }
 
-export function user_info(req, res) {
+export function userInfo(req, res) {
   res.json({ user: req.user });
 }
