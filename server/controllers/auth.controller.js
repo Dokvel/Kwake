@@ -49,16 +49,16 @@ export function signIn(req, res) {
               if (err) {
                 res.status(500).send(err);
               }
-              res.json({ user: saved })
-              //res.json({ authenticationToken: saved.authenticationToken });
+              //res.json({ user: saved })
+              res.json({ authenticationToken: saved.authenticationToken });
             });
           } else {
             user.save((err, saved) => {
               if (err) {
                 res.status(500).send(err);
               }
-              res.json({ user: saved })
-              //res.json({ authenticationToken: saved.authenticationToken });
+              //res.json({ user: saved })
+              res.json({ authenticationToken: saved.authenticationToken });
             });
           }
         });
@@ -67,6 +67,6 @@ export function signIn(req, res) {
   });
 }
 
-export function authenticate(req, res) {
+export function user_info(req, res) {
   res.json({ user: req.user });
 }

@@ -7,7 +7,10 @@ process.env.BASE_URL || (`http://localhost:${process.env.PORT || Config.port}/ap
 
 export default function callApi(endpoint, method = 'get', body) {
   return fetch(`${API_URL}/${endpoint}`, {
-    headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + getAuthenticationToken()},
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + getAuthenticationToken()
+    },
     method,
     body: JSON.stringify(body),
   })
@@ -26,15 +29,11 @@ export default function callApi(endpoint, method = 'get', body) {
 }
 
 export const getAuthenticationToken = () => {
-  if (typeof window.localStorage !== undefined && localStorage.authentication_token) {
-    localStorage.authentication_token
+  if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+    return localStorage.authentication_token
   }
 }
 
 export const isLoggedIn = () => {
-  try {
-    return !!getAuthenticationToken();
-  } catch (exception) {
-    return false;
-  }
+  return !!getAuthenticationToken();
 }

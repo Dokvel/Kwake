@@ -9,26 +9,17 @@ export function setupProfile(req, res) {
     || req.body.user.conscientiousness === undefined) {
     res.status(403).end();
   } else {
-    User.findOne({ email: req.body.user.email }).exec((err, user) => {
+    req.user.talents = [...req.body.user.talents];
+    req.user.influence = req.body.user.influence;
+    req.user.dominance = req.body.user.dominance;
+    req.user.steadiness = req.body.user.steadiness;
+    req.user.conscientiousness = req.body.user.conscientiousness;
+
+    req.user.save((err, saved) => {
       if (err) {
         res.status(500).send(err);
       } else {
-
-        if (user) {
-          user.talents = [...req.body.user.talents];
-          user.influence = req.body.user.influence;
-          user.dominance = req.body.user.dominance;
-          user.steadiness = req.body.user.steadiness;
-          user.conscientiousness = req.body.user.conscientiousness;
-
-          user.save((err, saved) => {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              res.json({ user: saved });
-            }
-          });
-        }
+        res.json({ user: saved });
       }
     });
   }

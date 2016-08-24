@@ -20,10 +20,12 @@ class SetupAccountPage extends Component {
     this.state = { currentStage: 1, amountStage: 2, disc: {}, talents: {} }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let { currentUser } = this.props;
 
-    if (currentUser && hasProfileCompleted(currentUser)) {
+    if (!currentUser) {
+      this.context.router.push('/');
+    } else if (hasProfileCompleted(currentUser)) {
       this.context.router.push('/profile');
     }
   }
@@ -72,7 +74,7 @@ function mapStateToProps(state) {
 }
 
 SetupAccountPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 SetupAccountPage.contextTypes = {
