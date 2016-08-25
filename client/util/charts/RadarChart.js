@@ -127,18 +127,12 @@ export function RadarChartFunc(id, data, options) {
 		.data(data)
 		.enter().append("g");
 
-	//Append the backgrounds
-	blobWrapper
-		.append("path")
-		.attr("d", function(d,i) { return radarLine(d); })
-		.style("fill", function(d,i) { return 'url(#gradient)'; })
-		.style("filter", 'url(#shadow)')
-
 	//Create the outlines
 	blobWrapper
 		.append("path")
 		.attr("d", function(d,i) { return radarLine(d); })
 		.style("stroke-width", cfg.strokeWidth + "px")
-		.style("stroke", function(d,i) { return 'url(#gradient)'; })
-		.style("fill", "none")
+		.style("stroke", function(d,i) { return cfg.color(i); })
+		.style("fill", function(d,i) { return cfg.color(i); })
+		.style("opacity", function(d,i) { return cfg.opacity(i); })
 }
