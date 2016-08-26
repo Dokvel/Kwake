@@ -11,6 +11,14 @@ import styles from './RadarChart.scss';
 import dataTalents from '../../../data/talents';
 
 export default class RadarChart extends Component {
+  componentDidMount() {
+    this.renderChart();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.renderChart();
+  }
+
   renderChart() {
     let margin = {top: 50, right: 50, bottom: 50, left: 50},
     		width  = 300,
@@ -147,8 +155,6 @@ export default class RadarChart extends Component {
     let userPhotoStyle = {
       backgroundImage: 'url(' + this.props.user.image + ')'
     };
-
-    this.renderChart();
 
     return (
       <div className={styles.chart}>
