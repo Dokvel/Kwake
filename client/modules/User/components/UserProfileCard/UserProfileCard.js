@@ -2,48 +2,52 @@ import React from 'react';
 import _ from 'lodash';
 import cn from 'classnames';
 
+import callApi from '../../../../util/apiCaller';
+
 // Import Components
 import Button from '../../../../components/Button/Button';
 import RadarChart from '../../../../components/RadarChart/RadarChart';
 
 // Import Functions
-import { generateDiscKey } from '../../../../util/disc_helpers';
+import { getPersonalityType } from '../../../../util/disc_helpers';
 
 // Import Style
 import styles from './UserProfileCard.scss';
 
 // Import Static Data
 import talents from '../../../../../data/talents';
-import personalityTypes from '../../../../../data/personalityTypes';
+
+const sendRequest = () => {
+  callApi('evaluate/request', 'post', { emails: ['test@test.com', 'test2@test.com'] })
+}
 
 function UserProfileCard(props) {
   let talentsObj = _.keyBy(talents, 'key');
-  let personalityTypesObj = _.keyBy(personalityTypes, 'key');
-
   let user = props.user;
-  let discKey = generateDiscKey(user);
-  let userType = personalityTypesObj[discKey];
+  let userType = getPersonalityType(user);
 
   return (
     <div className={styles.card}>
       <div className={styles.card_chart}>
-        <RadarChart user={user} />
+        <RadarChart user={user}/>
       </div>
       <div className={styles.card_user}>
         {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
       </div>
       <div className={styles.card_type}>
-        {userType.name}
+        {userType && userType.name}
       </div>
       <div className={styles.card_btnAsk}>
-        <Button rightIcon="bi_interface-arrow-right" color={Button.COLOR_BLUE}>Ask for a review</Button>
+        <Button rightIcon="bi_interface-arrow-right" color={Button.COLOR_BLUE} onClick={sendRequest.bind(this)}>
+          Ask for a review
+        </Button>
       </div>
       <div className={styles.card_desc}>
         <div className={styles.card_desc_score}>
           <i className="fa fa-lock"></i>
         </div>
         <div className={styles.card_desc_text}>
-          {userType.description}
+          {userType && userType.description}
         </div>
       </div>
       <ul className={styles.card_talentsList}>
@@ -62,7 +66,7 @@ function UserProfileCard(props) {
         <div className={styles.card_info_desc}>
           <span className={styles.card_info_desc_title}>Team</span>
           <br />
-          <span className={styles.card_info_desc_text}>{userType.team}</span>
+          <span className={styles.card_info_desc_text}>{userType && userType.team}</span>
         </div>
       </div>
       <div className={cn(styles.card_info, styles.card_info_troubleshooting)}>
@@ -72,7 +76,7 @@ function UserProfileCard(props) {
         <div className={styles.card_info_desc}>
           <span className={styles.card_info_desc_title}>Troubleshooting</span>
           <br />
-          <span className={styles.card_info_desc_text}>{userType.troubleshooting}</span>
+          <span className={styles.card_info_desc_text}>{userType && userType.troubleshooting}</span>
         </div>
       </div>
     </div>

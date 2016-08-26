@@ -2,16 +2,11 @@ import User from '../models/user';
 import cuid from 'cuid';
 import google from 'googleapis';
 import serverConfig from '../config';
-import crypto from 'crypto';
+import { generateRandomToken } from '../util/security';
 
 var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(serverConfig.GOOGLE_CLIENT_ID, serverConfig.GOOGLE_CLIENT_SECRET, 'postmessage');
 var auth2 = google.oauth2('v2');
-
-function generateRandomToken() {
-  var buffer = crypto.pseudoRandomBytes(256);
-  return crypto.createHash('sha1').update(buffer).digest("hex");
-}
 
 export function signIn(req, res) {
   if (!req.body.code) {

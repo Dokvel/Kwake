@@ -25,7 +25,7 @@ export class LandingPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (isLoggedIn()) {
-      if (nextProps.currentUser && !this.props.currentUser && hasProfileCompleted(nextProps.currentUser)) {
+      if (nextProps.currentUser && hasProfileCompleted(nextProps.currentUser)) {
         browserHistory.push('/profile');
       } else {
         browserHistory.push('/users/setup');

@@ -1,8 +1,7 @@
 import User from '../models/user';
 
 export function setupProfile(req, res) {
-  if (!req.body.user.email
-    || !req.body.user.talents
+  if (!req.body.user.talents
     || req.body.user.dominance === undefined
     || req.body.user.influence === undefined
     || req.body.user.steadiness === undefined

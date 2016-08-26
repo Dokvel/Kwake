@@ -9,10 +9,6 @@ import IntlWrapper from './modules/Intl/IntlWrapper';
 // Import Routes
 import routes from './routes';
 
-// Base stylesheet
-require('./layout.scss');
-require('../vendor/Budicon/css/budicon.css');
-
 export default function App(props) {
   return (
     <Provider store={props.store}>

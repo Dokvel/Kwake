@@ -1,7 +1,11 @@
 import _ from 'lodash';
+import personalityTypes from '../../data/personalityTypes';
 
-export function generateDiscKey(user) {
-  let key = `${user.dominance}${user.influence}${user.steadiness}${user.conscientiousness}`;
+//Function is separated for future
+export function generateDiscKey(discValues) {
+  return `${discValues.dominance}${discValues.influence}${discValues.steadiness}${discValues.conscientiousness}`;
+}
 
-  return key;
+export function getPersonalityType(discValues) {
+  return _.keyBy(personalityTypes, 'key')[generateDiscKey(discValues)];
 }

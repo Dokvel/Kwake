@@ -10,12 +10,11 @@ const userSchema = new Schema({
   googleAccessToken: { type: 'String', required: true },
   authenticationToken: { type: 'String' },
   cuid: { type: 'String', required: true },
-  dateAdded: { type: 'Date', default: Date.now, required: true },
   talents: [],
   dominance: { type: 'Number' },
   influence: { type: 'Number' },
   steadiness: { type: 'Number' },
   conscientiousness: { type: 'Number' }
-});
+}, { timestamps: { createdAt: 'created_at' } });
 
 export default mongoose.model('User', userSchema);

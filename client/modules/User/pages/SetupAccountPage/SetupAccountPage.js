@@ -31,11 +31,7 @@ class SetupAccountPage extends Component {
       this.setState({ currentStage: this.state.currentStage + 1, disc: result })
     } else if (this.state.currentStage === 2) {
       this.setState({ talents: result })
-      this.props.dispatch(setupProfileRequest({
-        email: this.props.currentUser.email,
-        talents: result,
-        ...this.state.disc
-      }));//TODO: Update after maje JWT auth api
+      this.props.dispatch(setupProfileRequest({ talents: result, ...this.state.disc }));
     }
   }
 
