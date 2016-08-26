@@ -57,7 +57,7 @@ export class TalentsForm extends Component {
             talents.map(talent => (
               <TalentsItem
                 { ...talent }
-                key={talent.key}
+                talentKey={talent.key}
                 selected={this.state.selectedTalents.indexOf(talent.key) > -1}
                 onSelect={this.updateResult.bind(this, talent.key)}
               />

@@ -21,7 +21,7 @@ export default function RateItemStatement(props) {
     <div className={styles.container}>
       <div className={styles['info-row']}>
         <div className={styles.info}>
-          <TalentIcon />
+          <TalentIcon talentKey={props.statementKey}/>
           <div className={styles.desc}>
             {props.children}
           </div>
