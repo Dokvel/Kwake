@@ -19,14 +19,28 @@ export default class RadarChart extends Component {
     let talentsObj = _.keyBy(dataTalents, 'key');
     let { talents } = this.props.user;
 
-    let votes = [
-      [3,4,5,4,3],
-      [4,3,2,3,4],
-      [1,5,1,5,1],
-
-      // final vote
-      [3,4,4,3.5,4]
+    let incomingVotes = [
+      [5,5,5,5,5],
+      [4,4,4,4,4],
+      [3,3,3,3,3],
+      [2,2,2,2,2]
     ];
+
+    let summaryVote = new Array(incomingVotes[0].length);
+    _.fill(summaryVote, 0);
+
+    for (var i1 = 0; i1 < incomingVotes.length; i1++) {
+      for (var i2 = 0; i2 < incomingVotes[i1].length; i2++) {
+        summaryVote[i2] = summaryVote[i2] + incomingVotes[i1][i2];
+      }
+    }
+
+    for (var i = 0; i < summaryVote.length; i++) {
+      summaryVote[i] = summaryVote[i] / incomingVotes.length;
+    }
+
+    let votes = incomingVotes;
+    votes.push(summaryVote);
 
     let data = new Array(votes.length);
     let colorArray = [];
