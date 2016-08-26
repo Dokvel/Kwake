@@ -1,22 +1,42 @@
 @import "../../../../main.scss";
 
-.talent-box {
-  width: 150px;
-  margin: 5px;
-  padding: 5px;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
+@media (min-width: $desktopMinWidth) {
+  .talent-box {
+    width: 150px;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 
-  .title {
-    color: $grey;
-    font-size: $baseFontSize-S;
-    margin-top: 15px;
-    font-family: $futuraFontFamily;
-    font-style: normal;
-    text-transform: uppercase;
+    .title {
+      color: $grey;
+      font-size: $baseFontSize-S;
+      margin-top: 15px;
+      font-family: $futuraFontFamily;
+      font-style: normal;
+      text-transform: uppercase;
+    }
   }
-
 }
 
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+  .talent-box {
+    margin-top: 20px;
+    width: 33%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      margin-top: 20px;
+
+      font-family: $futuraFontFamily;
+      font-size: $mobileFontSize-XS;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}
