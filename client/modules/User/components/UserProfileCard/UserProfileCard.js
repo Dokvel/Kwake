@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import cn from 'classnames';
 
@@ -19,7 +19,7 @@ import talents from '../../../../../data/talents';
 
 const sendRequest = () => {
   callApi('evaluate/request', 'post', { emails: ['test@test.com', 'test2@test.com'] })
-}
+};
 
 function UserProfileCard(props) {
   let talentsObj = _.keyBy(talents, 'key');
@@ -29,7 +29,7 @@ function UserProfileCard(props) {
   return (
     <div className={styles.card}>
       <div className={styles.card_chart}>
-        <RadarChart user={user}/>
+        <RadarChart user={user} votes={props.votes}/>
       </div>
       <div className={styles.card_user}>
         {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
@@ -82,5 +82,13 @@ function UserProfileCard(props) {
     </div>
   );
 }
+
+UserProfileCard.propTypes = {
+  votes: PropTypes.array.isRequired
+};
+
+UserProfileCard.defaultProps = {
+  votes: [[]]
+};
 
 export default UserProfileCard;

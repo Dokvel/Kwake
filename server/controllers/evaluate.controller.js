@@ -6,7 +6,7 @@ import cuid from 'cuid';
 import { generateRandomToken } from '../util/security';
 import _ from 'lodash';
 
-export function getEvaluate(req, res) {
+export function getTokenInfo(req, res) {
   if (!req.params.token) {
     res.status(403).end();
   } else {
@@ -29,6 +29,28 @@ export function getEvaluate(req, res) {
       }
     });
   }
+}
+
+export function getEvaluates(req, res) {
+  let evaluatesProjection = {
+    __v: false,
+    _id: false,
+    responderEmail: false
+  };
+
+  let findQuery = {};
+
+  if (req.params.user_cuid) {
+    findQuery.requester = req.params.user_cuid;
+  }
+
+  Evaluate.find(findQuery, evaluatesProjection).sort('-created_at').exec((err, evaluates) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.json({ evaluates });
+    }
+  });
 }
 
 export function addEvaluate(req, res) {

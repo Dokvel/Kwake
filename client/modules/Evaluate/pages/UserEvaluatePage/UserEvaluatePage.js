@@ -18,14 +18,13 @@ import Header from '../../components/Header/Header';
 import Footer from '../../../../components/Footer/Footer';
 
 // Import Actions
-import { fetchEvaluate } from '../../EvaluateActions';
+import { fetchTokenInfo } from '../../EvaluateActions';
 
 // Import Selectors
-import { getEvaluate } from '../../EvaluateReducer';
+import { getTokenInfo } from '../../EvaluateReducer';
 
 const TYPE_TALENTS = 'talents';
 const TYPE_STATEMENT = 'statement';
-const TYPE_TNXPAGE = 'thanks_page';
 
 class UserEvaluatePage extends Component {
 
@@ -35,7 +34,7 @@ class UserEvaluatePage extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchEvaluate(this.props.params.token));
+    this.props.dispatch(fetchTokenInfo(this.props.params.token));
   }
 
   onCompleted(result) {
@@ -55,8 +54,6 @@ class UserEvaluatePage extends Component {
   renderForm() {
     if (this.state.type === TYPE_STATEMENT) {
       return (<EvaluateStatementForm {...this.props} onCompleted={this.onCompleted.bind(this)}/>)
-    } else if (this.state.type === TYPE_TNXPAGE) {
-      console.log('thanks!')
     } else {
       return (<EvaluateTalentsForm onCompleted={this.onCompleted.bind(this)}
                                    talents={this.props.evaluate.talents} givenName={this.props.evaluate.givenName}/>)
@@ -78,7 +75,7 @@ class UserEvaluatePage extends Component {
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
-  let evaluate = getEvaluate(state, props.params.token);
+  let evaluate = getTokenInfo(state, props.params.token);
   let personalityType = evaluate ? getPersonalityType(evaluate) : undefined;
 
   return {
