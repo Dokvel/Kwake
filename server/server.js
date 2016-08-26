@@ -45,6 +45,7 @@ import serverConfig from './config';
 import posts from './routes/post.routes';
 import auth from './routes/auth.routes';
 import users from './routes/user.routes';
+import evaluate from './routes/evaluate.routes';
 
 const useRoutes = (routes) => {
   let protectedMiddleware = passport.authenticate('bearer', { session: false })
@@ -89,6 +90,7 @@ app.use(Express.static(path.resolve(__dirname, '../dist')));
 useRoutes(posts);
 useRoutes(auth);
 useRoutes(users);
+useRoutes(evaluate);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -117,7 +119,7 @@ const renderFullPage = (html, initialState) => {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
       </head>
       <body>
-        <div id="root">${html}</div>
+        <div id="root" style="height:100%;">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
@@ -129,7 +131,12 @@ const renderFullPage = (html, initialState) => {
       <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
       <script type="text/javascript">
         function triggerGoogleLoaded() {
-          window.dispatchEvent(new Event('google-loaded'));
+          window.gapi.load('auth2', function () {
+            window.auth2 = gapi.auth2.init({
+              client_id: '${serverConfig.GOOGLE_CLIENT_ID}',
+              scope: 'profile email https://www.googleapis.com/auth/calendar.readonly'
+            });
+          });
         }
       </script>
       <script src="https://apis.google.com/js/client:platform.js?onload=triggerGoogleLoaded" async defer></script>

@@ -42,6 +42,9 @@
 .button--disabled,
 .button.button--disabled:hover {
   background: $dark-grey;
+  -webkit-box-shadow: none;
+  -moz-box-shadow:none;
+  box-shadow: none;
 }
 
 .button:hover {

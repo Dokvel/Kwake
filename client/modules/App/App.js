@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import googleCreds from '../../../data/google_creds.json';
 
 // Import Style
 import styles from './App.scss';
 
 // Import Components
 import Helmet from 'react-helmet';
-import DevTools from './components/DevTools';
 import { isLoggedIn } from '../../util/apiCaller';
+
 // Import Actions
 import { authenticated } from './AppActions';
 import callApi from '../../util/apiCaller';
@@ -32,43 +31,27 @@ export class App extends Component {
 
   componentDidMount() {
     this.setState({ isMounted: true }); // eslint-disable-line
-    window.addEventListener('google-loaded', this.initGoogleAuth2.bind(this));
-    if (window.gapi) {
-      this.initGoogleAuth2()
-    }
-  }
-
-  initGoogleAuth2() {
-    window.gapi.load('auth2', () => {
-      window.auth2 = gapi.auth2.init({
-        client_id: googleCreds.client_id,
-        scope: 'profile email https://www.googleapis.com/auth/calendar.readonly'
-      });
-    });
   }
 
   render() {
     return (
-      <div>
-        {/*this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />*/}
-        <div>
-          <Helmet
-            title="KWAKE"
-            titleTemplate="%s - Kwake App"
-            meta={[
-              { charset: 'utf-8' },
-              {
-                'http-equiv': 'X-UA-Compatible',
-                content: 'IE=edge',
-              },
-              {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-              },
-            ]}
-          />
-          {this.props.children}
-        </div>
+      <div className={styles.main}>
+        <Helmet
+          title="KWAKE"
+          titleTemplate="%s - Kwake App"
+          meta={[
+            { charset: 'utf-8' },
+            {
+              'http-equiv': 'X-UA-Compatible',
+              content: 'IE=edge',
+            },
+            {
+              name: 'viewport',
+              content: 'width=device-width, initial-scale=1',
+            },
+          ]}
+        />
+        {this.props.children}
       </div>
     );
   }

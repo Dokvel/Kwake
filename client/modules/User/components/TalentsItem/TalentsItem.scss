@@ -18,36 +18,5 @@
     text-transform: uppercase;
   }
 
-  .icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    -moz-border-radius: 30px;
-    -webkit-border-radius: 30px;
-    font-size: 20px;
-    color: $grey;
-    line-height: 60px;
-    text-align: center;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-  }
-
 }
 
-.talent-box--selected {
-  .icon {
-    background: #ffac52;
-    background: -moz-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #ffac52), color-stop(100%, #ff3c57));
-    background: -webkit-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-    background: -o-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-    background: -ms-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-    background: linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffac52', endColorstr='#ff3c57', GradientType=1);
-    width: 62px;
-    height: 62px;
-    border-radius: 31px;
-    border: none;
-  }
-}

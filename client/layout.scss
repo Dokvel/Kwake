@@ -8,6 +8,11 @@ body {
   font-size: $baseFontSize-M;
   background-color: $backgroundColor;
 }
-.text-bold{
+
+html, body, .main {
+  height: 100%;
+}
+
+.text-bold {
   font-weight: bold;
 }
