@@ -13,7 +13,7 @@ export default class GoogleButton extends Component {
             .then(res => {
               if (res.authenticationToken) {
                 localStorage.setItem('authentication_token', res.authenticationToken);
-                return callApi('user_info', 'get');
+                return callApi('users/me', 'get');
               }
             }).then(userInfo => {
             this.props.dispatch(authenticated(userInfo.user));
@@ -30,7 +30,7 @@ export default class GoogleButton extends Component {
       <div>
         <Button color={Button.COLOR_RED}
                 onClick={this.onGoogleSignIn.bind(this)}
-                leftIcon="bi_logo-picasa">
+                rightIcon="bi_interface-arrow-right">
           Sign in with Google
         </Button>
       </div>

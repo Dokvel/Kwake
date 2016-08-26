@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 // Import Style
@@ -29,9 +28,9 @@ export class Header extends Component {
         <div className={styles['user-info']}>
           <span>Logged in as {this.props.currentUser.givenName} {this.props.currentUser.familyName}
             ({this.props.currentUser.email})</span>
+          <a className={styles['user-menu']} href="#" onClick={this.clickSignOut.bind(this)}>Sign out</a>
         </div>
         }
-        <a className={styles['user-menu']} href="#" onClick={this.clickSignOut.bind(this)}>Sign out</a>
       </div>
     );
   }

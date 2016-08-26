@@ -32,6 +32,7 @@ export function signIn(req, res) {
           image: userInfo.picture,
           givenName: userInfo.given_name,
           familyName: userInfo.family_name,
+          gender: userInfo.gender,
         });
 
         User.findOne({ googleId: user.googleId }).exec((err, existUser) => {
@@ -58,8 +59,4 @@ export function signIn(req, res) {
       res.status(403).end();
     }
   });
-}
-
-export function userInfo(req, res) {
-  res.json({ user: req.user });
 }

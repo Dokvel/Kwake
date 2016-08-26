@@ -10,7 +10,7 @@ const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
-    if (response.status === 401) {
+    if (typeof window !== 'undefined' && response.status === 401) {
       localStorage.removeItem('authentication_token');
       browserHistory.push('/');
     } else {

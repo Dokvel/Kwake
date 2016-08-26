@@ -1,7 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import styles from './SetupAccountPage.scss';
+
+import { isLoggedIn } from '../../../../util/apiCaller';
 
 // Import Components
 import DiscForm from '../../components/DiscForm/DiscForm';
@@ -20,9 +23,15 @@ class SetupAccountPage extends Component {
     this.state = { currentStage: 1, amountStage: 2, disc: {}, talents: {} }
   }
 
+  componentWillMount() {
+    if (!isLoggedIn()) {
+      browserHistory && browserHistory.push('/');
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!this.props.currentUser && nextProps.currentUser && hasProfileCompleted(nextProps.currentUser)) {
-      this.context.router.push('/profile');
+      this.context.router.push('/profile/' + nextProps.currentUser.cuid);
     }
   }
 
@@ -55,9 +64,6 @@ class SetupAccountPage extends Component {
     );
   }
 }
-
-// Actions required to provide data for this component to render in sever side.
-SetupAccountPage.need = [];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {

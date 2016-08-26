@@ -1,3 +1,6 @@
+
+//INFO: Key schema `${dominance}${influence}${steadiness}${conscientiousness}`
+
 export default [
   {
     key: "0001",
