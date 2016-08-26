@@ -43,14 +43,14 @@ export class EvaluateTalentsForm extends Component {
           </div>
           <div key="team" className={styles['statement-row']}>
             <RateItemStatement value={this.state['team']} onRate={this.onRate.bind(this, 'team')}>
-              <span><b>In team</b> {this.props.evaluate.givenName} is {this.props.personalityType.team} <b>How correct is this statement?</b></span>
+              <span><b>In team</b> {this.props.evaluate.givenName} is {this.props.personalityType.team} <b>How correct is this?</b></span>
             </RateItemStatement>
           </div>
           <div key="troubleshooting" className={styles['statement-row']}>
             <RateItemStatement value={this.state['troubleshooting']}
                                onRate={this.onRate.bind(this, 'troubleshooting')}>
               <span><b>To solve problems</b>, {this.props.evaluate.givenName} {this.props.personalityType.troubleshooting}
-                <b>How correct is this statement?</b></span>
+                <b>How correct is this?</b></span>
             </RateItemStatement>
           </div>
         </div>
