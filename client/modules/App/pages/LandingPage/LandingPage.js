@@ -23,13 +23,23 @@ export class LandingPage extends Component {
     this.setState({ isAuthorized: isLoggedIn() });
   }
 
+  componentDidMount() {
+    if (isLoggedIn()) {
+      this.loggedBehavior(this.props.currentUser)
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (isLoggedIn()) {
-      if (nextProps.currentUser && hasProfileCompleted(nextProps.currentUser)) {
-        browserHistory.push('/profile');
-      } else {
-        browserHistory.push('/users/setup');
-      }
+      this.loggedBehavior(nextProps.currentUser)
+    }
+  }
+
+  loggedBehavior(user) {
+    if (user && hasProfileCompleted(user)) {
+      browserHistory.push('/profile/'+user.cuid);
+    } else {
+      browserHistory.push('/users/setup');
     }
   }
 

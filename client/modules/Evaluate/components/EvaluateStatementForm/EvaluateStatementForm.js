@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 
+import {getPronoun} from '../../../../util/textHelpers';
 // Import Style
 import styles from './EvaluateStatementForm.scss';
 
@@ -37,7 +38,7 @@ export class EvaluateTalentsForm extends Component {
         <div className={styles.statements}>
           <div key="personality" className={styles['statement-row']}>
             <RateItemStatement value={this.state['personality']} onRate={this.onRate.bind(this, 'personality')}>
-              <span><b>{this.props.evaluate.givenName}</b>’ overall profile says that she’s an <b>{this.props.personalityType.name}</b>.
+              <span><b>{this.props.evaluate.givenName}</b>’ overall profile says that {getPronoun(this.props.evaluate.gender)}’s an <b>{this.props.personalityType.name}</b>.
                 That means {this.props.personalityType.description} <b>How correct is this?</b></span>
             </RateItemStatement>
           </div>

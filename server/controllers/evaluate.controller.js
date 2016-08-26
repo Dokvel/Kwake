@@ -19,7 +19,7 @@ export function getEvaluate(req, res) {
         if (token.dateUsed) {
           res.status(403).end();
         } else {
-          User.findOne({ cuid: token.requester }, 'givenName familyName image talents dominance influence steadiness conscientiousness').exec((err, user) => {
+          User.findOne({ cuid: token.requester }, 'givenName familyName image talents dominance influence steadiness conscientiousness gender').exec((err, user) => {
             if (err) {
               res.status(500).send(err);
             }
@@ -60,7 +60,9 @@ export function addEvaluate(req, res) {
               res.status(500).send(err);
             } else {
               savedEvaluate = saved;
-              token.dateUsed = Date.now();
+              if (token.token != 'demo_token') {
+                token.dateUsed = Date.now();
+              }
               token.save((err, saved) => {
                 if (err) {
                   res.status(500).send(err);

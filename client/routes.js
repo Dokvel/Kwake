@@ -64,7 +64,7 @@ export default (
           }}
         />
         <Route
-          path="/profile"
+          path="/profile/:cuid"
           getComponent={(nextState, cb) => {
             require.ensure([], require => {
               cb(null, require('./modules/User/pages/UserProfilePage/UserProfilePage').default);

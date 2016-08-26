@@ -23,7 +23,7 @@ export class App extends Component {
 
   componentWillMount() {
     if (isLoggedIn()) {
-      callApi('user_info', 'get').then(userInfo => {
+      callApi('users/me', 'get').then(userInfo => {
         this.props.dispatch(authenticated(userInfo.user));
       });
     }
