@@ -11,20 +11,14 @@ import styles from './RadarChart.scss';
 import dataTalents from '../../../data/talents';
 
 export default class RadarChart extends Component {
-  componentDidMount() {
+  renderChart() {
     let margin = {top: 50, right: 50, bottom: 50, left: 50},
     		width  = 300,
     		height = 300;
 
     let talentsObj = _.keyBy(dataTalents, 'key');
     let { talents } = this.props.user;
-
-    let incomingVotes = [
-      [5,5,5,5,5],
-      [4,4,4,4,4],
-      [3,3,3,3,3],
-      [2,2,2,2,2]
-    ];
+    let incomingVotes = this.props.votes;
 
     let summaryVote = new Array(incomingVotes[0].length);
     _.fill(summaryVote, 0);
@@ -150,9 +144,11 @@ export default class RadarChart extends Component {
   }
 
   render() {
-      let userPhotoStyle = {
+    let userPhotoStyle = {
       backgroundImage: 'url(' + this.props.user.image + ')'
     };
+
+    this.renderChart();
 
     return (
       <div className={styles.chart}>
