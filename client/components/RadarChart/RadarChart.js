@@ -12,7 +12,7 @@ import dataTalents from '../../../data/talents';
 
 export default class RadarChart extends Component {
   componentDidMount() {
-    let talentsObj  = _.keyBy(dataTalents, 'key');
+    let talentsObj = _.keyBy(dataTalents, 'key');
     this.renderChart();
   }
 
@@ -28,29 +28,28 @@ export default class RadarChart extends Component {
     let talentsObj = _.keyBy(dataTalents, 'key');
     let { talents } = this.props.user;
     let incomingVotes = this.props.votes;
-
-    let summaryVote = new Array(incomingVotes[0].length);
-    _.fill(summaryVote, 0);
-
-    for (var i1 = 0; i1 < incomingVotes.length; i1++) {
-      for (var i2 = 0; i2 < incomingVotes[i1].length; i2++) {
-        summaryVote[i2] = summaryVote[i2] + incomingVotes[i1][i2];
-      }
-    }
-
-    for (var i = 0; i < summaryVote.length; i++) {
-      summaryVote[i] = summaryVote[i] / incomingVotes.length;
-    }
-
     let votes = incomingVotes;
-    votes.push(summaryVote);
+
+    if (incomingVotes.length > 4) {
+      let summaryVote = new Array(incomingVotes[0].length);
+      _.fill(summaryVote, 0);
+      for (var i1 = 0; i1 < incomingVotes.length; i1++) {
+        for (var i2 = 0; i2 < incomingVotes[i1].length; i2++) {
+          summaryVote[i2] = summaryVote[i2] + incomingVotes[i1][i2];
+        }
+      }
+      for (var i = 0; i < summaryVote.length; i++) {
+        summaryVote[i] = summaryVote[i] / incomingVotes.length;
+      }
+      votes.push(summaryVote);
+    }
 
     let data = new Array(votes.length);
     let colorArray = [];
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
-      if (i === (votes.length - 1)) {
+      if (votes.length > 5 && i === (votes.length - 1)) {
         colorArray.push("url(#gradient)");
         opacityArray.push("1");
       } else {
@@ -142,8 +141,8 @@ export default class RadarChart extends Component {
     }
 
     let radarChartOptions = {
-    	color   : color,
-      opacity : opacity
+      color: color,
+      opacity: opacity
     };
 
     RadarChartFunc(".radarChart", data, radarChartOptions);

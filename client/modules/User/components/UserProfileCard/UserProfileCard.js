@@ -18,7 +18,10 @@ import styles from './UserProfileCard.scss';
 import talents from '../../../../../data/talents';
 
 const sendRequest = () => {
-  callApi('evaluate/request', 'post', { emails: ['test@test.com', 'test2@test.com'] }).then(res=> console.log(res.tokens.ops.map(token=> token.token)))
+  callApi('evaluate/request', 'post', { emails: ['test@test.com', 'test2@test.com'] }).then(res => {
+    var full = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
+    res.tokens.ops.map(token=> console.log(full + '/evaluate/' + token.token));
+  })
 };
 
 function UserProfileCard(props) {
