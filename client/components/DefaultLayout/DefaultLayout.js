@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Import Style
-import styles from './DefaultLayout.css';
+import styles from './DefaultLayout.scss';
 
 import Header from '../Header/Header';
 

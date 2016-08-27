@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 // Import Style
 import styles from './App.scss';
 
 // Import Components
 import Helmet from 'react-helmet';
-import DevTools from './components/DevTools';
+import { isLoggedIn } from '../../util/apiCaller';
 
 // Import Actions
+import { authenticated } from './AppActions';
+import callApi from '../../util/apiCaller';
 
 // Import Selectors
 import { getCurrentUser } from './AppReducer';
@@ -20,32 +21,37 @@ export class App extends Component {
     this.state = { isMounted: false };
   }
 
+  componentWillMount() {
+    if (isLoggedIn()) {
+      callApi('users/me', 'get').then(userInfo => {
+        this.props.dispatch(authenticated(userInfo.user));
+      });
+    }
+  }
+
   componentDidMount() {
     this.setState({ isMounted: true }); // eslint-disable-line
   }
 
   render() {
     return (
-      <div>
-        {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
-        <div>
-          <Helmet
-            title="KWAKE"
-            titleTemplate="%s - Kwake App"
-            meta={[
-              { charset: 'utf-8' },
-              {
-                'http-equiv': 'X-UA-Compatible',
-                content: 'IE=edge',
-              },
-              {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-              },
-            ]}
-          />
-          {this.props.children}
-        </div>
+      <div className={styles.main}>
+        <Helmet
+          title="KWAKE"
+          titleTemplate="%s - Kwake App"
+          meta={[
+            { charset: 'utf-8' },
+            {
+              'http-equiv': 'X-UA-Compatible',
+              content: 'IE=edge',
+            },
+            {
+              name: 'viewport',
+              content: 'width=device-width, initial-scale=1',
+            },
+          ]}
+        />
+        {this.props.children}
       </div>
     );
   }
@@ -55,6 +61,10 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+};
+
+App.contextTypes = {
+  router: React.PropTypes.object,
 };
 
 // Retrieve data from store as props

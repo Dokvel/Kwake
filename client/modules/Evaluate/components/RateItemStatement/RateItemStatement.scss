@@ -1,0 +1,25 @@
+@import "../../../../main.scss";
+
+.container {
+  display: inline-flex;
+  flex: 1;
+  flex-flow: column wrap;
+  .info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    justify-content: center;
+    .info {
+      display: flex;
+      padding-left: 40px;
+      .desc {
+        max-width: 475px;
+        width: 100%;
+        margin-left: 30px;
+        font-family: $baseFontFamily;
+        font-weight: 300;
+        line-height: 24px;
+      }
+    }
+  }
+}

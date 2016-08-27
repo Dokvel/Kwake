@@ -1,7 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import styles from './SetupAccountPage.scss';
+
+import { isLoggedIn } from '../../../../util/apiCaller';
 
 // Import Components
 import DiscForm from '../../components/DiscForm/DiscForm';
@@ -20,11 +23,15 @@ class SetupAccountPage extends Component {
     this.state = { currentStage: 1, amountStage: 2, disc: {}, talents: {} }
   }
 
-  componentDidMount() {
-    let { currentUser } = this.props;
+  componentWillMount() {
+    if (!isLoggedIn()) {
+      browserHistory && browserHistory.push('/');
+    }
+  }
 
-    if (currentUser && hasProfileCompleted(currentUser)) {
-      this.context.router.push('/profile');
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.currentUser && nextProps.currentUser && hasProfileCompleted(nextProps.currentUser)) {
+      this.context.router.push('/profile/' + nextProps.currentUser.cuid);
     }
   }
 
@@ -33,11 +40,7 @@ class SetupAccountPage extends Component {
       this.setState({ currentStage: this.state.currentStage + 1, disc: result })
     } else if (this.state.currentStage === 2) {
       this.setState({ talents: result })
-      this.props.dispatch(setupProfileRequest({
-        email: this.props.currentUser.email,
-        talents: result,
-        ...this.state.disc
-      }));//TODO: Update after maje JWT auth api
+      this.props.dispatch(setupProfileRequest({ talents: result, ...this.state.disc }));
     }
   }
 
@@ -51,18 +54,16 @@ class SetupAccountPage extends Component {
 
   render() {
     let { amountStage, currentStage } = this.state;
+    let { currentUser } = this.props;
 
     return (
       <div className={styles.wrapper}>
         <div className={styles.stage}>Setup account - step {currentStage} of {amountStage}</div>
-        {this.renderStage()}
+        {currentUser && this.renderStage()}
       </div>
     );
   }
 }
-
-// Actions required to provide data for this component to render in sever side.
-SetupAccountPage.need = [];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {
@@ -72,7 +73,7 @@ function mapStateToProps(state) {
 }
 
 SetupAccountPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 SetupAccountPage.contextTypes = {

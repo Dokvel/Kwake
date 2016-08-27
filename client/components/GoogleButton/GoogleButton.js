@@ -1,46 +1,38 @@
 import React, { Component } from 'react';
-import { signIn } from '../../modules/App/AppActions';
+import { authenticated } from '../../modules/App/AppActions';
+import Button from '../Button/Button';
+import callApi from '../../util/apiCaller';
 
 export default class GoogleButton extends Component {
-  constructor(props) {
-    super(props)
-  }
 
-  componentDidMount() {
-    window.addEventListener('google-loaded', this.renderGoogleLoginButton.bind(this));
-    if (window.gapi && gapi.signin2) {
-      this.renderGoogleLoginButton()
-    }
-  }
-
-  renderGoogleLoginButton() {
-    gapi.signin2.render('my-signin2', {
-      'scope': 'profile email https://www.googleapis.com/auth/calendar.readonly',
-      'width': 240,
-      'height': 50,
-      'longtitle': true,
-      'onsuccess': (googleUser) => {
-        let profile = googleUser.getBasicProfile()
-        console.log('Logged in as: ' + profile.getName());
-        let user = {
-          givenName: profile.getGivenName(),
-          familyName: profile.getFamilyName(),
-          googleId: profile.getId(),
-          image: profile.getImageUrl(),
-          email: profile.getEmail()
+  onGoogleSignIn() {
+    if (window.auth2) {
+      window.auth2.grantOfflineAccess({ 'redirect_uri': 'postmessage' }).then((authResult)=> {
+        if (authResult['code']) {
+          callApi('auth/google/callback', 'post', { code: authResult['code'] })
+            .then(res => {
+              if (res.authenticationToken) {
+                localStorage.setItem('authentication_token', res.authenticationToken);
+                return callApi('users/me', 'get');
+              }
+            }).then(userInfo => {
+            this.props.dispatch(authenticated(userInfo.user));
+          });
+        } else {
+          // There was an error.
         }
-        this.props.dispatch(signIn(user))
-      },
-      'onfailure': (error) => {
-        console.log(error);
-      }
-    });
+      });
+    }
   }
 
   render() {
     return (
       <div>
-        <div id="my-signin2"></div>
+        <Button color={Button.COLOR_RED}
+                onClick={this.onGoogleSignIn.bind(this)}
+                rightIcon="bi_interface-arrow-right">
+          Sign in with Google
+        </Button>
       </div>
     );
   }

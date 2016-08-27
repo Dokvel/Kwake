@@ -1,7 +1,10 @@
+@import "../../../../main.scss";
+
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: $backgroundColor;
   .main-content {
   }
 }

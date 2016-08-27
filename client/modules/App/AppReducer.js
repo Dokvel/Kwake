@@ -1,30 +1,19 @@
 // Import Actions
-import { TOGGLE_ADD_POST, AUTHENTICATED, NOT_AUTHENTICATED } from './AppActions';
-import { SETUP_PROFILE } from '../User/UserActions';
+import { AUTHENTICATED, NOT_AUTHENTICATED } from './AppActions';
+import { getUser } from '../User/UserReducer';
 
 // Initial State
-const initialState = {
-  showAddPost: false,
-};
+const initialState = {};
 
 const AppReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_ADD_POST:
-      return {
-        showAddPost: !state.showAddPost,
-      };
-    case SETUP_PROFILE:
     case AUTHENTICATED:
       return {
         ...state,
-        currentUser: action.user,
+        currentUser: action.user.cuid,
       };
     case NOT_AUTHENTICATED:
-      return {
-        ...state,
-        currentUser: undefined,
-      };
-
+      return initialState;
     default:
       return state;
   }
@@ -36,7 +25,8 @@ const AppReducer = (state = initialState, action) => {
 export const getShowAddPost = state => state.app.showAddPost;
 
 // Get currentUser
-export const getCurrentUser = state => state.app.currentUser;
+export const getCurrentUser = state => getUser(state, state.app.currentUser);
+
 export const hasProfileCompleted = user => {
   return user.dominance !== undefined
     && user.influence !== undefined

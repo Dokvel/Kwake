@@ -1,154 +1,337 @@
 @import "../../../../main.scss";
 
-.card {
-  box-sizing: border-box;
-  position: relative;
+@media (min-width: $desktopMinWidth) {
+  .card {
+    box-sizing: border-box;
+    position: relative;
 
-  width: 440px;
+    width: 440px;
 
-  margin-top: 200px;
-  padding: 40px 50px;
+    margin-top: 200px;
+    padding: 40px 50px;
 
-  border-radius: 8px;
-  background: linear-gradient(0deg, rgba(19,20,24,1) 0%, rgba(26,28,33,1) 83%, rgba(26,28,33,1) 100%);
+    border-radius: 8px;
+    background: linear-gradient(0deg, rgba(19,20,24,1) 0%, rgba(26,28,33,1) 83%, rgba(26,28,33,1) 100%);
 
-  box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
-  &_chart {
-    position: absolute;
-    top: -220px;
-    left: 20px;
+    &_chart {
+      width: 110%;
+      margin-top: -67.5%;
+      margin-left: -5%;
 
-    font-family: $futuraFontFamily;
-    text-transform: uppercase;
-  }
-
-  &_user {
-    margin-top: 120px;
-
-    font-family: $futuraFontFamily;
-    font-size: $baseFontSize-M;
-    text-align: center;
-    text-transform: uppercase;
-
-    &_isa {
-      color: $dark-grey;
-      font-weight: 600;
-    }
-  }
-
-  &_type {
-    margin-top: 14px;
-
-    font-family: $futuraFontFamily;
-    font-size: $baseFontSize-L;
-    letter-spacing: 0.1em;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  &_btnAsk {
-    margin-top: 22px;
-    text-align: center;
-  }
-
-  &_desc {
-    margin-top: 32px;
-    padding: 0 18px;
-
-    &_score {
-      margin-right: 38px;
-      float: left;
-
-      & > i {
-        color: $cardLockIconColor;
-        font-size: 64px;
-      }
+      font-family: $futuraFontFamily;
+      text-transform: uppercase;
     }
 
-    &_text {
-      font-size: $baseFontSize-S;
-      font-weight: 300;
-      line-height: 22px;
-    }
-  }
-
-  &_talentsList {
-    margin-top: 32px;
-    margin-bottom: 0;
-    padding: 0;
-
-    font-size: $baseFontSize-M;
-    font-weight: 300;
-    line-height: 22pt;
-
-    & > li {
-      padding: 3px 0;
-
-      list-style-type: none;
-      border-bottom-style: solid;
-      border-bottom-color: $dark-grey;
-      border-bottom-width: 1px;
-
-      &:last-child {
-        border: none;
-      }
-
-      & .talent {
-        margin-right: 10px;
-
-        font-size: 18px;
-      }
-
-      & .score {
-        float: right;
-        color: $cardLockIconColor;
-        font-size: 18px;
-      }
-    }
-  }
-
-  &_info {
-    margin-top: 32px;
-
-    &_troubleshooting {
-      margin-top: 24px;
-    }
-
-    &_score {
-      margin-right: 24px;
-      float: left;
-
-      $scoreSize: 76px;
-
-      height: $scoreSize;
-      width: $scoreSize;
-      line-height: calc(#{$scoreSize} * 1.2);
-
-      border: 2px solid $dark-grey;
-      border-radius: 50%;
-
+    &_user {
+      font-family: $futuraFontFamily;
+      font-size: $baseFontSize-M;
       text-align: center;
+      text-transform: uppercase;
 
-      & > i {
-        color: $cardLockIconColor;
-        font-size: 40px;
+      &_isa {
+        color: $dark-grey;
       }
+    }
+
+    &_type {
+      margin-top: 14px;
+
+      font-family: $futuraFontFamily;
+      font-size: $baseFontSize-L;
+      letter-spacing: 0.1em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    &_btnAsk {
+      margin-top: 22px;
+      text-align: center;
     }
 
     &_desc {
-      font-size: $baseFontSize-S;
-      line-height: 22px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
 
-      &_title {
-        font-family: $futuraFontFamily;
-        font-weight: 400;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+      margin-top: 32px;
+
+      &_score {
+        width: 74px;
+        margin-right: 24px;
+        text-align: center;
+
+        & > i {
+          color: $cardLockIconColor;
+          font-size: 64px;
+        }
       }
 
       &_text {
+        width: 240px;
+        font-size: $baseFontSize-S;
         font-weight: 300;
+        line-height: 22px;
+      }
+    }
+
+    &_talentsList {
+      margin-top: 32px;
+      margin-bottom: 0;
+      padding: 0;
+
+      font-size: $baseFontSize-M;
+      font-weight: 300;
+      line-height: 22pt;
+
+      & > li {
+        padding: 3px 0;
+
+        list-style-type: none;
+        border-bottom-style: solid;
+        border-bottom-color: $darkGreyBorderColor;
+        border-bottom-width: 1px;
+
+        &:last-child {
+          border: none;
+        }
+
+        & .talent {
+          margin-right: 10px;
+
+          font-size: 18px;
+        }
+
+        & .score {
+          float: right;
+          color: $cardLockIconColor;
+          font-size: 18px;
+        }
+      }
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      margin-top: 32px;
+
+      &_troubleshooting {
+        margin-top: 24px;
+      }
+
+      &_title {
+        display: none;
+      }
+
+      &_score {
+        margin-right: 24px;
+
+        $scoreSize: 74px;
+
+        height: $scoreSize;
+        width: $scoreSize;
+        line-height: calc(#{$scoreSize} * 1.2);
+
+        border: 2px solid $darkGreyBorderColor;
+        border-radius: 50%;
+
+        text-align: center;
+
+        & > i {
+          color: $cardLockIconColor;
+          font-size: 40px;
+        }
+      }
+
+      &_desc {
+        width: 240px;
+
+        font-size: $baseFontSize-S;
+        line-height: 22px;
+
+        &_title {
+          font-family: $futuraFontFamily;
+          font-weight: 400;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        &_text {
+          font-weight: 300;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+  .card {
+    box-sizing: border-box;
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 200px;
+    margin-bottom: 20px;
+    padding: 40px 20px;
+
+    border-radius: 8px;
+    background: linear-gradient(0deg, rgba(19,20,24,1) 0%, rgba(26,28,33,1) 83%, rgba(26,28,33,1) 100%);
+
+    box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
+
+    &_chart {
+      width: 110%;
+      margin-top: -67.5%;
+      margin-left: -5%;
+
+      font-family: $futuraFontFamily;
+      text-transform: uppercase;
+    }
+
+    &_user {
+      font-family: $futuraFontFamily;
+      font-size: $mobileFontSize-S;
+      text-align: center;
+      text-transform: uppercase;
+
+      &_isa {
+        color: $dark-grey;
+      }
+    }
+
+    &_type {
+      margin-top: 14px;
+
+      font-family: $futuraFontFamily;
+      font-size: $mobileFontSize-L;
+      letter-spacing: 0.1em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    &_btnAsk {
+      margin-top: 22px;
+      text-align: center;
+    }
+
+    &_desc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      margin-top: 32px;
+
+      &_score {
+        width: 74px;
+        text-align: center;
+
+        & > i {
+          color: $cardLockIconColor;
+          font-size: 64px;
+        }
+      }
+
+      &_text {
+        margin-top: 26px;
+        width: 90%;
+        font-size: $mobileFontSize-S;
+        text-align: center;
+        font-weight: 300;
+        line-height: 22px;
+      }
+    }
+
+    &_talentsList {
+      margin-top: 32px;
+      margin-bottom: 0;
+      padding: 0;
+
+      font-size: $mobileFontSize-S;
+      font-weight: 300;
+      line-height: 22pt;
+
+      & > li {
+        padding: 3px 0;
+
+        list-style-type: none;
+        border-bottom-style: solid;
+        border-bottom-color: $darkGreyBorderColor;
+        border-bottom-width: 1px;
+
+        &:last-child {
+          border: none;
+        }
+
+        & .talent {
+          margin-right: 10px;
+
+          font-size: 18px;
+        }
+
+        & .score {
+          float: right;
+          color: $cardLockIconColor;
+          font-size: 18px;
+        }
+      }
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: column;;
+      align-items: center;
+
+      margin-top: 32px;
+
+      &_title {
+        margin-bottom: 20px;
+
+        font-family: $futuraFontFamily;
+        font-size: $mobileFontSize-M;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      &_troubleshooting {
+        margin-top: 24px;
+      }
+
+      &_score {
+        $scoreSize: 74px;
+
+        height: $scoreSize;
+        width: $scoreSize;
+        line-height: calc(#{$scoreSize} * 1.2);
+
+        border: 2px solid $darkGreyBorderColor;
+        border-radius: 50%;
+
+        text-align: center;
+
+        & > i {
+          color: $cardLockIconColor;
+          font-size: 40px;
+        }
+      }
+
+      &_desc {
+        width: 90%;
+
+        font-size: $mobileFontSize-S;
+        line-height: 22px;
+        text-align: center;
+
+        &_title {
+          display: none;
+        }
+
+        &_text {
+          font-weight: 300;
+        }
       }
     }
   }

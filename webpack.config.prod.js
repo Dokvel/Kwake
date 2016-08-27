@@ -6,6 +6,7 @@ var cssnext = require('postcss-cssnext');
 var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
 var cssnano = require('cssnano');
+var path = require('path');
 
 module.exports = {
   devtool: 'hidden-source-map',
@@ -59,12 +60,14 @@ module.exports = {
         loader: 'babel'
       }, {
         test: /\.(jpe?g|gif|png|svg)$/i,
+        exclude: [path.resolve(__dirname, "vendor/fonts")],
         loader: 'url-loader?limit=10000'
       }, {
         test: /\.json$/,
         loader: 'json-loader'
       }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
+        include: [path.resolve(__dirname, "vendor/fonts")],
         loader: 'file?name=public/fonts/[name].[ext]'
       }
     ],

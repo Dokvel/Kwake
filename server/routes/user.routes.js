@@ -1,12 +1,17 @@
-import { Router } from 'express';
 import * as UserController from '../controllers/user.controller';
+import * as EvaluateController from '../controllers/evaluate.controller';
 
-const router = new Router();
+export default function (router, protectedMiddleware) {
+  router.put('/profile', protectedMiddleware, UserController.setupProfile);
 
-// Add a new Post
-router.route('/profile').put(UserController.setupProfile);
-if (process.env.DEMO_MODE) {
-  router.route('/drop_all').get(UserController.dropAll);
-}
+  router.get('/users/me', protectedMiddleware, UserController.getCurrentUser);
 
-export default router;
+  router.get('/users/:cuid', UserController.getUser);
+
+  router.get('/users/:user_cuid/evaluates', EvaluateController.getEvaluates);
+
+  if (process.env.DEMO_MODE) {
+    router.route('/drop_all').get(UserController.dropAll);
+  }
+  return router;
+};

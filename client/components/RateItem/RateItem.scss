@@ -1,0 +1,14 @@
+@import "../../main.scss";
+
+.container {
+  display: inline-flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  .star {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 25px;
+
+  }
+}

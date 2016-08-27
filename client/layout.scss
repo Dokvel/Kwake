@@ -8,6 +8,17 @@ body {
   font-size: $baseFontSize-M;
   background-color: $backgroundColor;
 }
-.text-bold{
+
+html, body, .main {
+  height: 100%;
+}
+
+.text-bold {
   font-weight: bold;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+  body {
+    padding: 20px;
+  }
 }

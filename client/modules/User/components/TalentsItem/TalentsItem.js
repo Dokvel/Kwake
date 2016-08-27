@@ -3,7 +3,8 @@
  */
 
 import React, { Component } from 'react';
-import cn from 'classnames';
+
+import TalentIcon from '../../../../components/TalentIcon/TalentIcon';
 
 import styles from './TalentsItem.scss';
 
@@ -14,12 +15,9 @@ export class TalentsItem extends Component {
 
   render() {
     return (
-      <div className={cn(styles['talent-box'], { [styles['talent-box--selected']]: this.props.selected })}>
-        <div className={styles.icon} onClick={this.props.onSelect}>
-          <i className="bi_com-group-bubble-a"></i>
-        </div>
+      <div className={styles['talent-box']}>
+        <TalentIcon onClick={this.props.onSelect.bind(this)} selected={this.props.selected} tip={this.props.description} talentKey={this.props.talentKey}/>
         <div className={styles.title}>{this.props.name}</div>
-
       </div>
     );
   }

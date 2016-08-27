@@ -1,75 +1,96 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import  cn from 'classnames';
+import cn from 'classnames';
+
+import callApi from '../../../../util/apiCaller';
 
 // Import Components
-import RadarChart from '../../../../components/RadarChart/RadarChart';
 import Button from '../../../../components/Button/Button';
+import RadarChart from '../../../../components/RadarChart/RadarChart';
+
+// Import Functions
+import { getPersonalityType } from '../../../../util/disc_helpers';
 
 // Import Style
 import styles from './UserProfileCard.scss';
 
+// Import Static Data
 import talents from '../../../../../data/talents';
+
+const sendRequest = () => {
+  callApi('evaluate/request', 'post', { emails: ['test@test.com', 'test2@test.com'] })
+};
 
 function UserProfileCard(props) {
   let talentsObj = _.keyBy(talents, 'key');
+  let user = props.user;
+  let userType = getPersonalityType(user);
+
   return (
     <div className={styles.card}>
       <div className={styles.card_chart}>
-        <RadarChart />
+        <RadarChart user={user} votes={props.votes}/>
       </div>
       <div className={styles.card_user}>
-        {`${props.user.givenName} ${props.user.familyName}`} <span className={styles.card_user_isa}>is a</span>
+        {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
       </div>
       <div className={styles.card_type}>
-        Individualist
+        {userType && userType.name}
       </div>
       <div className={styles.card_btnAsk}>
-        <Button rightIcon="bi_interface-arrow-right" color={Button.COLOR_BLUE}>Ask for a review</Button>
+        <Button rightIcon="bi_interface-arrow-right" color={Button.COLOR_BLUE} onClick={sendRequest.bind(this)}>
+          Ask for a review
+        </Button>
       </div>
       <div className={styles.card_desc}>
         <div className={styles.card_desc_score}>
           <i className="fa fa-lock"></i>
         </div>
         <div className={styles.card_desc_text}>
-          Ability to quickly identify multiple options when evaluating solutions; and assure viability.
+          {userType && userType.description}
         </div>
       </div>
       <ul className={styles.card_talentsList}>
-        { props.user.talents.map((talent)=> {
+        { user.talents.map((talent)=> {
           return (<li key={talent}>
             <span className={styles.talent}><i className="fa fa-star-o"></i></span>
-            {`${talentsObj[talent].name} (STG)`}
+            {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
             <span className={styles.score}><i className="fa fa-lock"></i></span>
           </li>)
-        })}
+        }) }
       </ul>
       <div className={styles.card_info}>
+        <div className={styles.card_info_title}>Team</div>
         <div className={styles.card_info_score}>
           <i className="fa fa-lock"></i>
         </div>
         <div className={styles.card_info_desc}>
           <span className={styles.card_info_desc_title}>Team</span>
           <br />
-          <span className={styles.card_info_desc_text}>Relying on facts, structures and rules create a safe, peaceful environment for engaging with work and others.</span>
+          <span className={styles.card_info_desc_text}>{userType && userType.team}</span>
         </div>
       </div>
       <div className={cn(styles.card_info, styles.card_info_troubleshooting)}>
+        <div className={styles.card_info_title}>Troubleshooting</div>
         <div className={styles.card_info_score}>
           <i className="fa fa-lock"></i>
         </div>
         <div className={styles.card_info_desc}>
           <span className={styles.card_info_desc_title}>Troubleshooting</span>
           <br />
-          <span className={styles.card_info_desc_text}>Willfully sets off in new directions and relies on their own wits, resources for success.</span>
+          <span className={styles.card_info_desc_text}>{userType && userType.troubleshooting}</span>
         </div>
       </div>
     </div>
   );
 }
 
-// UserProfileCard.propTypes = {
-//
-// };
+UserProfileCard.propTypes = {
+  votes: PropTypes.array.isRequired
+};
+
+UserProfileCard.defaultProps = {
+  votes: [[]]
+};
 
 export default UserProfileCard;
