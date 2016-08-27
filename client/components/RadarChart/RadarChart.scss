@@ -1,17 +1,34 @@
 @import "../../main.scss";
 
-.chart {
-  position: relative;
+svg {
+  width: 100%;
+  height: 100%;
 }
 
-.userPhoto {
-  position: absolute;
-  top: 162px;
-  left: 162px;
+@media (min-width: $desktopMinWidth) {
+  .userPhoto {
+    position: absolute;
+    margin: 34% auto 0 auto;
+    left: 0;
+    right: 0;
+    width: 75px;
+    height: 75px;
 
-  width: 75px;
-  height: 75px;
+    border-radius: 50%;
+    background-size: contain;
+  }
+}
 
-  border-radius: 50%;
-  background-size: contain;
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+  .userPhoto {
+    position: absolute;
+    margin: 40% auto 0 auto;
+    left: 0;
+    right: 0;
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+    background-size: contain;
+  }
 }

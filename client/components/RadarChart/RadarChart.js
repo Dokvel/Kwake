@@ -12,6 +12,7 @@ import dataTalents from '../../../data/talents';
 
 export default class RadarChart extends Component {
   componentDidMount() {
+    let talentsObj  = _.keyBy(dataTalents, 'key');
     this.renderChart();
   }
 
@@ -141,11 +142,8 @@ export default class RadarChart extends Component {
     }
 
     let radarChartOptions = {
-    	w: width,
-    	h: height,
-    	margin: margin,
-    	color: color,
-      opacity: opacity
+    	color   : color,
+      opacity : opacity
     };
 
     RadarChartFunc(".radarChart", data, radarChartOptions);
@@ -157,7 +155,7 @@ export default class RadarChart extends Component {
     };
 
     return (
-      <div className={styles.chart}>
+      <div>
         <div className="radarChart">
           <div className={styles.userPhoto} style={userPhotoStyle}></div>
         </div>

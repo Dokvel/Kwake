@@ -1,0 +1,10 @@
+@import "../../main.scss";
+
+@media (min-width: $desktopMinWidth) {
+  .container {
+    max-width: 1240px;
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+  }
+}

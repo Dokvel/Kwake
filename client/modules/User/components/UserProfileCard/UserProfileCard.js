@@ -60,6 +60,7 @@ function UserProfileCard(props) {
         }) }
       </ul>
       <div className={styles.card_info}>
+        <div className={styles.card_info_title}>Team</div>
         <div className={styles.card_info_score}>
           <i className="fa fa-lock"></i>
         </div>
@@ -70,6 +71,7 @@ function UserProfileCard(props) {
         </div>
       </div>
       <div className={cn(styles.card_info, styles.card_info_troubleshooting)}>
+        <div className={styles.card_info_title}>Troubleshooting</div>
         <div className={styles.card_info_score}>
           <i className="fa fa-lock"></i>
         </div>
