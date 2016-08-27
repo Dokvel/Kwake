@@ -30,12 +30,12 @@
     margin-bottom: 15px;
     display: inline-flex;
     flex-flow: column wrap;
-    .statement {
-      margin-right: 20px;
-      color: $grey;
-      font-family: $futuraFontFamily;
-      font-size: $baseFontSize-S;
-      text-transform: uppercase;
-    }
+  }
+  .statement {
+    margin-right: 20px;
+    color: $grey;
+    font-family: $futuraFontFamily;
+    font-size: $baseFontSize-S;
+    text-transform: uppercase;
   }
 }
