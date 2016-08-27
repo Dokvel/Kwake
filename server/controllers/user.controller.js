@@ -128,6 +128,8 @@ export function getUser(req, res) {
     User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
       if (err) {
         res.status(500).send(err);
+      } else if (!user) {
+        res.status(403).end();
       } else {
         res.json({ user: publicUserParams(user.toObject()) });
       }

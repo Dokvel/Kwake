@@ -37,7 +37,7 @@ export class LandingPage extends Component {
 
   loggedBehavior(user) {
     if (user && hasProfileCompleted(user)) {
-      browserHistory.push('/profile/'+user.cuid);
+      browserHistory.push('/profile/' + user.cuid);
     } else {
       browserHistory.push('/users/setup');
     }
