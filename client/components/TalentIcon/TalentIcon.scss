@@ -32,3 +32,20 @@
   border-radius: 31px;
   border: none;
 }
+
+.tooltip {
+  font-size: $baseFontSize-S !important;
+  color: $grey !important;
+  font-family: $baseFontFamily !important;
+  font-weight: 300 !important;
+  max-width: 320px !important;
+  background-color: black !important;
+  height: auto !important;
+  line-height: normal !important;
+  padding: 15px !important;
+  &.place-top {
+    &:before {
+      border-color: black !important;
+    }
+  }
+}

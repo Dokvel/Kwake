@@ -16,7 +16,7 @@ export class TalentsItem extends Component {
   render() {
     return (
       <div className={styles['talent-box']}>
-        <TalentIcon onClick={this.props.onSelect.bind(this)} selected={this.props.selected}/>
+        <TalentIcon onClick={this.props.onSelect.bind(this)} selected={this.props.selected} tip={this.props.description} talentKey={this.props.talentKey}/>
         <div className={styles.title}>{this.props.name}</div>
       </div>
     );

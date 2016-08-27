@@ -46,10 +46,10 @@ export class EvaluateTalentsForm extends Component {
               <div key={talent} className={styles['talent-row']}>
                 <div className={styles.talent}>
                   <div className={styles.name}>{talents[talent].name}</div>
-                  <TalentIcon name={talents[talent].icon }/>
+                  <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}/>
                 </div>
                 <RateItem value={this.state.talentRates[talent]} onChange={this.onRate.bind(this, talent)}/>
-                <div style={{flex: '1'}}></div>
+                <div style={{ flex: '1' }}></div>
               </div>
             ))
           }</div>
