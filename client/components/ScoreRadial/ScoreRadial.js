@@ -55,6 +55,8 @@ export default class ScoreRadial extends Component {
       stopOpacity: 1
     };
 
+    d3.select("svg").remove();
+
     return (
       <svg viewBox="0 0 80 80">
         <defs>
