@@ -58,7 +58,7 @@ export default class ScoreRadial extends Component {
     return (
       <svg viewBox="0 0 80 80">
         <defs>
-          <linearGradient id="lgrad" x1="0%" y1="100%" x2="0%" y2="0%" >
+          <linearGradient id="lgrad" x1="0%" y1="100%" x2="100%" y2="0%" >
             <stop style={linearGradient0Styles} />
             <stop offset="100%" style={linearGradient100Styles} />
           </linearGradient>
