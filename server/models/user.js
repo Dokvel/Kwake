@@ -16,7 +16,8 @@ const userSchema = new Schema({
   dominance: { type: 'Number' },
   influence: { type: 'Number' },
   steadiness: { type: 'Number' },
-  conscientiousness: { type: 'Number' }
+  conscientiousness: { type: 'Number' },
+  scoreLimit: { type: 'Number' }
 }, { timestamps: { createdAt: 'created_at' } });
 
 export default mongoose.model('User', userSchema);
