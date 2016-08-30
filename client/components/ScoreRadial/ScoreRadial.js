@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 // Import Style
 import styles from './ScoreRadial.scss';
 
-// Usage
-//
-// props:
-//
-// image - set for background image (color props don't needed)
-// colorStart - linearGradient start color
-// colorEnd - linearGradient end color
-// maxValue - max value for progress bar
-// value - actual value for progress bar
-//
-// set size via css width/height in parent component
+class ScoreRadial extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { d: undefined };
+  }
 
-export default class ScoreRadial extends Component {
   componentDidMount() {
-    let angle = (this.props.value * 359.99) / this.props.maxValue;
-    document.getElementById("progress").setAttribute("d", this.describeArc(40, 40, 37.5, 0, angle));
+    this.renderProgressBar(this.props.maxValue, this.props.value);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.renderProgressBar(nextProps.maxValue, nextProps.value);
+  }
+
+  renderProgressBar(maxValue, value) {
+    let angle = (value * 359.99) / maxValue;
+    this.setState({ d: this.describeArc(40, 40, 37.5, 0, angle) });
   }
 
   describeArc(x, y, radius, startAngle, endAngle) {
@@ -55,8 +56,6 @@ export default class ScoreRadial extends Component {
       stopOpacity: 1
     };
 
-    d3.select("svg").remove();
-
     return (
       <svg viewBox="0 0 80 80">
         <defs>
@@ -77,8 +76,18 @@ export default class ScoreRadial extends Component {
             <text id={styles.value} x="40" y="48" textAnchor="middle">{this.props.value}</text>
           </g>
         }
-        <path id="progress" fill="none" stroke={ this.props.image ? "#0060ff" : "url(#lgrad)" } strokeWidth="5" />
+        <path d={this.state.d} fill="none" stroke={ this.props.image ? "#0060ff" : "url(#lgrad)" } strokeWidth="5" />
       </svg>
     );
   }
 }
+
+ScoreRadial.propTypes = {
+  image: PropTypes.string, // set for background image (color props don't needed)
+  colorStart: PropTypes.string, // linearGradient start color
+  colorEnd: PropTypes.string,// linearGradient end color
+  maxValue: PropTypes.number.isRequired, // max value for progress bar
+  value: PropTypes.number.isRequired // actual value for progress bar
+};
+
+export default ScoreRadial;
