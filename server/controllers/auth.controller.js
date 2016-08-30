@@ -47,11 +47,27 @@ export function signIn(req, res) {
           user.googleAccessToken = tokens.access_token;
           user.authenticationToken = generateRandomToken(); //Our api token
 
-          user.save((err, saved) => {
+          User.findOne().sort('-created_at').exec((err, lastUser) => {
             if (err) {
               res.status(500).send(err);
+            } else {
+              const scoreLimits = [5, 10, 15, 20];
+
+              if (!lastUser || !lastUser.scoreLimit) {
+                user.scoreLimit = scoreLimits[0];
+              } else if (userInfo.id !== lastUser.googleId) {
+                let scoreIndex = scoreLimits.indexOf(lastUser.scoreLimit) + 1;
+                scoreIndex = scoreIndex === scoreLimits.length ? 0 : scoreIndex;
+                user.scoreLimit = scoreLimits[scoreIndex];
+              }
+
+              user.save((err, saved) => {
+                if (err) {
+                  res.status(500).send(err);
+                }
+                res.json({ authenticationToken: saved.authenticationToken });
+              });
             }
-            res.json({ authenticationToken: saved.authenticationToken });
           });
         });
       });
