@@ -85,7 +85,7 @@ class RequestReviewModal extends Component {
       <Modal handleClose={this.props.handleClose}>
         <div className={styles.title}>REQUEST A REVIEW</div>
         <div className={styles['list-title']}>
-          Your recent encounters (<span className={styles['select-all']} onClick={this.selectAll}>select all</span>):
+          Your recent encounters <span className={styles['select-all']} onClick={this.selectAll}>select all</span>
         </div>
         <div className={styles['encounters-container']}>
           <div className={styles.encounters}>

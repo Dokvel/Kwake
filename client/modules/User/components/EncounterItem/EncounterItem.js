@@ -5,10 +5,7 @@ import cn from 'classnames';
 import styles from './EncounterItem.scss';
 
 function EncounterItem(props) {
-  let avatar = props.image ? props.image : "https://lh4.googleusercontent.com/-9GtzGQSWlcY/AAAAAAAAAAI/AAAAAAAAAAs/rQ3kmKyAtVo/photo.jpg";
-  let userPhotoStyle = {
-    backgroundImage: `url(${avatar})`
-  };
+  let userPhotoStyle = props.image ? { backgroundImage: `url(${props.image})` } : undefined;
 
   return (
     <div className={styles.container}>
