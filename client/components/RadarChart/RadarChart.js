@@ -22,16 +22,16 @@ export default class RadarChart extends Component {
 
   renderChart() {
     let talentsObj = _.keyBy(dataTalents, 'key');
-    let {talents} = this.props.user;
-    let {talentRates, talentRatesAVG} = this.props;
+    let {talents} = this.props;
+    let {talentRates, summary} = this.props;
     let votes = [];
 
     _.each(talentRates, talentRate => {
       votes.push(_.toArray(talentRate));
     });
 
-    if (talentRatesAVG) {
-      votes.push(_.toArray(talentRatesAVG))
+    if (summary) {
+      votes.push(_.toArray(summary))
     }
 
     let data = new Array(votes.length);
@@ -39,7 +39,7 @@ export default class RadarChart extends Component {
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
-      if (talentRatesAVG && i === (votes.length - 1)) {
+      if (summary && i === (votes.length - 1)) {
         colorArray.push("url(#gradient)");
         opacityArray.push("1");
       } else {
@@ -140,7 +140,7 @@ export default class RadarChart extends Component {
 
   render() {
     let userPhotoStyle = {
-      backgroundImage: 'url(' + this.props.user.image + ')'
+      backgroundImage: 'url(' + this.props.image + ')'
     };
     if (typeof window !== 'undefined') {
       this.renderChart();

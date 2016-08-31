@@ -27,9 +27,10 @@ function UserProfileCard(props) {
     <div className={styles.card}>
       <div className={styles.card_chart}>
         <RadarChart
-          user={user}
+          image={user.image}
+          talents={user.talents}
           talentRates={props.feedbackRates.talents}
-          talentRatesAVG={props.feedbackRatesAVG.talents ? props.feedbackRatesAVG.talents : undefined} />
+          summary={props.summary && props.summary.talents} />
       </div>
       <div className={styles.card_user}>
         {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
@@ -58,7 +59,7 @@ function UserProfileCard(props) {
             <span className={styles.talent}><i className="fa fa-star-o"></i></span>
             {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
             <span className={styles.score}>
-            { props.feedbackRatesAVG ? <span className={styles.value}>{props.feedbackRatesAVG.talents[talent]}</span> : <i className="fa fa-lock"></i> }
+            { props.summary ? <span className={styles.value}>{props.summary.talents[talent]}</span> : <i className="fa fa-lock"></i> }
             </span>
           </li>)
         }) }

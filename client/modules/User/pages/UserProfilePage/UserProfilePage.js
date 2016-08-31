@@ -14,7 +14,7 @@ import { fetchUser } from '../../UserActions';
 import { getEvaluates } from '../../../Evaluate/EvaluateActions';
 
 // Import Functions
-import { checkLimit, generateAVG } from '../../../../util/feedbackHelpers';
+import { generateAVG } from '../../../../util/feedbackHelpers';
 
 // Import Selectors
 import { getUser } from '../../UserReducer';
@@ -53,13 +53,17 @@ class UserProfilePage extends Component {
     this.setState({ showReviewModal: true })
   };
 
+  isUnlocked = () => {
+    return this.props.user && this.props.evaluates.length >= this.props.user.scoreLimit;
+  }
+
   render() {
     let feedbackRates = {
       statements: [],
       talents: []
     };
 
-    let feedbackRatesAVG = {
+    let summary = {
       statements: {},
       talents: {}
     }
@@ -71,19 +75,21 @@ class UserProfilePage extends Component {
       });
     }
 
-    if (checkLimit(this.props.evaluates, this.props.user.scoreLimit)) {
-      feedbackRatesAVG.statements = generateAVG(feedbackRates.statements);
-      feedbackRatesAVG.talents = generateAVG(feedbackRates.talents);
+    if (this.isUnlocked()) {
+      summary.statements = generateAVG(['personality', 'team', 'troubleshooting'] ,feedbackRates.statements);
+      summary.talents = generateAVG(this.props.user.talents, feedbackRates.talents);
     }
 
     return (
       <div className={styles.container}>
-        <UserProfileCard
-          user={this.props.user}
-          showRequestModal={this.showRequestModal}
-          isCurrentUser={this.props.isCurrentUser}
-          feedbackRates={feedbackRates}
-          feedbackRatesAVG={checkLimit(this.props.evaluates, this.props.user.scoreLimit) ? feedbackRatesAVG : undefined} />
+
+          <UserProfileCard
+            user={this.props.user}
+            showRequestModal={this.showRequestModal}
+            isCurrentUser={this.props.isCurrentUser}
+            feedbackRates={feedbackRates}
+            summary={this.isUnlocked() ? summary : undefined} />
+        }
         {this.props.user && this.state.showReviewModal && <RequestReviewModal handleClose={this.hideReviewModal}/>}
       </div>
     );
