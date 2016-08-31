@@ -75,11 +75,18 @@ class RequestReviewModal extends Component {
     return this.getCustomEmails().length > 0 || this.state.selected.length > 0
   };
 
+  selectAll = ()=> {
+    let selected = this.state.encounters.map(encounter => encounter.email);
+    this.setState({ selected });
+  };
+
   render() {
     return (
       <Modal handleClose={this.props.handleClose}>
         <div className={styles.title}>REQUEST A REVIEW</div>
-        <div className={styles['list-title']}>Your recent encounters:</div>
+        <div className={styles['list-title']}>
+          Your recent encounters (<span className={styles['select-all']} onClick={this.selectAll}>select all</span>):
+        </div>
         <div className={styles['encounters-container']}>
           <div className={styles.encounters}>
             {
