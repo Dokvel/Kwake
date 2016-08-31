@@ -38,19 +38,19 @@ export default (
         });
       }}
     />
+    <Route
+      path="/evaluate(/:token)"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Evaluate/pages/UserEvaluatePage/UserEvaluatePage').default);
+        });
+      }}
+    />
     <Route component={App}>
       <IndexRoute
         getComponent={(nextState, cb) => {
           require.ensure([], require => {
             cb(null, require('./modules/App/pages/LandingPage/LandingPage').default);
-          });
-        }}
-      />
-      <Route
-        path="/evaluate/:token"
-        getComponent={(nextState, cb) => {
-          require.ensure([], require => {
-            cb(null, require('./modules/Evaluate/pages/UserEvaluatePage/UserEvaluatePage').default);
           });
         }}
       />
@@ -64,7 +64,7 @@ export default (
           }}
         />
         <Route
-          path="/profile/:cuid"
+          path="/profile(/:cuid)"
           getComponent={(nextState, cb) => {
             require.ensure([], require => {
               cb(null, require('./modules/User/pages/UserProfilePage/UserProfilePage').default);
