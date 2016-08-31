@@ -82,14 +82,12 @@ class UserProfilePage extends Component {
 
     return (
       <div className={styles.container}>
-
-          <UserProfileCard
-            user={this.props.user}
-            showRequestModal={this.showRequestModal}
-            isCurrentUser={this.props.isCurrentUser}
-            feedbackRates={feedbackRates}
-            summary={this.isUnlocked() ? summary : undefined} />
-        }
+        {this.props.user && <UserProfileCard
+          user={this.props.user}
+          showRequestModal={this.showRequestModal}
+          isCurrentUser={this.props.isCurrentUser}
+          feedbackRates={feedbackRates}
+          summary={this.isUnlocked() ? summary : undefined} />}
         {this.props.user && this.state.showReviewModal && <RequestReviewModal handleClose={this.hideReviewModal}/>}
       </div>
     );
