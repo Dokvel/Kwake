@@ -72,8 +72,8 @@ class UserProfilePage extends Component {
     }
 
     if (checkLimit(this.props.evaluates, this.props.user.scoreLimit)) {
-      feedbackRatesAVG.statements = (generateAVG(feedbackRates.statements));
-      feedbackRatesAVG.talents = (generateAVG(feedbackRates.talents));
+      feedbackRatesAVG.statements = generateAVG(feedbackRates.statements);
+      feedbackRatesAVG.talents = generateAVG(feedbackRates.talents);
     }
 
     return (
