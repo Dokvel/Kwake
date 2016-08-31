@@ -25,20 +25,16 @@ class ScoreRadial extends Component {
   describeArc(x, y, radius, startAngle, endAngle) {
     let start = this.polarToCartesian(x, y, radius, endAngle);
     let end = this.polarToCartesian(x, y, radius, startAngle);
-
     let largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
     let d = [
       "M", start.x, start.y,
       "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
     ].join(" ");
-
     return d;
   }
 
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
-
     return {
       x: centerX + (radius * Math.cos(angleInRadians)),
       y: centerY + (radius * Math.sin(angleInRadians))
@@ -63,31 +59,73 @@ class ScoreRadial extends Component {
             <stop style={linearGradient0Styles} />
             <stop offset="100%" style={linearGradient100Styles} />
           </linearGradient>
-          <pattern id="img" width="80" height="80" patternUnits="userSpaceOnUse">
-            <image xlinkHref={this.props.image} width="70" height="70" x="5" y="5" />
-          </pattern>
+          {
+            this.props.contentType === 'image' && this.props.content
+            ?
+            <pattern id="img" width="100" height="100" patternUnits="userSpaceOnUse">
+              <image xlinkHref={this.props.content} width="80" height="80" x="0" y="0" />
+            </pattern>
+            :
+            null
+          }
         </defs>
-        { this.props.image
+        {
+          this.props.contentType === 'image' && this.props.content
           ?
-          <circle cx="40" cy="40" r="37.5" fill="url(#img)" stroke="#434448" strokeWidth="5" />
+          <circle cx="40" cy="40" r={37.5 + this.props.strokeDistance} fill="url(#img)" stroke="#434448" strokeWidth={this.props.strokeWidth} />
           :
-          <g>
-            <circle cx="40" cy="40" r="39" fill="none" stroke="#434448" strokeWidth="2" />
-            <text id={styles.value} x="40" y="48" textAnchor="middle">{this.props.value}</text>
-          </g>
+          null
         }
-        <path d={this.state.d} fill="none" stroke={ this.props.image ? "#0060ff" : "url(#lgrad)" } strokeWidth="5" />
+        {
+          this.props.contentType === 'text' && this.props.content
+          ?
+          <g>
+            <circle cx="40" cy="40" r={37.5 + this.props.strokeDistance} fill="none" stroke="#434448" strokeWidth={this.props.strokeWidth} />
+            <text id={styles.value} x="40" y="48" textAnchor="middle">{this.props.content}</text>
+          </g>
+          :
+          null
+        }
+        <path d={this.state.d} fill="none" stroke={ this.props.image ? "#0060ff" : "url(#lgrad)" } strokeWidth={this.props.progressStrokeWidth} />
       </svg>
     );
   }
 }
 
+// example
+//
+// <ScoreRadial
+//   contentType={'text'}
+//   content={'3'}
+//   maxValue={5}
+//   value={3}
+//   strokeWidth={1}
+//   strokeDistance={2}
+//   progressStrokeWidth={5} />
+
 ScoreRadial.propTypes = {
-  image: PropTypes.string, // set for background image (color props don't needed)
-  colorStart: PropTypes.string, // linearGradient start color
-  colorEnd: PropTypes.string,// linearGradient end color
+  // set colorStart and colorEnd with same color for no gradient
+  colorStart: PropTypes.string.isRequired, // linearGradient start color
+  colorEnd: PropTypes.string.isRequired, // linearGradient end color
+  contentType: PropTypes.string.isRequired, // type of components content
+  content: PropTypes.string.isRequired, // components content
   maxValue: PropTypes.number.isRequired, // max value for progress bar
-  value: PropTypes.number.isRequired // actual value for progress bar
+  value: PropTypes.number.isRequired, // actual value for progress bar
+  strokeWidth: PropTypes.number.isRequired, // width of circle's stroke
+  strokeDistance: PropTypes.number.isRequired, // distance of circle's stroke. Set '2' for ideal out
+  progressStrokeWidth: PropTypes.number.isRequired // width of progress bar's path
+};
+
+ScoreRadial.defaultProps = {
+  colorStart: 'black',
+  colorEnd: 'black',
+  contentType: 'text',
+  content: '',
+  maxValue: 5,
+  value: 0,
+  strokeWidth: 1,
+  strokeDistance: 0,
+  progressStrokeWidth: 5
 };
 
 export default ScoreRadial;
