@@ -86,7 +86,7 @@ class ScoreRadial extends Component {
           :
           null
         }
-        <path d={this.state.d} fill="none" stroke={ this.props.image ? "#0060ff" : "url(#lgrad)" } strokeWidth={this.props.progressStrokeWidth} />
+        <path d={this.state.d} fill="none" stroke="url(#lgrad)" strokeWidth={this.props.progressStrokeWidth} />
       </svg>
     );
   }
