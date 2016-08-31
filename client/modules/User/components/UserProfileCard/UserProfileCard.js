@@ -17,13 +17,6 @@ import styles from './UserProfileCard.scss';
 // Import Static Data
 import talents from '../../../../../data/talents';
 
-const sendRequest = () => {
-  callApi('evaluate/request', 'post', { emails: ['test@test.com', 'test2@test.com'] }).then(res => {
-    var full = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
-    res.tokens.ops.map(token=> console.log(full + '/evaluate/' + token.token));
-  })
-};
-
 function UserProfileCard(props) {
   let talentsObj = _.keyBy(talents, 'key');
   let user = props.user;
@@ -40,11 +33,13 @@ function UserProfileCard(props) {
       <div className={styles.card_type}>
         {userType && userType.name}
       </div>
+      {props.isCurrentUser &&
       <div className={styles.card_btnAsk}>
-        <Button rightIcon="bi_interface-arrow-right" color={Button.COLOR_BLUE} onClick={sendRequest.bind(this)}>
+        <Button rightIcon="bi_interface-arrow-right" color={Button.COLOR_BLUE} onClick={props.showRequestModal}>
           Ask for a review
         </Button>
       </div>
+      }
       <div className={styles.card_desc}>
         <div className={styles.card_desc_score}>
           <i className="fa fa-lock"></i>

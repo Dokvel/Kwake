@@ -1,0 +1,12 @@
+@import "../../main.scss";
+
+.dialog {
+  background-color: $modalBackgroundColor !important;
+  border-radius: 5px !important;
+  color: $grey !important;
+  padding: 0 !important;
+  a[class^="closeButton"] {
+    left: initial !important;
+    right: -50px !important;
+  }
+}

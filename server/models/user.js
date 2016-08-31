@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 import _ from 'lodash';
 
+mongoose.Promise = Promise;
+
 const userSchema = new Schema({
   givenName: { type: 'String', required: true },
   familyName: { type: 'String', required: true },
@@ -10,6 +12,8 @@ const userSchema = new Schema({
   email: { type: 'String', required: true },
   googleId: { type: 'String', required: true },
   googleAccessToken: { type: 'String', required: true },
+  googleRefreshToken: { type: 'String', required: true },
+  googleExpiryDate: { type: 'Number', required: true },
   authenticationToken: { type: 'String' },
   cuid: { type: 'String', required: true },
   talents: [],
@@ -23,5 +27,13 @@ const userSchema = new Schema({
 export default mongoose.model('User', userSchema);
 
 export function publicUserParams(user) {
-  return _.omit(user, ['_id', 'googleId', 'googleAccessToken', 'authenticationToken']);
+  return _.omit(user, ['_id', 'googleId', 'googleAccessToken', 'authenticationToken', 'googleRefreshToken']);
+}
+
+export function getGoogleCredentials(user) {
+  return {
+    access_token: user.googleAccessToken,
+    refresh_token: user.googleRefreshToken,
+    expiry_date: user.googleExpiryDate
+  };
 }

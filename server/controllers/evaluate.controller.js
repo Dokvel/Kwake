@@ -115,11 +115,14 @@ export function createEvaluateRequest(req, res) {
       }
     });
 
-    Token.collection.insert(tokensObjects, (err, saveTokens) => {
+    Token.collection.insert(tokensObjects, (err, savedTokens) => {
       if (err) {
         res.status(500).send(err);
       } else {
-        res.json({ tokens: saveTokens });
+        let tokens = savedTokens.ops.map(token => {
+          return { responderEmail: token.responderEmail, token: token.token }
+        });
+        res.json({ tokens });
       }
     });
   }
