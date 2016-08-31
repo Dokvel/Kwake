@@ -14,7 +14,6 @@ export class Header extends Component {
   clickSignOut(event) {
     this.props.dispatch(notAuthenticated());
     window.gapi.auth2.getAuthInstance().signOut().then(() => {
-      window.gapi.auth2.getAuthInstance().disconnect();
       this.context.router.push('/');
     });
   }
