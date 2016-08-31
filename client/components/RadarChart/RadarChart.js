@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 // Import Functions
 import { RadarChartFunc } from '../../util/charts/RadarChart';
+import { generateSummary } from '../../util/feedbackHelpers';
 
 // Import Style
 import styles from './RadarChart.scss';
@@ -21,35 +22,16 @@ export default class RadarChart extends Component {
   }
 
   renderChart() {
-    let margin = { top: 50, right: 50, bottom: 50, left: 50 },
-      width = 300,
-      height = 300;
-
     let talentsObj = _.keyBy(dataTalents, 'key');
-    let { talents } = this.props.user;
-    let incomingVotes = this.props.votes;
-    let votes = incomingVotes;
-
-    if (incomingVotes.length > 4) {
-      let summaryVote = new Array(incomingVotes[0].length);
-      _.fill(summaryVote, 0);
-      for (var i1 = 0; i1 < incomingVotes.length; i1++) {
-        for (var i2 = 0; i2 < incomingVotes[i1].length; i2++) {
-          summaryVote[i2] = summaryVote[i2] + incomingVotes[i1][i2];
-        }
-      }
-      for (var i = 0; i < summaryVote.length; i++) {
-        summaryVote[i] = summaryVote[i] / incomingVotes.length;
-      }
-      votes.push(summaryVote);
-    }
+    let { talents, scoreLimit } = this.props.user;
+    let votes = this.props.votes;
 
     let data = new Array(votes.length);
     let colorArray = [];
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
-      if (votes.length > 5 && i === (votes.length - 1)) {
+      if (votes.length > scoreLimit && i === (votes.length - 1)) {
         colorArray.push("url(#gradient)");
         opacityArray.push("1");
       } else {

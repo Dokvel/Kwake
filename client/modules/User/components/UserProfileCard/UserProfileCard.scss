@@ -107,6 +107,13 @@
           float: right;
           color: $cardLockIconColor;
           font-size: 18px;
+
+          .value {
+            color: $grey;
+            font-family: $futuraFontFamily;
+            font-size: $baseFontSize-M;
+            font-weight: 400;
+          }
         }
       }
     }
@@ -276,6 +283,12 @@
           float: right;
           color: $cardLockIconColor;
           font-size: 18px;
+
+          .value {
+            color: $grey;
+            font-family: $futuraFontFamily;
+            font-weight: 400;
+          }
         }
       }
     }
