@@ -13,6 +13,9 @@ import RequestReviewModal from '../../components/RequestReviewModal/RequestRevie
 import { fetchUser } from '../../UserActions';
 import { getEvaluates } from '../../../Evaluate/EvaluateActions';
 
+// Import Functions
+import { generateAVG } from '../../../../util/feedbackHelpers';
+
 // Import Selectors
 import { getUser } from '../../UserReducer';
 import { getUserEvaluates } from '../../../Evaluate/EvaluateReducer';
@@ -50,24 +53,41 @@ class UserProfilePage extends Component {
     this.setState({ showReviewModal: true })
   };
 
+  isUnlocked = () => {
+    return this.props.user && this.props.evaluates.length >= this.props.user.scoreLimit;
+  }
+
   render() {
-    let votes = [];
+    let feedbackRates = {
+      statements: [],
+      talents: []
+    };
+
+    let summary = {
+      statements: {},
+      talents: {}
+    }
+
     if (this.props.user && this.props.evaluates) {
       _.each(this.props.evaluates, evaluate => {
-        votes.push(this.props.user.talents.map(talent=> evaluate.talents[talent] || 0));
-      })
-      if (votes.length === 0) {
-        votes.push([]);
-      }
+        feedbackRates.statements.push(evaluate.statements);
+        feedbackRates.talents.push(evaluate.talents);
+      });
+    }
+
+    if (this.isUnlocked()) {
+      summary.statements = generateAVG(['personality', 'team', 'troubleshooting'] ,feedbackRates.statements);
+      summary.talents = generateAVG(this.props.user.talents, feedbackRates.talents);
     }
 
     return (
       <div className={styles.container}>
-        <UserProfileCard
+        {this.props.user && <UserProfileCard
           user={this.props.user}
-          votes={votes}
           showRequestModal={this.showRequestModal}
-          isCurrentUser={this.props.isCurrentUser}/>
+          isCurrentUser={this.props.isCurrentUser}
+          feedbackRates={feedbackRates}
+          summary={this.isUnlocked() ? summary : undefined} />}
         {this.props.user && this.state.showReviewModal && <RequestReviewModal handleClose={this.hideReviewModal}/>}
       </div>
     );

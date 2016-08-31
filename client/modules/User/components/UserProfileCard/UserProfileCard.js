@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import cn from 'classnames';
 
+// Import Functions
 import callApi from '../../../../util/apiCaller';
 
 // Import Components
@@ -25,7 +26,11 @@ function UserProfileCard(props) {
   return (
     <div className={styles.card}>
       <div className={styles.card_chart}>
-        <RadarChart user={user} votes={props.votes}/>
+        <RadarChart
+          image={user.image}
+          talents={user.talents}
+          talentRates={props.feedbackRates.talents}
+          summary={props.summary && props.summary.talents} />
       </div>
       <div className={styles.card_user}>
         {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
@@ -49,11 +54,13 @@ function UserProfileCard(props) {
         </div>
       </div>
       <ul className={styles.card_talentsList}>
-        { user.talents.map((talent)=> {
+        { user.talents.map((talent) => {
           return (<li key={talent}>
             <span className={styles.talent}><i className="fa fa-star-o"></i></span>
             {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
-            <span className={styles.score}><i className="fa fa-lock"></i></span>
+            <span className={styles.score}>
+            { props.summary ? <span className={styles.value}>{props.summary.talents[talent]}</span> : <i className="fa fa-lock"></i> }
+            </span>
           </li>)
         }) }
       </ul>

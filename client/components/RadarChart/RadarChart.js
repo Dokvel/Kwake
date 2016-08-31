@@ -21,27 +21,17 @@ export default class RadarChart extends Component {
   }
 
   renderChart() {
-    let margin = { top: 50, right: 50, bottom: 50, left: 50 },
-      width = 300,
-      height = 300;
-
     let talentsObj = _.keyBy(dataTalents, 'key');
-    let { talents } = this.props.user;
-    let incomingVotes = this.props.votes;
-    let votes = incomingVotes;
+    let {talents} = this.props;
+    let {talentRates, summary} = this.props;
+    let votes = [];
 
-    if (incomingVotes.length > 4) {
-      let summaryVote = new Array(incomingVotes[0].length);
-      _.fill(summaryVote, 0);
-      for (var i1 = 0; i1 < incomingVotes.length; i1++) {
-        for (var i2 = 0; i2 < incomingVotes[i1].length; i2++) {
-          summaryVote[i2] = summaryVote[i2] + incomingVotes[i1][i2];
-        }
-      }
-      for (var i = 0; i < summaryVote.length; i++) {
-        summaryVote[i] = summaryVote[i] / incomingVotes.length;
-      }
-      votes.push(summaryVote);
+    _.each(talentRates, talentRate => {
+      votes.push(_.toArray(talentRate));
+    });
+
+    if (summary) {
+      votes.push(_.toArray(summary))
     }
 
     let data = new Array(votes.length);
@@ -49,7 +39,7 @@ export default class RadarChart extends Component {
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
-      if (votes.length > 5 && i === (votes.length - 1)) {
+      if (summary && i === (votes.length - 1)) {
         colorArray.push("url(#gradient)");
         opacityArray.push("1");
       } else {
@@ -150,7 +140,7 @@ export default class RadarChart extends Component {
 
   render() {
     let userPhotoStyle = {
-      backgroundImage: 'url(' + this.props.user.image + ')'
+      backgroundImage: 'url(' + this.props.image + ')'
     };
     if (typeof window !== 'undefined') {
       this.renderChart();
