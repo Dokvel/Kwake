@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 // Import Functions
 import { RadarChartFunc } from '../../util/charts/RadarChart';
-import { generateSummary } from '../../util/feedbackHelpers';
 
 // Import Style
 import styles from './RadarChart.scss';
