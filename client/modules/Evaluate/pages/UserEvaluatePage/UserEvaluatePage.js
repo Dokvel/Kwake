@@ -14,6 +14,7 @@ import { getPersonalityType } from '../../../../util/disc_helpers';
 // Import Components
 import EvaluateStatementForm from '../../components/EvaluateStatementForm/EvaluateStatementForm';
 import EvaluateTalentsForm from '../../components/EvaluateTalentsForm/EvaluateTalentsForm';
+import SignInStepPage from '../../components/SignInStepPage/SignInStepPage';
 import Header from '../../components/Header/Header';
 import Footer from '../../../../components/Footer/Footer';
 
@@ -23,14 +24,15 @@ import { fetchTokenInfo } from '../../EvaluateActions';
 // Import Selectors
 import { getTokenInfo } from '../../EvaluateReducer';
 
-const TYPE_TALENTS = 'talents';
-const TYPE_STATEMENT = 'statement';
+const TYPE_TALENTS = 'TYPE_TALENTS';
+const TYPE_STATEMENT = 'TYPE_STATEMENT';
+const TYPE_SIGN_IN = 'TYPE_SIGN_IN';
 
 class UserEvaluatePage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { type: TYPE_TALENTS, statements: {}, talents: {} }
+    this.state = { type: props.location.query.sign_in ? TYPE_SIGN_IN : TYPE_TALENTS, statements: {}, talents: {} }
   }
 
   componentDidMount() {
@@ -38,7 +40,9 @@ class UserEvaluatePage extends Component {
   }
 
   onCompleted(result) {
-    if (this.state.type === TYPE_TALENTS) {
+    if (this.state.type === TYPE_SIGN_IN) {
+      this.setState({ type: TYPE_TALENTS })
+    } else if (this.state.type === TYPE_TALENTS) {
       this.setState({ type: TYPE_STATEMENT, talents: result })
     } else if (this.state.type === TYPE_STATEMENT) {
       callApi(`evaluate/${this.props.params.token}`, 'post', {
@@ -52,7 +56,9 @@ class UserEvaluatePage extends Component {
   }
 
   renderForm() {
-    if (this.state.type === TYPE_STATEMENT) {
+    if (this.state.type === TYPE_SIGN_IN) {
+      return (<SignInStepPage onCompleted={this.onCompleted.bind(this)}/>)
+    } else if (this.state.type === TYPE_STATEMENT) {
       return (<EvaluateStatementForm {...this.props} onCompleted={this.onCompleted.bind(this)}/>)
     } else {
       return (<EvaluateTalentsForm onCompleted={this.onCompleted.bind(this)}
