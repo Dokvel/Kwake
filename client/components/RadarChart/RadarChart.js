@@ -22,15 +22,24 @@ export default class RadarChart extends Component {
 
   renderChart() {
     let talentsObj = _.keyBy(dataTalents, 'key');
-    let { talents, scoreLimit } = this.props.user;
-    let votes = this.props.votes;
+    let {talents} = this.props.user;
+    let {talentRates, talentRatesAVG} = this.props;
+    let votes = [];
+
+    _.each(talentRates, talentRate => {
+      votes.push(_.toArray(talentRate));
+    });
+
+    if (talentRatesAVG) {
+      votes.push(_.toArray(talentRatesAVG))
+    }
 
     let data = new Array(votes.length);
     let colorArray = [];
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
-      if (votes.length > scoreLimit && i === (votes.length - 1)) {
+      if (talentRatesAVG && i === (votes.length - 1)) {
         colorArray.push("url(#gradient)");
         opacityArray.push("1");
       } else {

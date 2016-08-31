@@ -13,6 +13,9 @@ import RequestReviewModal from '../../components/RequestReviewModal/RequestRevie
 import { fetchUser } from '../../UserActions';
 import { getEvaluates } from '../../../Evaluate/EvaluateActions';
 
+// Import Functions
+import { checkLimit, generateAVG } from '../../../../util/feedbackHelpers';
+
 // Import Selectors
 import { getUser } from '../../UserReducer';
 import { getUserEvaluates } from '../../../Evaluate/EvaluateReducer';
@@ -51,23 +54,36 @@ class UserProfilePage extends Component {
   };
 
   render() {
-    let votes = [];
+    let feedbackRates = {
+      statements: [],
+      talents: []
+    };
+
+    let feedbackRatesAVG = {
+      statements: {},
+      talents: {}
+    }
+
     if (this.props.user && this.props.evaluates) {
       _.each(this.props.evaluates, evaluate => {
-        votes.push(this.props.user.talents.map(talent=> evaluate.talents[talent] || 0));
-      })
-      if (votes.length === 0) {
-        votes.push([]);
-      }
+        feedbackRates.statements.push(evaluate.statements);
+        feedbackRates.talents.push(evaluate.talents);
+      });
+    }
+
+    if (checkLimit(this.props.evaluates, this.props.user.scoreLimit)) {
+      feedbackRatesAVG.statements = (generateAVG(feedbackRates.statements));
+      feedbackRatesAVG.talents = (generateAVG(feedbackRates.talents));
     }
 
     return (
       <div className={styles.container}>
         <UserProfileCard
           user={this.props.user}
-          votes={votes}
           showRequestModal={this.showRequestModal}
-          isCurrentUser={this.props.isCurrentUser}/>
+          isCurrentUser={this.props.isCurrentUser}
+          feedbackRates={feedbackRates}
+          feedbackRatesAVG={checkLimit(this.props.evaluates, this.props.user.scoreLimit) ? feedbackRatesAVG : undefined} />
         {this.props.user && this.state.showReviewModal && <RequestReviewModal handleClose={this.hideReviewModal}/>}
       </div>
     );

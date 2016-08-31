@@ -4,7 +4,6 @@ import cn from 'classnames';
 
 // Import Functions
 import callApi from '../../../../util/apiCaller';
-import { checkLimit, generateSummary } from '../../../../util/feedbackHelpers';
 
 // Import Components
 import Button from '../../../../components/Button/Button';
@@ -23,18 +22,14 @@ function UserProfileCard(props) {
   let talentsObj = _.keyBy(talents, 'key');
   let user = props.user;
   let userType = getPersonalityType(user);
-  let talentsFeedbacks = props.votes;
-  let limitStatus = checkLimit(props.votes, user.scoreLimit);
-  if (limitStatus) {
-    talentsFeedbacks = generateSummary(props.votes);
-  }
-  let talentsSummary = _.last(talentsFeedbacks);
-  let talentsSummaryObj = _.zipObject(user.talents, talentsSummary);
 
   return (
     <div className={styles.card}>
       <div className={styles.card_chart}>
-        <RadarChart user={user} votes={talentsFeedbacks}/>
+        <RadarChart
+          user={user}
+          talentRates={props.feedbackRates.talents}
+          talentRatesAVG={props.feedbackRatesAVG.talents ? props.feedbackRatesAVG.talents : undefined} />
       </div>
       <div className={styles.card_user}>
         {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
@@ -63,7 +58,7 @@ function UserProfileCard(props) {
             <span className={styles.talent}><i className="fa fa-star-o"></i></span>
             {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
             <span className={styles.score}>
-            { limitStatus ? <span className={styles.value}>{talentsSummaryObj[talent]}</span> : <i className="fa fa-lock"></i> }
+            { props.feedbackRatesAVG ? <span className={styles.value}>{props.feedbackRatesAVG.talents[talent]}</span> : <i className="fa fa-lock"></i> }
             </span>
           </li>)
         }) }
