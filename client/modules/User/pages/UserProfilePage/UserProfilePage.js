@@ -7,6 +7,7 @@ import styles from './UserProfilePage.scss';
 
 // Import Components
 import UserProfileCard from '../../components/UserProfileCard/UserProfileCard';
+import RequestReviewModal from '../../components/RequestReviewModal/RequestReviewModal';
 
 // Import Actions
 import { fetchUser } from '../../UserActions';
@@ -20,6 +21,10 @@ import { getUserEvaluates } from '../../../Evaluate/EvaluateReducer';
 import { hasProfileCompleted } from '../../../App/AppReducer';
 
 class UserProfilePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showReviewModal: false }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user && !hasProfileCompleted(nextProps.user)) {
@@ -37,6 +42,14 @@ class UserProfilePage extends Component {
     }
   }
 
+  hideReviewModal = ()=> {
+    this.setState({ showReviewModal: false })
+  };
+
+  showRequestModal = ()=> {
+    this.setState({ showReviewModal: true })
+  };
+
   render() {
     let votes = [];
     if (this.props.user && this.props.evaluates) {
@@ -50,7 +63,12 @@ class UserProfilePage extends Component {
 
     return (
       <div className={styles.container}>
-        {this.props.user && <UserProfileCard user={this.props.user} votes={votes}/>}
+        <UserProfileCard
+          user={this.props.user}
+          votes={votes}
+          showRequestModal={this.showRequestModal}
+          isCurrentUser={this.props.isCurrentUser}/>
+        {this.props.user && this.state.showReviewModal && <RequestReviewModal handleClose={this.hideReviewModal}/>}
       </div>
     );
   }
@@ -68,8 +86,10 @@ UserProfilePage.need = [
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
+  let user = getUser(state, props.params.cuid)
   return {
-    user: getUser(state, props.params.cuid),
+    user,
+    isCurrentUser: user && user.cuid === state.app.currentUser,
     evaluates: getUserEvaluates(state, props.params.cuid)
   };
 }

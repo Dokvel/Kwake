@@ -10,6 +10,8 @@ export default function (router, protectedMiddleware) {
 
   router.get('/users/:user_cuid/evaluates', EvaluateController.getEvaluates);
 
+  router.get('/users/:user_cuid/encounters', protectedMiddleware, UserController.getEncounters);
+
   if (process.env.DEMO_MODE) {
     router.route('/drop_all').get(UserController.dropAll);
   }

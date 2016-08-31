@@ -7,13 +7,14 @@ import styles from './Header.scss';
 // Import Selectors
 import { getCurrentUser } from '../../modules/App/AppReducer';
 
-import { signOut } from '../../util/google-api'
+// Import Actions
 import { notAuthenticated } from '../../modules/App/AppActions';
 
 export class Header extends Component {
   clickSignOut(event) {
     this.props.dispatch(notAuthenticated());
     window.gapi.auth2.getAuthInstance().signOut().then(() => {
+      window.gapi.auth2.getAuthInstance().disconnect();
       this.context.router.push('/');
     });
   }

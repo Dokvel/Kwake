@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
+mongoose.Promise = Promise;
+
 const userSchema = new Schema({
   requester: { type: 'String', required: true },
   responderEmail: { type: 'String', required: true },

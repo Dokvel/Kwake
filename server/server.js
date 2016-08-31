@@ -134,7 +134,7 @@ const renderFullPage = (html, initialState) => {
           window.gapi.load('auth2', function () {
             window.auth2 = gapi.auth2.init({
               client_id: '${serverConfig.GOOGLE_CLIENT_ID}',
-              scope: 'profile email https://www.googleapis.com/auth/calendar.readonly'
+              scope: '${serverConfig.GOOGLE_SCOPES.join(' ')}'
             });
           });
         }

@@ -7,5 +7,12 @@
   "client_secret": "C4A2TGvsZEXBX6leOjFzAf7H",
   "redirect_uris": [
     "http://localhost:8000"
+  ],
+  "scopes": [
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/calendar.readonly",
+    "https://www.googleapis.com/auth/contacts.readonly",
+    "https://www.googleapis.com/auth/plus.login"
   ]
 }
