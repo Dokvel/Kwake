@@ -32,7 +32,8 @@
 .encounters {
   display: inline-flex;
   flex-flow: row wrap;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .actions {
@@ -83,6 +84,19 @@
 }
 
 .select-all {
+  display: inline-block;
+  padding: 4px 10px;
   cursor: pointer;
-  text-decoration: underline;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: $baseFontSize-XS;
+  font-family: $futuraFontFamily;
+  color: rgba(254, 254, 254, 0.7);
+  background-color: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  &:hover {
+
+    color: rgb(254, 254, 254);
+  }
 }
