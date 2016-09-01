@@ -36,10 +36,10 @@ export class ThanxPage extends Component {
             </div>
           </div>
           <div className={styles.message}>
-            Kwake &mdash; psychological profiles, that don`t suck.
+            Kwake &mdash; professional profiles, that don't suck!
           </div>
           <div className={styles.ability}>
-            With Kwake you can quickly create and share you psychological profile and let others review it.
+            With Kwake you can quickly create your professional profile and let others to rate how you really work.
           </div>
           <div className={styles.actions}>
             <GoogleButton {...this.props}/>
