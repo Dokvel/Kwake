@@ -23,6 +23,10 @@ function UserProfileCard(props) {
   let user = props.user;
   let userType = getPersonalityType(user);
 
+  let classes = cn(styles.margin, {
+    [styles.margin]: !(_.isEmpty(props.feedbackRates.talents))
+  });
+
   return (
     <div className={styles.card}>
       <div className={styles.card_chart}>
@@ -32,6 +36,7 @@ function UserProfileCard(props) {
           talentRates={props.feedbackRates.talents}
           summary={props.summary && props.summary.talents} />
       </div>
+      <div className={classes}></div>
       <div className={styles.card_user}>
         {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
       </div>

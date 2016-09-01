@@ -13,11 +13,16 @@ import dataTalents from '../../../data/talents';
 export default class RadarChart extends Component {
   componentDidMount() {
     let talentsObj = _.keyBy(dataTalents, 'key');
-    this.renderChart();
+
+    if (!(_.isEmpty(this.props.talentRates))) {
+      this.renderChart();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.renderChart();
+    if (!(_.isEmpty(this.props.talentRates))) {
+      this.renderChart();
+    }
   }
 
   renderChart() {
@@ -142,9 +147,13 @@ export default class RadarChart extends Component {
     let userPhotoStyle = {
       backgroundImage: 'url(' + this.props.image + ')'
     };
-    if (typeof window !== 'undefined') {
-      this.renderChart();
+
+    if (!(_.isEmpty(this.props.talentRates))) {
+      if (typeof window !== 'undefined') {
+        this.renderChart();
+      }
     }
+
     return (
       <div>
         <div className="radarChart">

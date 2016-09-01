@@ -1,5 +1,9 @@
 @import "../../../../main.scss";
 
+.margin {
+  margin-top: 275px;
+}
+
 @media (min-width: $desktopMinWidth) {
   .card {
     box-sizing: border-box;
