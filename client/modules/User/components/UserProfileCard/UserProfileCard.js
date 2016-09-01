@@ -30,13 +30,7 @@ function UserProfileCard(props) {
 
   return (
     <div>
-      {
-        props.isCurrentUser && !props.summary
-        ?
-        <div className={styles.limitInfo}>Get <span className={styles.more}>{user.scoreLimit - props.feedbackRates.talents.length} more</span> reviews to unlock your scores!</div>
-        :
-        null
-      }
+      {props.isCurrentUser && !props.summary && <div className={styles.limitInfo}>Get <span className={styles.more}>{user.scoreLimit - props.feedbackRates.talents.length} more</span> reviews to unlock your scores!</div>}
       <div className={styles.card}>
         <div className={styles.card_chart}>
           <RadarChart
