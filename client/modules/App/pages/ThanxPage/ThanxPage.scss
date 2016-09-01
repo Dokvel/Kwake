@@ -40,27 +40,8 @@
         text-transform: uppercase;
       }
     }
-    .message {
-      font-family: $baseFontFamily;
-      font-size: 72px;
-      font-weight: 300;
-      color: $grey;
-      margin-bottom: 20px;
-      margin-top: 70px;
-    }
-    .ability {
-      max-width: 550px;
-      font-family: $baseFontFamily;
-      font-size: 18px;
-      line-height: 1.5em;
-      font-weight: 300;
-      color: $grey;
-      opacity: 0.6;
-      margin-bottom: 30px;
-    }
-    .actions {
-      padding-top: 10px;
-      margin-bottom: 100px;
+    .jumbotron {
+      margin: 90px 0;
     }
   }
 }

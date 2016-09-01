@@ -19,6 +19,7 @@ $light-black : #13151a;
 $black       : #07090C;
 
 $backgroundColor: #101114;
+$landingBackgroundColor: #000111;
 
 $cardLockIconColor: #8A8B8D;
 $darkGreyBorderColor: #434448;
@@ -26,8 +27,9 @@ $darkGreyBorderColor: #434448;
 // Font configuration
 $baseFontColor    : $grey;
 
-$baseFontFamily   : 'Open Sans', sans-serif;
-$futuraFontFamily : "futura-pt", sans-serif;
+$baseFontFamily    : 'Open Sans', sans-serif;
+$futuraFontFamily  : "futura-pt", sans-serif;
+$landingFooterFont : Arial, sans-serif;
 
 $mobileFontSize-L  : 30px;
 $mobileFontSize-M  : 18px;

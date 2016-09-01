@@ -1,17 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import GoogleButton from '../../../../components/GoogleButton/GoogleButton';
 import { connect } from 'react-redux';
-import { hasProfileCompleted } from '../../AppReducer';
 import { browserHistory } from 'react-router';
 
 // Import Components
+import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
+import RadarChart from '../../../../components/RadarChart/RadarChart';
 
 // Import Styles
+import styles from './LandingPage.scss';
 
 import { isLoggedIn } from '../../../../util/apiCaller';
 
 // Import Selectors
 import { getCurrentUser } from '../../AppReducer';
+import { hasProfileCompleted } from '../../AppReducer';
 
 export class LandingPage extends Component {
   constructor(props) {
@@ -47,8 +49,27 @@ export class LandingPage extends Component {
 
   render() {
     return (
-      <div>
-        {!this.state.isAuthorized && <GoogleButton {...this.props}/>}
+      <div className={styles.container}>
+        <div className={styles.header}>kwake</div>
+        <div className={styles.content}>
+        <div className={styles.radarChart}>
+          <RadarChart
+            image={'https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg'}
+            talents={['ACHIEVER','ACHIEVER','ACHIEVER','ACHIEVER','ACHIEVER']}
+            talentRates={[[5,5,5,5,5]]} />
+        </div>
+        <div className={styles.jumbotron}>
+          <Jumbotron
+            {...this.props}
+            title={'Kwake — professional profiles, that don’t suck.'}
+            titleSize={60}
+            text={'With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'}
+            textSize={18} />
+        </div>
+        </div>
+        <div className={styles.footer}>
+          Copyright © 2016 Krake. All rights reserved.
+        </div>
       </div>
     );
   }

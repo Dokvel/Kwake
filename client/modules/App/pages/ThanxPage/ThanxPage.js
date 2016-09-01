@@ -1,17 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import GoogleButton from '../../../../components/GoogleButton/GoogleButton';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { isLoggedIn } from '../../../../util/apiCaller';
 
 // Import Components
+import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
 import Footer from '../../../../components/Footer/Footer';
 
-// Import Styles
-import styles from './ThanxPage.scss';
+// Import Functions
+import { isLoggedIn } from '../../../../util/apiCaller';
 
 // Import Selectors
 import { getCurrentUser } from '../../AppReducer';
+
+// Import Styles
+import styles from './ThanxPage.scss';
 
 let atom = require("./../../../../../vendor/atom.svg");
 
@@ -35,14 +37,13 @@ export class ThanxPage extends Component {
               THANKS FOR THE REVIEW!
             </div>
           </div>
-          <div className={styles.message}>
-            Kwake &mdash; professional profiles, that don't suck!
-          </div>
-          <div className={styles.ability}>
-            With Kwake you can quickly create your professional profile and let others to rate how you really work.
-          </div>
-          <div className={styles.actions}>
-            <GoogleButton {...this.props}/>
+          <div className={styles.jumbotron}>
+            <Jumbotron
+              {...this.props}
+              title={"Kwake — professional profiles, that don’t suck!"}
+              titleSize={72}
+              text={"With Kwake you can quickly create and share you psychological profile and let others review it."}
+              textSize={18} />
           </div>
           <Footer/>
         </div>
