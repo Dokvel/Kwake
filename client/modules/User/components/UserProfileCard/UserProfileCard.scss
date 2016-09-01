@@ -5,6 +5,17 @@
 }
 
 @media (min-width: $desktopMinWidth) {
+  .limitInfo {
+    padding-bottom: 20px;
+
+    font-weight: 300;
+    text-align: center;
+
+    .more {
+      font-weight: 600;
+    }
+  }
+
   .card {
     box-sizing: border-box;
     position: relative;
@@ -65,6 +76,12 @@
         width: 74px;
         margin-right: 24px;
         text-align: center;
+
+        &_summary {
+          font-family: $futuraFontFamily;
+          font-size: $baseFontSize-XL;
+          letter-spacing: -0.05em;
+        }
 
         & > i {
           color: $cardLockIconColor;
@@ -140,20 +157,29 @@
       &_score {
         margin-right: 24px;
 
-        $scoreSize: 74px;
+        &_radial {
+          $scoreSize: 74px;
 
-        height: $scoreSize;
-        width: $scoreSize;
-        line-height: calc(#{$scoreSize} * 1.2);
+          height: $scoreSize;
+          width: $scoreSize;
+        }
 
-        border: 2px solid $darkGreyBorderColor;
-        border-radius: 50%;
+        &_icon {
+          $scoreSize: 74px;
 
-        text-align: center;
+          height: $scoreSize;
+          width: $scoreSize;
+          line-height: calc(#{$scoreSize} * 1.2);
 
-        & > i {
-          color: $cardLockIconColor;
-          font-size: 40px;
+          border: 2px solid $darkGreyBorderColor;
+          border-radius: 50%;
+
+          text-align: center;
+
+          & > i {
+            color: $cardLockIconColor;
+            font-size: 40px;
+          }
         }
       }
 
@@ -179,6 +205,17 @@
 }
 
 @media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+  .limitInfo {
+    padding-bottom: 20px;
+
+    font-weight: 300;
+    text-align: center;
+
+    .more {
+      font-weight: 600;
+    }
+  }
+  
   .card {
     box-sizing: border-box;
     position: relative;
@@ -239,6 +276,12 @@
       &_score {
         width: 74px;
         text-align: center;
+
+        &_summary {
+          font-family: $futuraFontFamily;
+          font-size: $baseFontSize-XL;
+          letter-spacing: -0.05em;
+        }
 
         & > i {
           color: $cardLockIconColor;
@@ -318,20 +361,29 @@
       }
 
       &_score {
-        $scoreSize: 74px;
+        &_radial {
+          $scoreSize: 74px;
 
-        height: $scoreSize;
-        width: $scoreSize;
-        line-height: calc(#{$scoreSize} * 1.2);
+          height: $scoreSize;
+          width: $scoreSize;
+        }
 
-        border: 2px solid $darkGreyBorderColor;
-        border-radius: 50%;
+        &_icon {
+          $scoreSize: 74px;
 
-        text-align: center;
+          height: $scoreSize;
+          width: $scoreSize;
+          line-height: calc(#{$scoreSize} * 1.2);
 
-        & > i {
-          color: $cardLockIconColor;
-          font-size: 40px;
+          border: 2px solid $darkGreyBorderColor;
+          border-radius: 50%;
+
+          text-align: center;
+
+          & > i {
+            color: $cardLockIconColor;
+            font-size: 40px;
+          }
         }
       }
 

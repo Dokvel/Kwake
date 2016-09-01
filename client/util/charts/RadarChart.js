@@ -27,9 +27,10 @@ export function RadarChartFunc(id, data, options) {
 		.domain([0, maxValue]);
 
 	// Initiate the radar chart SVG
-  d3.select(id).select("svg").remove();
+  d3.select("#radarChartSVG").remove();
 	var svg = d3.select(id).append("svg")
-		.attr("viewBox" , "0 0 "+ width * 1.33 +" "+ height * 1.33)
+		.attr("id", "radarChartSVG")
+		.attr("viewBox", "0 0 "+ width * 1.33 +" "+ height * 1.33)
 
 	// Append g element
 	var g = svg.append("g")

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+// Import Components
+import ScoreRadial from '../ScoreRadial/ScoreRadial';
+
 // Import Functions
 import { RadarChartFunc } from '../../util/charts/RadarChart';
 
@@ -157,7 +160,24 @@ export default class RadarChart extends Component {
     return (
       <div>
         <div className="radarChart">
-          <div className={styles.userPhoto} style={userPhotoStyle}></div>
+          {
+            this.props.summary
+            ?
+            <div className={styles.userPhoto} style={userPhotoStyle}></div>
+            :
+            <div className={styles.scoreRadial}>
+              <ScoreRadial
+                colorStart={'#0060ff'}
+                colorEnd={'#0060ff'}
+                contentType={'image'}
+                content={this.props.image}
+                maxValue={this.props.limit}
+                value={this.props.talentRates.length}
+                strokeWidth={5}
+                strokeDistance={0}
+                progressStrokeWidth={5} />
+            </div>
+          }
         </div>
       </div>
     );
