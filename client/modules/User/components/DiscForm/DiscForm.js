@@ -40,12 +40,12 @@ export class DiscForm extends Component {
   render() {
     return (
       <div>
-        <div className={styles.title}>What behaviour characterizes you:</div>
+        <div className={styles.title}>How do people see you at work:</div>
         <div className={styles.container}>
           <div className={styles.headers}>
-            <div className={styles['low-header']}>low</div>
+            <div className={styles['low-header']}>lower</div>
             <div></div>
-            <div className={styles['high-header']}>high</div>
+            <div className={styles['high-header']}>higher</div>
           </div>
           {
             discItems.map(item => (

@@ -2,21 +2,21 @@ export default [
   {
     key: 'dominance',
     name: "Dominance",
-    description: "Person places emphasis on accomplishing results, the bottom line, confidence"
+    description: "Driven, result-based, competitive, challenger"
   },
   {
     key: 'influence',
     name: "Influence",
-    description: "Person places emphasis on influencing or persuading others, openness, relationships"
+    description: "Optimistic, energetic, friendly, people-focused"
   },
   {
     key: 'steadiness',
     name: "Steadiness",
-    description: "Person places emphasis on cooperation, sincerity, dependability"
+    description: "Sincere, reserved, consistent, helper"
   },
   {
     key: 'conscientiousness',
     name: "Conscientiousness",
-    description: "Person places emphasis on quality and accuracy, expertise, competency"
+    description: "Thoughtful, orderly, cautious, accurate"
   }
 ]
