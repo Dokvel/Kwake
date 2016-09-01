@@ -108,7 +108,6 @@ ScoreRadial.propTypes = {
   colorStart: PropTypes.string.isRequired, // linearGradient start color
   colorEnd: PropTypes.string.isRequired, // linearGradient end color
   contentType: PropTypes.string.isRequired, // type of components content
-  content: PropTypes.string.isRequired, // components content
   maxValue: PropTypes.number.isRequired, // max value for progress bar
   value: PropTypes.number.isRequired, // actual value for progress bar
   strokeWidth: PropTypes.number.isRequired, // width of circle's stroke
