@@ -6,7 +6,7 @@ import cuid from 'cuid';
 import google from 'googleapis';
 import serverConfig from '../config';
 
-import { getPersonalityType } from '../../client/util/disc_helpers';
+import { getPersonalityType } from '../../utils/disc_helpers';
 
 var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(serverConfig.GOOGLE_CLIENT_ID, serverConfig.GOOGLE_CLIENT_SECRET, 'postmessage');

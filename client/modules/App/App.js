@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-// Import Style
-import styles from './App.scss';
-
 // Import Components
-import Helmet from 'react-helmet';
 import { isLoggedIn } from '../../util/apiCaller';
 
 // Import Actions
@@ -34,26 +30,7 @@ export class App extends Component {
   }
 
   render() {
-    return (
-      <div className={styles.main}>
-        <Helmet
-          title="KWAKE"
-          titleTemplate="%s - Kwake App"
-          meta={[
-            { charset: 'utf-8' },
-            {
-              'http-equiv': 'X-UA-Compatible',
-              content: 'IE=edge',
-            },
-            {
-              name: 'viewport',
-              content: 'width=device-width, initial-scale=1',
-            },
-          ]}
-        />
-        {this.props.children}
-      </div>
-    );
+    return this.props.children;
   }
 }
 

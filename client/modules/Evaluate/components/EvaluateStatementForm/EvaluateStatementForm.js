@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 
 import { getPronoun } from '../../../../util/textHelpers';
+import { PERSONALITY_STATEMENT, TEAM_STATEMENT, TROUBLESHOOTING_STATEMENT } from '../../../../../utils/disc_helpers';
+
 // Import Style
 import styles from './EvaluateStatementForm.scss';
 
@@ -37,20 +39,21 @@ export class EvaluateTalentsForm extends Component {
       <div className={styles.container}>
         <div className={styles.statements}>
           <div key="personality" className={styles['statement-row']}>
-            <RateItemStatement statementKey="personality" value={this.state['personality']}
-                               onRate={this.onRate.bind(this, 'personality')}>
+            <RateItemStatement statementKey={PERSONALITY_STATEMENT} value={this.state[PERSONALITY_STATEMENT]}
+                               onRate={this.onRate.bind(this, PERSONALITY_STATEMENT)}>
               <span><b>{this.props.evaluate.givenName}</b>’ overall profile says that {getPronoun(this.props.evaluate.gender)}’s an <b>{this.props.personalityType.name}</b>.
                 That means {this.props.personalityType.description} <b>How correct is this?</b></span>
             </RateItemStatement>
           </div>
           <div key="team" className={styles['statement-row']}>
-            <RateItemStatement statementKey="team" value={this.state['team']} onRate={this.onRate.bind(this, 'team')}>
+            <RateItemStatement statementKey={TEAM_STATEMENT} value={this.state[TEAM_STATEMENT]}
+                               onRate={this.onRate.bind(this, TEAM_STATEMENT)}>
               <span><b>In team</b> {this.props.evaluate.givenName} is {this.props.personalityType.team} <b>How correct is this?</b></span>
             </RateItemStatement>
           </div>
           <div key="troubleshooting" className={styles['statement-row']}>
-            <RateItemStatement statementKey="troubleshooting" value={this.state['troubleshooting']}
-                               onRate={this.onRate.bind(this, 'troubleshooting')}>
+            <RateItemStatement statementKey={TROUBLESHOOTING_STATEMENT} value={this.state[TROUBLESHOOTING_STATEMENT]}
+                               onRate={this.onRate.bind(this, TROUBLESHOOTING_STATEMENT)}>
               <span><b>To solve problems</b>, {this.props.evaluate.givenName} {this.props.personalityType.troubleshooting}
                 <b>How correct is this?</b></span>
             </RateItemStatement>

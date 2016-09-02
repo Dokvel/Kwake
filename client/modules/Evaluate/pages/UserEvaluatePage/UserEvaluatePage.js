@@ -9,7 +9,7 @@ import { browserHistory } from 'react-router';
 
 import styles from './UserEvaluatePage.scss';
 
-import { getPersonalityType } from '../../../../util/disc_helpers';
+import { getPersonalityType } from '../../../../../utils/disc_helpers';
 
 // Import Components
 import EvaluateStatementForm from '../../components/EvaluateStatementForm/EvaluateStatementForm';
