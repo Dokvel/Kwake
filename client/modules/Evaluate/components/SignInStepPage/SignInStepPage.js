@@ -29,7 +29,7 @@ export class SignInStepPage extends Component {
           <Jumbotron
             {...this.props}
             title='Kwake &mdash; professional profiles, that don’t suck.'
-            titleSize={72}
+            titleSize={60}
             text='With Kwake you can quickly create and share you psychological profile and let others review it.'
             textSize={18} />
         </div>
