@@ -42,6 +42,17 @@ export class LandingPage extends Component {
     }
   }
 
+  renderJumbotron(titleSize, textSize) {
+    return (
+      <Jumbotron
+        {...this.props}
+        title='Kwake — professional profiles, that don’t suck.'
+        titleSize={titleSize}
+        text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
+        textSize={textSize} />
+    );
+  }
+
   loggedBehavior(user) {
     if (user) {
       if (hasProfileCompleted(user)) {
@@ -74,25 +85,15 @@ export class LandingPage extends Component {
         </div>
         <div className={styles.jumbotron}>
           <MediaQuery query='(max-width: 767px)'>
-            <Jumbotron
-              {...this.props}
-              title='Kwake — professional profiles, that don’t suck.'
-              titleSize={30}
-              text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
-              textSize={16} />
+            {this.renderJumbotron(30, 18)}
           </MediaQuery>
           <MediaQuery query='(min-width: 769px)'>
-            <Jumbotron
-              {...this.props}
-              title='Kwake — professional profiles, that don’t suck.'
-              titleSize={60}
-              text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
-              textSize={18} />
+            {this.renderJumbotron(60, 18)}
           </MediaQuery>
         </div>
         </div>
         <div className={styles.footer}>
-          Copyright © 2016 Krake. All rights reserved.
+          Copyright © {new Date().getFullYear()} Kwake. All rights reserved.
         </div>
       </div>
     );
