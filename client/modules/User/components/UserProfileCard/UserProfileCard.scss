@@ -1,5 +1,7 @@
 @import "../../../../../stylesheets/modules/config";
 
+$scoreSize: 74px;
+
 .margin {
   margin-top: 275px;
 }
@@ -159,15 +161,11 @@
         margin-right: 24px;
 
         &_radial {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
         }
 
         &_icon {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
           line-height: calc(#{$scoreSize} * 1.2);
@@ -364,15 +362,11 @@
 
       &_score {
         &_radial {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
         }
 
         &_icon {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
           line-height: calc(#{$scoreSize} * 1.2);
