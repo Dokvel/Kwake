@@ -1,5 +1,19 @@
 @import "../../main.scss";
 
-.star {
-  width: 50px;
+@media (min-width: $desktopMidWidth) {
+  .star {
+    width: 50px;
+  }
+}
+
+@media (min-width: $desktopMinWidth) and (max-width: $tabletMaxWidth) {
+  .star {
+    width: 43px;
+  }
+}
+
+@media (min-width: 0px) and (max-width: $mobileMaxWidth) {
+  .star {
+    width: 36px;
+  }
 }

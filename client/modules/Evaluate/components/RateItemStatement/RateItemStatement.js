@@ -1,4 +1,5 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
 
 // Import Components
 import RateItem from '../../../../components/RateItem/RateItem';
@@ -21,7 +22,12 @@ export default function RateItemStatement(props) {
     <div className={styles.container}>
       <div className={styles['info-row']}>
         <div className={styles.info}>
-          <TalentIcon talentKey={props.statementKey}/>
+          <MediaQuery query='(max-width: 767px)'>
+            <TalentIcon talentKey={props.statementKey} mobileEvaluation={true}/>
+          </MediaQuery>
+          <MediaQuery query='(min-width: 768px)'>
+            <TalentIcon talentKey={props.statementKey}/>
+          </MediaQuery>
           <div className={styles.desc}>
             {props.children}
           </div>

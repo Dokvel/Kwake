@@ -49,7 +49,10 @@ function UserProfileCard(props) {
         </div>
         {props.isCurrentUser &&
         <div className={styles.card_btnAsk}>
-          <Button rightIcon="bi_interface-arrow-right" color={Button.COLOR_BLUE} onClick={props.showRequestModal}>
+          <Button
+            rightIcon="bi_interface-arrow-right"
+            color={props.summary ? Button.COLOR_GREEN : Button.COLOR_BLUE}
+            onClick={props.showRequestModal}>
             Ask for a review
           </Button>
         </div>

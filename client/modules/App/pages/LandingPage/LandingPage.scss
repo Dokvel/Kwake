@@ -53,10 +53,6 @@
 }
 
 @media (min-width: 0px) and (max-width: $tabletMaxWidth) {
-  body {
-    padding: 0 !important;
-  }
-
   .container {
     padding: 20px;
 
@@ -70,6 +66,7 @@
     background-size: cover;
 
     .header {
+      margin-top: 1%;
       font-family: $futuraFontFamily;
       font-size: 20px;
       font-weight: 400;
@@ -89,7 +86,7 @@
     }
 
     .footer {
-      margin: 100px 0 2.5% 0;
+      margin: 130px 0 2.5% 0;
       font-family: $landingFooterFont;
       font-size: $mobileFontSize-XS;
       font-weight: 600;

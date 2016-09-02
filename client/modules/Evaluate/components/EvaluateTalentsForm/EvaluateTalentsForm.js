@@ -3,6 +3,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import MediaQuery from 'react-responsive';
 import _ from 'lodash';
 
 // Import Style
@@ -39,14 +40,19 @@ export class EvaluateTalentsForm extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <span className={styles.title}> Rate {this.props.givenName}`s personal talents:</span>
+        <div className={styles.title}> Rate {this.props.givenName}`s personal talents:</div>
         <div className={styles.talents}>
           {
             this.props.talents.map((talent)=> (
               <div key={talent} className={styles['talent-row']}>
                 <div className={styles.talent}>
                   <div className={styles.name}>{talents[talent].name}</div>
-                  <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}/>
+                  <MediaQuery query='(max-width: 767px)'>
+                    <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent} mobileEvaluation={true}/>
+                  </MediaQuery>
+                  <MediaQuery query='(min-width: 768px)'>
+                    <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}/>
+                  </MediaQuery>
                 </div>
                 <RateItem value={this.state.talentRates[talent]} onChange={this.onRate.bind(this, talent)}/>
                 <div style={{ flex: '1' }}></div>
@@ -56,7 +62,12 @@ export class EvaluateTalentsForm extends Component {
         <div className={styles.actions}>
           <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}
                   rightIcon="bi_interface-arrow-right">next</Button>
-          <div className={styles.anonymous}>This review will be fully anonymous</div>
+          <div className={styles.anonymous}>
+            <MediaQuery query='(max-width: 767px)'>
+              <i className="fa fa-lock" aria-hidden="true"></i>
+            </MediaQuery>
+            This review will be fully anonymous
+          </div>
         </div>
       </div>
     );

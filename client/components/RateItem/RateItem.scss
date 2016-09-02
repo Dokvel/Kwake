@@ -1,14 +1,24 @@
 @import "../../main.scss";
 
-.container {
-  display: inline-flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-  .star {
-    cursor: pointer;
-    display: inline-block;
-    margin: 0 25px;
+@media (min-width: $desktopMidWidth) {
+  .container {
+    display: inline-flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    .star {
+      cursor: pointer;
+      display: inline-block;
+      margin: 0 25px;
 
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: $tabletMaxWidth) {
+  .container {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
   }
 }
