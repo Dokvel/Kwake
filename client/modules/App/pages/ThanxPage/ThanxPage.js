@@ -40,9 +40,9 @@ export class ThanxPage extends Component {
           <div className={styles.jumbotron}>
             <Jumbotron
               {...this.props}
-              title={"Kwake — professional profiles, that don’t suck!"}
+              title='Kwake &mdash; professional profiles, that don’t suck!'
               titleSize={72}
-              text={"With Kwake you can quickly create and share you psychological profile and let others review it."}
+              text='With Kwake you can quickly create and share you psychological profile and let others review it.'
               textSize={18} />
           </div>
           <Footer/>
