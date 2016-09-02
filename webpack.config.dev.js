@@ -39,7 +39,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        exclude: [/node_modules/, /vendor/],
+        exclude: [/node_modules/, /vendor/, /emails/],
         loader: [
           'style-loader',
           'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
@@ -54,7 +54,7 @@ module.exports = {
         ],
       }, {
         test: /\.scss$/,
-        exclude: [/node_modules/, /vendor/],
+        exclude: [/node_modules/, /vendor/, /emails/],
         loaders: [
           'style-loader',
           'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',

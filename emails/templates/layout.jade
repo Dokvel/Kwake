@@ -1,0 +1,88 @@
+doctype strict
+// Emails use the XHTML Strict doctype
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    // The character set should be utf-8
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width')
+    title subject
+  body
+    // Wrapper for the body of the email
+    table.body(data-made-with-foundation='')
+      tr
+        // The class, align, and <center> tag center the container
+        td.float-center(align='center', valign='top')
+          center
+            table.spacer
+              tbody
+                tr
+                  td(height='50px', style='font-size:50px;line-height:50px;')  
+            table.container.main(align='center')
+              tbody
+                tr
+                  td
+                    table.row
+                      tbody
+                        tr
+                          th.small-12.large-12.columns.first.last
+                            table
+                              tr
+                                th
+                                  center.header-content(data-parsed="")
+                                    table.spacer
+                                      tbody
+                                        tr
+                                          td(height='20px', style='font-size:20px;line-height:20px;')  
+                                    img.user-picture(src=image)
+                                    span.requester-name #{givenName} #{familyName}
+                                th.expander
+                    table.row
+                      tbody
+                        tr
+                          th.small-12.large-12.columns.first.last
+                            table
+                              tr
+                                th
+                                  block content
+                                th.expander
+            table.spacer
+              tbody
+                tr
+                  td(height='50px', style='font-size:50px;line-height:50px;')  
+            table.container.footer(align='center')
+              tbody
+                tr
+                  td
+                    table.row
+                      tbody
+                        tr
+                          th.small-12.large-12.columns.first.last
+                            table
+                              tr
+                                th
+                                  center(data-parsed="")
+                                    img(src='cid:logo')
+                                th.expander
+                    table.row
+                      tbody
+                        tr
+                          th.small-12.large-12.columns.first.last
+                            table
+                              tr
+                                th
+                                  span.text-center.kwake-description Kwake allows you to create your unique type and talent profile and receive ratings from people you encounter at work, socially, or in service to your communities.
+                                th.expander
+                    table.row
+                      tbody
+                        tr
+                          th.small-12.large-12.columns.first.last
+                            table
+                              tr
+                                th
+                                  center(data-parsed="")
+                                    a.text-center.unsubscribe(href=HOST_DOMAIN) Join Kwake for free now!
+                                th.expander
+            table.spacer
+              tbody
+                tr
+                  td(height='100px', style='font-size:100px;line-height:100px;')  

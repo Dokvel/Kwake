@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  p.text-center.question
+    i #{givenName}
+    | &nbsp;
+    | wants to know how well she works with her unique type and talent
+  p.text-center.description #{givenName} type is an #{profileType.name} which means #{profileType.description}
+  p.text-center.description
+    b How correct is this?
+  center(data-parsed="")
+    table.spacer
+      tbody
+        tr
+          td(height='30px', style='font-size:30px;line-height:30px;')
+    table.button.rounded.large.float-center.small-expanded
+      tr
+        td
+          table
+            tr
+              td
+                a(href=evaluateLink, target='_blank') REVIEW ANONYMOUSLY
+    table.spacer
+      tbody
+        tr
+          td(height='30px', style='font-size:30px;line-height:30px;')
