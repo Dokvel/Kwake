@@ -41,7 +41,7 @@ Jumbotron.propTypes = {
 
 Jumbotron.defaultProps = {
   title: 'Title',
-  titleSize: 16,
+  titleSize: 30,
   text: 'Text',
   textSize: 16
 };
