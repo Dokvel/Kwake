@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
 // Base stylesheet
-let styles = require('./layout.scss');
+require('../stylesheets/static/layout.scss');
+require('../stylesheets/static/tooltips.scss');
 require('../vendor/fonts/Budicon/css/budicon.css');
 
 export class Base extends Component {
@@ -17,7 +18,7 @@ export class Base extends Component {
 
   render() {
     return (
-      <div className={styles.main}>
+      <div className='main'>
         <Helmet
           title="KWAKE"
           titleTemplate="%s - Kwake App"

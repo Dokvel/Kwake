@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component }from 'react';
 import cn from 'classnames';
+import Tooltip from '../Tooltip/Tooltip';
 
-import ReactTooltip from 'react-tooltip';
 import styles from './TalentIcon.scss';
 
 function TalentIcon(props) {
@@ -11,10 +11,11 @@ function TalentIcon(props) {
     [styles['icon--enabled']]: !!props.onClick
   });
   return (
-    <div data-for={props.talentKey} className={classes} onClick={props.onClick} data-tip={props.tip}>
-      <i className={props.name || "bi_com-group-bubble-a"} aria-hidden="true"/>
-      <ReactTooltip id={props.talentKey} class={styles.tooltip} effect='solid'/>
-    </div>
+    <Tooltip id={props.talentKey} tip={props.tip}>
+      <div className={classes} onClick={props.onClick}>
+        <i className={props.name || "bi_com-group-bubble-a"} aria-hidden="true"/>
+      </div>
+    </Tooltip>
   )
 }
 

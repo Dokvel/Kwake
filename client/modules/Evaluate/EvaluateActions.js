@@ -32,6 +32,7 @@ export function addTokenInfo(token, info) {
     token
   };
 }
+
 export function addEvaluates(evaluates) {
   return {
     type: ADD_EVALUATES,

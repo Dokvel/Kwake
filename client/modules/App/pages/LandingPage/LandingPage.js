@@ -49,7 +49,7 @@ export class LandingPage extends Component {
         title='Kwake &mdash; professional profiles, that don’t suck.'
         titleSize={titleSize}
         text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
-        textSize={textSize} />
+        textSize={textSize}/>
     );
   }
 
@@ -64,11 +64,11 @@ export class LandingPage extends Component {
   }
 
   render() {
-    let keys = [1,2,3,4,5];
+    let keys = [1, 2, 3, 4, 5];
     let talentRates = [
-      {1:5, 2:4, 3:3, 4:4, 5:5},
-      {1:3, 2:4, 3:5, 4:4, 5:3},
-      {1:4, 2:3, 3:4, 4:3, 5:4}
+      { 1: 5, 2: 4, 3: 3, 4: 4, 5: 5 },
+      { 1: 3, 2: 4, 3: 5, 4: 4, 5: 3 },
+      { 1: 4, 2: 3, 3: 4, 4: 3, 5: 4 }
     ];
     let summary = generateAVG(keys, talentRates);
     return (

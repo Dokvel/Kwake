@@ -39,7 +39,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        exclude: [/node_modules/, /vendor/, /emails/],
+        exclude: [/node_modules/, /vendor/, /emails/, path.resolve(__dirname, "stylesheets/static")],
         loader: [
           'style-loader',
           'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
@@ -47,14 +47,23 @@ module.exports = {
         ],
       }, {
         test: /\.css$/,
-        include: [/node_modules/, /vendor/],
+        include: [/node_modules/, /vendor/, path.resolve(__dirname, "stylesheets/static")],
         loaders: [
           'style-loader',
           'css-loader'
         ],
       }, {
         test: /\.scss$/,
-        exclude: [/node_modules/, /vendor/, /emails/],
+        include: [path.resolve(__dirname, "stylesheets/static")],
+        loaders: [
+          'style-loader',
+          'css-loader?localIdentName=[local]&modules&importLoaders=1&sourceMap',
+          'sass-loader?localIdentName=[local]&modules&importLoaders=1&sourceMap',
+          'postcss-loader'
+        ],
+      }, {
+        test: /\.scss$/,
+        exclude: [/node_modules/, /vendor/, /emails/, path.resolve(__dirname, "stylesheets/static")],
         loaders: [
           'style-loader',
           'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',
