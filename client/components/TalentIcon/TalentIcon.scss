@@ -1,6 +1,10 @@
 @import "../../main.scss";
 
 .icon {
+  font-size: 30px;
+}
+
+.circled {
   width: 60px;
   height: 60px;
   border-radius: 30px;
@@ -12,10 +16,6 @@
   text-align: center;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.mobileEvaluation {
-  font-size: 30px;
 }
 
 .icon--enabled {

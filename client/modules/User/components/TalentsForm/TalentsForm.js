@@ -65,8 +65,10 @@ export class TalentsForm extends Component {
           }
         </div>
         <div className={styles.actions}>
-          <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}
+          <div className={styles.btnFinish}>
+            <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}
                   rightIcon="bi_interface-arrow-right">Finish</Button>
+          </div>
         </div>
       </div>
     );

@@ -5,9 +5,8 @@ import ReactTooltip from 'react-tooltip';
 import styles from './TalentIcon.scss';
 
 function TalentIcon(props) {
-  let classes = cn({
-    [styles.icon]: !props.mobileEvaluation,
-    [styles.mobileEvaluation]: props.mobileEvaluation,
+  let classes = cn(styles.icon, {
+    [styles.circled]: props.circled,
     [styles['icon--selected']]: props.selected,
     [styles['icon--enabled']]: !!props.onClick
   });

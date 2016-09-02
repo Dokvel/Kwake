@@ -86,12 +86,24 @@
       flex-direction: row;
       justify-content: space-between;
 
-      .manage-button-minus, .manage-button-plus {
+      .manage-button-minus,
+      .manage-button-plus {
         font-size: 30px;
+        opacity: 0.4;
+        cursor: pointer;
+      }
+      .manage-button-plus {
+        align-self: flex-start;
+        flex: none;
       }
 
       .manage-button-minus {
-        opacity: .4;
+        align-self: flex-end;
+        flex: none;
+      }
+      .manage-button-minus--selected,
+      .manage-button-plus--selected {
+        opacity: 1;
       }
     }
   }

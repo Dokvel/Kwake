@@ -23,10 +23,10 @@ export default function RateItemStatement(props) {
       <div className={styles['info-row']}>
         <div className={styles.info}>
           <MediaQuery query='(max-width: 767px)'>
-            <TalentIcon talentKey={props.statementKey} mobileEvaluation={true}/>
+            <TalentIcon talentKey={props.statementKey}/>
           </MediaQuery>
           <MediaQuery query='(min-width: 768px)'>
-            <TalentIcon talentKey={props.statementKey}/>
+            <TalentIcon talentKey={props.statementKey} circled={true}/>
           </MediaQuery>
           <div className={styles.desc}>
             {props.children}

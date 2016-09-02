@@ -48,10 +48,10 @@ export class EvaluateTalentsForm extends Component {
                 <div className={styles.talent}>
                   <div className={styles.name}>{talents[talent].name}</div>
                   <MediaQuery query='(max-width: 767px)'>
-                    <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent} mobileEvaluation={true}/>
+                    <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}/>
                   </MediaQuery>
                   <MediaQuery query='(min-width: 768px)'>
-                    <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}/>
+                    <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent} circled={true}/>
                   </MediaQuery>
                 </div>
                 <RateItem value={this.state.talentRates[talent]} onChange={this.onRate.bind(this, talent)}/>
