@@ -85,7 +85,7 @@ export class LandingPage extends Component {
         </div>
         <div className={styles.jumbotron}>
           <MediaQuery query='(max-width: 767px)'>
-            {this.renderJumbotron(30, 18)}
+            {this.renderJumbotron(30, 16)}
           </MediaQuery>
           <MediaQuery query='(min-width: 769px)'>
             {this.renderJumbotron(60, 18)}
