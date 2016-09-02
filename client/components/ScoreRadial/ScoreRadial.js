@@ -55,7 +55,7 @@ class ScoreRadial extends Component {
     return (
       <svg viewBox="0 0 80 80">
         <defs>
-          <linearGradient id="lgrad" x1="0%" y1="100%" x2="100%" y2="0%" >
+          <linearGradient id={this.props.id} x1="0%" y1="100%" x2="100%" y2="0%" >
             <stop style={linearGradient0Styles} />
             <stop offset="100%" style={linearGradient100Styles} />
           </linearGradient>
@@ -86,7 +86,11 @@ class ScoreRadial extends Component {
           :
           null
         }
-        <path d={this.state.d} fill="none" stroke="url(#lgrad)" strokeWidth={this.props.progressStrokeWidth} />
+        <path
+          d={this.state.d}
+          fill="none"
+          stroke={"url(#" + this.props.id + ")"} 
+          strokeWidth={this.props.progressStrokeWidth} />
       </svg>
     );
   }
@@ -104,6 +108,7 @@ class ScoreRadial extends Component {
 //   progressStrokeWidth={5} />
 
 ScoreRadial.propTypes = {
+  id: PropTypes.string.isRequired, // linearGradient start color
   // set colorStart and colorEnd with same color for no gradient
   colorStart: PropTypes.string.isRequired, // linearGradient start color
   colorEnd: PropTypes.string.isRequired, // linearGradient end color
