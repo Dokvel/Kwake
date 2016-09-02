@@ -66,9 +66,9 @@ export class LandingPage extends Component {
         <div className={styles.content}>
         <div className={styles.radarChart}>
           <RadarChart
-            image={'https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg'}
+            image='https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg'
             limit={3} // just for unlocked scoreRadial propgress-border
-            talents={'none'} // if there are no titles for axes
+            talents='none' // if there are no titles for axes
             talentRates={talentRates}
             summary={summary} />
         </div>
@@ -76,17 +76,17 @@ export class LandingPage extends Component {
           <MediaQuery query='(max-width: 767px)'>
             <Jumbotron
               {...this.props}
-              title={'Kwake — professional profiles, that don’t suck.'}
+              title='Kwake — professional profiles, that don’t suck.'
               titleSize={30}
-              text={'With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'}
+              text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
               textSize={16} />
           </MediaQuery>
           <MediaQuery query='(min-width: 769px)'>
             <Jumbotron
               {...this.props}
-              title={'Kwake — professional profiles, that don’t suck.'}
+              title='Kwake — professional profiles, that don’t suck.'
               titleSize={60}
-              text={'With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'}
+              text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
               textSize={18} />
           </MediaQuery>
         </div>
