@@ -2,15 +2,17 @@
  * Created by alex on 31.08.16.
  */
 import React, { Component, PropTypes } from 'react';
-import GoogleButton from '../../../../components/GoogleButton/GoogleButton';
 import { connect } from 'react-redux';
 import { isLoggedIn } from '../../../../util/apiCaller';
 
-// Import Styles
-import styles from './SignInStepPage.scss';
+// Import Components
+import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
 
 // Import Selectors
 import { getCurrentUser } from '../../../App/AppReducer';
+
+// Import Styles
+import styles from './SignInStepPage.scss';
 
 export class SignInStepPage extends Component {
 
@@ -24,15 +26,12 @@ export class SignInStepPage extends Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.container}>
-          <div className={styles.message}>
-            Kwake &mdash; psychological profiles, that don`t suck.
-          </div>
-          <div className={styles.ability}>
-            With Kwake you can quickly create and share you psychological profile and let others review it.
-          </div>
-          <div className={styles.actions}>
-            <GoogleButton {...this.props}/>
-          </div>
+          <Jumbotron
+            {...this.props}
+            title='Kwake &mdash; professional profiles, that don’t suck.'
+            titleSize={60}
+            text='With Kwake you can quickly create and share you psychological profile and let others review it.'
+            textSize={18} />
         </div>
       </div>
     );
