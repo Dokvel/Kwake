@@ -11,7 +11,7 @@ import RadarChart from '../../../../components/RadarChart/RadarChart';
 import ScoreRadial from '../../../../components/ScoreRadial/ScoreRadial';
 
 // Import Functions
-import { getPersonalityType } from '../../../../util/disc_helpers';
+import { getPersonalityType } from '../../../../../utils/disc_helpers';
 
 // Import Style
 import styles from './UserProfileCard.scss';

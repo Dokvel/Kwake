@@ -2,6 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { STATEMENTS } from '../../../../../utils/disc_helpers';
+
 // Import Style
 import styles from './UserProfilePage.scss';
 
@@ -76,7 +78,7 @@ class UserProfilePage extends Component {
     }
 
     if (this.isUnlocked()) {
-      summary.statements = generateAVG(['personality', 'team', 'troubleshooting'] ,feedbackRates.statements);
+      summary.statements = generateAVG(STATEMENTS, feedbackRates.statements);
       summary.talents = generateAVG(this.props.user.talents, feedbackRates.talents);
     }
 
@@ -87,7 +89,7 @@ class UserProfilePage extends Component {
           showRequestModal={this.showRequestModal}
           isCurrentUser={this.props.isCurrentUser}
           feedbackRates={feedbackRates}
-          summary={this.isUnlocked() ? summary : undefined} />}
+          summary={this.isUnlocked() ? summary : undefined}/>}
         {this.props.user && this.state.showReviewModal && <RequestReviewModal handleClose={this.hideReviewModal}/>}
       </div>
     );
