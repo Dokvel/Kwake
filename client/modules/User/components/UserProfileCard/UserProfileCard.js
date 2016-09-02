@@ -12,6 +12,7 @@ import ScoreRadial from '../../../../components/ScoreRadial/ScoreRadial';
 
 // Import Functions
 import { getPersonalityType } from '../../../../../utils/disc_helpers';
+import { getColorRange } from '../../../../util/feedbackHelpers';
 
 // Import Style
 import styles from './UserProfileCard.scss';
@@ -27,6 +28,12 @@ function UserProfileCard(props) {
   let classes = cn({
     [styles.margin]: _.isEmpty(props.feedbackRates.talents)
   });
+
+  let teamColorRange, troubleshootingColorRange;
+  if (props.summary && props.summary.statements) {
+    teamColorRange = getColorRange(props.summary.statements.team);
+    troubleshootingColorRange = getColorRange(props.summary.statements.troubleshooting);
+  }
 
   return (
     <div>
@@ -87,8 +94,9 @@ function UserProfileCard(props) {
               ?
               <div className={styles.card_info_score_radial}>
                 <ScoreRadial
-                  colorStart={'coral'}
-                  colorEnd={'brown'}
+                  id={'team'}
+                  colorStart={teamColorRange[0]}
+                  colorEnd={teamColorRange[1]}
                   contentType={'text'}
                   content={props.summary.statements.team.toFixed(1)}
                   maxValue={5}
@@ -115,8 +123,9 @@ function UserProfileCard(props) {
             ?
             <div className={styles.card_info_score_radial}>
               <ScoreRadial
-                colorStart={'coral'}
-                colorEnd={'brown'}
+                id={'troubleshooting'}
+                colorStart={troubleshootingColorRange[0]}
+                colorEnd={troubleshootingColorRange[1]}
                 contentType={'text'}
                 content={props.summary.statements.troubleshooting.toFixed(1)}
                 maxValue={5}
