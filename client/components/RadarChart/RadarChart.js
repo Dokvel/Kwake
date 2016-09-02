@@ -120,22 +120,39 @@ export default class RadarChart extends Component {
         }
       }
 
-      for (let i = 0; i < talents.length; i++) {
-        let item = {};
+      if (talents === 'none') {
+        for (let i = 0; i < 5; i++) {
+          let item = {};
 
-        item = {
-          axis: talentsObj[talents[i]].abbreviation,
-          value: points[i]
-        }
-        data[v].push(item);
+          item = {
+            axis: "",
+            value: points[i]
+          }
+          data[v].push(item);
 
-        item = {
-          axis: "",
-          value: subPoints[i]
+          item = {
+            axis: "",
+            value: subPoints[i]
+          }
+          data[v].push(item);
         }
-        data[v].push(item);
+      } else {
+        for (let i = 0; i < talents.length; i++) {
+          let item = {};
+
+          item = {
+            axis: talentsObj[talents[i]].abbreviation,
+            value: points[i]
+          }
+          data[v].push(item);
+
+          item = {
+            axis: "",
+            value: subPoints[i]
+          }
+          data[v].push(item);
+        }
       }
-
     }
 
     let radarChartOptions = {
