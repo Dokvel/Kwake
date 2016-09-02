@@ -32,7 +32,7 @@ class UserEvaluatePage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { type: props.location.query.sign_in ? TYPE_SIGN_IN : TYPE_TALENTS, statements: {}, talents: {} }
+    this.state = { type: props.location.query.sign_in === 'true' ? TYPE_SIGN_IN : TYPE_TALENTS, statements: {}, talents: {} }
   }
 
   componentDidMount() {

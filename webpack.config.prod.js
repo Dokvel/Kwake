@@ -39,7 +39,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        exclude: [/node_modules/, /vendor/],
+        exclude: [/node_modules/, /vendor/, /emails/],
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[hash:base64]&modules&importLoaders=1!postcss-loader'),
       }, {
         test: /\.css$/,
@@ -47,7 +47,7 @@ module.exports = {
         loaders: ['style-loader', 'css-loader']
       }, {
         test: /\.scss$/,
-        exclude: [/node_modules/, /vendor/],
+        exclude: [/node_modules/, /vendor/, /emails/],
         loaders: [
           'style-loader',
           'css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap',

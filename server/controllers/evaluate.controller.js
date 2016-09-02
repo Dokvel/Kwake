@@ -5,6 +5,8 @@ import User from '../models/user';
 import cuid from 'cuid';
 import { generateRandomToken } from '../util/security';
 import _ from 'lodash';
+import { sendEvaluateRequest } from '../../emails';
+import { getPersonalityType } from '../../utils/disc_helpers';
 
 export function getTokenInfo(req, res) {
   if (!req.params.token) {
@@ -120,8 +122,16 @@ export function createEvaluateRequest(req, res) {
         res.status(500).send(err);
       } else {
         let tokens = savedTokens.ops.map(token => {
-          return { responderEmail: token.responderEmail, token: token.token }
+          return {
+            email: token.responderEmail,
+            token: token.token,
+            givenName: req.user.givenName,
+            familyName: req.user.familyName,
+            image: req.user.image,
+            profileType: getPersonalityType(req.user)
+          }
         });
+        sendEvaluateRequest(tokens);
         res.json({ tokens });
       }
     });

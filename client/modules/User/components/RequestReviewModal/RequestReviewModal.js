@@ -51,7 +51,7 @@ class RequestReviewModal extends Component {
     callApi('evaluate/request', 'post', { emails }).then(res => {
       var full = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
       res.tokens.map(token => console.log(full + '/evaluate/' + token.token));
-      let tokensEmails = res.tokens.map(token=>token.responderEmail)
+      let tokensEmails = res.tokens.map(token=>token.email)
       this.setState({
         selected: [],
         customEmails: '',
