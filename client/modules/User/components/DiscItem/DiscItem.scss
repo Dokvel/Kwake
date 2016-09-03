@@ -2,9 +2,11 @@
 
 .manage-button-minus,
 .manage-button-plus {
-  font-size: 30px;
-  opacity: 0.4;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../../../../vendor/arrow.svg');
   cursor: pointer;
+  opacity: 0.4;
 }
 .manage-button-plus {
   align-self: flex-start;
@@ -14,6 +16,7 @@
 .manage-button-minus {
   align-self: flex-end;
   flex: none;
+  transform: rotate(180deg);
 }
 .manage-button-minus--selected,
 .manage-button-plus--selected {

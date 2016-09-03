@@ -26,9 +26,7 @@ export class Header extends Component {
         </div>
         { this.props.currentUser &&
         <div className={styles['user-info']}>
-          <span>Logged in as {this.props.currentUser.givenName} {this.props.currentUser.familyName}
-            ({this.props.currentUser.email})</span>
-          <a className={styles['user-menu']} href="#" onClick={this.clickSignOut.bind(this)}>Sign out</a>
+          <a className={styles['user-menu']} href="#" onClick={this.clickSignOut.bind(this)}>Log out</a>
         </div>
         }
       </div>

@@ -89,7 +89,7 @@ class ScoreRadial extends Component {
         <path
           d={this.state.d}
           fill="none"
-          stroke={"url(#" + this.props.id + ")"} 
+          stroke={"url(#" + this.props.id + ")"}
           strokeWidth={this.props.progressStrokeWidth} />
       </svg>
     );
@@ -108,7 +108,7 @@ class ScoreRadial extends Component {
 //   progressStrokeWidth={5} />
 
 ScoreRadial.propTypes = {
-  id: PropTypes.string.isRequired, // linearGradient start color
+  id: PropTypes.string, // linearGradient start color
   // set colorStart and colorEnd with same color for no gradient
   colorStart: PropTypes.string.isRequired, // linearGradient start color
   colorEnd: PropTypes.string.isRequired, // linearGradient end color
