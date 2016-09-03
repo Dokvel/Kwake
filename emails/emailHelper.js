@@ -7,10 +7,10 @@ import path from 'path';
 
 
 var transport = nodemailer.createTransport({ //TODO: Need make config related to NODE_ENV
-  service: 'Mailgun',
+  service: 'Gmail',
   auth: {
-    user: 'postmaster@kwakeapp.com',
-    pass: 'f624285311e3e268e31d01122980a9ba'
+    user: 'demo.kwake@gmail.com',
+    pass: 'Demo123456'
   }
 });
 
