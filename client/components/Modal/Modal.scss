@@ -8,5 +8,10 @@
   a[class^="closeButton"] {
     left: initial !important;
     right: -50px !important;
+    svg{
+      circle{
+        fill: none;
+      }
+    }
   }
 }

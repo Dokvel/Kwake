@@ -21,8 +21,6 @@ import { generateAVG } from '../../../../util/feedbackHelpers';
 // Import Selectors
 import { getUser } from '../../UserReducer';
 import { getUserEvaluates } from '../../../Evaluate/EvaluateReducer';
-
-// Import Selectors
 import { hasProfileCompleted } from '../../../App/AppReducer';
 
 class UserProfilePage extends Component {
@@ -57,7 +55,7 @@ class UserProfilePage extends Component {
 
   isUnlocked = () => {
     return this.props.user && this.props.evaluates.length >= this.props.user.scoreLimit;
-  }
+  };
 
   render() {
     let feedbackRates = {
@@ -68,7 +66,7 @@ class UserProfilePage extends Component {
     let summary = {
       statements: {},
       talents: {}
-    }
+    };
 
     if (this.props.user && this.props.evaluates) {
       _.each(this.props.evaluates, evaluate => {
