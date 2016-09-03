@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import  _ from 'lodash';
-import { validateEmail } from '../../../../util/textHelpers';
+import { validateEmail } from '../../../../../utils/textHelpers';
 
 import { getCurrentUser } from '../../../App/AppReducer';
 

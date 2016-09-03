@@ -63,9 +63,7 @@ export class EvaluateTalentsForm extends Component {
           <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}
                   rightIcon="bi_interface-arrow-right">next</Button>
           <div className={styles.anonymous}>
-            <MediaQuery query='(max-width: 767px)'>
-              <i className="fa fa-lock" aria-hidden="true"></i>
-            </MediaQuery>
+            <i className="fa fa-lock" aria-hidden="true"/>
             This review will be fully anonymous
           </div>
         </div>

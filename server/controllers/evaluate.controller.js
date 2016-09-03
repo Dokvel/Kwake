@@ -7,6 +7,7 @@ import { generateRandomToken } from '../util/security';
 import _ from 'lodash';
 import { sendEvaluateRequest } from '../../emails';
 import { getPersonalityType } from '../../utils/disc_helpers';
+import { getPronoun } from '../../utils/textHelpers';
 
 export function getTokenInfo(req, res) {
   if (!req.params.token) {
@@ -121,6 +122,7 @@ export function createEvaluateRequest(req, res) {
       if (err) {
         res.status(500).send(err);
       } else {
+        let pronoun = getPronoun(req.user.gender);
         let tokens = savedTokens.ops.map(token => {
           return {
             email: token.responderEmail,
@@ -128,7 +130,8 @@ export function createEvaluateRequest(req, res) {
             givenName: req.user.givenName,
             familyName: req.user.familyName,
             image: req.user.image,
-            profileType: getPersonalityType(req.user)
+            profileType: getPersonalityType(req.user),
+            pronoun
           }
         });
         sendEvaluateRequest(tokens);

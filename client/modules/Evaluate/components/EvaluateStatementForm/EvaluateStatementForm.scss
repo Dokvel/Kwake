@@ -4,6 +4,9 @@
   margin-top: 15px;
   font-weight: 300;
   opacity: .2;
+  i {
+    margin-right: 10px;
+  }
 }
 
 @media (min-width: $desktopMidWidth) {
@@ -54,10 +57,6 @@
 
       .anonymous {
         font-size: $mobileFontSize-XS;
-
-        i {
-          margin-right: 10px;
-        }
       }
     }
   }
