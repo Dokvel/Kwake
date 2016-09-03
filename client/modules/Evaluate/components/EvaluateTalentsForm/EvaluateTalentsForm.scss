@@ -1,5 +1,20 @@
 @import "../../../../main.scss";
 
+.container {
+  .title {
+    color: $grey;
+    font-weight: 300;
+    opacity: .3;
+  }
+  .actions {
+    .anonymous {
+      margin-top: 15px;
+      font-weight: 300;
+      opacity: 0.2;
+    }
+  }
+}
+
 @media (min-width: $desktopMidWidth) {
   .container {
     flex: 1 100%;
@@ -16,18 +31,11 @@
       margin-bottom: 30px;
     }
     .anonymous {
-      margin-top: 15px;
       font-size: $baseFontSize-XS;
-      font-weight: 300;
-      font-family: $baseFontFamily;
-      opacity: 0.2;
     }
     .title {
       font-size: $baseFontSize-M;
-      font-weight: 300;
       font-family: $baseFontFamily;
-      color: $grey;
-      opacity: 0.3;
     }
     .talents {
       display: flex;
@@ -66,8 +74,6 @@
     .title {
       margin-bottom: 20px;
       font-size: $mobileFontSize-S;
-      font-weight: 300;
-      opacity: .3;
     }
 
     .talent {
@@ -90,11 +96,7 @@
       margin-top: 40px;
 
       .anonymous {
-        margin-top: 15px;
-
         font-size: $mobileFontSize-XS;
-        font-weight: 300;
-        opacity: .2;
 
         i {
           margin-right: 10px;

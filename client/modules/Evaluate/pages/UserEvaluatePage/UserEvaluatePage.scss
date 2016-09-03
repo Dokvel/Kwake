@@ -1,18 +1,22 @@
 @import "../../../../main.scss";
 
-@media (min-width: $desktopMidWidth) {
-  .container {
-    max-width: 1240px;
-    width: 100%;
-    display: flex;
-    background-color: $backgroundColor;
-    justify-content: center;
-  }
+.container {
+  max-width: 1240px;
+  width: 100%;
+  display: flex;
+  background-color: $backgroundColor;
+  justify-content: center;
+}
 
-  .wrapper {
-    display: flex;
-    flex: 1 100%;
-    flex-flow: column wrap;
-    align-items: center;
+.wrapper {
+  display: flex;
+  flex: 1 100%;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+@media (min-width: 0px) and (max-width: $tabletMaxWidth) {
+  .container {
+    display: block;
   }
 }

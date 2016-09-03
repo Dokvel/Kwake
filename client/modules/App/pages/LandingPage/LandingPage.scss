@@ -1,39 +1,54 @@
 @import "../../../../main.scss";
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $landingBackgroundColor;
+  background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
+  background-position: center;
+  background-size: cover;
+
+  .header {
+    font-family: $futuraFontFamily;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+
+    .radarChart {
+      position: relative;
+    }
+  }
+
+  .footer {
+    font-family: $landingFooterFont;
+    font-weight: 600;
+    opacity: 0.1;
+  }
+}
+
 @media (min-width: $desktopMidWidth) {
   .container {
-    height: 100%;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-
-    background-color: $landingBackgroundColor;
-    background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
-    background-position: center;
     background-repeat: repeat;
-    background-size: cover;
+    height: 100%;
+    justify-content: space-between;
+    width: 100%;
 
     .header {
       margin-top: 2.5%;
-      font-family: $futuraFontFamily;
       font-size: 30px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
     }
 
     .content {
       max-width: 1000px;
       margin-left: 14%;
 
-      display: flex;
-      align-items: center;
-
       .radarChart {
-        position: relative;
         width: 35%;
       }
 
@@ -44,10 +59,7 @@
 
     .footer {
       margin: 2.5% 0;
-      font-family: $landingFooterFont;
       font-size: $baseFontSize-S;
-      font-weight: 600;
-      opacity: 0.1;
     }
   }
 }
@@ -56,41 +68,22 @@
   .container {
     padding: 20px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background-color: $landingBackgroundColor;
-    background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
-    background-position: center;
-    background-size: cover;
-
     .header {
       margin-top: 1%;
-      font-family: $futuraFontFamily;
       font-size: 20px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
     }
 
     .content {
-      display: flex;
       flex-direction: column;
-      align-items: center;
 
       .radarChart {
         margin-bottom: -5%;
-        position: relative;
       }
     }
 
     .footer {
       margin: 130px 0 2.5% 0;
-      font-family: $landingFooterFont;
       font-size: $mobileFontSize-XS;
-      font-weight: 600;
-      opacity: 0.1;
       text-align: center;
     }
   }

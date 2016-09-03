@@ -20,6 +20,28 @@
   opacity: 1;
 }
 
+.container {
+  .name {
+    font-family: $futuraFontFamily;
+    text-transform: uppercase;
+  }
+
+  .description {
+    text-align: center;
+    font-size: $baseFontSize-M;
+    color: $grey;
+    opacity: 0.5;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
 @media (min-width: $desktopMinWidth) {
   .container {
     display: flex;
@@ -27,27 +49,11 @@
     color: $grey;
     margin-top: 10px;
     margin-bottom: 10px;
+
     .name {
-      font-family: $futuraFontFamily;
       font-size: 18px;
       text-align: center;
-      text-transform: uppercase;
       color: $grey;
-    }
-
-    .description {
-      text-align: center;
-      font-size: $baseFontSize-M;
-      color: $grey;
-      opacity: 0.5;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-
-    .controls {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
     }
   }
 
@@ -64,10 +70,8 @@
     text-align: center;
 
     .name {
-      font-family: $futuraFontFamily;
       font-size: $mobileFontSize-M;
       letter-spacing: .1em;
-      text-transform: uppercase;
     }
 
     .description {
@@ -76,10 +80,6 @@
 
     .controls{
       margin: 20px 0 40px 0;
-
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
     }
   }
 }
