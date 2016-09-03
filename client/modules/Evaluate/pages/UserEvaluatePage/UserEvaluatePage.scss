@@ -14,3 +14,9 @@
   flex-flow: column wrap;
   align-items: center;
 }
+
+@media (min-width: 0px) and (max-width: $tabletMaxWidth) {
+  .container {
+    display: block;
+  }
+}

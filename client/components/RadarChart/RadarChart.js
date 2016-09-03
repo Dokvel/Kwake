@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cn from 'classnames';
 import _ from 'lodash';
 
 // Import Components
@@ -174,6 +175,10 @@ export default class RadarChart extends Component {
       }
     }
 
+    let classes = cn(styles.userPhoto, {
+      [styles.moveDown]: _.isEmpty(this.props.talentRates)
+    });
+
     return (
       <div>
         <div className="radarChart">
@@ -182,7 +187,7 @@ export default class RadarChart extends Component {
             ?
             <div className={styles.userPhoto} style={userPhotoStyle}></div>
             :
-            <div className={styles.scoreRadial}>
+            <div className={classes}>
               <ScoreRadial
                 colorStart={'#0060ff'}
                 colorEnd={'#0060ff'}

@@ -1,41 +1,64 @@
 @import "../../../../main.scss";
 
-.container {
-  flex: 1 100%;
-  flex-flow: column wrap;
-  margin: 0 auto;
-  margin-top: 50px;
-  .actions {
-    display: flex;
-    flex: 1;
+.anonymous {
+  margin-top: 15px;
+  font-weight: 300;
+  opacity: .2;
+}
+
+@media (min-width: $desktopMidWidth) {
+  .container {
+    flex: 1 100%;
     flex-flow: column wrap;
-    align-items: center;
-    justify-content: center;
+    margin: 0 auto;
     margin-top: 50px;
-    margin-bottom: 30px;
+    .actions {
+      display: flex;
+      flex: 1;
+      flex-flow: column wrap;
+      align-items: center;
+      justify-content: center;
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+    .anonymous {
+      font-size: $baseFontSize-XS;
+    }
+    .statements {
+      display: flex;
+      align-items: stretch;
+      flex-flow: column wrap;
+    }
+    .statement-row {
+      margin-bottom: 30px;
+      display: inline-flex;
+      flex-flow: column wrap;
+    }
+    .statement {
+      margin-right: 20px;
+      color: $grey;
+      font-family: $futuraFontFamily;
+      font-size: $baseFontSize-S;
+      text-transform: uppercase;
+    }
   }
-  .anonymous {
-    margin-top: 15px;
-    font-size: $baseFontSize-XS;
-    font-weight: 300;
-    font-family: $baseFontFamily;
-    opacity: 0.2;
-  }
-  .statements {
-    display: flex;
-    align-items: stretch;
-    flex-flow: column wrap;
-  }
-  .statement-row {
-    margin-bottom: 15px;
-    display: inline-flex;
-    flex-flow: column wrap;
-  }
-  .statement {
-    margin-right: 20px;
-    color: $grey;
-    font-family: $futuraFontFamily;
-    font-size: $baseFontSize-S;
-    text-transform: uppercase;
+}
+
+@media (min-width: 0px) and (max-width: $tabletMaxWidth) {
+  .container {
+    padding: 50px 20px;
+    text-align: center;
+
+    .actions {
+      margin-top: 40px;
+
+      .anonymous {
+        font-size: $mobileFontSize-XS;
+
+        i {
+          margin-right: 10px;
+        }
+      }
+    }
   }
 }

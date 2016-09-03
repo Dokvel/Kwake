@@ -6,6 +6,7 @@ import styles from './TalentIcon.scss';
 
 function TalentIcon(props) {
   let classes = cn(styles.icon, {
+    [styles.circled]: props.circled,
     [styles['icon--selected']]: props.selected,
     [styles['icon--enabled']]: !!props.onClick
   });

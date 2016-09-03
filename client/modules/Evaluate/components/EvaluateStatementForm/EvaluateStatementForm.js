@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 
 import { getPronoun } from '../../../../util/textHelpers';
 import { PERSONALITY_STATEMENT, TEAM_STATEMENT, TROUBLESHOOTING_STATEMENT } from '../../../../../utils/disc_helpers';
@@ -62,7 +63,12 @@ export class EvaluateTalentsForm extends Component {
 
         <div className={styles.actions}>
           <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}>send anonymously</Button>
-          <div className={styles.anonymous}>This review will be fully anonymous</div>
+          <div className={styles.anonymous}>
+            <MediaQuery query='(max-width: 767px)'>
+              <i className="fa fa-lock" aria-hidden="true"></i>
+            </MediaQuery>
+            This review will be fully anonymous
+          </div>
         </div>
       </div>
     );

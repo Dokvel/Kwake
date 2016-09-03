@@ -1,18 +1,5 @@
 @import "../../main.scss";
 
-@media (min-width: 0px) and (max-width: $tabletMaxWidth) {
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    .title {
-      line-height: 1.4em;
-    }
-  }
-}
-
 .container {
   height: 100%;
   width: 100%;
@@ -29,5 +16,18 @@
     margin-bottom: 30px;
     font-weight: 300;
     line-height: 1.5em;
+  }
+}
+
+@media (min-width: 0px) and (max-width: $tabletMaxWidth) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .title {
+      line-height: 1.4em;
+    }
   }
 }

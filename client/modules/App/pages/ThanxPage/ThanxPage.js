@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import MediaQuery from 'react-responsive';
 
 // Import Components
 import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
@@ -25,6 +26,17 @@ export class ThanxPage extends Component {
     }
   }
 
+  renderJumbotron(titleSize, textSize) {
+    return (
+      <Jumbotron
+        {...this.props}
+        title='Kwake &mdash; psychological profiles, that don’t suck.'
+        titleSize={titleSize}
+        text='With Kwake you can quickly create and share you psychological profile and let others review it.'
+        textSize={textSize} />
+    );
+  }
+
   render() {
     return (
       <div className={styles.wrapper}>
@@ -38,12 +50,13 @@ export class ThanxPage extends Component {
             </div>
           </div>
           <div className={styles.jumbotron}>
-            <Jumbotron
-              {...this.props}
-              title='Kwake &mdash; professional profiles, that don’t suck!'
-              titleSize={60}
-              text='With Kwake you can quickly create and share you psychological profile and let others review it.'
-              textSize={18} />
+            <MediaQuery query='(max-width: 767px)'>
+              <div className={styles.poweredBy}>REVIEW POWERED BY:</div>
+              {this.renderJumbotron(30, 16)}
+            </MediaQuery>
+            <MediaQuery query='(min-width: 768px)'>
+              {this.renderJumbotron(60, 18)}
+            </MediaQuery>
           </div>
           <Footer/>
         </div>

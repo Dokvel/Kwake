@@ -70,7 +70,7 @@ export class LandingPage extends Component {
       {1:3, 2:4, 3:5, 4:4, 5:3},
       {1:4, 2:3, 3:4, 4:3, 5:4}
     ];
-    let summary = generateAVG(keys, talentRates);;
+    let summary = generateAVG(keys, talentRates);
     return (
       <div className={styles.container}>
         <div className={styles.header}>kwake</div>
@@ -87,7 +87,7 @@ export class LandingPage extends Component {
           <MediaQuery query='(max-width: 767px)'>
             {this.renderJumbotron(30, 16)}
           </MediaQuery>
-          <MediaQuery query='(min-width: 769px)'>
+          <MediaQuery query='(min-width: 768px)'>
             {this.renderJumbotron(60, 18)}
           </MediaQuery>
         </div>
