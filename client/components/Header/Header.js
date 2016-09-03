@@ -25,9 +25,7 @@ export class Header extends Component {
           kwake
         </div>
         { this.props.currentUser &&
-        <div className={styles['user-info']}>
           <a className={styles['user-menu']} href="#" onClick={this.clickSignOut.bind(this)}>Log out</a>
-        </div>
         }
       </div>
     );

@@ -16,19 +16,17 @@
     letter-spacing: .1em;
   }
 
-  .user-info {
-    width: 100px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
+  .user-menu {
     align-items: center;
-    border: 1px solid $grey;
     border-radius: 15px;
+    border: 1px solid $grey;
+    color: $grey;
+    display: flex;
+    font-size: $baseFontSize-S;
+    height: 30px;
+    justify-content: center;
     opacity: .5;
-    .user-menu {
-      color: $grey;
-      font-size: $baseFontSize-S;
-      text-decoration: none;
-    }
+    text-decoration: none;
+    width: 100px;
   }
 }

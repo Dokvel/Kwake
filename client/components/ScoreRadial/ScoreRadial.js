@@ -108,7 +108,7 @@ class ScoreRadial extends Component {
 //   progressStrokeWidth={5} />
 
 ScoreRadial.propTypes = {
-  id: PropTypes.string, // linearGradient start color
+  id: PropTypes.string.isRequired, // linearGradient start color
   // set colorStart and colorEnd with same color for no gradient
   colorStart: PropTypes.string.isRequired, // linearGradient start color
   colorEnd: PropTypes.string.isRequired, // linearGradient end color
@@ -121,6 +121,7 @@ ScoreRadial.propTypes = {
 };
 
 ScoreRadial.defaultProps = {
+  id: 'defaultId',
   colorStart: 'black',
   colorEnd: 'black',
   contentType: 'text',
