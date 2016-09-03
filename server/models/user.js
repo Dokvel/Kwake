@@ -12,7 +12,7 @@ const userSchema = new Schema({
   email: { type: 'String', required: true },
   googleId: { type: 'String', required: true },
   googleAccessToken: { type: 'String', required: true },
-  googleRefreshToken: { type: 'String', required: true },
+  googleRefreshToken: { type: 'String' },
   googleExpiryDate: { type: 'Number', required: true },
   authenticationToken: { type: 'String' },
   cuid: { type: 'String', required: true },

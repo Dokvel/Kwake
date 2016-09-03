@@ -11,6 +11,9 @@
       margin-top: 15px;
       font-weight: 300;
       opacity: 0.2;
+      i {
+        margin-right: 10px;
+      }
     }
   }
 }
@@ -97,10 +100,6 @@
 
       .anonymous {
         font-size: $mobileFontSize-XS;
-
-        i {
-          margin-right: 10px;
-        }
       }
     }
   }
