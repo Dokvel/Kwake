@@ -46,7 +46,7 @@ export class LandingPage extends Component {
     return (
       <Jumbotron
         {...this.props}
-        title='Kwake &mdash; professional profiles, that don’t suck.'
+        title='Kwake &mdash; professional profiles that don’t suck!'
         titleSize={titleSize}
         text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
         textSize={textSize}/>
