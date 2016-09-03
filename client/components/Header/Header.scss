@@ -1,36 +1,32 @@
 @import "../../../stylesheets/modules/config";
 
 .content {
+  max-width: 1270px;
+  margin: 0 auto;
+  padding: 15px 15px;
+  display: flex;
+  justify-content: space-between;
+
   font-family: $futuraFontFamily;
-  font-weight: bold;
   text-transform: uppercase;
-  display: flex;
-  max-width: 1240px;
-  overflow: auto;
-  margin: auto;
-  flex-flow: row wrap;
-  align-items: center;
-  flex: 1 100%;
-  padding: 15px 0;
-}
 
-.brand {
-  display: flex;
-  flex: 1;
-  align-self: flex-start;
-}
+  .brand {
+    font-size: $baseFontSize-M;
+    font-weight: 600;
+    letter-spacing: .1em;
+  }
 
-.brand a {
-  text-decoration: none;
-  color: #FFF;
-}
-
-.user-menu {
-  align-self: flex-end;
-  display: flex;
-}
-
-.user-info {
-  display: flex;
-  align-self: flex-end;
+  .user-menu {
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid $grey;
+    color: $grey;
+    display: flex;
+    font-size: $baseFontSize-S;
+    height: 30px;
+    justify-content: center;
+    opacity: .5;
+    text-decoration: none;
+    width: 100px;
+  }
 }

@@ -16,7 +16,8 @@
 
 @media (min-width: 0px) and (max-width: $tabletMaxWidth) {
   .container {
-    margin: 20px;
+    max-width: 400px;
+    margin: 20px auto;
     display: flex;
     justify-content: space-between;
   }

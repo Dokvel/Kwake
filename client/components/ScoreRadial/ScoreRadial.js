@@ -89,7 +89,7 @@ class ScoreRadial extends Component {
         <path
           d={this.state.d}
           fill="none"
-          stroke={"url(#" + this.props.id + ")"} 
+          stroke={"url(#" + this.props.id + ")"}
           strokeWidth={this.props.progressStrokeWidth} />
       </svg>
     );
@@ -121,6 +121,7 @@ ScoreRadial.propTypes = {
 };
 
 ScoreRadial.defaultProps = {
+  id: 'defaultId',
   colorStart: 'black',
   colorEnd: 'black',
   contentType: 'text',
