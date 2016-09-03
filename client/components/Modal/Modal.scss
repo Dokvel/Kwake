@@ -1,4 +1,4 @@
-@import "../../main.scss";
+@import "../../../stylesheets/modules/config";
 
 .dialog {
   background-color: $modalBackgroundColor !important;
@@ -8,5 +8,10 @@
   a[class^="closeButton"] {
     left: initial !important;
     right: -50px !important;
+    svg{
+      circle{
+        fill: none;
+      }
+    }
   }
 }

@@ -2,9 +2,6 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import cn from 'classnames';
 
-// Import Functions
-import callApi from '../../../../util/apiCaller';
-
 // Import Components
 import Button from '../../../../components/Button/Button';
 import RadarChart from '../../../../components/RadarChart/RadarChart';
@@ -37,7 +34,12 @@ function UserProfileCard(props) {
 
   return (
     <div>
-      {props.isCurrentUser && !props.summary && <div className={styles.limitInfo}>Get <span className={styles.more}>{user.scoreLimit - props.feedbackRates.talents.length} more</span> reviews to unlock your scores!</div>}
+      { props.isCurrentUser && !props.summary &&
+      <div className={styles.limitInfo}>
+        <span className={styles.icon}><i className="fa fa-info-circle" aria-hidden="true"/></span>
+        Get <b>{user.scoreLimit - props.feedbackRates.talents.length} more</b> reviews to unlock your scores!
+      </div>
+      }
       <div className={styles.card}>
         <div className={styles.card_chart}>
           <RadarChart
@@ -45,7 +47,7 @@ function UserProfileCard(props) {
             limit={user.scoreLimit}
             talents={user.talents}
             talentRates={props.feedbackRates.talents}
-            summary={props.summary && props.summary.talents} />
+            summary={props.summary && props.summary.talents}/>
         </div>
         <div className={classes}></div>
         <div className={styles.card_user}>
@@ -58,7 +60,7 @@ function UserProfileCard(props) {
         <div className={styles.card_btnAsk}>
           <Button
             rightIcon="bi_interface-arrow-right"
-            color={props.summary ? Button.COLOR_GREEN : Button.COLOR_BLUE}
+            color={!props.summary && Button.COLOR_BLUE}
             onClick={props.showRequestModal}>
             Ask for a review
           </Button>
@@ -67,11 +69,11 @@ function UserProfileCard(props) {
         <div className={styles.card_desc}>
           <div className={styles.card_desc_score}>
             {
-              props.summary && props.summary.statements
-              ?
-              <span className={styles.card_desc_score_summary}>{props.summary.statements.personality.toFixed(1)}</span>
-              :
-              <i className="fa fa-lock"></i>
+              props.summary && props.summary.statements ?
+                <span className={styles.card_desc_score_summary}>
+                  {props.summary.statements.personality.toFixed(1)}
+                </span> :
+                <i className="fa fa-lock"/>
             }
           </div>
           <div className={styles.card_desc_text}>
@@ -80,13 +82,17 @@ function UserProfileCard(props) {
         </div>
         <ul className={styles.card_talentsList}>
           { user.talents.map((talent) => {
-            return (<li key={talent}>
-              <span className={styles.talent}><i className="fa fa-star-o"></i></span>
-              {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
-              <span className={styles.score}>
-              { props.summary ? <span className={styles.value}>{props.summary.talents[talent].toFixed(1)}</span> : <i className="fa fa-lock"></i> }
-              </span>
-            </li>)
+            return (
+              <li key={talent}>
+                <span className={styles.talent}><i className="fa fa-star-o"/></span>
+                {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
+                <span className={styles.score}>
+                { props.summary ?
+                  <span className={styles.value}>{props.summary.talents[talent].toFixed(1)}</span> :
+                  <i className="fa fa-lock"/> }
+                </span>
+              </li>
+            )
           }) }
         </ul>
         <div className={styles.card_info}>
@@ -94,22 +100,21 @@ function UserProfileCard(props) {
           <div className={styles.card_info_score}>
             {
               props.summary && props.summary.statements
-              ?
-              <div className={styles.card_info_score_radial}>
-                <ScoreRadial
-                  id={'team'}
-                  colorStart={teamColorRange[0]}
-                  colorEnd={teamColorRange[1]}
-                  contentType={'text'}
-                  content={props.summary.statements.team.toFixed(1)}
-                  maxValue={5}
-                  value={props.summary.statements.team}
-                  strokeWidth={1}
-                  strokeDistance={2}
-                  progressStrokeWidth={5} />
-              </div>
-              :
-              <div className={styles.card_info_score_icon}><i className="fa fa-lock"></i></div>
+                ?
+                <div className={styles.card_info_score_radial}>
+                  <ScoreRadial
+                    id={'team'}
+                    colorStart={teamColorRange[0]}
+                    colorEnd={teamColorRange[1]}
+                    contentType={'text'}
+                    content={props.summary.statements.team.toFixed(1)}
+                    maxValue={5}
+                    value={props.summary.statements.team}
+                    strokeWidth={1}
+                    strokeDistance={2}
+                    progressStrokeWidth={5}/>
+                </div> :
+                <div className={styles.card_info_score_icon}><i className="fa fa-lock"/></div>
             }
           </div>
           <div className={styles.card_info_desc}>
@@ -121,25 +126,22 @@ function UserProfileCard(props) {
         <div className={cn(styles.card_info, styles.card_info_troubleshooting)}>
           <div className={styles.card_info_title}>Troubleshooting</div>
           <div className={styles.card_info_score}>
-          {
-            props.summary && props.summary.statements
-            ?
-            <div className={styles.card_info_score_radial}>
-              <ScoreRadial
-                id={'troubleshooting'}
-                colorStart={troubleshootingColorRange[0]}
-                colorEnd={troubleshootingColorRange[1]}
-                contentType={'text'}
-                content={props.summary.statements.troubleshooting.toFixed(1)}
-                maxValue={5}
-                value={props.summary.statements.troubleshooting}
-                strokeWidth={1}
-                strokeDistance={2}
-                progressStrokeWidth={5} />
-            </div>
-            :
-            <div className={styles.card_info_score_icon}><i className="fa fa-lock"></i></div>
-          }
+            { props.summary && props.summary.statements ?
+              <div className={styles.card_info_score_radial}>
+                <ScoreRadial
+                  id={'troubleshooting'}
+                  colorStart={troubleshootingColorRange[0]}
+                  colorEnd={troubleshootingColorRange[1]}
+                  contentType={'text'}
+                  content={props.summary.statements.troubleshooting.toFixed(1)}
+                  maxValue={5}
+                  value={props.summary.statements.troubleshooting}
+                  strokeWidth={1}
+                  strokeDistance={2}
+                  progressStrokeWidth={5}/>
+              </div> :
+              <div className={styles.card_info_score_icon}><i className="fa fa-lock"/></div>
+            }
           </div>
           <div className={styles.card_info_desc}>
             <span className={styles.card_info_desc_title}>Troubleshooting</span>
@@ -151,13 +153,5 @@ function UserProfileCard(props) {
     </div>
   );
 }
-
-UserProfileCard.propTypes = {
-  votes: PropTypes.array.isRequired
-};
-
-UserProfileCard.defaultProps = {
-  votes: [[]]
-};
 
 export default UserProfileCard;

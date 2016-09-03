@@ -1,7 +1,15 @@
-@import "../../../../main.scss";
+@import "../../../../../stylesheets/modules/config";
+
+$scoreSize: 74px;
 
 .margin {
   margin-top: 275px;
+}
+
+.limitInfo {
+  .icon {
+    padding-right: 10px;
+  }
 }
 
 @media (min-width: $desktopMinWidth) {
@@ -26,7 +34,7 @@
     padding: 40px 50px;
 
     border-radius: 8px;
-    background: linear-gradient(0deg, rgba(19,20,24,1) 0%, rgba(26,28,33,1) 83%, rgba(26,28,33,1) 100%);
+    background: linear-gradient(0deg, rgba(19, 20, 24, 1) 0%, rgba(26, 28, 33, 1) 83%, rgba(26, 28, 33, 1) 100%);
 
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
@@ -159,15 +167,11 @@
         margin-right: 24px;
 
         &_radial {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
         }
 
         &_icon {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
           line-height: calc(#{$scoreSize} * 1.2);
@@ -228,7 +232,7 @@
     padding: 40px 20px;
 
     border-radius: 8px;
-    background: linear-gradient(0deg, rgba(19,20,24,1) 0%, rgba(26,28,33,1) 83%, rgba(26,28,33,1) 100%);
+    background: linear-gradient(0deg, rgba(19, 20, 24, 1) 0%, rgba(26, 28, 33, 1) 83%, rgba(26, 28, 33, 1) 100%);
 
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
@@ -364,15 +368,11 @@
 
       &_score {
         &_radial {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
         }
 
         &_icon {
-          $scoreSize: 74px;
-
           height: $scoreSize;
           width: $scoreSize;
           line-height: calc(#{$scoreSize} * 1.2);
