@@ -1,5 +1,36 @@
 @import "../../../stylesheets/modules/config";
 
+.lightBox {
+  z-index: -1;
+
+  max-width: 1240px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+
+  top: -75%;
+  height: 150%;
+
+  overflow: hidden;
+
+  .light {
+    height: 100%;
+    width: 100%;
+
+    background: radial-gradient(ellipse farthest-side at center, rgba(255,255,255,.075) 0%, rgba(255,255,255,0) 100%);
+  }
+}
+
+@media (max-width: $mobileMaxWidth) {
+  .lightBox {
+    .light {
+      width: 200%;
+      margin-left: -50%;
+    }
+  }
+}
+
 @media (min-width: $desktopMinWidth) {
   .container {
     max-width: 1240px;
