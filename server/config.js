@@ -7,10 +7,10 @@ const config = {
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || googleCreds.client_secret,
   GOOGLE_SCOPES: googleCreds.scopes,
   admin: {
-    username: 'admin',
-    password: 'secretSecretPassword'
+    username: process.env.ADMIN_USERNAME || 'admin',
+    password: process.env.ADMIN_PASSWORD || 'secretSecretPassword'
   },
-  sessionSecret: 'd41d8cd98f00b204e9800998ecf8427e'
+  sessionSecret: process.env.SESSION_SECRET || 'd41d8cd98f00b204e9800998ecf8427e'
 };
 
 export default config;
