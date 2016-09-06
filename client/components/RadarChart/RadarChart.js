@@ -44,22 +44,30 @@ export default class RadarChart extends Component {
     }
 
     let data = new Array(votes.length);
+    let animationArray = [];
     let colorArray = [];
+    let filterArray = [];
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
       if (summary && i === (votes.length - 1)) {
+        animationArray.push("morphing");
         colorArray.push("url(#gradient)");
+        filterArray.push("url(#glow)");
         opacityArray.push("1");
       } else {
+        animationArray.push("none");
         colorArray.push("#B2C4FF");
+        filterArray.push("none");
         opacityArray.push(".15");
       }
 
       data[i] = [];
     }
 
+    let animation = d3.scale.ordinal().range(animationArray);
     let color = d3.scale.ordinal().range(colorArray);
+    let filter = d3.scale.ordinal().range(filterArray);
     let opacity = d3.scale.ordinal().range(opacityArray);
 
     let baseMult = 3;
@@ -157,7 +165,9 @@ export default class RadarChart extends Component {
     }
 
     let radarChartOptions = {
+      animation: animation,
       color: color,
+      filter: filter,
       opacity: opacity
     };
 

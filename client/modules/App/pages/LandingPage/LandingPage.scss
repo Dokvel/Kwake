@@ -4,87 +4,128 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   background-color: $landingBackgroundColor;
   background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
   background-position: center;
+  background-repeat: repeat;
   background-size: cover;
 
-  .header {
-    font-family: $futuraFontFamily;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
   .content {
-    display: flex;
-    align-items: center;
+    height: 100%;
 
-    .radarChart {
-      position: relative;
+    .columnLeft {
+      width: 34%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .radarChart {
+        position: relative;
+      }
     }
-  }
 
-  .footer {
-    font-family: $landingFooterFont;
-    font-weight: 600;
-    opacity: 0.1;
+    .columnRight {
+      width: 66%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .header {
+        font-family: $futuraFontFamily;
+        font-size: 30px;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .footer {
+        font-family: $landingFooterFont;
+        font-size: $baseFontSize-S;
+        font-weight: 600;
+        opacity: 0.25;
+      }
+    }
   }
 }
 
+@media (min-width: $desktopMidWidth) and (max-width: 1199px) {
+ .container {
+   .content {
+     margin-left: 16%;
+   }
+ }
+}
+
 @media (min-width: $desktopMidWidth) {
-  .container {
-    background-repeat: repeat;
-    height: 100%;
-    justify-content: space-between;
-    width: 100%;
+ .container {
+   height: 100%;
+   width: 100%;
 
-    .header {
-      margin-top: 2.5%;
-      font-size: 30px;
-    }
+   .mobileHeader {
+     display: none;
+   }
 
-    .content {
-      max-width: 1000px;
-      margin-left: 14%;
+   .content {
+     max-width: 1200px;
+     margin-left: 17.5%;
 
-      .radarChart {
-        width: 35%;
-      }
+     display: flex;
+     flex-direction: row;
 
-      .jumbotron {
-        width: 65%;
-      }
-    }
-
-    .footer {
-      margin: 2.5% 0;
-      font-size: $baseFontSize-S;
-    }
-  }
+     .columnRight {
+       .header {
+         margin-top: 50px;
+       }
+       .footer {
+         margin-bottom: 50px;
+       }
+     }
+   }
+ }
 }
 
 @media (min-width: 0px) and (max-width: $tabletMaxWidth) {
   .container {
     padding: 20px;
 
-    .header {
-      margin-top: 1%;
+    .mobileHeader {
+      font-family: $futuraFontFamily;
       font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .content {
+      display: flex;
       flex-direction: column;
+      align-items: center;
 
-      .radarChart {
-        margin-bottom: -5%;
+      .columnLeft {
+        width: 100%;
+
+        .radarChart {
+          margin: -7.5% 0 -15% 0;
+        }
       }
-    }
 
-    .footer {
-      margin: 130px 0 2.5% 0;
-      font-size: $mobileFontSize-XS;
-      text-align: center;
+      .columnRight {
+        width: 100%;
+
+        text-align: center;
+
+        .header {
+          display: none;
+        }
+
+        .footer {
+          margin-top: 100px;
+          font-size: $mobileFontSize-XS;
+        }
+      }
     }
   }
 }

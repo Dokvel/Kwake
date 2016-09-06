@@ -73,27 +73,32 @@ export class LandingPage extends Component {
     let summary = generateAVG(keys, talentRates);
     return (
       <div className={styles.container}>
-        <div className={styles.header}>kwake</div>
+        <div className={styles.mobileHeader}>kwake</div>
         <div className={styles.content}>
-        <div className={styles.radarChart}>
-          <RadarChart
-            image='https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg'
-            limit={3} // just for unlocked scoreRadial propgress-border
-            talents='none' // if there are no titles for axes
-            talentRates={talentRates}
-            summary={summary} />
-        </div>
-        <div className={styles.jumbotron}>
-          <MediaQuery query='(max-width: 767px)'>
-            {this.renderJumbotron(30, 16)}
-          </MediaQuery>
-          <MediaQuery query='(min-width: 768px)'>
-            {this.renderJumbotron(60, 18)}
-          </MediaQuery>
-        </div>
-        </div>
-        <div className={styles.footer}>
-          Copyright © {new Date().getFullYear()} Kwake. All rights reserved.
+          <div className={styles.columnLeft}>
+            <div className={styles.radarChart}>
+              <RadarChart
+                image='https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg'
+                limit={3} // just for unlocked scoreRadial propgress-border
+                talents='none' // if there are no titles for axes
+                talentRates={talentRates}
+                summary={summary} />
+            </div>
+          </div>
+          <div className={styles.columnRight}>
+            <div className={styles.header}>kwake</div>
+            <div className={styles.jumbotron}>
+              <MediaQuery query='(max-width: 1199px)'>
+                {this.renderJumbotron(30, 16)}
+              </MediaQuery>
+              <MediaQuery query='(min-width: 1200px)'>
+                {this.renderJumbotron(60, 18)}
+              </MediaQuery>
+            </div>
+            <div className={styles.footer}>
+              Copyright © {new Date().getFullYear()} Kwake. All rights reserved.
+            </div>
+          </div>
         </div>
       </div>
     );

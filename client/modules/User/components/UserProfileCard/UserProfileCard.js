@@ -60,7 +60,8 @@ function UserProfileCard(props) {
         <div className={styles.card_btnAsk}>
           <Button
             rightIcon="bi_interface-arrow-right"
-            color={!props.summary && Button.COLOR_BLUE}
+            // {!props.summary && Button.COLOR_BLUE} throws error
+            color={!props.summary ? Button.COLOR_BLUE : undefined}
             onClick={props.showRequestModal}>
             Ask for a review
           </Button>
