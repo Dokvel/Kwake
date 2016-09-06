@@ -10,6 +10,8 @@ const userSchema = new Schema({
     type: { type: 'String', required: true },
     _id: { type: 'String' },
     dateUsed: { type: 'Date' },
+    openedAt: { type: 'Date' },
+    responder: { type: 'String' },
   }, { timestamps: { createdAt: 'created_at' } }
 );
 
