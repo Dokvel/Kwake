@@ -50,22 +50,6 @@ export function RadarChartFunc(id, data, options) {
 		feMergeNode_1 = feMerge.append('feMergeNode').attr('in','coloredBlur'),
 		feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
 
-	// // Append shadow filter
-	// var filter = defines.append('filter').attr('id', 'shadow');
-	// var feOffset = filter.append('feOffset')
-	// 	.attr('result', 'offOut')
-	// 	.attr('in', 'SourceAlpha')
-	// 	.attr('dx', '0')
-	// 	.attr('dy', '10');
-	// var feGaussianBlur = filter.append('feGaussianBlur')
-	// 	.attr('result', 'blurOut')
-	// 	.attr('in', 'offOut')
-	// 	.attr('stdDeviation', '10');
-	// var feBlend = filter.append('feBlend')
-	// 	.attr('in', 'SourceGraphic')
-	// 	.attr('in2', 'blurOut')
-	// 	.attr('mode', 'normal');
-
 	// Append linear gradient
 	let gradient = defines.append("linearGradient")
 	  .attr("id", "gradient")
