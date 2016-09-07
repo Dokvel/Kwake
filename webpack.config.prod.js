@@ -24,7 +24,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist/',
     filename: '[name].[chunkhash].js',
-    publicPath: 'http://kwakeapp.com/',
+    publicPath: '/',
   },
 
   resolve: {

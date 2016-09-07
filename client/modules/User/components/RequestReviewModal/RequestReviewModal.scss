@@ -25,26 +25,39 @@
   align-self: center;
   justify-content: center;
   flex-flow: column wrap;
-  padding: 20px;
-  max-width: 710px;
+  padding: 20px 40px;
+  width: 450px;
 }
 
 .encounters {
   display: inline-flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
-.actions {
+.search, .actions {
   display: flex;
   justify-content: center;
-  border-top: 1px solid #232324;
-  padding: 30px 20px;
+  padding: 30px 40px 0 40px;
   flex-flow: column wrap;
 }
 
-.custom-emails-field {
+.actions {
+
+  padding: 30px 40px;
+  border-top: 1px solid #232324;
+}
+
+.search-wrapper {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.field {
   display: inline-block;
   border: 1px solid #ccced2;
   background-color: transparent !important;
@@ -52,21 +65,22 @@
   color: $grey;
   opacity: 0.4;
   padding: 15px 0 15px 35px;
-  margin: 0 50px;
   border-radius: 1px;
-  min-width: 350px;
-  width: 70%;
+  width: 100%;
   font-weight: 300;
   font-size: $baseFontSize-M;
   font-family: $baseFontFamily;
-  background-image: url("../../../../../vendor/email.png");
-  background-repeat: no-repeat;
-  background-position: 10px center;
-
+  &:focus {
+    opacity: 1;
+  }
 }
 
-.custom-emails-field:focus {
-  opacity: 1;
+.emails-field {
+  background: url("../../../../../vendor/email.png") no-repeat 10px center;
+}
+
+.search-field {
+  background: url("../../../../../vendor/search.png") no-repeat 10px center;
 }
 
 .customEmailsForm {
@@ -98,5 +112,17 @@
   &:hover {
 
     color: rgb(254, 254, 254);
+  }
+}
+
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+  .encounters-container {
+    width: 150px;
+  }
+}
+
+@media (min-width: $mobileMaxWidth) and (max-width: $desktopMidWidth) {
+  .encounters-container {
+    width: 250px;
   }
 }
