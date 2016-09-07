@@ -8,14 +8,17 @@ function EncounterItem(props) {
   let userPhotoStyle = props.image ? { backgroundImage: `url(${props.image})` } : undefined;
 
   return (
-    <div className={styles.container}>
-      <div className={cn(styles['user-photo'], { [styles['user-photo--selected']]: props.selected })}
-           style={userPhotoStyle}
-           onClick={props.onClick}>
-        <i className={cn("bi_interface-tick", styles.tick)}/>
+    <div className={ cn(styles['container'], { [styles['container--selected']]: props.selected })}
+         onClick={props.onClick}>
+      <div className={styles['user-photo']}
+           style={userPhotoStyle}>
       </div>
-      <div className={cn(styles.name, { [styles['name--selected']]: props.selected })}>
-        {props.displayName || props.email}
+      <div className={styles.details}>
+        <span className={styles.name}> {props.displayName }</span>
+        <span className={styles.email}>{ props.email}</span>
+      </div>
+      <div className={styles.marker}>
+        <i className={cn("bi_interface-tick", styles.tick)}/>
       </div>
     </div>
   );

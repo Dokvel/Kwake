@@ -12,6 +12,9 @@ import EncounterItem from '../../components/EncounterItem/EncounterItem';
 import callApi, { isLoggedIn } from '../../../../util/apiCaller';
 
 import styles from './RequestReviewModal.scss';
+import cn from 'classnames';
+
+import CustomScrollbar from '../../../../components/CustomScrollbar/CustomScrollbar';
 
 class RequestReviewModal extends Component {
   constructor(props) {
@@ -19,7 +22,8 @@ class RequestReviewModal extends Component {
     this.state = {
       selected: [],
       customEmails: '',
-      encounters: []
+      encounters: [],
+      search: ''
     }
   }
 
@@ -80,28 +84,41 @@ class RequestReviewModal extends Component {
     this.setState({ selected });
   };
 
+  filterEncounter = () => {
+    let search = this.state.search.trim();
+    return search === '' ? this.state.encounters : _.toArray(_.pickBy(this.state.encounters, encounter => `${encounter.displayName}`.indexOf(search) > -1 || `${encounter.email}`.indexOf(search) > -1));
+  }
+
   render() {
+    let encounters = this.filterEncounter();
     return (
       <Modal handleClose={this.props.handleClose}>
         <div className={styles.title}>REQUEST A REVIEW</div>
-        <div className={styles['list-title']}>
-          Your recent encounters <span className={styles['select-all']} onClick={this.selectAll}>select all</span>
+        <div className={styles['search']}>
+          <div className={styles['search-wrapper']}>
+            <input type="text" value={this.state.search} placeholder="Search last encounters..."
+                   className={cn(styles['field'], styles['search-field'])}
+                   onChange={(e)=>this.setState({ search: e.target.value })}/>
+          </div>
         </div>
         <div className={styles['encounters-container']}>
           <div className={styles.encounters}>
-            {
-              this.state.encounters.map(encounter => (
-                  <EncounterItem key={encounter.email} {...encounter} onClick={this.onSelect.bind(this, encounter.email)}
-                                 selected={this.state.selected.indexOf(encounter.email) > -1}/>
+            <CustomScrollbar autoHeight={true} autoHeightMax={230}>
+              {
+                encounters.map(encounter => (
+                    <EncounterItem key={encounter.email} {...encounter}
+                                   onClick={this.onSelect.bind(this, encounter.email)}
+                                   selected={this.state.selected.indexOf(encounter.email) > -1}/>
+                  )
                 )
-              )
-            }
+              }
+            </CustomScrollbar>
           </div>
         </div>
         <div className={styles['actions']}>
           <div className={styles.customEmailsForm}>
             <input type="text" value={this.state.customEmails} placeholder="Not in the list? Enter emails here..."
-                   className={styles['custom-emails-field']}
+                   className={cn(styles['field'], styles['emails-field'])}
                    onChange={(e)=>this.setState({ customEmails: e.target.value })}/>
           </div>
           <div className={styles['button-wrapper']}>

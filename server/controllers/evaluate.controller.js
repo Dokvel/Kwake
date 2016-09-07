@@ -112,8 +112,9 @@ export function createEvaluateRequest(req, res) {
     res.status(403).end();
   } else {
     User.find({}, 'email cuid').where('email').in(req.body.emails).then((users)=> {
-      let tokensObjects = req.body.emails.map((email) => {
-        let existUser = users.filter(user => user.email === email)[0]
+      let emails = req.body.emails.filter(email => email !== req.user.email);
+      let tokensObjects = emails.map((email) => {
+        let existUser = users.filter(user => user.email === email)[0];
         return {
           _id: cuid(),
           requester: req.user.cuid,

@@ -8,10 +8,20 @@
   a[class^="closeButton"] {
     left: initial !important;
     right: -50px !important;
-    svg{
-      circle{
+    svg {
+      circle {
         fill: none;
       }
+    }
+  }
+}
+
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+
+  .dialog {
+    a[class^="closeButton"] {
+      right: 10px !important;
+      top: 10px !important;
     }
   }
 }

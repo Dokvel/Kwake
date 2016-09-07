@@ -1,57 +1,69 @@
 @import '../../../../../stylesheets/modules/config';
 
 .user-photo {
-  cursor: pointer;
   width: 42px;
   height: 42px;
   border-radius: 50%;
   background-size: contain;
   position: relative;
-  margin-bottom: 12px;
-  margin-top: 12px;
+  margin: 10px;
   background-image: url("../../../../../vendor/avatar.svg");
-  .tick {
-    display: none;
-  }
 }
 
 .container {
-  padding: 5px 10px;
+  cursor: pointer;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   align-items: center;
-  width: 200px;
-}
-
-.name {
-  text-align: center;
-  padding: 5px;
-  text-transform: uppercase;
-  font-family: $futuraFontFamily;
-  font-size: $baseFontSize-S;
-  color: $grey;
-  opacity: 0.5;
-}
-
-.name--selected {
-  opacity: 1;
-}
-
-.user-photo--selected {
-  border: 2px solid $grey;
-  margin-bottom: 6px;
-  margin-top: 6px;
-  width: 50px;
-  height: 50px;
-  .tick {
-    border-radius: 50%;
-    position: absolute;
-    right: -3px;
-    top: -3px;
-    border: 1px solid $grey;
-    display: inline-block;
-    font-size: 12px;
-    color: black;
-    background-color: $grey;
+  padding: 10px 0;
+  border-bottom: 1px solid #232324;
+  &:last-child {
+    border: none !important;
+  }
+  .marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    .tick {
+      border-radius: 50%;
+      border: 1px solid $grey;
+      display: inline-block;
+      font-size: 12px;
+      color: $grey;
+      background-color: transparent;
+      opacity: 0.7;
+    }
   }
 }
+
+.details {
+  padding: 5px;
+  color: $grey;
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-flow: column wrap;
+  .email {
+    opacity: 0.3;
+    font-family: $baseFontFamily;
+    font-size: $baseFontSize-S;
+    font-weight: 300;
+  }
+  .name {
+    font-family: $futuraFontFamily;
+    text-transform: uppercase;
+  }
+}
+
+.container--selected {
+  .marker {
+    .tick {
+      color: black;
+      background-color: $grey;
+      opacity: 1;
+    }
+  }
+}
+

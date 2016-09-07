@@ -5,7 +5,7 @@ var path = require('path');
 
 module.exports = {
   output: {
-    publicPath: 'http://kwakeapp.com/',
+    publicPath: '/',
     libraryTarget: 'commonjs2',
   },
   resolve: {
