@@ -1,4 +1,5 @@
 .users {
+  padding: 20px;
   display: flex;
   align-self: center;
   justify-content: center;
@@ -6,7 +7,7 @@
   .search {
     display: inline-flex;
     align-self: center;
-
+    margin: 15px;
     max-width: 256px;
   }
   .user {
@@ -14,6 +15,7 @@
     flex: 1;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid white;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
   }
 }

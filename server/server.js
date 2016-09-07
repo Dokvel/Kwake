@@ -8,6 +8,29 @@ import session from 'express-session';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 import reactCookie from 'react-cookie';
+
+import mongoSession from 'connect-mongodb-session';
+
+var MongoDBStore = mongoSession(session);
+
+var store = new MongoDBStore(
+  {
+    uri: serverConfig.mongoURL,
+    collection: 'appSessions'
+  }, function (error) {
+    if (error) {
+      console.error('MongoDBStore: Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+      throw error;
+    }
+  });
+
+store.on('error', function (error) {
+  if (error) {
+    console.error('MongoDBStore error !'); // eslint-disable-line no-console
+    throw error;
+  }
+});
+
 //Auth
 import User from './models/user';
 import passport from 'passport';
@@ -108,7 +131,8 @@ app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(session({
   secret: serverConfig.sessionSecret,
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: store
 }));
 
 // Passport Middleware
