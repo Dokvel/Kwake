@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 
+require('../../../stylesheets/static/adminLayout.scss');
+
 export class AdminApp extends Component {
   render() {
-    return this.props.children;
+    return (
+      <div className="main">{
+        this.props.children}</div>
+    )
   }
 }
 

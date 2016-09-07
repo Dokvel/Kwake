@@ -5,16 +5,14 @@
   flex-flow: row wrap;
   font-family: $baseFontFamily;
   font-size: $baseFontSize-M;
-  color: $baseFontColor;
 }
 
 .attr {
-  color: $grey;
   padding: 15px;
 }
 
 .attr a,
 .attr a:visited {
+  color: #0a0a0a !important;
   text-decoration: none;
-  color: $grey;
 }
