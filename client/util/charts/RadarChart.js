@@ -109,7 +109,7 @@ export function RadarChartFunc(id, data, options) {
 	//The morphing radial line function
 	let morphingRadarLine = d3.svg.line.radial()
 		.interpolate("cardinal-closed")
-		.radius(function(d) { return rScale(d.value * _.random(0.8, 1.2)); })
+		.radius(function(d) { return rScale(d.value * _.random(mult[0], mult[1])); })
 		.angle(function(d,i) { return i*angleSlice; });
 
 	//Create a wrapper for the blobs
@@ -128,6 +128,8 @@ export function RadarChartFunc(id, data, options) {
 		.attr("d", function(d,i) { return radarLine(d); })
 		.attr('class', function(d,i) { return 'animation-' + cfg.animation(i); })
 
+	let mult;
+
 	d3.select('.animation-morphing')
 		.each(morph);
 
@@ -137,7 +139,15 @@ export function RadarChartFunc(id, data, options) {
 	    path = path.transition()
         .duration(5000)
 				.ease("linear")
-				.attr("d", function(d,i) { return morphingRadarLine(d); })
+				.attr("d", function(d,i) {
+					if (cfg.color(i) === '#B2C4FF' && cfg.animation(i) === 'morphing') {
+						mult = [.66, 1.66];
+						return morphingRadarLine(d, mult);
+					} else {
+						mult = [.8, 1.2];
+						return morphingRadarLine(d, mult);
+					}
+				})
         .each("end", repeat);
 	  })();
 	}

@@ -16,31 +16,25 @@ import dataTalents from '../../../data/talents';
 
 export default class RadarChart extends Component {
   componentDidMount() {
-    let talentsObj = _.keyBy(dataTalents, 'key');
-
-    if (!(_.isEmpty(this.props.talentRates))) {
-      this.renderChart();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!(_.isEmpty(this.props.talentRates))) {
-      this.renderChart();
-    }
+    this.renderChart();
   }
 
   renderChart() {
     let talentsObj = _.keyBy(dataTalents, 'key');
-    let {talents} = this.props;
-    let {talentRates, summary} = this.props;
+    let {summary, talentRates, talents} = this.props;
     let votes = [];
 
-    _.each(talentRates, talentRate => {
-      votes.push(_.toArray(talentRate));
-    });
+    if (_.isEmpty(this.props.talentRates)) {
+      talents = 'none';
+      votes.push([3,3,3,3,3]);
+    } else {
+      _.each(talentRates, talentRate => {
+        votes.push(_.toArray(talentRate));
+      });
 
-    if (summary) {
-      votes.push(_.toArray(summary))
+      if (summary) {
+        votes.push(_.toArray(summary))
+      }
     }
 
     let data = new Array(votes.length);
@@ -50,7 +44,12 @@ export default class RadarChart extends Component {
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
-      if (summary && i === (votes.length - 1)) {
+      if (_.isEmpty(this.props.talentRates)) {
+        animationArray.push("morphing");
+        colorArray.push("#B2C4FF");
+        filterArray.push("none");
+        opacityArray.push(".15");
+      } else if (summary && i === (votes.length - 1)) {
         animationArray.push("morphing");
         colorArray.push("url(#gradient)");
         filterArray.push("url(#glow)");
@@ -179,38 +178,36 @@ export default class RadarChart extends Component {
       backgroundImage: 'url(' + this.props.image + ')'
     };
 
-    if (!(_.isEmpty(this.props.talentRates))) {
-      if (typeof window !== 'undefined') {
-        this.renderChart();
-      }
+    if (typeof window !== 'undefined') {
+      this.renderChart();
     }
 
-    let classes = cn(styles.userPhoto, {
-      [styles.moveDown]: _.isEmpty(this.props.talentRates)
-    });
+    let chartID = cn({
+       [styles.chart]: _.isEmpty(this.props.talentRates)
+     });
 
     return (
       <div>
-        <div className="radarChart">
-          {
-            this.props.summary
-            ?
-            <div className={styles.userPhoto} style={userPhotoStyle}></div>
-            :
-            <div className={classes}>
-              <ScoreRadial
-                colorStart={'#0060ff'}
-                colorEnd={'#0060ff'}
-                contentType={'image'}
-                content={this.props.image}
-                maxValue={this.props.limit}
-                value={this.props.talentRates.length}
-                strokeWidth={5}
-                strokeDistance={0}
-                progressStrokeWidth={5} />
-            </div>
-          }
+        <div id={chartID} className="radarChart">
         </div>
+        {
+          this.props.summary
+          ?
+          <div className={styles.userPhoto} style={userPhotoStyle}></div>
+          :
+          <div className={styles.userPhoto}>
+            <ScoreRadial
+              colorStart={'#0060ff'}
+              colorEnd={'#0060ff'}
+              contentType={'image'}
+              content={this.props.image}
+              maxValue={this.props.limit}
+              value={this.props.talentRates.length}
+              strokeWidth={5}
+              strokeDistance={0}
+              progressStrokeWidth={5} />
+          </div>
+        }
       </div>
     );
   }
