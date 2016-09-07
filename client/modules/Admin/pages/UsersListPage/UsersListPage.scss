@@ -1,0 +1,19 @@
+.users {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  .search {
+    display: inline-flex;
+    align-self: center;
+
+    max-width: 256px;
+  }
+  .user {
+    display: inline-flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid white;
+  }
+}

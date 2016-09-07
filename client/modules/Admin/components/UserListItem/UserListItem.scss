@@ -1,0 +1,20 @@
+@import "../../../../../stylesheets/modules/config.scss";
+
+.single-user {
+  display: flex;
+  flex-flow: row wrap;
+  font-family: $baseFontFamily;
+  font-size: $baseFontSize-M;
+  color: $baseFontColor;
+}
+
+.attr {
+  color: $grey;
+  padding: 15px;
+}
+
+.attr a,
+.attr a:visited {
+  text-decoration: none;
+  color: $grey;
+}

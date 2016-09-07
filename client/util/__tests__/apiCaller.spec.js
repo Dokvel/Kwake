@@ -1,10 +1,10 @@
 import test from 'ava';
-import callApi, { API_URL } from '../apiCaller';
+import callApi, { API_HOST } from '../apiCaller';
 import nock from 'nock';
 
 test('method defaults to GET', t => {
   const reply = { foo: 'bar' };
-  nock(API_URL)
+  nock(API_HOST)
     .get('/foo')
     .reply(200, reply);
   return callApi('foo').then(response => {
@@ -15,7 +15,7 @@ test('method defaults to GET', t => {
 test('sends the body', t => {
   const body = { id: 5 };
   const reply = { foo: 'bar' };
-  nock(API_URL)
+  nock(API_HOST)
     .post('/foo', body)
     .reply(200, reply);
   return callApi('foo', 'post', body).then(response => {
@@ -25,7 +25,7 @@ test('sends the body', t => {
 
 test('returns the error', t => {
   const reply = { message: 'Errrrrrrrrr' };
-  nock(API_URL)
+  nock(API_HOST)
     .get('/send_error')
     .reply(500, reply);
   return callApi('send_error').then(error => {

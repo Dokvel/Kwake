@@ -9,6 +9,7 @@ import posts from './modules/Post/PostReducer';
 import intl from './modules/Intl/IntlReducer';
 import users from './modules/User/UserReducer';
 import evaluate from './modules/Evaluate/EvaluateReducer';
+import admin from './modules/Admin/AdminReducer';
 
 // Combine all reducers into one root reducer
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   posts,
   intl,
   users,
-  evaluate
+  evaluate,
+  admin
 });

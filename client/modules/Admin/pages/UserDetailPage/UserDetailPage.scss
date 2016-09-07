@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  .tokens {
+    td, th {
+      padding: 15px;
+    }
+  }
+}

@@ -13,24 +13,28 @@ export function getTokenInfo(req, res) {
   if (!req.params.token) {
     res.status(403).end();
   } else {
-    Token.findOne({ token: req.params.token, type: TYPE_EVALUATE }).exec((err, token) => {
-      if (err) {
-        res.status(500).send(err);
-      } else if (!token) {
-        res.status(403).end();
-      } else {
-        if (token.dateUsed) {
+    Token.findOne({ token: req.params.token, type: TYPE_EVALUATE })
+      .then((token) => {
+        if (!token || (token && token.dateUsed)) {
           res.status(403).end();
         } else {
-          User.findOne({ cuid: token.requester }, 'givenName familyName image talents dominance influence steadiness conscientiousness gender').exec((err, user) => {
-            if (err) {
-              res.status(500).send(err);
-            }
-            res.json({ user: _.omit(user.toObject(), '_id') });
-          });
+          if (token.token != 'demo_token' && !token.openedAt) {
+            token.openedAt = Date.now();
+            return token.save();
+          } else {
+            return token;
+          }
         }
-      }
-    });
+      })
+      .then((token) => {
+        return User.findOne({ cuid: token.requester }, 'givenName familyName image talents dominance influence steadiness conscientiousness gender');
+      })
+      .then((user) => {
+        res.json({ user: _.omit(user.toObject(), '_id') });
+      })
+      .catch(err => {
+        res.status(500).send(err);
+      });
   }
 }
 
@@ -107,36 +111,40 @@ export function createEvaluateRequest(req, res) {
   if (!req.body.emails) {
     res.status(403).end();
   } else {
-    let tokensObjects = req.body.emails.map((email) => {
-      return {
-        _id: cuid(),
-        requester: req.user.cuid,
-        responderEmail: email,
-        type: TYPE_EVALUATE,
-        token: generateRandomToken(),
-        created_at: new Date()
-      }
-    });
+    User.find({}, 'email cuid').where('email').in(req.body.emails).then((users)=> {
+      let tokensObjects = req.body.emails.map((email) => {
+        let existUser = users.filter(user => user.email === email)[0]
+        return {
+          _id: cuid(),
+          requester: req.user.cuid,
+          responderEmail: email,
+          type: TYPE_EVALUATE,
+          token: generateRandomToken(),
+          created_at: new Date(),
+          responder: existUser && existUser.cuid
+        }
+      });
 
-    Token.collection.insert(tokensObjects, (err, savedTokens) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        let pronoun = getPronoun(req.user.gender);
-        let tokens = savedTokens.ops.map(token => {
-          return {
-            email: token.responderEmail,
-            token: token.token,
-            givenName: req.user.givenName,
-            familyName: req.user.familyName,
-            image: req.user.image,
-            profileType: getPersonalityType(req.user),
-            pronoun
-          }
-        });
-        sendEvaluateRequest(tokens);
-        res.json({ tokens });
-      }
+      Token.collection.insert(tokensObjects, (err, savedTokens) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          let pronoun = getPronoun(req.user.gender);
+          let tokens = savedTokens.ops.map(token => {
+            return {
+              email: token.responderEmail,
+              token: token.token,
+              givenName: req.user.givenName,
+              familyName: req.user.familyName,
+              image: req.user.image,
+              profileType: getPersonalityType(req.user),
+              pronoun
+            }
+          });
+          sendEvaluateRequest(tokens);
+          res.json({ tokens });
+        }
+      });
     });
   }
 }
