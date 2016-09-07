@@ -15,21 +15,7 @@ import styles from './RadarChart.scss';
 import dataTalents from '../../../data/talents';
 
 export default class RadarChart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { chartIsEmpty: true };
-  }
-
-  componentWillMount() {
-    this.setState({ chartIsEmpty: _.isEmpty(this.props.talentRates) });
-  }
-
   componentDidMount() {
-    this.renderChart();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ chartIsEmpty: _.isEmpty(this.props.talentRates) });
     this.renderChart();
   }
 
@@ -38,7 +24,7 @@ export default class RadarChart extends Component {
     let {summary, talentRates, talents} = this.props;
     let votes = [];
 
-    if (this.state.chartIsEmpty) {
+    if (_.isEmpty(this.props.talentRates)) {
       talents = 'none';
       votes.push([3,3,3,3,3]);
     } else {
@@ -58,7 +44,7 @@ export default class RadarChart extends Component {
     let opacityArray = [];
 
     for (var i = 0; i < votes.length; i++) {
-      if (this.state.chartIsEmpty) {
+      if (_.isEmpty(this.props.talentRates)) {
         animationArray.push("morphing");
         colorArray.push("#B2C4FF");
         filterArray.push("none");
@@ -197,7 +183,7 @@ export default class RadarChart extends Component {
     }
 
     let chartID = cn({
-       [styles.chart]: this.state.chartIsEmpty
+       [styles.chart]: _.isEmpty(this.props.talentRates)
      });
 
     return (
