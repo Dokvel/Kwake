@@ -5,8 +5,9 @@ require('../../../stylesheets/static/adminLayout.scss');
 export class AdminApp extends Component {
   render() {
     return (
-      <div className="main">{
-        this.props.children}</div>
+      <div className="adminMain">
+        {this.props.children}
+      </div>
     )
   }
 }

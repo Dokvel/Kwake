@@ -1,14 +1,9 @@
 @import '../modules/config';
 
-body {
-  margin: 0;
-  padding: 0;
-  color: #0a0a0a !important;
+.adminMain {
+  height: 100%;
+  color: $baseFontColor;
   font-family: $baseFontFamily;
   font-size: $baseFontSize-M;
-  background-color: whitesmoke !important;
-}
-
-html, body, .main {
-  height: 100%;
+  background-color: $backgroundColor;
 }
