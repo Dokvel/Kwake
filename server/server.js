@@ -1,15 +1,19 @@
 import Express, { Router } from 'express';
+import passportLocal  from 'passport-local';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 import path from 'path';
 import IntlWrapper from '../client/modules/Intl/IntlWrapper';
-
+import reactCookie from 'react-cookie';
 //Auth
 import User from './models/user';
 import passport from 'passport';
 import bearer from 'passport-http-bearer';
 var BearerStrategy = bearer.Strategy;
+var LocalStrategy = passportLocal.Strategy;
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -47,9 +51,16 @@ import auth from './routes/auth.routes';
 import users from './routes/user.routes';
 import evaluate from './routes/evaluate.routes';
 
+//Import Admin Routes
+import adminUsers from './routes/admin/user.routes';
+
 const useRoutes = (routes) => {
   let protectedMiddleware = passport.authenticate('bearer', { session: false })
   app.use('/api', routes(new Router(), protectedMiddleware))
+};
+
+const useAdminRoutes = (routes) => {
+  app.use('/admin/api', routes(new Router()));
 };
 
 // Set native promises as mongoose promise
@@ -81,16 +92,42 @@ passport.use(new BearerStrategy(
   }
 ));
 
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    let isValid = serverConfig.admin.username === username && serverConfig.admin.password === password;
+    return done(null, isValid);
+  }
+));
+
 // Apply body Parser and server public assets and routes
 app.use(compression());
+app.use(cookieParser(serverConfig.sessionSecret));
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
+app.use(session({
+  secret: serverConfig.sessionSecret,
+  resave: true,
+  saveUninitialized: false
+}));
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function (result, cb) {
+  cb(null, result);
+});
+
+passport.deserializeUser(function (result, cb) {
+  cb(null, result);
+});
 
 useRoutes(posts);
 useRoutes(auth);
 useRoutes(users);
 useRoutes(evaluate);
+useAdminRoutes(adminUsers);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -168,7 +205,8 @@ app.use((req, res, next) => {
     }
 
     const store = configureStore();
-
+    var unplug = reactCookie.plugToRequest(req, res);
+    reactCookie.setRawCookie(req.headers.cookie);
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(

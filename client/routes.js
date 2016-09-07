@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
+import AdminApp from './modules/Admin/Admin';
 import Base from './Base';
 import DefaultLayout from './components/DefaultLayout/DefaultLayout';
 
@@ -23,6 +24,9 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/App/pages/ThanxPage/ThanxPage');
   require('./modules/User/pages/UserProfilePage/UserProfilePage');
   require('./modules/Evaluate/pages/UserEvaluatePage/UserEvaluatePage');
+  require('./modules/Admin/pages/AdminLoginPage/AdminLoginPage');
+  require('./modules/Admin/pages/UsersListPage/UsersListPage');
+  require('./modules/Admin/pages/UserDetailPage/UserDetailPage');
 }
 
 // react-router setup with code-splitting
@@ -46,6 +50,31 @@ export default (
         });
       }}
     />
+    <Route path="/admin" component={AdminApp}>
+      <IndexRoute
+        getComponent={(nextState, cb) => {
+          require.ensure([], require => {
+            cb(null, require('./modules/Admin/pages/AdminLoginPage/AdminLoginPage').default);
+          });
+        }}
+      />
+      <Route
+        path="/admin/users"
+        getComponent={(nextState, cb) => {
+          require.ensure([], require => {
+            cb(null, require('./modules/Admin/pages/UsersListPage/UsersListPage').default);
+          });
+        }}
+      />
+      <Route
+        path="/admin/users/:cuid"
+        getComponent={(nextState, cb) => {
+          require.ensure([], require => {
+            cb(null, require('./modules/Admin/pages/UserDetailPage/UserDetailPage').default);
+          });
+        }}
+      />
+    </Route>
     <Route component={App}>
       <IndexRoute
         getComponent={(nextState, cb) => {

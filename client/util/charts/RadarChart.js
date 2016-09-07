@@ -1,71 +1,57 @@
-export function RadarChartFunc(id, data, options) {
-	var width = 300;
-	var height = 300;
+import _ from 'lodash';
 
-	var cfg = {
+export function RadarChartFunc(id, data, options) {
+	let width = 300;
+	let height = 300;
+
+	let cfg = {
 	 labelFactor: 1.25,
 	 strokeWidth: 30
 	};
 
 	//Put all of the options into cfg variable
 	if('undefined' !== typeof options){
-	  for(var i in options){
+	  for(let i in options){
 			if('undefined' !== typeof options[i]){ cfg[i] = options[i]; }
 	  }
 	}
 
-	var maxValue = d3.max(data, function(i) {return 5});
+	let maxValue = d3.max(data, function(i) {return 5});
 
-	var allAxis = (data[0].map(function(i, j) {return i.axis})),
+	let allAxis = (data[0].map(function(i, j) {return i.axis})),
 		total = allAxis.length,
 		radius = Math.min(width/2, height/2),
 		angleSlice = Math.PI * 2 / total;
 
 	// Scale for the radius
-	var rScale = d3.scale.linear()
+	let rScale = d3.scale.linear()
 		.range([0, radius])
 		.domain([0, maxValue]);
 
 	// Initiate the radar chart SVG
   d3.select("#radarChartSVG").remove();
-	var svg = d3.select(id).append("svg")
+	let svg = d3.select(id).append("svg")
 		.attr("id", "radarChartSVG")
 		.attr("viewBox", "0 0 "+ width * 1.33 +" "+ height * 1.33)
 
 	// Append g element
-	var g = svg.append("g")
+	let g = svg.append("g")
 		.attr("transform", "translate(" + (width/1.5) + "," + (height/1.5) + ")");
 
 	// Append defs element
-	var defines = svg.append('defs');
+	let defines = svg.append('defs');
 
 	// Append glow filter
-	var filter = defines.append('filter').attr('id','glow'),
+	let filter = defines.append('filter').attr('id','glow'),
 		feGaussianBlur = filter.append('feGaussianBlur')
-			.attr('stdDeviation','2.5')
+			.attr('stdDeviation','1')
 			.attr('result','coloredBlur'),
 		feMerge = filter.append('feMerge'),
 		feMergeNode_1 = feMerge.append('feMergeNode').attr('in','coloredBlur'),
 		feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
 
-	// Append shadow filter
-	var filter = defines.append('filter').attr('id', 'shadow');
-	var feOffset = filter.append('feOffset')
-		.attr('result', 'offOut')
-		.attr('in', 'SourceAlpha')
-		.attr('dx', '0')
-		.attr('dy', '10');
-	var feGaussianBlur = filter.append('feGaussianBlur')
-		.attr('result', 'blurOut')
-		.attr('in', 'offOut')
-		.attr('stdDeviation', '10');
-	var feBlend = filter.append('feBlend')
-		.attr('in', 'SourceGraphic')
-		.attr('in2', 'blurOut')
-		.attr('mode', 'normal');
-
 	// Append linear gradient
-	var gradient = defines.append("linearGradient")
+	let gradient = defines.append("linearGradient")
 	  .attr("id", "gradient")
 	  .attr("x1", "0%")
 	  .attr("y1", "100%")
@@ -90,10 +76,10 @@ export function RadarChartFunc(id, data, options) {
 	/////////////////////////////////////////////////////////
 
 	//Wrapper for the axes
-	var axisGrid = g.append("g").attr("class", "axisWrapper");
+	let axisGrid = g.append("g").attr("class", "axisWrapper");
 
 	//Create the straight lines radiating outward from the center
-	var axis = axisGrid.selectAll(".axis")
+	let axis = axisGrid.selectAll(".axis")
 		.data(allAxis)
 		.enter()
 
@@ -115,22 +101,54 @@ export function RadarChartFunc(id, data, options) {
 	/////////////////////////////////////////////////////////
 
 	//The radial line function
-	var radarLine = d3.svg.line.radial()
+	let radarLine = d3.svg.line.radial()
 		.interpolate("cardinal-closed")
 		.radius(function(d) { return rScale(d.value); })
-		.angle(function(d,i) {	return i*angleSlice; });
+		.angle(function(d,i) { return i*angleSlice; });
+
+	//The morphing radial line function
+	let morphingRadarLine = d3.svg.line.radial()
+		.interpolate("cardinal-closed")
+		.radius(function(d) { return rScale(d.value * _.random(mult[0], mult[1])); })
+		.angle(function(d,i) { return i*angleSlice; });
 
 	//Create a wrapper for the blobs
-	var blobWrapper = g.selectAll(".radarWrapper")
+	let blobWrapper = g.selectAll(".radarWrapper")
 		.data(data)
 		.enter().append("g");
 
 	//Create the outlines
 	blobWrapper
 		.append("path")
-		.attr("d", function(d,i) { return radarLine(d); })
+		.style("fill", function(d,i) { return cfg.color(i); })
+		.style("filter" , function(d,i) { return cfg.filter(i); })
+		.style("opacity", function(d,i) { return cfg.opacity(i); })
 		.style("stroke-width", cfg.strokeWidth + "px")
 		.style("stroke", function(d,i) { return cfg.color(i); })
-		.style("fill", function(d,i) { return cfg.color(i); })
-		.style("opacity", function(d,i) { return cfg.opacity(i); })
+		.attr("d", function(d,i) { return radarLine(d); })
+		.attr('class', function(d,i) { return 'animation-' + cfg.animation(i); })
+
+	let mult;
+
+	d3.select('.animation-morphing')
+		.each(morph);
+
+	function morph() {
+		let path = d3.select(this);
+		(function repeat() {
+	    path = path.transition()
+        .duration(5000)
+				.ease("linear")
+				.attr("d", function(d,i) {
+					if (cfg.color(i) === '#B2C4FF' && cfg.animation(i) === 'morphing') {
+						mult = [.66, 1.66];
+						return morphingRadarLine(d, mult);
+					} else {
+						mult = [.8, 1.2];
+						return morphingRadarLine(d, mult);
+					}
+				})
+        .each("end", repeat);
+	  })();
+	}
 }

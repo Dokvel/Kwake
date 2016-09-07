@@ -1,8 +1,17 @@
 @import "../../../stylesheets/modules/config";
 
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 svg {
   width: 100%;
   height: 100%;
+}
+
+#chart {
+  animation: rotation 30s linear infinite;
 }
 
 .userPhoto {
@@ -15,10 +24,6 @@ svg {
   left: 50%;
   border-radius: 50%;
   background-size: contain;
-}
-
-.moveDown {
-  margin-top: 150px;
 }
 
 @media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {

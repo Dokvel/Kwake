@@ -22,10 +22,6 @@ function UserProfileCard(props) {
   let user = props.user;
   let userType = getPersonalityType(user);
 
-  let classes = cn({
-    [styles.margin]: _.isEmpty(props.feedbackRates.talents)
-  });
-
   let teamColorRange, troubleshootingColorRange;
   if (props.summary && props.summary.statements) {
     teamColorRange = getColorRange(props.summary.statements.team);
@@ -49,7 +45,6 @@ function UserProfileCard(props) {
             talentRates={props.feedbackRates.talents}
             summary={props.summary && props.summary.talents}/>
         </div>
-        <div className={classes}></div>
         <div className={styles.card_user}>
           {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
         </div>
@@ -60,7 +55,8 @@ function UserProfileCard(props) {
         <div className={styles.card_btnAsk}>
           <Button
             rightIcon="bi_interface-arrow-right"
-            color={!props.summary && Button.COLOR_BLUE}
+            // {!props.summary && Button.COLOR_BLUE} throws error
+            color={!props.summary ? Button.COLOR_BLUE : undefined}
             onClick={props.showRequestModal}>
             Ask for a review
           </Button>
