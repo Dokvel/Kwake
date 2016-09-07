@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-
+import dateFormat from 'dateformat';
 // Import Style
 import styles from './UserDetailPage.scss';
 
@@ -11,6 +11,8 @@ import { fetchUsers, fetchTokens } from '../../AdminActions';
 
 // Import Selectors
 import { getUser, getUserTokens, getUsers } from '../../AdminReducer';
+
+const dateMask = 'mm/dd/yyyy, HH:MM:ss';
 
 export function UserDetailPage(props) {
   return (
@@ -41,10 +43,10 @@ export function UserDetailPage(props) {
                   <td>{token.token}</td>
                   <td>{token.responderEmail}</td>
                   <td>{!token.responder ? 'New' : 'Exist'}</td>
-                  <td>{responder ? responder.created_at : 'Not Exist'}</td>
-                  <td>{token.created_at}</td>
-                  <td>{token.openedAt}</td>
-                  <td>{token.dateUsed}</td>
+                  <td>{responder ? dateFormat(responder.created_at, dateMask, true) : 'Not Exist'}</td>
+                  <td>{token.created_at && dateFormat(token.created_at, dateMask, true)}</td>
+                  <td>{token.openedAt && dateFormat(token.openedAt, dateMask, true)}</td>
+                  <td>{token.dateUsed && dateFormat(token.dateUsed, dateMask, true)}</td>
                   <td>{token.dateUsed ? 'Evaluate pass' : 'Evaluate not pass'}</td>
                 </tr>
               );

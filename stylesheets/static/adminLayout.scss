@@ -1,0 +1,14 @@
+@import '../modules/config';
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #0a0a0a !important;
+  font-family: $baseFontFamily;
+  font-size: $baseFontSize-M;
+  background-color: whitesmoke !important;
+}
+
+html, body, .main {
+  height: 100%;
+}
