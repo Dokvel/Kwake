@@ -117,12 +117,12 @@
 
 @media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
   .encounters-container {
-    width: 150px;
+    width: auto;
   }
 }
 
 @media (min-width: $mobileMaxWidth) and (max-width: $desktopMidWidth) {
   .encounters-container {
-    width: 250px;
+    width: auto;
   }
 }
