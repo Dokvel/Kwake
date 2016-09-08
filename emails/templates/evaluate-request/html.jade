@@ -4,8 +4,8 @@ block content
   p.text-center.question
     i #{givenName}
     | &nbsp;
-    | wants to know how well #{pronoun} works with her unique type and talent
-  p.text-center.description #{givenName} type is an #{profileType.name} which means #{profileType.description}
+    | wants to know how well #{fs.getPronoun(gender)} works with #{fs.getPronoun(gender, 'third', 'possessive')} unique type and talent
+  p.text-center.description #{givenName} type is #{fs.indefiniteArticle(profileType.name)} #{profileType.name} which means #{profileType.description}
   p.text-center.description
     b How correct is this?
   center(data-parsed="")

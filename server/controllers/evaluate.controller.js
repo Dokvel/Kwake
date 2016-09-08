@@ -130,7 +130,6 @@ export function createEvaluateRequest(req, res) {
         if (err) {
           res.status(500).send(err);
         } else {
-          let pronoun = getPronoun(req.user.gender);
           let tokens = savedTokens.ops.map(token => {
             return {
               email: token.responderEmail,
@@ -139,7 +138,7 @@ export function createEvaluateRequest(req, res) {
               familyName: req.user.familyName,
               image: req.user.image,
               profileType: getPersonalityType(req.user),
-              pronoun
+              gender: req.user.gender
             }
           });
           sendEvaluateRequest(tokens);
