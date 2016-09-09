@@ -94,12 +94,8 @@ class RequestReviewModal extends Component {
     return (
       <Modal handleClose={this.props.handleClose}>
         <div className={styles.title}>REQUEST A REVIEW</div>
-        <div className={styles['search']}>
-          <div className={styles['search-wrapper']}>
-            <input type="text" value={this.state.search} placeholder="Search last encounters..."
-                   className={cn(styles['field'], styles['search-field'])}
-                   onChange={(e)=>this.setState({ search: e.target.value })}/>
-          </div>
+        <div className={styles['list-title']}>
+          Your recent encounters <span className={styles['select-all']} onClick={this.selectAll}>select all</span>
         </div>
         <div className={styles['encounters-container']}>
           <div className={styles.encounters}>
