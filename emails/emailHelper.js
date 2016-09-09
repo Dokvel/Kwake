@@ -4,7 +4,7 @@ import { htmlToText } from 'nodemailer-html-to-text';
 import wellknown from 'nodemailer-wellknown';
 import async from 'async';
 import path from 'path';
-
+import { PRODUCTION_DOMAIN } from './index';
 
 var transport = nodemailer.createTransport({ //TODO: Need make config related to NODE_ENV
   service: 'Gmail',
@@ -21,7 +21,7 @@ export function emailsSender(templatePath, data = [], senderEmail) {
   let vendorDir = path.resolve(__dirname, '..', 'vendor');
 
   async.mapLimit(data, 10, (item, next) => {
-    template.render(item, (err, results) => {
+    template.render({ ...item, host: PRODUCTION_DOMAIN}, (err, results) => {
       if (err) {
         return next(err);
       } else {
