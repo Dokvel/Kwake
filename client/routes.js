@@ -27,8 +27,6 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Admin/pages/AdminLoginPage/AdminLoginPage');
   require('./modules/Admin/pages/UsersListPage/UsersListPage');
   require('./modules/Admin/pages/UserDetailPage/UserDetailPage');
-
-  require('./modules/Sandbox/Sandbox');
 }
 
 // react-router setup with code-splitting
@@ -36,15 +34,6 @@ if (process.env.NODE_ENV !== 'production') {
 export default (
 
   <Route path="/" component={Base}>
-    <Route
-      path="/sandbox"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Sandbox/Sandbox').default);
-        });
-      }}
-    />
-
     <Route
       path="/thanks"
       getComponent={(nextState, cb) => {
