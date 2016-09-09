@@ -36,13 +36,12 @@ export class DiscForm extends Component {
     let formLength = Object.keys(form).length;
 
     if (formLength >= discKeys.length - 1) {
-      if (formLength === discKeys.length && (lowerValues.length === formLength || higherValues.length === formLength)) {
-        attentionItem = {};
-      }
-      if (lowerValues.length >= formLength - 1) {
+      attentionItem = {};
+
+      if (lowerValues.length >= discKeys.length - 1) {
         attentionItem = { key: _.xor(lowerValues, discKeys)[0], value: 0 };
       }
-      if (higherValues.length >= formLength - 1) {
+      if (higherValues.length >= discKeys.length - 1) {
         attentionItem = { key: _.xor(higherValues, discKeys)[0], value: 1 };
       }
     }
@@ -90,7 +89,7 @@ export class DiscForm extends Component {
         </div>
         <div className={styles.actions}>
           <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}
-                  rightIcon="bi_interface-arrow-right">Continue</Button>
+                  rightIcon="icon-37-arrow">Continue</Button>
         </div>
       </div>
     );
