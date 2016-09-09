@@ -16,7 +16,8 @@
 
 @media (min-width: $desktopMinWidth) {
   .container {
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
+    max-width: 800px;
     .headers {
       color: $grey;
       font-size: 18px;

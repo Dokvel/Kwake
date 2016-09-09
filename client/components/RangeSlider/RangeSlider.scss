@@ -1,0 +1,65 @@
+@import "../../../stylesheets/modules/config";
+
+// background-color: #FFAC52;
+// background-color: #FF7555;
+// background-color: #FF3C57;
+
+$handleAnimation: all 1s ease;
+$handleRadius: 50px;
+$max: 100%;
+$mid: 50%;
+
+.container {
+  .progress {
+    height: 10px;
+    width: 100%;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    filter: url('#goo');
+
+    background: linear-gradient(90deg, #FFAC52 0%, #FF3C57 100%);
+    border-radius: 5px;
+
+    .handle {
+      height: $handleRadius;
+      position: absolute;
+      border-radius: 100%;
+      opacity: .5;
+
+      animation: pulsing 2s infinite alternate ease-in-out;
+    }
+
+    .handle-left {
+      transition: $handleAnimation;
+      width: $handleRadius * 1.5;
+      left: 0;
+      background-color: #FFAC52;
+    }
+
+    .handle-center {
+      transition: $handleAnimation;
+      width: $handleRadius * 2;
+      left: calc(#{$mid} - #{$handleRadius});
+      background-color: #FF7555;
+    }
+
+    .handle-right {
+      transition: $handleAnimation;
+      width: $handleRadius * 1.5;
+      left: calc(#{$max} - #{$handleRadius * 1.5});
+      background-color: #FF3C57;
+    }
+  }
+
+  svg {
+    display: none;
+  }
+}
+
+@keyframes pulsing {
+  to {transform: scale(1.05);}
+}

@@ -187,7 +187,7 @@ export default class RadarChart extends Component {
      });
 
     return (
-      <div>
+      <div className={styles.radarChartContainer}>
         <div id={chartID} className="radarChart">
         </div>
         {
