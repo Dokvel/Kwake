@@ -35,29 +35,17 @@ export class DiscForm extends Component {
     let higherValues = discKeys.filter(item => form[item] === 1);
     let formLength = Object.keys(form).length;
 
-    if (discKeys.length === formLength && (lowerValues.length === formLength - 1 || higherValues.length === formLength - 1)) {
-      if (lowerValues.length === formLength - 1) {
-        attentionItem.key = _.xor(lowerValues, discKeys)[0];
-        attentionItem.value = 0;
+    if (formLength >= discKeys.length - 1) {
+      if (formLength === discKeys.length && (lowerValues.length === formLength || higherValues.length === formLength)) {
+        attentionItem = {};
       }
-      if (higherValues.length === formLength - 1) {
-        attentionItem.key = _.xor(higherValues, discKeys)[0];
-        attentionItem.value = 1;
+      if (lowerValues.length >= formLength - 1) {
+        attentionItem = { key: _.xor(lowerValues, discKeys)[0], value: 0 };
       }
-    } else if (discKeys.length === formLength) {
-      attentionItem = {}
-    } else if (discKeys.length - 1 === formLength && (lowerValues.length === formLength || higherValues.length === formLength)) {
-      if (lowerValues.length === formLength) {
-        attentionItem.key = _.xor(lowerValues, discKeys)[0];
-        attentionItem.value = 0;
+      if (higherValues.length >= formLength - 1) {
+        attentionItem = { key: _.xor(higherValues, discKeys)[0], value: 1 };
       }
-      if (higherValues.length === formLength) {
-        attentionItem.key = _.xor(higherValues, discKeys)[0];
-        attentionItem.value = 1;
-      }
-      alert(attentionItem.key);
     }
-
     this.setState({ ...this.state, form, attentionItem });
   }
 
@@ -109,6 +97,4 @@ export class DiscForm extends Component {
   }
 }
 
-export
-default
-DiscForm;
+export default DiscForm;
