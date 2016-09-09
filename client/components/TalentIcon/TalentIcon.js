@@ -7,14 +7,14 @@ import styles from './TalentIcon.scss';
 export default class TalentIcon extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: undefined };
+    this.state = { waveAnimation: undefined };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selected) {
-      this.setState({ selected: 'selected' });
+      this.setState({ waveAnimation: 'iconSelected' });
     } else if (this.props.selected && !nextProps.selected) {
-      this.setState({ selected: 'unselected' });
+      this.setState({ waveAnimation: 'iconDeselected' });
     }
   }
 
@@ -29,10 +29,10 @@ export default class TalentIcon extends Component {
     });
 
     let waveT = cn ({
-      [styles.wave]: this.state.selected === 'selected'
+      [styles.wave]: this.state.waveAnimation === 'iconSelected'
     });
     let waveF = cn ({
-      [styles.wave]: this.state.selected === 'unselected'
+      [styles.wave]: this.state.waveAnimation === 'iconDeselected'
     });
 
     return (
