@@ -1,40 +1,178 @@
 @import "../../../stylesheets/modules/config";
 
-.icon {
-  font-size: 30px;
+$max: 100%;
+$mid: 50%;
+$radius: 60px;
+
+svg#svgFilters {
+  display:none;
 }
 
-.circled {
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  font-size: 24px;
-  color: $grey;
-  line-height: 60px;
-  text-align: center;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  cursor: default;
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .wave {
+    position: absolute;
+    z-index: -1;
+    background: white;
+    height: $radius / 2;
+    width: $radius / 2;
+    border-radius: 50%;
+    animation: wave .5s ease-out forwards;
+  }
+
+  .icon {
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+    border-radius: 100%;
+  }
+
+  .circled {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    font-size: 24px;
+    color: $grey;
+    line-height: 60px;
+    text-align: center;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: default;
+  }
+
+  .icon--enabled {
+    cursor: pointer;
+  }
+
+  .jumpingContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: jumping 5s infinite alternate ease-in-out;
+
+    .icon {
+      z-index: 1;
+      height: 100px;
+      width: 100px;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background: radial-gradient(ellipse farthest-side at center, rgba(255,60,87,.2) 0%, rgba(255,255,255,0) 100%);
+    }
+
+    .liquidContainer {
+      height: 62px;
+      width: 62px;
+
+      position: relative;
+
+      filter: url('#filter');
+
+      animation: rotation 10s infinite linear;
+
+      .mainBall {
+        height: $radius;
+        width: $radius;
+
+        position: absolute;
+        top: calc(#{$mid} - #{$radius / 2});
+        left: calc(#{$mid} - #{$radius / 2});
+
+
+        border-radius: 100%;
+        background: linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
+        opacity: .66;
+      }
+
+      .ball {
+        z-index: -1;
+        width: $radius / 2;
+        height: $radius / 2;
+
+        position: absolute;
+
+        &:before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          content: '';
+
+          border-radius: 100%;
+          background: linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
+          opacity: .25;
+        }
+
+        /* minX: .1, minY: .1 */
+        transform: translate(#{$radius * .1}, #{$radius * .1});
+        animation: translateBall1 (random(20) / 10) + 2 + s infinite alternate ease-in-out;
+        animation-delay: (random(20) / 10) + s;
+
+        &:nth-child(2) {
+          /* minX: .45, minY: .1 */
+          transform: translate(#{$radius * .45}, #{$radius * .1});
+          animation: translateBall2 (random(20) / 10) + 2 + s infinite alternate ease-in-out;
+          animation-delay: (random(20) / 10) + s;
+        }
+
+        &:nth-child(3) {
+          /* minX: .45, minY: .45 */
+          transform: translate(#{$radius * .45}, #{$radius * .45});
+          animation: translateBall3 (random(20) / 10) + 2 + s infinite alternate ease-in-out;
+          animation-delay: (random(20) / 10) + s;
+        }
+
+        &:nth-child(4) {
+          /* minX: .1, minY: .45 */
+          transform: translate(#{$radius * .1}, #{$radius * .45});
+          animation: translateBall4 (random(20) / 10) + 2 + s infinite alternate ease-in-out;
+          animation-delay: (random(20) / 10) + s;
+        }
+      }
+    }
+  }
 }
 
-.icon--enabled {
-  cursor: pointer;
+
+@keyframes rotation {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
 }
 
-.icon--selected {
-  background: #ffac52;
-  background: -moz-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #ffac52), color-stop(100%, #ff3c57));
-  background: -webkit-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-  background: -o-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-  background: -ms-linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-  background: linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffac52', endColorstr='#ff3c57', GradientType=1);
-  width: 62px;
-  height: 62px;
-  border-radius: 31px;
-  border: none;
+@keyframes jumping {
+  to {transform: translateY(5px);}
 }
 
+@keyframes wave {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes translateBall1 {
+  to {transform: translate(#{$radius * -((random(10) / 100))}, #{$radius * -((random(10) / 100))});}
+}
+@keyframes translateBall2 {
+  to {transform: translate(#{$radius * ((random(5) / 100) + 0.65)}, #{$radius * -((random(10) / 100))});}
+}
+@keyframes translateBall3 {
+  to {transform: translate(#{$radius * ((random(5) / 100) + 0.65)}, #{$radius * ((random(5) / 100) + 0.65)});}
+}
+@keyframes translateBall4 {
+  to {transform: translate(#{$radius * -((random(10) / 100))}, #{$radius * ((random(5) / 100) + 0.65)});}
+}
