@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 // Base stylesheet
 require('../stylesheets/static/layout.scss');
 require('../stylesheets/static/tooltips.scss');
-require('../vendor/fonts/Budicon/css/budicon.css');
+require('../vendor/fonts/iconfont/styles.css');
 
 export class Base extends Component {
   constructor(props) {

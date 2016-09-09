@@ -19,6 +19,7 @@ export class DiscItem extends Component {
             <div
               className={cn(styles['manage-button-minus'], { [styles['manage-button-minus--selected']]: this.props.value === 0 })}
               onClick={ () => this.props.onChangeValue(0) }>
+              <i className="icon-44-vote-left"/>
             </div>
           </Tooltip>
           <div className={styles.sliderContainer}>
@@ -28,6 +29,7 @@ export class DiscItem extends Component {
             <div
               className={cn(styles['manage-button-plus'], { [styles['manage-button-plus--selected']]: this.props.value === 1 })}
               onClick={ () => this.props.onChangeValue(1) }>
+              <i className="icon-43-vote-right"/>
             </div>
           </Tooltip>
         </div>

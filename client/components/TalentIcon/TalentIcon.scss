@@ -12,7 +12,6 @@ svg#svgFilters {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
 
   .wave {
     position: absolute;
@@ -28,6 +27,12 @@ svg#svgFilters {
     width: 30px;
     font-size: 30px;
     border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      padding-top: 3px;
+    }
   }
 
   .circled {
@@ -62,8 +67,12 @@ svg#svgFilters {
 
     .icon {
       z-index: 1;
-      height: 100px;
-      width: 100px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
       position: absolute;
       display: flex;
       align-items: center;

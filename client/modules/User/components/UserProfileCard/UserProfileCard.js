@@ -32,7 +32,7 @@ function UserProfileCard(props) {
     <div>
       { props.isCurrentUser && !props.summary &&
       <div className={styles.limitInfo}>
-        <span className={styles.icon}><i className="fa fa-info-circle" aria-hidden="true"/></span>
+        <span className={styles.icon}><i className="icon-36-info" aria-hidden="true"/></span>
         Get <b>{user.scoreLimit - props.feedbackRates.talents.length} more</b> reviews to unlock your scores!
       </div>
       }
@@ -54,7 +54,7 @@ function UserProfileCard(props) {
         {props.isCurrentUser &&
         <div className={styles.card_btnAsk}>
           <Button
-            rightIcon="bi_interface-arrow-right"
+            rightIcon="icon-37-arrow"
             // {!props.summary && Button.COLOR_BLUE} throws error
             color={!props.summary ? Button.COLOR_BLUE : undefined}
             onClick={props.showRequestModal}>
@@ -69,7 +69,7 @@ function UserProfileCard(props) {
                 <span className={styles.card_desc_score_summary}>
                   {props.summary.statements.personality.toFixed(1)}
                 </span> :
-                <i className="fa fa-lock"/>
+                <i className="icon-35-lock"/>
             }
           </div>
           <div className={styles.card_desc_text}>
@@ -80,7 +80,7 @@ function UserProfileCard(props) {
           { user.talents.map((talent) => {
             return (
               <li key={talent}>
-                <span className={styles.talent}><i className="fa fa-star-o"/></span>
+                <span className={styles.talent}><i className={talentsObj[talent].icon}/></span>
                 {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
                 <span className={styles.score}>
                 { props.summary ?
@@ -110,7 +110,7 @@ function UserProfileCard(props) {
                     strokeDistance={2}
                     progressStrokeWidth={5}/>
                 </div> :
-                <div className={styles.card_info_score_icon}><i className="fa fa-lock"/></div>
+                <div className={styles.card_info_score_icon}><i className="icon-35-lock"/></div>
             }
           </div>
           <div className={styles.card_info_desc}>
@@ -136,7 +136,7 @@ function UserProfileCard(props) {
                   strokeDistance={2}
                   progressStrokeWidth={5}/>
               </div> :
-              <div className={styles.card_info_score_icon}><i className="fa fa-lock"/></div>
+              <div className={styles.card_info_score_icon}><i className="icon-35-lock"/></div>
             }
           </div>
           <div className={styles.card_info_desc}>
