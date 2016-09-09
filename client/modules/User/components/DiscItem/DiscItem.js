@@ -22,8 +22,6 @@ export class DiscItem extends Component {
           </div>
           <div className={styles.sliderContainer}>
             <RangeSlider value={this.props.value}/>
-            {this.props.value}
-            {this.props.value !== undefined && <div onClick={() => this.props.onChangeValue(undefined)}>(reset)</div>}
           </div>
           <div
             className={cn(styles['manage-button-plus'], { [styles['manage-button-plus--selected']]: this.props.value === 1 })}
