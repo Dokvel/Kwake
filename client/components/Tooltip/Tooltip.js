@@ -1,4 +1,4 @@
-import React, { Component }from 'react';
+import React, { Component, PropTypes }from 'react';
 import { isTouchDevice } from '../../util/generalHelpers';
 import cn from 'classnames';
 import ReactTooltip from 'react-tooltip';
@@ -40,8 +40,24 @@ class Tooltip extends Component {
   };
 
   render() {
-    return isTouchDevice() ? this.renderTouchable(this.props.children) : this.renderUntouchable(this.props.children);
+    if (!this.props.disabled) {
+      if (isTouchDevice()) {
+        return this.renderTouchable(this.props.children);
+      } else {
+        return this.renderUntouchable(this.props.children);
+      }
+    } else {
+      return (<div>{this.props.children}</div>)
+    }
   }
 }
+
+Tooltip.propTypes = {
+  disabled: PropTypes.bool
+};
+
+Tooltip.defaultProps = {
+  disabled: false
+};
 
 export default Tooltip;
