@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactSlider from 'react-slider';
 import cn from 'classnames';
 
 import styles from './RangeSlider.scss';

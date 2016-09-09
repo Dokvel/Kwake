@@ -21,6 +21,7 @@ export default class TalentIcon extends Component {
   render() {
     let iconWrapper = cn(styles.icon, {
       [styles.circled]: this.props.circled && !this.props.selected,
+      [styles['circled--pulsing']]: this.state.waveAnimation === 'iconDeselected',
       [styles['icon--enabled']]: !!this.props.onClick
     });
 
