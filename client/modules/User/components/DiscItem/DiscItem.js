@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import cn from 'classnames';
 
+import RangeSlider from '../../../../components/RangeSlider/RangeSlider';
+
 import styles from './DiscItem.scss';
 
 export class DiscItem extends Component {
@@ -18,7 +20,9 @@ export class DiscItem extends Component {
             className={cn(styles['manage-button-minus'], { [styles['manage-button-minus--selected']]: this.props.value === 0 })}
             onClick={ () => this.props.onChangeValue(0) }>
           </div>
-          <div>{this.props.value}
+          <div className={styles.sliderContainer}>
+            <RangeSlider value={this.props.value}/>
+            {this.props.value}
             {this.props.value !== undefined && <div onClick={() => this.props.onChangeValue(undefined)}>(reset)</div>}
           </div>
           <div
