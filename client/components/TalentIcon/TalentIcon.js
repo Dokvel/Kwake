@@ -36,7 +36,7 @@ export default class TalentIcon extends Component {
     });
 
     return (
-      <Tooltip id={this.props.talentKey} tip={this.props.tip}>
+      <Tooltip id={this.props.talentKey} tip={this.props.tip} title={this.props.talentName}>
         <div className={styles.wrapper}>
           <div className={jumpingContainer}>
             <div className={iconWrapper} onClick={this.props.onClick}>
