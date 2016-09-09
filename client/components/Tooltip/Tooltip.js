@@ -1,24 +1,32 @@
 import React, { Component }from 'react';
-import { findDOMNode } from 'react-dom';
 import { isTouchDevice } from '../../util/generalHelpers';
-import Tappable from 'react-tappable';
-
+import cn from 'classnames';
 import ReactTooltip from 'react-tooltip';
 
+import styles from './Tooltip.scss';
+
 class Tooltip extends Component {
-  onLongPress = (event) => {
-    ReactTooltip.hide();
-    ReactTooltip.rebuild();
-    ReactTooltip.show(findDOMNode(this.refs[this.props.id]));
+  constructor(props) {
+    super(props);
+    this.state = { showMobile: false };
   };
 
-  renderTouchable = (children)=> {
+  showMobileTooltip = (event) => {
+    this.setState({ showMobile: true });
+    setTimeout(() => {
+      this.setState({ showMobile: false });
+    }, 2000);
+  };
+
+  renderTouchable = (children) => {
     return (
-      <Tappable onPress={this.onLongPress}>
+      <div onClick={this.showMobileTooltip}>
         {children}
-        <snap ref={this.props.id} data-tip={this.props.tip}/>
-        <ReactTooltip class='kwake-tooltip' effect='solid' globalEventOff="click" eventOff="click"/>
-      </Tappable>
+        <div className={cn(styles.overlay, { [styles['overlay--visible']]: this.state.showMobile })}>
+          <span className={styles['mobile-title']}>{this.props.title}</span>
+          <span className={styles['mobile-message']}>{this.props.tip}</span>
+        </div>
+      </div>
     )
   };
 

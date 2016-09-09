@@ -11,7 +11,7 @@ function TalentIcon(props) {
     [styles['icon--enabled']]: !!props.onClick
   });
   return (
-    <Tooltip id={props.talentKey} tip={props.tip}>
+    <Tooltip id={props.talentKey} tip={props.tip} title={props.talentName}>
       <div className={classes} onClick={props.onClick}>
         <i className={props.name || "bi_com-group-bubble-a"} aria-hidden="true"/>
       </div>
