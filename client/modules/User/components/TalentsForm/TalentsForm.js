@@ -51,7 +51,6 @@ export class TalentsForm extends Component {
         <div className={styles.title}>
           <span>Select <b>{AMOUNT_SELECT_TALENTS - this.state.selectedTalents.length}</b> talents that characterize you:</span>
         </div>
-        {/*<pre>{JSON.stringify(this.state)}</pre>*/}
         <div className={styles.container}>
           {
             talents.map(talent => (
@@ -67,7 +66,7 @@ export class TalentsForm extends Component {
         <div className={styles.actions}>
           <div className={styles.btnFinish}>
             <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}
-                  rightIcon="bi_interface-arrow-right">Finish</Button>
+                  rightIcon="icon-37-arrow">Finish</Button>
           </div>
         </div>
       </div>

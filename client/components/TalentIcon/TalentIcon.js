@@ -41,7 +41,7 @@ export default class TalentIcon extends Component {
         <div className={styles.wrapper}>
           <div className={jumpingContainer}>
             <div className={iconWrapper} onClick={this.props.onClick}>
-              <i className={this.props.name || "bi_com-group-bubble-a"} aria-hidden="true"/>
+              <i className={this.props.name} aria-hidden="true"/>
             </div>
             <div className={styles.liquidContainer}>
               <div className={styles.mainBall}></div>

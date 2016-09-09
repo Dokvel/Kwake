@@ -122,7 +122,7 @@ class RequestReviewModal extends Component {
                    onChange={(e)=>this.setState({ customEmails: e.target.value })}/>
           </div>
           <div className={styles['button-wrapper']}>
-            <Button onClick={this.onSubmit} rightIcon="bi_interface-arrow-right" disabled={!this.isValid()}>
+            <Button onClick={this.onSubmit} rightIcon="icon-37-arrow" disabled={!this.isValid()}>
               <span>SEND REQUEST TO <b>{this.state.selected.length + this.getCustomEmails().length}</b> PEOPLE</span>
             </Button></div>
         </div>

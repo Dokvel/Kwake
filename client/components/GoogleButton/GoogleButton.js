@@ -30,7 +30,7 @@ export default class GoogleButton extends Component {
       <div>
         <Button color={Button.COLOR_RED}
                 onClick={this.onGoogleSignIn.bind(this)}
-                rightIcon="bi_interface-arrow-right">
+                rightIcon="icon-37-arrow">
           Log in with Google
         </Button>
       </div>

@@ -63,9 +63,9 @@ export class EvaluateTalentsForm extends Component {
           }</div>
         <div className={styles.actions}>
           <Button disabled={!this.isValid()} onClick={this.onComplete.bind(this)}
-                  rightIcon="bi_interface-arrow-right">next</Button>
+                  rightIcon="icon-37-arrow">next</Button>
           <div className={styles.anonymous}>
-            <i className="fa fa-lock" aria-hidden="true"/>
+            <i className="icon-35-lock" aria-hidden="true"/>
             This review will be fully anonymous
           </div>
         </div>

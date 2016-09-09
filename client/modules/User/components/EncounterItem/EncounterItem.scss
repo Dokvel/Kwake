@@ -28,11 +28,14 @@
     .tick {
       border-radius: 50%;
       border: 1px solid $grey;
-      display: inline-block;
-      font-size: 12px;
+      font-size: 14px;
       color: $grey;
       background-color: transparent;
       opacity: 0.7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
     }
   }
 }

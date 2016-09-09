@@ -18,7 +18,7 @@ function EncounterItem(props) {
         <span className={styles.email}>{ props.email}</span>
       </div>
       <div className={styles.marker}>
-        <i className={cn("bi_interface-tick", styles.tick)}/>
+        <i className={cn("icon-41-checkmark", styles.tick)}/>
       </div>
     </div>
   );

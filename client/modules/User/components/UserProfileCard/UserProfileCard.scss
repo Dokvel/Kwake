@@ -127,6 +127,10 @@ $scoreSize: 74px;
           margin-right: 10px;
 
           font-size: 18px;
+          [class^="icon-"],
+          [class*=" icon-"] {
+            font-size: 14px;
+          }
         }
 
         & .score {
