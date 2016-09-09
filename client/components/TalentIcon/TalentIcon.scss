@@ -16,7 +16,6 @@ svg#svgFilters {
 
   .wave {
     position: absolute;
-    z-index: -1;
     background: white;
     height: $radius / 2;
     width: $radius / 2;
@@ -44,6 +43,10 @@ svg#svgFilters {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.3);
     cursor: default;
+  }
+
+  .circled--pulsing {
+    animation: pulsing .4s alternate ease-out;
   }
 
   .icon--enabled {
@@ -91,6 +94,9 @@ svg#svgFilters {
         border-radius: 100%;
         background: linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
         opacity: .66;
+
+        animation: pulsing .4s alternate ease-out;
+        animation-delay: .4s;
       }
 
       .ball {
@@ -157,10 +163,21 @@ svg#svgFilters {
   0% {
     transform: scale(0);
     opacity: 1;
+    z-index: 1;
   }
   100% {
     transform: scale(3);
     opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes pulsing {
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
