@@ -1,4 +1,12 @@
-import googleCreds from '../data/google_creds.json';
+function getGoogleCreds() {
+  if (process.env.NODE_ENV === 'production') {
+    return require('../data/google_creds_production.json');
+  } else {
+    return require('../data/google_creds.json');
+  }
+};
+
+const googleCreds = getGoogleCreds();
 
 const config = {
   mongoURL: process.env.MONGO_URL || 'mongodb://localhost:27017/kwake',

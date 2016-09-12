@@ -1,10 +1,10 @@
 {
-  "client_id": "452279282281-5so873vs9uunojpmo12badkqb10lfr7j.apps.googleusercontent.com",
-  "project_id": "silver-optics-140414",
+  "client_id": "854836621522-5snqgtke7cak6jomvgs36gfmepc8i5qv.apps.googleusercontent.com",
+  "project_id": "enqounterapp",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://accounts.google.com/o/oauth2/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_secret": "C4A2TGvsZEXBX6leOjFzAf7H",
+  "client_secret": "_oVBEK29sxdYDg6TR3Xyhm7k",
   "scopes": [
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email",
