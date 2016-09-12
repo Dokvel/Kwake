@@ -15,10 +15,12 @@ class RangeSlider extends Component {
       [styles['light-center']]: this.props.value === undefined,
       [styles['light-right']]: this.props.value === 1,
     });
+    let progressStyles = {
+      filter: "url('#goo')"
+    }
     return (
       <div className={styles.container}>
-      <div className={styles.light}></div>
-        <div className={styles.progress}>
+        <div className={styles.progress} style={progressStyles}>
           <div className={handleClasses}></div>
         </div>
 

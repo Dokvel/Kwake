@@ -36,6 +36,10 @@ export default class TalentIcon extends Component {
       [styles.wave]: this.state.waveAnimation === 'iconDeselected'
     });
 
+    let liquidContainerStyles = {
+      filter: "url('#filter')"
+    }
+
     return (
       <Tooltip id={this.props.talentKey} tip={this.props.tip} title={this.props.talentName}>
         <div className={styles.wrapper}>
@@ -43,7 +47,7 @@ export default class TalentIcon extends Component {
             <div className={iconWrapper} onClick={this.props.onClick}>
               <i className={this.props.name} aria-hidden="true"/>
             </div>
-            <div className={styles.liquidContainer}>
+            <div className={styles.liquidContainer} style={liquidContainerStyles}>
               <div className={styles.mainBall}></div>
               <div className={styles.ball}></div>
               <div className={styles.ball}></div>
@@ -53,17 +57,16 @@ export default class TalentIcon extends Component {
           </div>
           <div className={waveT}></div>
           <div className={waveF}></div>
+          <svg id={styles.svgFilters}>
+            <defs>
+              <filter id="filter">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -10" result="filter" />
+                <feComposite in="SourceGraphic" in2="filter" operator="atop" />
+              </filter>
+            </defs>
+          </svg>
         </div>
-
-        <svg id={styles.svgFilters}>
-          <defs>
-            <filter id="filter">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -10" result="filter" />
-              <feComposite in="SourceGraphic" in2="filter" operator="atop" />
-            </filter>
-          </defs>
-        </svg>
       </Tooltip>
     )
   }

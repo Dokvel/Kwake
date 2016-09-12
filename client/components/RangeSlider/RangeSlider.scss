@@ -1,27 +1,27 @@
 @import "../../../stylesheets/modules/config";
 
+$progressHeight: 10px;
 $handleAnimation: all 1s ease;
 $max: 100%;
 $mid: 50%;
 
 .container {
+  position: relative;
+
   .progress {
-    height: 10px;
+    height: $progressHeight;
     width: 100%;
 
     position: relative;
-
-    display: flex;
-    align-items: center;
-
-    filter: url('#goo');
 
     background: linear-gradient(90deg, #FFAC52 0%, #FF3C57 100%);
     border-radius: 5px;
   }
 
   svg {
-    display: none;
+    height: 0px;
+    width: 0px;
+    position: absolute;
   }
 }
 
@@ -37,6 +37,7 @@ $mid: 50%;
       .handle {
         height: $handleRadius;
         position: absolute;
+        top: -($handleRadius/2)+$progressHeight/2;
         border-radius: 100%;
         opacity: .5;
 
@@ -75,6 +76,7 @@ $mid: 50%;
       .handle {
         height: $handleRadius;
         position: absolute;
+        top: -($handleRadius/2)+$progressHeight/2;
         border-radius: 100%;
         opacity: .5;
 
