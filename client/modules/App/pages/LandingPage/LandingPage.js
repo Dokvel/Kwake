@@ -74,13 +74,13 @@ export class LandingPage extends Component {
     let summary = {1:1,2:1,3:1,4:1,5:1};
     return (
       <div className={styles.container}>
-        <div className={styles.mobileHeader}>kwake</div>
+        <div className={styles['mobile-header']}>kwake</div>
         <div className={styles.content}>
-          <div className={styles.columnLeft}>
-            <div className={styles.radarChart}>
-              <div className={styles.mainStar}>
+          <div className={styles['column-left']}>
+            <div className={styles['radar-chart']}>
+              <div className={styles['main-star']}>
                 <Loader />
-                <div className={styles.userPhoto}></div>
+                <div className={styles['user-photo']}></div>
               </div>
               <RadarChart
                 image=''
@@ -90,7 +90,7 @@ export class LandingPage extends Component {
                 summary={summary} />
             </div>
           </div>
-          <div className={styles.columnRight}>
+          <div className={styles['column-right']}>
             <div className={styles.header}>kwake</div>
             <div className={styles.jumbotron}>
               <MediaQuery query='(max-width: 1199px)'>
