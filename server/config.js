@@ -1,10 +1,12 @@
+import fbconfig from '../data/facebook.json';
+
 function getGoogleCreds() {
   if (process.env.NODE_ENV === 'production') {
     return require('../data/google_creds_production.json');
   } else {
     return require('../data/google_creds.json');
   }
-};
+}
 
 const googleCreds = getGoogleCreds();
 
@@ -18,7 +20,8 @@ const config = {
     username: process.env.ADMIN_USERNAME || 'admin',
     password: process.env.ADMIN_PASSWORD || 'secretSecretPassword'
   },
-  sessionSecret: process.env.SESSION_SECRET || 'd41d8cd98f00b204e9800998ecf8427e'
+  sessionSecret: process.env.SESSION_SECRET || 'd41d8cd98f00b204e9800998ecf8427e',
+  FB_APP_ID: fbconfig[process.env.NODE_ENV || 'development'].appId
 };
 
 export default config;

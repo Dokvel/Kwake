@@ -17,6 +17,14 @@ import styles from './UserProfileCard.scss';
 // Import Static Data
 import talents from '../../../../../data/talents';
 
+function fbShare() {
+  FB.ui({
+    method: 'feed',
+    link: 'https://developers.facebook.com/docs/',
+    caption: 'An example caption',
+  }, function(response){});
+}
+
 function UserProfileCard(props) {
   let talentsObj = _.keyBy(talents, 'key');
   let user = props.user;
@@ -45,7 +53,7 @@ function UserProfileCard(props) {
             talentRates={props.feedbackRates.talents}
             summary={props.summary && props.summary.talents}/>
         </div>
-        <div className={styles.card_user}>
+        <div className={styles.card_user} onClick={fbShare.bind(this)}>
           {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
         </div>
         <div className={styles.card_type}>
