@@ -5,6 +5,7 @@ import MediaQuery from 'react-responsive';
 import _ from 'lodash';
 
 // Import Components
+import Loader from '../../../../components/Loader/Loader';
 import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
 import RadarChart from '../../../../components/RadarChart/RadarChart';
 
@@ -70,15 +71,19 @@ export class LandingPage extends Component {
       { 1: 3, 2: 4, 3: 5, 4: 4, 5: 3 },
       { 1: 4, 2: 3, 3: 4, 4: 3, 5: 4 }
     ];
-    let summary = generateAVG(keys, talentRates);
+    let summary = {1:1,2:1,3:1,4:1,5:1};
     return (
       <div className={styles.container}>
         <div className={styles.mobileHeader}>kwake</div>
         <div className={styles.content}>
           <div className={styles.columnLeft}>
             <div className={styles.radarChart}>
+              <div className={styles.mainStar}>
+                <Loader />
+                <div className={styles.userPhoto}></div>
+              </div>
               <RadarChart
-                image='https://s3.amazonaws.com/uifaces/faces/twitter/jonohunt/128.jpg'
+                image=''
                 limit={3} // just for unlocked scoreRadial propgress-border
                 talents='none' // if there are no titles for axes
                 talentRates={talentRates}

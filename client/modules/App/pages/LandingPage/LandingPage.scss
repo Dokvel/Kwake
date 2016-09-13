@@ -1,5 +1,27 @@
 @import "../../../../../stylesheets/modules/config";
 
+@keyframes userPhotoChanger {
+  0% {
+
+    background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
+  }
+  20% {
+    background-image: url('https://randomuser.me/api/portraits/men/17.jpg');
+  }
+  40% {
+    background-image: url('https://randomuser.me/api/portraits/women/44.jpg');
+  }
+  60% {
+    background-image: url('https://randomuser.me/api/portraits/men/51.jpg');
+  }
+  80% {
+    background-image: url('https://randomuser.me/api/portraits/women/94.jpg');
+  }
+  100% {
+    background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
+  }
+}
+
 .container {
   background-color: $landingBackgroundColor;
   background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
@@ -19,6 +41,26 @@
 
       .radarChart {
         position: relative;
+
+        .mainStar {
+          height: 100%;
+          width: 100%;
+          position: absolute;
+
+          .userPhoto {
+            width: 75px;
+            height: 75px;
+            margin-top: -37px;
+            margin-left: -37px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            background-size: contain;
+            background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
+            animation: userPhotoChanger 15s infinite 0.1s cubic-bezier(.25,.75,.25,.75);
+          }
+        }
       }
     }
 

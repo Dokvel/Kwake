@@ -1,0 +1,113 @@
+@import "../../../stylesheets/modules/config";
+
+$radius: 60px;
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes top {
+    0% { transform: rotate(-90deg) translate(2em); }
+  100% { transform: rotate(-90deg) translate(6em); }
+}
+
+@keyframes right-top {
+    0% { transform: rotate(-18deg) translate(2em); }
+  100% { transform: rotate(-18deg) translate(5.5em); }
+}
+
+@keyframes right-bot {
+    0% { transform: rotate(54deg) translate(2em); }
+  100% { transform: rotate(54deg) translate(5em); }
+}
+
+@keyframes left-bot {
+    0% { transform: rotate(126deg) translate(2em); }
+  100% { transform: rotate(126deg) translate(4.5em); }
+}
+@keyframes left-top {
+    0% { transform: rotate(198deg) translate(2em); }
+  100% { transform: rotate(198deg) translate(5em); }
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  svg {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+  }
+
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: url('#filter');
+
+    animation: spin 5s infinite linear;
+  }
+
+  .ball {
+    height: $radius;
+    width: $radius;
+    position: absolute;
+    top: calc(50% - #{$radius / 2});
+    left: calc(50% - #{$radius / 2});
+
+    &:before {
+      content: '';
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #FF7555;
+      border-radius: 100%;
+    }
+
+    &:nth-child(1) {
+      &:before {
+        height: $radius * 2;
+        width: $radius * 2;
+        left: -$radius / 2;
+        top: -$radius / 2;
+      }
+    }
+
+    &:nth-child(2) {
+      &:before {
+        animation: top 1.5s infinite alternate ease-in-out;
+      }
+    }
+
+    &:nth-child(3) {
+      &:before {
+        animation: right-top 1.5s infinite alternate ease-in-out;
+      }
+    }
+
+   &:nth-child(4) {
+      &:before {
+        animation: right-bot 1.5s infinite alternate ease-in-out;
+      }
+    }
+
+   &:nth-child(5) {
+      &:before {
+        animation: left-bot 1.5s infinite alternate ease-in-out;
+      }
+    }
+
+   &:nth-child(6) {
+      &:before {
+        animation: left-top 1.5s infinite 0.1s alternate ease-in-out;
+      }
+    }
+  }
+}
