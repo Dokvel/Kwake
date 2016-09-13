@@ -4,9 +4,12 @@ import React from 'react';
 import styles from './Loader.scss';
 
 export default function Loader(props) {
+  let wrapperStyle = {
+    filter: "url('#filter')"
+  };
   return (
     <div className={styles.container}>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} style={wrapperStyle}>
         <div className={styles.ball}></div>
         <div className={styles.ball}></div>
         <div className={styles.ball}></div>
