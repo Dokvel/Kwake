@@ -4,8 +4,8 @@ import { emailsSender } from './emailHelper';
 import { getPronoun, indefiniteArticle } from '../utils/textHelpers';
 var templatesDir = path.resolve(__dirname, 'templates');
 
-export const SUPPORT_ADDRESS = 'info@kwakeapp.com';
-export const PRODUCTION_DOMAIN = 'http://kwakeapp.com';
+export const SUPPORT_ADDRESS = 'enqounter@gmail.com';
+export const PRODUCTION_DOMAIN = 'http://enqounter.co';
 
 export function sendEvaluateRequest(data) {
   data = data.map((item, index)=> {

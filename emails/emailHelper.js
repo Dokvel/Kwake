@@ -9,8 +9,8 @@ import { PRODUCTION_DOMAIN } from './index';
 var transport = nodemailer.createTransport({ //TODO: Need make config related to NODE_ENV
   service: 'Gmail',
   auth: {
-    user: 'demo.kwake@gmail.com',
-    pass: 'Demo123456'
+    user: 'enqounter@gmail.com',
+    pass: 'Kwake123456'
   }
 });
 
