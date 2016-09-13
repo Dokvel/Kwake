@@ -58,7 +58,7 @@
             border-radius: 50%;
             background-size: contain;
             background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
-            animation: userPhotoChanger 15s infinite 0.1s cubic-bezier(.25,.75,.25,.75);
+            animation: userPhotoChanger 15s infinite 0.1s ease;
           }
         }
       }
