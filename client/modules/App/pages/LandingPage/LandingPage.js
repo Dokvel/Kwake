@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import MediaQuery from 'react-responsive';
 import _ from 'lodash';
+import browser from 'detect-browser';
 
 // Import Components
 import Loader from '../../../../components/Loader/Loader';
@@ -11,6 +12,7 @@ import RadarChart from '../../../../components/RadarChart/RadarChart';
 
 // Import Functions
 import { generateAVG } from '../../../../util/feedbackHelpers';
+import { isAppleDevice } from '../../../../util/generalHelpers';
 
 // Import Styles
 import styles from './LandingPage.scss';
@@ -71,7 +73,12 @@ export class LandingPage extends Component {
       { 1: 3, 2: 4, 3: 5, 4: 4, 5: 3 },
       { 1: 4, 2: 3, 3: 4, 4: 3, 5: 4 }
     ];
-    let summary = {1:1,2:1,3:1,4:1,5:1};
+    let summary;
+    if (isAppleDevice()) {
+      summary = generateAVG(keys, talentRates);
+    } else {
+      summary = {1:1,2:1,3:1,4:1,5:1};
+    }
     return (
       <div className={styles.container}>
         <div className={styles['mobile-header']}>kwake</div>
@@ -79,7 +86,7 @@ export class LandingPage extends Component {
           <div className={styles['column-left']}>
             <div className={styles['radar-chart']}>
               <div className={styles['main-star']}>
-                <Loader />
+                { isAppleDevice() ? undefined : <Loader /> }
                 <div className={styles['user-photo']}></div>
               </div>
               <RadarChart

@@ -85,6 +85,28 @@ svg#svgFilters {
       background: radial-gradient(ellipse farthest-side at center, rgba(255,60,87,.2) 0%, rgba(255,255,255,0) 100%);
     }
 
+    .apple-liquid-container {
+      height: 62px;
+      width: 62px;
+
+      position: relative;
+
+      .ball {
+        height: $radius;
+        width: $radius;
+
+        position: absolute;
+        top: calc(#{$mid} - #{$radius / 2});
+        left: calc(#{$mid} - #{$radius / 2});
+
+        border-radius: 100%;
+        background: linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);
+
+        animation: pulsing .4s alternate ease-out;
+        animation-delay: .4s;
+      }
+    }
+
     .liquidContainer {
       height: 62px;
       width: 62px;
@@ -100,7 +122,6 @@ svg#svgFilters {
         position: absolute;
         top: calc(#{$mid} - #{$radius / 2});
         left: calc(#{$mid} - #{$radius / 2});
-
 
         border-radius: 100%;
         background: linear-gradient(45deg, #ffac52 0%, #ff3c57 100%);

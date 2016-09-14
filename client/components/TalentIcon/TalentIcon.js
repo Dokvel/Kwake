@@ -2,6 +2,7 @@ import React, { Component }from 'react';
 import cn from 'classnames';
 import Tooltip from '../Tooltip/Tooltip';
 
+import { isAppleDevice } from '../../util/generalHelpers';
 import styles from './TalentIcon.scss';
 
 export default class TalentIcon extends Component {
@@ -47,13 +48,21 @@ export default class TalentIcon extends Component {
             <div className={iconWrapper} onClick={this.props.onClick}>
               <i className={this.props.name} aria-hidden="true"/>
             </div>
-            <div className={styles.liquidContainer} style={liquidContainerStyles}>
-              <div className={styles.mainBall}></div>
-              <div className={styles.ball}></div>
-              <div className={styles.ball}></div>
-              <div className={styles.ball}></div>
-              <div className={styles.ball}></div>
-            </div>
+            {
+              isAppleDevice()
+              ?
+              <div className={styles['apple-liquid-container']}>
+                <div className={styles['ball']}></div>
+              </div>
+              :
+              <div className={styles.liquidContainer} style={liquidContainerStyles}>
+                <div className={styles.mainBall}></div>
+                <div className={styles.ball}></div>
+                <div className={styles.ball}></div>
+                <div className={styles.ball}></div>
+                <div className={styles.ball}></div>
+              </div>
+            }
           </div>
           <div className={waveT}></div>
           <div className={waveF}></div>

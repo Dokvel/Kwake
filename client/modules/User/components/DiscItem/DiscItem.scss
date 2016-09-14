@@ -46,6 +46,51 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .apple-controls-lower {
+    background-position: 0% !important;
+    .manage-button-lower {
+      font-weight: 600;
+    }
+    .manage-button-higher {
+      font-weight: 100;
+    }
+  }
+
+  .apple-controls-middle {
+    background-position: 50% !important;
+  }
+
+  .apple-controls-higher {
+    background-position: 100% !important;
+    .manage-button-lower {
+      font-weight: 100;
+    }
+    .manage-button-higher {
+      font-weight: 600;
+    }
+  }
+
+  .apple-controls {
+    height: 50px;
+    display: flex;
+    margin: 20px 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #ffac52, #ff3c57);
+    background-size: 200%;
+    transition: all .5s linear;
+
+    .manage-button-lower, .manage-button-higher {
+      height: 100%;
+      padding: 10px;
+      font-family: $futuraFontFamily;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  }
 }
 
 @media (min-width: $desktopMinWidth) {
@@ -53,7 +98,7 @@
     display: flex;
     flex-flow: row wrap;
     color: $grey;
-    margin: 10px 0;
+    margin: 10px auto;
 
     .name {
       font-size: 18px;
@@ -62,7 +107,7 @@
     }
 
     .controls {
-      margin: 20px 0;
+      margin: 20px 15px;
 
       .sliderContainer {
         width: 90%;
@@ -95,7 +140,6 @@
       margin: 20px 0 40px 0;
 
       .sliderContainer {
-
         width: 80%;
       }
     }
