@@ -19,27 +19,27 @@ export default class TalentIcon extends Component {
     }
   }
 
+  renderAppleLiquidContainer() {
+    return (
+      <div className={styles['apple-liquid-container']}>
+        <div className={styles['ball']}></div>
+      </div>
+    );
+  }
+
   renderLiquidContainer() {
-    if (isAppleDevice()) {
-      return (
-        <div className={styles['apple-liquid-container']}>
-          <div className={styles['ball']}></div>
-        </div>
-      );
-    } else {
-      let liquidContainerStyles = {
-        filter: "url('#filter')"
-      }
-      return (
-        <div className={styles.liquidContainer} style={liquidContainerStyles}>
-          <div className={styles.mainBall}></div>
-          <div className={styles.ball}></div>
-          <div className={styles.ball}></div>
-          <div className={styles.ball}></div>
-          <div className={styles.ball}></div>
-        </div>
-      );
+    let liquidContainerStyles = {
+      filter: "url('#filter')"
     }
+    return (
+      <div className={styles.liquidContainer} style={liquidContainerStyles}>
+        <div className={styles.mainBall}></div>
+        <div className={styles.ball}></div>
+        <div className={styles.ball}></div>
+        <div className={styles.ball}></div>
+        <div className={styles.ball}></div>
+      </div>
+    );
   }
 
   render() {
@@ -67,7 +67,7 @@ export default class TalentIcon extends Component {
             <div className={iconWrapper} onClick={this.props.onClick}>
               <i className={this.props.name} aria-hidden="true"/>
             </div>
-            { this.renderLiquidContainer() }
+            { isAppleDevice() ? this.renderLiquidContainer() : this.renderAppleLiquidContainer() }
           </div>
           <div className={waveT}></div>
           <div className={waveF}></div>
