@@ -6,7 +6,6 @@
 ## Quickstart
 
 1. install mongodb
-2. install fonts from vendor/fonts
 3. npm install
 4. npm start
 
