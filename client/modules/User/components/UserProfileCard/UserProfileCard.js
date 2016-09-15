@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import cn from 'classnames';
 
@@ -17,36 +17,44 @@ import styles from './UserProfileCard.scss';
 // Import Static Data
 import talents from '../../../../../data/talents';
 
-function fbShare() {
-  FB.ui({
-    method: 'feed',
-    link: 'https://developers.facebook.com/docs/',
-    caption: 'An example caption',
-  }, function(response){});
-}
+class UserProfileCard extends React.Component {
 
-function UserProfileCard(props) {
-  let talentsObj = _.keyBy(talents, 'key');
-  let user = props.user;
-  let userType = getPersonalityType(user);
+  fbShare = () => {
+    if (!window.location.origin) {
+      window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+    }
+    FB.ui({
+      method: 'feed',
+      link: window.location.origin,
+      caption: 'enQounter',
+      picture: `${window.location.origin}/api/users/${this.props.user.cuid}/sm_post_picture`
+    }, (response) => {
+      console.log(response);
+    });
+  };
 
-  let teamColorRange, troubleshootingColorRange;
-  if (props.summary && props.summary.statements) {
-    teamColorRange = getColorRange(props.summary.statements.team);
-    troubleshootingColorRange = getColorRange(props.summary.statements.troubleshooting);
-  }
+  render() {
+    let talentsObj = _.keyBy(talents, 'key');
+    let user = this.props.user;
+    let userType = getPersonalityType(user);
+
+    let teamColorRange, troubleshootingColorRange;
+    if (this.props.summary && this.props.summary.statements) {
+      teamColorRange = getColorRange(this.props.summary.statements.team);
+      troubleshootingColorRange = getColorRange(this.props.summary.statements.troubleshooting);
+    }
 
   let cardStyles = cn(styles.card, {
-    [styles['locked--margin-top']]: props.isCurrentUser && !props.summary,
-    [styles['unlocked--margin-top']]: props.isCurrentUser && props.summary
+    [styles['locked--margin-top']]: this.props.isCurrentUser && !this.props.summary,
+    [styles['unlocked--margin-top']]: this.props.isCurrentUser && this.props.summary
   });
 
   return (
     <div className={cardStyles}>
-      { props.isCurrentUser && !props.summary &&
+      { this.props.isCurrentUser && !this.props.summary &&
       <div className={styles.limitInfo}>
         <span className={styles.icon}><i className="icon-36-info" aria-hidden="true"/></span>
-        Get <b>{user.scoreLimit - props.feedbackRates.talents.length} more</b> reviews to unlock your scores!
+        Get <b>{user.scoreLimit - this.props.feedbackRates.talents.length} more</b> reviews to unlock your scores!
       </div>
       }
       <div className={styles.card_chart}>
@@ -54,32 +62,37 @@ function UserProfileCard(props) {
           image={user.image}
           limit={user.scoreLimit}
           talents={user.talents}
-          talentRates={props.feedbackRates.talents}
-          summary={props.summary && props.summary.talents}/>
+          talentRates={this.props.feedbackRates.talents}
+          summary={this.props.summary && this.props.summary.talents}/>
       </div>
-      <div className={styles.card_user} onClick={fbShare.bind(this)}>
+      <div className={styles.card_user}>
         {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>
       </div>
       <div className={styles.card_type}>
         {userType && userType.name}
       </div>
-      {props.isCurrentUser &&
+      {this.props.isCurrentUser &&
       <div className={styles.card_btnAsk}>
         <Button
           rightIcon="icon-37-arrow"
           // {!props.summary && Button.COLOR_BLUE} throws error
-          color={!props.summary ? Button.COLOR_BLUE : undefined}
-          onClick={props.showRequestModal}>
+          color={!this.props.summary ? Button.COLOR_BLUE : undefined}
+          onClick={this.props.showRequestModal}>
           Ask for a review
         </Button>
+        <div className={styles['share-links']}>
+          <div className={styles['fb-share-link']} onClick={this.fbShare.bind(this)}>
+            <span className="fa fa-facebook-square" ariaHidden="true"/> share
+          </div>
+        </div>
       </div>
       }
       <div className={styles.card_desc}>
         <div className={styles.card_desc_score}>
           {
-            props.summary && props.summary.statements ?
+            this.props.summary && this.props.summary.statements ?
               <span className={styles.card_desc_score_summary}>
-                {props.summary.statements.personality.toFixed(1)}
+                {this.props.summary.statements.personality.toFixed(1)}
               </span> :
               <i className="icon-35-lock"/>
           }
@@ -95,8 +108,8 @@ function UserProfileCard(props) {
               <span className={styles.talent}><i className={talentsObj[talent].icon}/></span>
               {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
               <span className={styles.score}>
-              { props.summary ?
-                <span className={styles.value}>{props.summary.talents[talent].toFixed(1)}</span> :
+              { this.props.summary ?
+                <span className={styles.value}>{this.props.summary.talents[talent].toFixed(1)}</span> :
                 <i className="fa fa-lock"/> }
               </span>
             </li>
@@ -107,7 +120,7 @@ function UserProfileCard(props) {
         <div className={styles.card_info_title}>Team</div>
         <div className={styles.card_info_score}>
           {
-            props.summary && props.summary.statements
+            this.props.summary && this.props.summary.statements
               ?
               <div className={styles.card_info_score_radial}>
                 <ScoreRadial
@@ -115,9 +128,9 @@ function UserProfileCard(props) {
                   colorStart={teamColorRange[0]}
                   colorEnd={teamColorRange[1]}
                   contentType={'text'}
-                  content={props.summary.statements.team.toFixed(1)}
+                  content={this.props.summary.statements.team.toFixed(1)}
                   maxValue={5}
-                  value={props.summary.statements.team}
+                  value={this.props.summary.statements.team}
                   strokeWidth={1}
                   strokeDistance={2}
                   progressStrokeWidth={5}/>
@@ -134,16 +147,16 @@ function UserProfileCard(props) {
       <div className={cn(styles.card_info, styles.card_info_troubleshooting)}>
         <div className={styles.card_info_title}>Troubleshooting</div>
         <div className={styles.card_info_score}>
-          { props.summary && props.summary.statements ?
+          { this.props.summary && this.props.summary.statements ?
             <div className={styles.card_info_score_radial}>
               <ScoreRadial
                 id={'troubleshooting'}
                 colorStart={troubleshootingColorRange[0]}
                 colorEnd={troubleshootingColorRange[1]}
                 contentType={'text'}
-                content={props.summary.statements.troubleshooting.toFixed(1)}
+                content={this.props.summary.statements.troubleshooting.toFixed(1)}
                 maxValue={5}
-                value={props.summary.statements.troubleshooting}
+                value={this.props.summary.statements.troubleshooting}
                 strokeWidth={1}
                 strokeDistance={2}
                 progressStrokeWidth={5}/>

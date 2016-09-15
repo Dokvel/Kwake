@@ -8,6 +8,14 @@ import serverConfig from '../config';
 
 import { getPersonalityType } from '../../utils/disc_helpers';
 
+import React from 'react';
+import FacebookSharePost from '../../common/feed_posts/FacebookSharePost';
+import querystring from 'querystring';
+import tmp from 'tmp';
+import fs from 'pn/fs';
+import svg2png from 'svg2png';
+import { renderToString } from 'react-dom/server';
+
 var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(serverConfig.GOOGLE_CLIENT_ID, serverConfig.GOOGLE_CLIENT_SECRET, 'postmessage');
 
@@ -140,6 +148,48 @@ export function getUser(req, res) {
       } else {
         res.json({ user: publicUserParams(user.toObject()) });
       }
+    });
+  }
+}
+
+export function getUserSmPostPicture(req, res) {
+  if (!req.params.user_cuid) {
+    res.status(403).end();
+  } else {
+    User.findOne({ cuid: req.params.user_cuid }).then(user => {
+      if (!user) {
+        res.status(403).end();
+      } else {
+        let filePath;
+        tmp.file({
+          mode: 0o644,
+          prefix: 'facebookPost-',
+          postfix: '.svg'
+        }, function _tempFileCreated(err, path, fd, cleanupCallback) {
+          if (err) throw err;
+          let svg = querystring.unescape(encodeURIComponent(renderToString(
+            <FacebookSharePost personalityType={getPersonalityType(user).name}
+                               displayName={`${user.givenName} ${user.familyName}`} selector="dsg"/>
+          )));
+          filePath = path;
+          fs.writeFile(path, svg, (err) => {
+            if (err) throw err;
+            fs.readFile(filePath)
+              .then(svg2png)
+              .then(buffer => {
+                res.writeHead(200, {
+                  'Content-Type': 'image/png',
+                  'Content-Length': buffer.length
+                });
+                res.end(buffer);
+                cleanupCallback();
+              })
+              .catch(e => console.error(e));
+          });
+        });
+      }
+    }).catch(err=> {
+      res.status(500).send(err);
     });
   }
 }

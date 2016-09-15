@@ -26,6 +26,23 @@ $scoreSize: 74px;
   }
 }
 
+.share-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  padding: 10px 0;
+}
+
+.fb-share-link {
+  color: $grey;
+  text-transform: uppercase;
+  font-family: $futuraFontFamily;
+  font-size: $baseFontSize-M;
+  font-weight: 300;
+  cursor: pointer;
+}
+
 @media (min-width: $desktopMinWidth) {
   .unlocked--margin-top {
     margin-top: 98px;

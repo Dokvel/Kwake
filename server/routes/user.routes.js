@@ -8,6 +8,8 @@ export default function (router, protectedMiddleware) {
 
   router.get('/users/:cuid', UserController.getUser);
 
+  router.get('/users/:user_cuid/sm_post_picture', UserController.getUserSmPostPicture);
+
   router.get('/users/:user_cuid/evaluates', EvaluateController.getEvaluates);
 
   router.get('/users/:user_cuid/encounters', protectedMiddleware, UserController.getEncounters);
