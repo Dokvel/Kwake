@@ -1,5 +1,27 @@
 @import "../../../../../stylesheets/modules/config";
 
+@keyframes userPhotoChanger {
+  0% {
+
+    background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
+  }
+  20% {
+    background-image: url('https://randomuser.me/api/portraits/men/17.jpg');
+  }
+  40% {
+    background-image: url('https://randomuser.me/api/portraits/women/44.jpg');
+  }
+  60% {
+    background-image: url('https://randomuser.me/api/portraits/men/51.jpg');
+  }
+  80% {
+    background-image: url('https://randomuser.me/api/portraits/women/94.jpg');
+  }
+  100% {
+    background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
+  }
+}
+
 .container {
   background-color: $landingBackgroundColor;
   background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
@@ -10,19 +32,39 @@
   .content {
     height: 100%;
 
-    .columnLeft {
+    .column-left {
       width: 34%;
 
       display: flex;
       flex-direction: column;
       justify-content: center;
 
-      .radarChart {
+      .radar-chart {
         position: relative;
+
+        .main-star {
+          height: 100%;
+          width: 100%;
+          position: absolute;
+
+          .user-photo {
+            width: 75px;
+            height: 75px;
+            margin-top: -37px;
+            margin-left: -37px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            background-size: contain;
+            background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
+            animation: userPhotoChanger 15s infinite 0.1s ease;
+          }
+        }
       }
     }
 
-    .columnRight {
+    .column-right {
       width: 66%;
 
       display: flex;
@@ -60,7 +102,7 @@
    height: 100%;
    width: 100%;
 
-   .mobileHeader {
+   .mobile-header {
      display: none;
    }
 
@@ -71,7 +113,7 @@
      display: flex;
      flex-direction: row;
 
-     .columnRight {
+     .column-right {
        .header {
          margin-top: 50px;
        }
@@ -87,7 +129,7 @@
   .container {
     padding: 20px;
 
-    .mobileHeader {
+    .mobile-header {
       font-family: $futuraFontFamily;
       font-size: 20px;
       font-weight: 400;
@@ -101,15 +143,15 @@
       flex-direction: column;
       align-items: center;
 
-      .columnLeft {
+      .column-left {
         width: 100%;
 
-        .radarChart {
+        .radar-chart {
           margin: -7.5% 0 -15% 0;
         }
       }
 
-      .columnRight {
+      .column-right {
         width: 100%;
 
         text-align: center;

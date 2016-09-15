@@ -1,15 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-
-// Import Components
-import { isLoggedIn } from '../../util/apiCaller';
+import cn from 'classnames';
 
 // Import Actions
 import { authenticated } from './AppActions';
-import callApi from '../../util/apiCaller';
+import callApi, { isLoggedIn } from '../../util/apiCaller';
+
+// Import Components
+import Loader from '../../components/Loader/Loader';
 
 // Import Selectors
 import { getCurrentUser } from './AppReducer';
+
+// Import Styles
+import styles from './App.scss';
 
 export class App extends Component {
   constructor(props) {
@@ -30,7 +34,15 @@ export class App extends Component {
   }
 
   render() {
-    return this.props.children;
+    if (this.state.isMounted) {
+      return this.props.children;
+    } else {
+      return (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      );
+    }
   }
 }
 

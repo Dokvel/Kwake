@@ -2,6 +2,7 @@ import React, { Component }from 'react';
 import cn from 'classnames';
 import Tooltip from '../Tooltip/Tooltip';
 
+import { isAppleDevice } from '../../util/generalHelpers';
 import styles from './TalentIcon.scss';
 
 export default class TalentIcon extends Component {
@@ -16,6 +17,29 @@ export default class TalentIcon extends Component {
     } else if (this.props.selected && !nextProps.selected) {
       this.setState({ waveAnimation: 'iconDeselected' });
     }
+  }
+
+  renderAppleLiquidContainer() {
+    return (
+      <div className={styles['apple-liquid-container']}>
+        <div className={styles['ball']}></div>
+      </div>
+    );
+  }
+
+  renderLiquidContainer() {
+    let liquidContainerStyles = {
+      filter: "url('#filter')"
+    }
+    return (
+      <div className={styles.liquidContainer} style={liquidContainerStyles}>
+        <div className={styles.mainBall}></div>
+        <div className={styles.ball}></div>
+        <div className={styles.ball}></div>
+        <div className={styles.ball}></div>
+        <div className={styles.ball}></div>
+      </div>
+    );
   }
 
   render() {
@@ -36,10 +60,6 @@ export default class TalentIcon extends Component {
       [styles.wave]: this.state.waveAnimation === 'iconDeselected'
     });
 
-    let liquidContainerStyles = {
-      filter: "url('#filter')"
-    }
-
     return (
       <Tooltip id={this.props.talentKey} tip={this.props.tip} title={this.props.talentName}>
         <div className={styles.wrapper}>
@@ -47,13 +67,7 @@ export default class TalentIcon extends Component {
             <div className={iconWrapper} onClick={this.props.onClick}>
               <i className={this.props.name} aria-hidden="true"/>
             </div>
-            <div className={styles.liquidContainer} style={liquidContainerStyles}>
-              <div className={styles.mainBall}></div>
-              <div className={styles.ball}></div>
-              <div className={styles.ball}></div>
-              <div className={styles.ball}></div>
-              <div className={styles.ball}></div>
-            </div>
+            { isAppleDevice() ? this.renderLiquidContainer() : this.renderAppleLiquidContainer() }
           </div>
           <div className={waveT}></div>
           <div className={waveF}></div>

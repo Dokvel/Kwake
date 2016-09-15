@@ -22,20 +22,9 @@
       color: $grey;
       font-size: 18px;
       display: flex;
-      flex-flow: row;
-      > * {
-        flex: 1 100%;
-      }
-
-      .high-header,
-      .low-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        min-width: 45px;
-        text-transform: uppercase;
-      }
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 
