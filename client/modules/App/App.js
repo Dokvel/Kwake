@@ -34,7 +34,7 @@ export class App extends Component {
   }
 
   render() {
-    if (this.state.isMounted && typeof window !== 'undefined' && window.d3) {
+    if (this.state.isMounted) {
       return this.props.children;
     } else {
       return (

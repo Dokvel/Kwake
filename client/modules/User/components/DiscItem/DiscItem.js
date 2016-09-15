@@ -10,6 +10,8 @@ import styles from './DiscItem.scss';
 
 export class DiscItem extends Component {
   render() {
+    let tipHigher = 'Select at least one that you are higher at';
+    let tipLower = 'Select at least one that you are lower at';
     return (
       <div className={styles.container}>
         <div className={styles.name}>{this.props.name}</div>
@@ -22,12 +24,12 @@ export class DiscItem extends Component {
             [styles['apple-controls-middle']]: this.props.value === undefined,
             [styles['apple-controls-higher']]: this.props.value === 1
           })}>
-            <Tooltip disabled={this.props.unavailableValue !== 0} tip="Select at least one that you are higher at">
+            <Tooltip disabled={this.props.unavailableValue !== 0} tip={tipHigher}>
               <div className={cn(styles['manage-button-lower'], { [styles['manage-button-lower--selected']]: this.props.value === 0 })} onClick={ () => this.props.onChangeValue(0) }>
                 Lower
               </div>
             </Tooltip>
-            <Tooltip disabled={this.props.unavailableValue !== 1} tip="Select at least one that you are lower at">
+            <Tooltip disabled={this.props.unavailableValue !== 1} tip={tipLower}>
               <div className={cn(styles['manage-button-higher'], { [styles['manage-button-higher--selected']]: this.props.value === 0 })} onClick={ () => this.props.onChangeValue(1) }>
                 Higher
               </div>
@@ -35,7 +37,7 @@ export class DiscItem extends Component {
           </div>
           :
           <div className={styles.controls}>
-            <Tooltip disabled={this.props.unavailableValue !== 0} tip="Select at least one that you are higher at">
+            <Tooltip disabled={this.props.unavailableValue !== 0} tip={tipHigher}>
               <div
                 className={cn(styles['manage-button-minus'], { [styles['manage-button-minus--selected']]: this.props.value === 0 })}
                 onClick={ () => this.props.onChangeValue(0) }>
@@ -45,7 +47,7 @@ export class DiscItem extends Component {
             <div className={styles.sliderContainer}>
               <RangeSlider value={this.props.value}/>
             </div>
-            <Tooltip disabled={this.props.unavailableValue !== 1} tip="Select at least one that you are lower at">
+            <Tooltip disabled={this.props.unavailableValue !== 1} tip={tipLower}>
               <div
                 className={cn(styles['manage-button-plus'], { [styles['manage-button-plus--selected']]: this.props.value === 1 })}
                 onClick={ () => this.props.onChangeValue(1) }>

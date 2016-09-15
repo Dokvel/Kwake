@@ -7,9 +7,5 @@ export function isTouchDevice() {
 }
 
 export function isAppleDevice() {
-  if (browser.name === 'ios' || browser.name === 'safari' || browser.name === undefined) {
-    return true;
-  } else {
-    return false;
-  }
+  return ((browser.name === 'ios') || (browser.name === 'safari') || (browser.name === undefined));
 }
