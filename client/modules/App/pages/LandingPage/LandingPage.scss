@@ -47,7 +47,7 @@
   }
 }
 
-@media (min-width: $desktopMidWidth) and (max-width: 1280px) {
+@media (min-width: $desktopMidWidth) and (max-width: $desktopLgWidth) {
  .container {
    .mobile-header {
      display: none;
