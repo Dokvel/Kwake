@@ -20,8 +20,8 @@ export class Base extends Component {
     return (
       <div className='main'>
         <Helmet
-          title="KWAKE"
-          titleTemplate="%s - Kwake App"
+          title="ENQOUNTER"
+          titleTemplate="%s - enQounter App"
           meta={[
             { charset: 'utf-8' },
             {

@@ -27,7 +27,7 @@ export function emailsSender(templatePath, data = [], senderEmail) {
       } else {
 
         let meta = {
-          from: `Kwake App <${senderEmail}>`,
+          from: `enQounter App <${senderEmail}>`,
           to: item.email,
           subject: item.subject,
           html: results.html,
