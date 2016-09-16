@@ -15,11 +15,11 @@ function Footer(props) {
         <img src={logoSrc}/>
       </div>
       <div className={styles.info}>
-        Kwake allows you to create beautiful psychological profiles for <br/>
+        enQounter allows you to create beautiful psychological profiles for <br/>
         yourself and receive ratings from people you`ve encoutered.
       </div>
       <Link to="/">
-        Join Kwake for free now!
+        Join enQounter for free now!
       </Link>
     </div>
   )
