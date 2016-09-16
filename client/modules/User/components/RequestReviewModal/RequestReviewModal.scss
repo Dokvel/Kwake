@@ -116,7 +116,6 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   &:hover {
-
     color: rgb(254, 254, 254);
   }
 }
@@ -166,8 +165,7 @@
 }
 
 @media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth) {
-
   .container {
-    width: 100%;
+    max-width: 450px;
   }
 }
