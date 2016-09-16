@@ -16,7 +16,7 @@
   }
 }
 
-@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+@media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth) {
 
   .dialog {
     a[class^="closeButton"] {

@@ -82,7 +82,7 @@ class UserProfileCard extends React.Component {
           </Button>
           <div className={styles['share-links']}>
             <div className={styles['fb-share-link']} onClick={this.fbShare.bind(this)}>
-              <span className="fa fa-facebook-square" ariaHidden="true"/> share
+              <span className="fa fa-facebook-square" aria-hidden="true"/> share
             </div>
           </div>
         </div>
