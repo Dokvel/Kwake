@@ -26,6 +26,7 @@
   justify-content: center;
   flex-flow: column wrap;
   padding: 20px 40px;
+  max-width: 450px;
 }
 
 .encounters {
@@ -158,8 +159,9 @@
   }
 }
 
-@media(min-width: $desktopMidWidth) {
+@media (min-width: $mobileMinWidth) and (max-width: 600px) {
+
   .encounters-container {
-    min-width: 450px;
+    max-width: 100%;
   }
 }
