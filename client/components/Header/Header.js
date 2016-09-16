@@ -22,7 +22,7 @@ export class Header extends Component {
     return (
       <div className={styles.content}>
         <div className={styles.brand}>
-          kwake
+          enQounter
         </div>
         { this.props.currentUser &&
           <a className={styles['user-menu']} href="#" onClick={this.clickSignOut.bind(this)}>Log out</a>
