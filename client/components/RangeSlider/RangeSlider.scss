@@ -12,6 +12,8 @@ $mid: 50%;
     height: $progressHeight;
     width: 100%;
 
+    filter: url('#goo');
+
     position: relative;
 
     background: linear-gradient(90deg, #FFAC52 0%, #FF3C57 100%);

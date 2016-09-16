@@ -113,6 +113,8 @@ svg#svgFilters {
 
       position: relative;
 
+      filter: url('#filter');
+
       animation: rotation 10s infinite linear;
 
       .mainBall {

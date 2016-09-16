@@ -47,6 +47,7 @@ $mid: 50%;
   .wrapper {
     height: 100%;
     width: 100%;
+    filter: url('#filter');
 
     animation: spin 5s infinite linear;
   }

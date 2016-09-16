@@ -67,7 +67,7 @@ export default class TalentIcon extends Component {
             <div className={iconWrapper} onClick={this.props.onClick}>
               <i className={this.props.name} aria-hidden="true"/>
             </div>
-            { isAppleDevice() ? this.renderLiquidContainer() : this.renderAppleLiquidContainer() }
+            { isAppleDevice() ? this.renderAppleLiquidContainer() : this.renderLiquidContainer() }
           </div>
           <div className={waveT}></div>
           <div className={waveF}></div>
