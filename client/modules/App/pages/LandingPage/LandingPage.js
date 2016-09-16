@@ -49,9 +49,9 @@ export class LandingPage extends Component {
     return (
       <Jumbotron
         {...this.props}
-        title='Kwake &mdash; professional profiles that don’t suck!'
+        title='enQounter &mdash; professional profiles that don’t suck!'
         titleSize={titleSize}
-        text='With Kwake you can quickly create and share you psychological profile and let others review it. Here should be a bit more text, describing the product overall. At least 3 sentances.'
+        text='With enQounter, you can quickly create and share your unique type and talent, grow personal Superpower Scores via invited, but anonymous, encounter reviews, and always be ready to play to your best at work.'
         textSize={textSize}/>
     );
   }
@@ -81,7 +81,7 @@ export class LandingPage extends Component {
     }
     return (
       <div className={styles.container}>
-        <div className={styles['mobile-header']}>kwake</div>
+        <div className={styles['mobile-header']}>enQounter</div>
         <div className={styles.content}>
           <div className={styles['column-left']}>
             <div className={styles['radar-chart']}>
@@ -99,17 +99,17 @@ export class LandingPage extends Component {
             </div>
           </div>
           <div className={styles['column-right']}>
-            <div className={styles.header}>kwake</div>
+            <div className={styles.header}>enQounter</div>
             <div className={styles.jumbotron}>
               <MediaQuery query='(max-width: 1280px)'>
                 {this.renderJumbotron(30, 16)}
               </MediaQuery>
               <MediaQuery query='(min-width: 1281px)'>
-                {this.renderJumbotron(60, 18)}
+                {this.renderJumbotron(56, 18)}
               </MediaQuery>
             </div>
             <div className={styles.footer}>
-              Copyright © {new Date().getFullYear()} Kwake. All rights reserved.
+              Copyright © {new Date().getFullYear()} enQounter. All rights reserved.
             </div>
           </div>
         </div>

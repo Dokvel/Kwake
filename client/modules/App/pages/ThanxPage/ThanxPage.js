@@ -30,9 +30,9 @@ export class ThanxPage extends Component {
     return (
       <Jumbotron
         {...this.props}
-        title='Kwake &mdash; psychological profiles, that don’t suck.'
+        title='enQounter &mdash; professional profiles that don’t suck!'
         titleSize={titleSize}
-        text='With Kwake you can quickly create and share you psychological profile and let others review it.'
+        text='With enQounter you can quickly create and share you psychological profile and let others review it.'
         textSize={textSize} />
     );
   }
@@ -55,7 +55,7 @@ export class ThanxPage extends Component {
               {this.renderJumbotron(30, 16)}
             </MediaQuery>
             <MediaQuery query='(min-width: 768px)'>
-              {this.renderJumbotron(60, 18)}
+              {this.renderJumbotron(56, 18)}
             </MediaQuery>
           </div>
           <Footer/>

@@ -16,6 +16,7 @@ const talents = _.keyBy(require('../../../../../data/talents').default, 'key')
 import Button from '../../../../components/Button/Button';
 import RateItem from '../../../../components/RateItem/RateItem';
 import TalentIcon from '../../../../components/TalentIcon/TalentIcon';
+import Tooltip from '../../../../components/Tooltip/Tooltip';
 
 export class EvaluateTalentsForm extends Component {
   constructor(props) {
@@ -46,7 +47,9 @@ export class EvaluateTalentsForm extends Component {
             this.props.talents.map((talent)=> (
               <div key={talent} className={styles['talent-row']}>
                 <div className={styles.talent}>
-                  <div className={styles.name}>{talents[talent].name}</div>
+                  <Tooltip tip={talents[talent].description}>
+                    <div className={styles.name}>{talents[talent].name}</div>
+                  </Tooltip>
                   <MediaQuery query='(max-width: 767px)'>
                     <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}
                                 talentName={talents[talent].name}/>

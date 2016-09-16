@@ -15,7 +15,7 @@ class Tooltip extends Component {
     this.setState({ showMobile: true });
     setTimeout(() => {
       this.setState({ showMobile: false });
-    }, 2000);
+    }, 5000);
   };
 
   renderTouchable = (children) => {
