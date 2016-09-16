@@ -5,6 +5,12 @@
   flex-flow: column wrap;
   align-items: center;
 
+  & > div {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+  }
+
   .title {
     color: $grey;
     font-family: $futuraFontFamily;
@@ -17,7 +23,6 @@
     width: 150px;
     margin: 5px;
     padding: 5px;
-    justify-content: center;
 
     .title {
       font-size: $baseFontSize-S;
