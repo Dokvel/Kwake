@@ -1,25 +1,12 @@
 @import "../../../../../stylesheets/modules/config";
 
 @keyframes userPhotoChanger {
-  0% {
-
-    background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
-  }
-  20% {
-    background-image: url('https://randomuser.me/api/portraits/men/17.jpg');
-  }
-  40% {
-    background-image: url('https://randomuser.me/api/portraits/women/44.jpg');
-  }
-  60% {
-    background-image: url('https://randomuser.me/api/portraits/men/51.jpg');
-  }
-  80% {
-    background-image: url('https://randomuser.me/api/portraits/women/94.jpg');
-  }
-  100% {
-    background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
-  }
+  0%   { background-image: url('https://randomuser.me/api/portraits/women/17.jpg'); }
+  20%  { background-image: url('https://randomuser.me/api/portraits/men/17.jpg'); }
+  40%  { background-image: url('https://randomuser.me/api/portraits/women/44.jpg'); }
+  60%  { background-image: url('https://randomuser.me/api/portraits/men/51.jpg'); }
+  80%  { background-image: url('https://randomuser.me/api/portraits/women/94.jpg'); }
+  100% { background-image: url('https://randomuser.me/api/portraits/women/17.jpg'); }
 }
 
 .container {
@@ -30,14 +17,8 @@
   background-size: cover;
 
   .content {
-    height: 100%;
-
     .column-left {
-      width: 34%;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      overflow: hidden;
 
       .radar-chart {
         position: relative;
@@ -46,115 +27,142 @@
           height: 100%;
           width: 100%;
           position: absolute;
-
-          .user-photo {
-            width: 75px;
-            height: 75px;
-            margin-top: -37px;
-            margin-left: -37px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            border-radius: 50%;
-            background-size: contain;
-            background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
-            animation: userPhotoChanger 15s infinite 0.1s ease;
-          }
         }
-      }
-    }
 
-    .column-right {
-      width: 66%;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      .header {
-        font-family: $futuraFontFamily;
-        font-size: 30px;
-        font-weight: 400;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-
-      .footer {
-        font-family: $landingFooterFont;
-        font-size: $baseFontSize-S;
-        font-weight: 600;
-        opacity: 0.25;
+        .user-photo {
+          width: 75px;
+          height: 75px;
+          margin-top: -37px;
+          margin-left: -37px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          border-radius: 50%;
+          background-size: contain;
+          background-image: url('https://randomuser.me/api/portraits/women/17.jpg');
+          animation: userPhotoChanger 15s infinite 0.1s ease;
+        }
       }
     }
   }
 }
 
-@media (min-width: $desktopMidWidth) and (max-width: 1199px) {
+@media (min-width: $desktopMidWidth) and (max-width: 1280px) {
  .container {
-   .content {
-     margin-left: 16%;
-   }
- }
-}
-
-@media (min-width: $desktopMidWidth) {
- .container {
-   height: 100%;
-   width: 100%;
-
    .mobile-header {
      display: none;
    }
 
    .content {
-     max-width: 1200px;
-     margin-left: 17.5%;
+     height: 100%;
+     max-width: 720px !important;
+     margin: 0 auto;
 
-     display: flex;
-     flex-direction: row;
+     .column-left {
+       width: 40%;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+     }
 
      .column-right {
+       width: 60%;
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+
        .header {
-         margin-top: 50px;
+         font-family: $futuraFontFamily;
+         font-size: 30px;
+         font-weight: 400;
+         letter-spacing: 0.1em;
+         text-transform: uppercase;
        }
+
        .footer {
-         margin-bottom: 50px;
+         font-family: $landingFooterFont;
+         font-size: $baseFontSize-S;
+         font-weight: 600;
+         opacity: 0.25;
        }
      }
    }
  }
 }
 
+@media (min-width: $desktopMidWidth) {
+  .container {
+    height: 100%;
+    width: 100%;
+
+    .mobile-header {
+      display: none;
+    }
+
+    .content {
+      height: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+
+      .column-left {
+         width: 34%;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+       }
+
+      .column-right {
+        width: 66%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .header {
+          margin-top: 50px;
+          font-family: $futuraFontFamily;
+          font-size: 30px;
+          font-weight: 400;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+        .footer {
+          margin-bottom: 50px;
+          font-family: $landingFooterFont;
+          font-size: $baseFontSize-S;
+          font-weight: 600;
+          opacity: 0.25;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: 0px) and (max-width: $tabletMaxWidth) {
   .container {
-    padding: 20px;
+    width: 100%;
+    padding: 20px 0;
+    box-sizing: border-box;
 
     .mobile-header {
       font-family: $futuraFontFamily;
       font-size: 20px;
       font-weight: 400;
       letter-spacing: 0.1em;
-      text-transform: uppercase;
       text-align: center;
+      text-transform: uppercase;
     }
 
     .content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
       .column-left {
-        width: 100%;
-
-        .radar-chart {
-          margin: -7.5% 0 -15% 0;
-        }
+        height: 320px;
+        width: 320px;
+        margin: 0 auto;
       }
 
       .column-right {
-        width: 100%;
-
-        text-align: center;
+        padding: 0 20px;
 
         .header {
           display: none;
@@ -162,7 +170,11 @@
 
         .footer {
           margin-top: 100px;
+          font-family: $landingFooterFont;
           font-size: $mobileFontSize-XS;
+          font-weight: 600;
+          opacity: 0.25;
+          text-align: center;
         }
       }
     }
