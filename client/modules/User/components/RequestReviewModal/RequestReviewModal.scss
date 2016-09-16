@@ -6,7 +6,7 @@
   font-size: 24px;
   color: $grey;
   text-align: center;
-  padding: 30px 0 0 0;
+  padding: 30px 20px 0 20px;
   letter-spacing: 0.1em;
 }
 
@@ -15,7 +15,7 @@
   font-size: $baseFontSize-M;
   font-weight: 300;
   color: $grey;
-  padding: 10px 0 0 0;
+  padding: 10px 20px;
   text-align: center;
   opacity: 0.5;
 }
@@ -26,7 +26,6 @@
   justify-content: center;
   flex-flow: column wrap;
   padding: 20px 40px;
-  width: 450px;
 }
 
 .encounters {
@@ -45,8 +44,8 @@
 }
 
 .actions {
-
   padding: 30px 40px;
+  padding-top: 10px;
   border-top: 1px solid #232324;
 }
 
@@ -115,14 +114,52 @@
   }
 }
 
-@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
-  .encounters-container {
-    width: auto;
+.loader {
+  height: 300px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.status-message {
+  color: $grey;
+  padding: 5px 0;
+  opacity: 0;
+  text-align: center;
+}
+
+.visible {
+  animation: fadein 2s;
+  opacity: 1;
+}
+
+.hidden {
+  animation: fadeout 2s;
+  opacity: 0;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-@media (min-width: $mobileMaxWidth) and (max-width: $desktopMidWidth) {
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media(min-width: $desktopMidWidth) {
   .encounters-container {
-    width: auto;
+    min-width: 450px;
   }
 }
