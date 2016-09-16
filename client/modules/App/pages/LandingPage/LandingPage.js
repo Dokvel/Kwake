@@ -77,7 +77,7 @@ export class LandingPage extends Component {
     if (isAppleDevice()) {
       summary = generateAVG(keys, talentRates);
     } else {
-      summary = {1:1,2:1,3:1,4:1,5:1};
+      summary = {1:0,2:0,3:0,4:0,5:0};
     }
     return (
       <div className={styles.container}>
@@ -87,7 +87,7 @@ export class LandingPage extends Component {
             <div className={styles['radar-chart']}>
               <div className={styles['main-star']}>
                 { isAppleDevice() ? undefined : <Loader /> }
-                <div className={styles['user-photo']}></div>
+
               </div>
               <RadarChart
                 image=''
@@ -95,15 +95,16 @@ export class LandingPage extends Component {
                 talents='none' // if there are no titles for axes
                 talentRates={talentRates}
                 summary={summary} />
+              <div className={styles['user-photo']}></div>
             </div>
           </div>
           <div className={styles['column-right']}>
             <div className={styles.header}>kwake</div>
             <div className={styles.jumbotron}>
-              <MediaQuery query='(max-width: 1199px)'>
+              <MediaQuery query='(max-width: 1280px)'>
                 {this.renderJumbotron(30, 16)}
               </MediaQuery>
-              <MediaQuery query='(min-width: 1200px)'>
+              <MediaQuery query='(min-width: 1281px)'>
                 {this.renderJumbotron(60, 18)}
               </MediaQuery>
             </div>

@@ -8,16 +8,31 @@ $scoreSize: 74px;
   }
 }
 
+@media (min-width: 481px) and (max-width: 1024px) {
+  .unlocked--margin-top {
+    margin-top: 110px !important;
+  }
+}
+
+@media (min-width: $desktopMinWidth) and (max-width: 600px) {
+  .locked--margin-top {
+    margin-top: 155px !important;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .locked--margin-top {
+    margin-top: 102px !important;
+  }
+}
+
 @media (min-width: $desktopMinWidth) {
-  .limitInfo {
-    padding-bottom: 20px;
+  .unlocked--margin-top {
+    margin-top: 98px;
+  }
 
-    font-weight: 300;
-    text-align: center;
-
-    .more {
-      font-weight: 600;
-    }
+  .locked--margin-top {
+    margin-top: 88px;
   }
 
   .card {
@@ -26,7 +41,6 @@ $scoreSize: 74px;
 
     width: 440px;
 
-    margin-top: 200px;
     padding: 40px 50px;
 
     border-radius: 8px;
@@ -34,11 +48,25 @@ $scoreSize: 74px;
 
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
+    .limitInfo {
+      position: absolute;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      top: -180px;
+      font-weight: 300;
+      text-align: center;
+
+      .more {
+        font-weight: 600;
+      }
+    }
+
     &_chart {
       position: relative;
-      width: 110%;
-      margin-top: -67.5%;
-      margin-left: -5%;
+      height: 380px;
+      width: 380px;
+      margin: -230px -20px -20px -20px;
 
       font-family: $futuraFontFamily;
       text-transform: uppercase;
@@ -56,7 +84,7 @@ $scoreSize: 74px;
     }
 
     &_type {
-      margin-top: 14px;
+      margin-top: 10px;
 
       font-family: $futuraFontFamily;
       font-size: $baseFontSize-L;
@@ -66,7 +94,7 @@ $scoreSize: 74px;
     }
 
     &_btnAsk {
-      margin-top: 22px;
+      margin-top: 15px;
       text-align: center;
     }
 
@@ -75,7 +103,7 @@ $scoreSize: 74px;
       flex-direction: row;
       align-items: center;
 
-      margin-top: 32px;
+      margin-top: 20px;
 
       &_score {
         width: 74px;
@@ -210,6 +238,14 @@ $scoreSize: 74px;
 }
 
 @media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
+  .unlocked--margin-top {
+    margin-top: 166px;
+  }
+
+  .locked--margin-top {
+    margin-top: 155px;
+  }
+
   .limitInfo {
     padding-bottom: 20px;
 
@@ -227,7 +263,6 @@ $scoreSize: 74px;
 
     width: 100%;
 
-    margin-top: 200px;
     margin-bottom: 20px;
     padding: 40px 20px;
 
@@ -236,11 +271,24 @@ $scoreSize: 74px;
 
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
+    .limitInfo {
+      position: absolute;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      top: -180px;
+      font-weight: 300;
+      text-align: center;
+
+      .more {
+        font-weight: 600;
+      }
+    }
+
     &_chart {
       position: relative;
       width: 110%;
-      margin-top: -67.5%;
-      margin-left: -5%;
+      margin: -67.5% -5% -20px -5%;
 
       font-family: $futuraFontFamily;
       text-transform: uppercase;

@@ -141,7 +141,7 @@ export function RadarChartFunc(id, data, options) {
 				.ease("linear")
 				.attr("d", function(d,i) {
 					if (cfg.color(i) === '#B2C4FF' && cfg.animation(i) === 'morphing') {
-						mult = [.66, 1.66];
+						mult = [.66, 1.33];
 						return morphingRadarLine(d, mult);
 					} else {
 						mult = [.8, 1.2];
