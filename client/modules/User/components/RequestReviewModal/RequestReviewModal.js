@@ -138,28 +138,30 @@ class RequestReviewModal extends Component {
     });
     return (
       <Modal handleClose={this.props.handleClose}>
-        <div className={styles.title}>REQUEST A REVIEW</div>
-        {!this.state.isLoaded ? <div className={styles.loader}><Loader/></div> :
-          <div>
-            {this.renderListTitle()}
-            {this.state.encounters.length > 0 && this.renderEncountersList()}
-            <div className={styles['actions']}>
-              <div className={messageStyles}>
-                Request for review was successfully sent. Request more?
-              </div>
-              <div className={styles.customEmailsForm}>
-                <input type="text" value={this.state.customEmails} placeholder="Not in the list? Enter emails here..."
-                       className={cn(styles['field'], styles['emails-field'])}
-                       onChange={(e)=>this.setState({ customEmails: e.target.value })}/>
-              </div>
-              <div className={styles['button-wrapper']}>
-                <Button onClick={this.onSubmit} rightIcon="icon-37-arrow" disabled={!this.isValid()}>
-                  <span>SEND REQUEST TO <b>{this.state.selected.length + this.getCustomEmails().length}</b> PEOPLE</span>
-                </Button>
+        <div className={styles.container}>
+          <div className={styles.title}>REQUEST A REVIEW</div>
+          {!this.state.isLoaded ? <div className={styles.loader}><Loader/></div> :
+            <div>
+              {this.renderListTitle()}
+              {this.state.encounters.length > 0 && this.renderEncountersList()}
+              <div className={styles['actions']}>
+                <div className={messageStyles}>
+                  Request for review was successfully sent. Request more?
+                </div>
+                <div className={styles.customEmailsForm}>
+                  <input type="text" value={this.state.customEmails} placeholder="Not in the list? Enter emails here..."
+                         className={cn(styles['field'], styles['emails-field'])}
+                         onChange={(e)=>this.setState({ customEmails: e.target.value })}/>
+                </div>
+                <div className={styles['button-wrapper']}>
+                  <Button onClick={this.onSubmit} rightIcon="icon-37-arrow" disabled={!this.isValid()}>
+                    <span>SEND REQUEST TO <b>{this.state.selected.length + this.getCustomEmails().length}</b> PEOPLE</span>
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </Modal>
     );
   }

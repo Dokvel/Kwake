@@ -1,5 +1,12 @@
 @import '../../../../../stylesheets/modules/config';
 
+.container {
+  width: 600px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
 .title {
   text-transform: uppercase;
   font-family: $futuraFontFamily;
@@ -26,7 +33,6 @@
   justify-content: center;
   flex-flow: column wrap;
   padding: 20px 40px;
-  max-width: 450px;
 }
 
 .encounters {
@@ -159,9 +165,9 @@
   }
 }
 
-@media (min-width: $mobileMinWidth) and (max-width: 600px) {
+@media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth) {
 
-  .encounters-container {
-    max-width: 100%;
+  .container {
+    width: 100%;
   }
 }
