@@ -1,10 +1,10 @@
 {
-  "client_id": "854836621522-lsrqbp8h6pqsjms2enq08tehkvq813hj.apps.googleusercontent.com",
+  "client_id": "278518862880-ie2iq0r3akg868cjtqaqvsplkmfej0he.apps.googleusercontent.com",
   "project_id": "silver-optics-140414",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://accounts.google.com/o/oauth2/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_secret": "gI1lFPABRXK0eZ-yP3DtZC_7",
+  "client_secret": "cAQ3aeiJrbD2wVAtTXQGHlCk",
   "scopes": [
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email",
