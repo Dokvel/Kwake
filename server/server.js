@@ -32,7 +32,7 @@ store.on('error', function (error) {
 });
 
 //Auth
-import User from './models/user';
+import User, { getGoogleCredentials } from './models/user';
 import passport from 'passport';
 import bearer from 'passport-http-bearer';
 var BearerStrategy = bearer.Strategy;
@@ -65,8 +65,8 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import dummyData from './dummyData';
 import serverConfig from './config';
+import google from 'googleapis';
 
 // Import routes
 import posts from './routes/post.routes';
@@ -153,6 +153,10 @@ useRoutes(users);
 useRoutes(evaluate);
 useAdminRoutes(adminUsers);
 
+const isBuilt = ()=> {
+  return ['production', 'staging'].indexOf(process.env.NODE_ENV) > -1;
+};
+
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
   const head = Helmet.rewind();
@@ -171,7 +175,7 @@ const renderFullPage = (html, initialState) => {
         ${head.link.toString()}
         ${head.script.toString()}
 
-        ${process.env.NODE_ENV === 'production' ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
+        ${isBuilt() ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
 
         <script src='https://use.typekit.net/dor3mna.js'></script>
         <script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -183,13 +187,13 @@ const renderFullPage = (html, initialState) => {
         <div id="root" style="height:100%;">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-          ${process.env.NODE_ENV === 'production' ?
+          ${isBuilt() ?
     `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
       </script>
-      <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
-      <script src='${process.env.NODE_ENV === 'production' ? assetsManifest['/app.js'] : '/app.js'}'></script>
+      <script src='${isBuilt() ? assetsManifest['/vendor.js'] : '/vendor.js'}'></script>
+      <script src='${isBuilt() ? assetsManifest['/app.js'] : '/app.js'}'></script>
       <script type="text/javascript">
         function triggerGoogleLoaded() {
           window.gapi.load('auth2', function () {
@@ -225,7 +229,7 @@ const renderFullPage = (html, initialState) => {
 
 const renderError = err => {
   const softTab = '&#32;&#32;&#32;&#32;';
-  const errTrace = process.env.NODE_ENV !== 'production' ?
+  const errTrace = !isBuilt() ?
     `:<br><br><pre style="color:red">${softTab}${err.stack.replace(/\n/g, `<br>${softTab}`)}</pre>` : '';
   return renderFullPage(`Server Error${errTrace}`, {});
 };

@@ -1,0 +1,15 @@
+{
+  "client_id": "854836621522-70sn52qg76bb7h4iijrtc514cdlorbek.apps.googleusercontent.com",
+  "project_id": "enqounterapp",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_secret": "QTa_dHLn4QA41VW8oSaB02pN",
+  "scopes": [
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/calendar.readonly",
+    "https://www.googleapis.com/auth/contacts.readonly",
+    "https://www.googleapis.com/auth/plus.login"
+  ]
+}

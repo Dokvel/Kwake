@@ -3,6 +3,8 @@ import fbconfig from '../data/facebook.json';
 function getGoogleCreds() {
   if (process.env.NODE_ENV === 'production') {
     return require('../data/google_creds_production.json');
+  } else if (process.env.NODE_ENV === 'staging') {
+    return require('../data/google_creds_staging.json');
   } else {
     return require('../data/google_creds.json');
   }

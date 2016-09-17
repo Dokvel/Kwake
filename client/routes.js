@@ -17,7 +17,7 @@ if (typeof require.ensure !== 'function') {
  https://github.com/reactjs/react-router/issues/2182 and
  https://github.com/gaearon/react-hot-loader/issues/288 is fixed.
  */
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./modules/User/pages/SetupAccountPage/SetupAccountPage');
   require('./modules/App/pages/LandingPage/LandingPage');
