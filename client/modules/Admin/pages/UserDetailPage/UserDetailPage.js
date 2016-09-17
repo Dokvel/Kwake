@@ -22,15 +22,15 @@ export function UserDetailPage(props) {
       <table className={styles.tokens}>
         <thead>
         <tr>
-          <th>Type</th>
+          <th>Token Type</th>
           <th>Token</th>
-          <th>Responder Email</th>
-          <th>Responder is New</th>
-          <th>Responder is Created</th>
-          <th>CreatedAt</th>
-          <th>OpenedAt</th>
-          <th>UsedAt</th>
-          <th>Evaluate status</th>
+          <th>Sent at</th>
+          <th>Sent to</th>
+          <th>Is new user?</th>
+          <th>Is evaluation completed?</th>
+          <th>Date of opening</th>
+          <th>Date of completion</th>
+          <th>Was new user created?</th>
         </tr>
         </thead>
         <tbody>
@@ -41,13 +41,13 @@ export function UserDetailPage(props) {
                 <tr>
                   <td>{token.type}</td>
                   <td>{token.token}</td>
+                  <td>{token.created_at && dateFormat(token.created_at, dateMask, true)}</td>
                   <td>{token.responderEmail}</td>
                   <td>{!token.responder ? 'New' : 'Exist'}</td>
-                  <td>{responder ? dateFormat(responder.created_at, dateMask, true) : 'Not Exist'}</td>
-                  <td>{token.created_at && dateFormat(token.created_at, dateMask, true)}</td>
+                  <td>{token.dateUsed ? 'Evaluate pass' : 'Evaluate not pass'}</td>
                   <td>{token.openedAt && dateFormat(token.openedAt, dateMask, true)}</td>
                   <td>{token.dateUsed && dateFormat(token.dateUsed, dateMask, true)}</td>
-                  <td>{token.dateUsed ? 'Evaluate pass' : 'Evaluate not pass'}</td>
+                  <td>{responder ? dateFormat(responder.created_at, dateMask, true) : 'Not Exist'}</td>
                 </tr>
               );
             }
