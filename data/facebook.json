@@ -2,6 +2,9 @@
   "production": {
     "appId": "1766310416944532"
   },
+  "staging": {
+    "appId": "1766310416944532"
+  },
   "development": {
     "appId": "246728369056259"
   }
