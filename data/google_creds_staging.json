@@ -1,10 +1,10 @@
 {
-  "client_id": "854836621522-70sn52qg76bb7h4iijrtc514cdlorbek.apps.googleusercontent.com",
-  "project_id": "enqounterapp",
+  "client_id": "14671275629-26prd2qqiit57ggkjv4m9kldjdv2cqfe.apps.googleusercontent.com",
+  "project_id": "enqounterstaging",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://accounts.google.com/o/oauth2/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_secret": "QTa_dHLn4QA41VW8oSaB02pN",
+  "client_secret": "bPzUJh1habOcFYx9Lxb4GMnh",
   "scopes": [
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email",
