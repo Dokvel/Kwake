@@ -2,7 +2,7 @@
  * Entry Script
  */
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   process.env.webpackAssets = JSON.stringify(require('./dist/manifest.json'));
   process.env.webpackChunkAssets = JSON.stringify(require('./dist/chunk-manifest.json'));
   // In production, serve the webpacked server file.
