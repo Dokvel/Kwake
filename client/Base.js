@@ -32,6 +32,10 @@ export class Base extends Component {
               name: 'viewport',
               content: 'width=device-width, initial-scale=1',
             },
+            {
+              property: "og:title",
+              content: `ENQOUNTER - enQounter App`
+            }
           ]}
         />
         {this.props.children}

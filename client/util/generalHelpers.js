@@ -9,3 +9,10 @@ export function isTouchDevice() {
 export function isAppleDevice() {
   return ((browser.name === 'ios') || (browser.name === 'safari') || (browser.name === undefined));
 }
+
+export function domainAddress() {
+  if (!window.location.origin) {
+    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+  }
+  return window.location.origin;
+}
