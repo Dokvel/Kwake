@@ -2,7 +2,7 @@ import React, { Component }from 'react';
 import cn from 'classnames';
 import Tooltip from '../Tooltip/Tooltip';
 
-import { isAppleDevice } from '../../util/generalHelpers';
+import { problemWithFilters } from '../../util/generalHelpers';
 import styles from './TalentIcon.scss';
 
 export default class TalentIcon extends Component {
@@ -67,7 +67,7 @@ export default class TalentIcon extends Component {
             <div className={iconWrapper} onClick={this.props.onClick}>
               <i className={this.props.name} aria-hidden="true"/>
             </div>
-            { isAppleDevice() ? this.renderAppleLiquidContainer() : this.renderLiquidContainer() }
+            { problemWithFilters() ? this.renderAppleLiquidContainer() : this.renderLiquidContainer() }
           </div>
           <div className={waveT}></div>
           <div className={waveF}></div>

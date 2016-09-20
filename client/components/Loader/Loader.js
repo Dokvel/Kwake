@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Import Functions
-import { isAppleDevice } from '../../util/generalHelpers';
+import { problemWithFilters } from '../../util/generalHelpers';
 
 // Import Styles
 import styles from './Loader.scss';
@@ -34,7 +34,7 @@ export default class Loader extends Component {
   render() {
     return (
       <div className={styles.container}>
-        { isAppleDevice() ? this.renderAppleLoader() : this.renderLoader() }
+        { problemWithFilters() ? this.renderAppleLoader() : this.renderLoader() }
         <svg>
           <defs>
             <filter id="filter">

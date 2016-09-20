@@ -21,6 +21,10 @@ function Footer(props) {
       <Link to="/">
         Join enQounter for free now!
       </Link>
+      <br />
+      <Link to="/terms">
+        Terms and Conditions
+      </Link>
     </div>
   )
 }

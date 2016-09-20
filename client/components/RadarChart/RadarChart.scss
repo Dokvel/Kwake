@@ -10,11 +10,18 @@ svg {
   height: 100%;
 }
 
+#radarChart {
+  height: 100%;
+  width: 100%;
+}
+
 #chart {
   animation: rotation 30s linear infinite;
 }
 
 .radarChartContainer {
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 

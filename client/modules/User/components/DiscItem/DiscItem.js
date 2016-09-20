@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cn from 'classnames';
 
-import { isAppleDevice } from '../../../../util/generalHelpers';
+import { problemWithFilters } from '../../../../util/generalHelpers';
 
 import RangeSlider from '../../../../components/RangeSlider/RangeSlider';
 import Tooltip from '../../../../components/Tooltip/Tooltip';
@@ -59,7 +59,7 @@ export class DiscItem extends Component {
       <div className={styles.container}>
         <div className={styles.name}>{this.props.name}</div>
         <div className={styles.description}>{this.props.description}</div>
-        { isAppleDevice() ? this.renderAppleControls() : this.renderControls() }
+        { problemWithFilters() ? this.renderAppleControls() : this.renderControls() }
       </div>
     );
   }

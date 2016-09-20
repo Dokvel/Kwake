@@ -6,6 +6,6 @@ export function isTouchDevice() {
   || (navigator.msMaxTouchPoints > 0));
 }
 
-export function isAppleDevice() {
-  return ((browser.name === 'ios') || (browser.name === 'safari') || (browser.name === undefined));
+export function problemWithFilters() {
+  return ((browser.name === 'ios') || (browser.name === 'safari') || (browser.name === 'edge') || (browser.name === 'ie') || (browser.name === undefined));
 }

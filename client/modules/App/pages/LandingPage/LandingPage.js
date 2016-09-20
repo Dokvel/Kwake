@@ -12,7 +12,7 @@ import RadarChart from '../../../../components/RadarChart/RadarChart';
 
 // Import Functions
 import { generateAVG } from '../../../../util/feedbackHelpers';
-import { isAppleDevice } from '../../../../util/generalHelpers';
+import { problemWithFilters } from '../../../../util/generalHelpers';
 
 // Import Styles
 import styles from './LandingPage.scss';
@@ -74,7 +74,7 @@ export class LandingPage extends Component {
       { 1: 4, 2: 3, 3: 4, 4: 3, 5: 4 }
     ];
     let summary;
-    if (isAppleDevice()) {
+    if (problemWithFilters()) {
       summary = generateAVG(keys, talentRates);
     } else {
       summary = {1:0,2:0,3:0,4:0,5:0};
@@ -86,7 +86,7 @@ export class LandingPage extends Component {
           <div className={styles['column-left']}>
             <div className={styles['radar-chart']}>
               <div className={styles['main-star']}>
-                { isAppleDevice() ? undefined : <Loader /> }
+                { problemWithFilters() ? undefined : <Loader /> }
 
               </div>
               <RadarChart

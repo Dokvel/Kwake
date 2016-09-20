@@ -1,5 +1,11 @@
 @import "../../../stylesheets/modules/config";
 
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMidWidth) {
+  .content {
+    min-width: 0 !important;
+  }
+}
+
 .button {
   display: inline-flex;
   padding: 0;

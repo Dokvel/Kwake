@@ -22,6 +22,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
   require('./modules/User/pages/SetupAccountPage/SetupAccountPage');
   require('./modules/App/pages/LandingPage/LandingPage');
   require('./modules/App/pages/ThanxPage/ThanxPage');
+  require('./modules/App/pages/TermsPage/TermsPage');
   require('./modules/User/pages/UserProfilePage/UserProfilePage');
   require('./modules/Evaluate/pages/UserEvaluatePage/UserEvaluatePage');
   require('./modules/Admin/pages/AdminLoginPage/AdminLoginPage');
@@ -39,6 +40,14 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/App/pages/ThanxPage/ThanxPage').default);
+        });
+      }}
+    />
+    <Route
+      path="/terms"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/App/pages/TermsPage/TermsPage').default);
         });
       }}
     />
