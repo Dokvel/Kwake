@@ -107,7 +107,7 @@ By continuing to access or use our Service after any revisions become effective,
 
 ## Contact Us
 
-If you have any questions about these Terms, please contact us.
+If you have any questions about these Terms, please [contact us](mailto://enqounter@gmail.com).
 `;
 
 export default content;

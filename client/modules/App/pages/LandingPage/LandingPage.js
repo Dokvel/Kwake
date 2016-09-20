@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import MediaQuery from 'react-responsive';
 import _ from 'lodash';
 import browser from 'detect-browser';
@@ -109,7 +109,11 @@ export class LandingPage extends Component {
               </MediaQuery>
             </div>
             <div className={styles.footer}>
-              Copyright © {new Date().getFullYear()} enQounter. All rights reserved.
+              Copyright © {new Date().getFullYear()} enQounter.
+              <Link to="/terms">
+                Terms.
+              </Link>
+              All rights reserved.
             </div>
           </div>
         </div>
