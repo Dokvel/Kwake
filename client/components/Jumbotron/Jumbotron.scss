@@ -17,6 +17,21 @@
     font-weight: 300;
     line-height: 1.5em;
   }
+
+  .button-section {
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    a {
+      margin-top: 5px;
+      color: $grey;
+      font-size: $baseFontSize-S;
+      opacity: .25;
+      text-decoration: none;
+    }
+  }
 }
 
 @media (min-width: 0px) and (max-width: $tabletMaxWidth) {

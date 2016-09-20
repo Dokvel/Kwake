@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 // Import Components
 import GoogleButton from '../GoogleButton/GoogleButton';
@@ -24,8 +25,11 @@ class Jumbotron extends Component {
         <div className={styles.text} style={textStyle}>
           {this.props.text}
         </div>
-        <div className={styles.button}>
+        <div className={styles['button-section']}>
           <GoogleButton {...this.props} />
+          <Link to="/terms">
+            Terms and Conditions
+          </Link>
         </div>
       </div>
     );

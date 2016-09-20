@@ -86,12 +86,6 @@
          font-size: $baseFontSize-S;
          font-weight: 600;
          opacity: 0.25;
-
-         a {
-           margin: 0 5px;
-           color: $grey;
-           text-decoration: none;
-         }
        }
      }
    }
@@ -141,12 +135,6 @@
           font-size: $baseFontSize-S;
           font-weight: 600;
           opacity: 0.25;
-
-          a {
-            margin: 0 5px;
-            color: $grey;
-            text-decoration: none;
-          }
         }
       }
     }
@@ -189,13 +177,6 @@
           font-weight: 600;
           opacity: 0.25;
           text-align: center;
-
-          a {
-            display: block;
-            margin: 5px 0;
-            color: $grey;
-            text-decoration: none;
-          }
         }
       }
     }
