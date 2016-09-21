@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import MediaQuery from 'react-responsive';
-
+import { browserHistory } from 'react-router';
+import { getFirstUserPageLink } from '../../../../util/generalHelpers';
 // Import Components
 import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
 import Footer from '../../../../components/Footer/Footer';
 
-// Import Functions
 import { isLoggedIn } from '../../../../util/apiCaller';
 
 // Import Selectors
@@ -20,12 +19,6 @@ let atom = require("./../../../../../vendor/atom.svg");
 
 export class ThanxPage extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    if (isLoggedIn() && nextProps.currentUser) {
-      browserHistory.push('/');
-    }
-  }
-
   renderJumbotron(titleSize, textSize) {
     return (
       <Jumbotron
@@ -33,7 +26,12 @@ export class ThanxPage extends Component {
         title='enQounter &mdash; professional profiles that don’t suck!'
         titleSize={titleSize}
         text='With enQounter you can quickly create and share you psychological profile and let others review it.'
-        textSize={textSize} />
+        textSize={textSize}
+        onGoogleSuccess={(user)=> {
+          if (isLoggedIn()) {
+            browserHistory.push(getFirstUserPageLink(user))
+          }
+        }}/>
     );
   }
 

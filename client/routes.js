@@ -36,26 +36,10 @@ export default (
 
   <Route path="/" component={Base}>
     <Route
-      path="/thanks"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/App/pages/ThanxPage/ThanxPage').default);
-        });
-      }}
-    />
-    <Route
       path="/terms"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/App/pages/TermsPage/TermsPage').default);
-        });
-      }}
-    />
-    <Route
-      path="/evaluate(/:token)"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Evaluate/pages/UserEvaluatePage/UserEvaluatePage').default);
         });
       }}
     />
@@ -89,6 +73,22 @@ export default (
         getComponent={(nextState, cb) => {
           require.ensure([], require => {
             cb(null, require('./modules/App/pages/LandingPage/LandingPage').default);
+          });
+        }}
+      />
+      <Route
+        path="/thanks"
+        getComponent={(nextState, cb) => {
+          require.ensure([], require => {
+            cb(null, require('./modules/App/pages/ThanxPage/ThanxPage').default);
+          });
+        }}
+      />
+      <Route
+        path="/evaluate(/:token)"
+        getComponent={(nextState, cb) => {
+          require.ensure([], require => {
+            cb(null, require('./modules/Evaluate/pages/UserEvaluatePage/UserEvaluatePage').default);
           });
         }}
       />

@@ -17,6 +17,7 @@ export default class GoogleButton extends Component {
               }
             }).then(userInfo => {
             this.props.dispatch(authenticated(userInfo.user));
+            this.props.onSuccess && this.props.onSuccess(userInfo.user);
           });
         } else {
           // There was an error.

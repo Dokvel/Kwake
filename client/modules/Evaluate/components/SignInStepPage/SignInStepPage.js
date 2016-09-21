@@ -31,7 +31,10 @@ export class SignInStepPage extends Component {
             title='enQounter &mdash; professional profiles that don’t suck!'
             titleSize={56}
             text='With enQounter you can quickly create and share you psychological profile and let others review it.'
-            textSize={18} />
+            textSize={18}
+            onContinue={()=> {
+              this.props.onCompleted();
+            }}/>
         </div>
       </div>
     );
