@@ -46,7 +46,7 @@ export function signIn(req, res) {
                   return User.findOne().sort('-created_at');
                 })
                 .then(lastUser => {
-                  const scoreLimits = [5, 10, 15, 20];
+                  const scoreLimits = [5, 10];
 
                   if (!user.scoreLimit) {
                     if (!lastUser || !lastUser.scoreLimit) {
