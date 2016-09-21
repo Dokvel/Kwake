@@ -182,7 +182,7 @@ export default class RadarChart extends Component {
       this.renderChart();
     }
 
-    let chartID = cn({
+    let chartID = cn(styles.radarChart, {
        [styles.chart]: _.isEmpty(this.props.talentRates)
      });
 

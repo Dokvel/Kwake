@@ -1,0 +1,55 @@
+@import "../../../../../stylesheets/modules/config";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: $landingBackgroundColor;
+  background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: contain;
+
+  .wrapper {
+    font-weight: 100;
+    line-height: 1.5em;
+
+    h1, h2 {
+      font-family: $futuraFontFamily;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    a {
+      color: #FF7555;
+      font-weight: normal;
+      text-decoration: none;
+    }
+  }
+}
+
+@media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth - 1) {
+  .container {
+    .wrapper {
+      margin: 20px;
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: $tabletMaxWidth) {
+  .container {
+    .wrapper {
+      max-width: 640px;
+      margin: 50px 0;
+    }
+  }
+}

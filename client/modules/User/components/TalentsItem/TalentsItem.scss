@@ -1,5 +1,11 @@
 @import "../../../../../stylesheets/modules/config";
 
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMidWidth) {
+  .title {
+    font-size: 12px !important;
+  }
+}
+
 .talent-box {
   display: flex;
   flex-flow: column wrap;
