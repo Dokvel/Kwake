@@ -81,8 +81,6 @@ $mid: 50%;
         top: -($handleRadius/2)+$progressHeight/2;
         border-radius: 100%;
         opacity: .5;
-
-        animation: pulsing 2s infinite alternate ease-in-out;
       }
 
       .handle-left {

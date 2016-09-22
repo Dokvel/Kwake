@@ -14,3 +14,10 @@ export function problemWithFilters() {
 export function getFirstUserPageLink(user) {
   return hasProfileCompleted(user) ? `/profile/${ user.cuid }` : '/users/setup'
 }
+
+export function domainAddress() {
+  if (!window.location.origin) {
+    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+  }
+  return window.location.origin;
+}

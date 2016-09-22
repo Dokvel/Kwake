@@ -2,7 +2,10 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { domainAddress } from '../../../../util/generalHelpers';
 import { STATEMENTS } from '../../../../../utils/disc_helpers';
+
+import Helmet from 'react-helmet';
 
 // Import Style
 import styles from './UserProfilePage.scss';
@@ -82,6 +85,17 @@ class UserProfilePage extends Component {
 
     return (
       <div className={styles.container}>
+        <Helmet title={`${this.props.user.givenName} ${this.props.user.familyName} Profile`}
+                meta={[
+                  {
+                    "property": "og:title",
+                    "content": `${this.props.user.givenName} ${this.props.user.familyName} Profile`
+                  },
+                  {
+                    "property": "og:image",
+                    "content": `${domainAddress()}/api/users/${this.props.user.cuid}/sm_post_picture`
+                  }
+                ]}/>
         {this.props.user && <UserProfileCard
           user={this.props.user}
           showRequestModal={this.showRequestModal}

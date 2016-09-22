@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import cn from 'classnames';
+import { domainAddress } from '../../../../util/generalHelpers';
 
 // Import Components
 import Button from '../../../../components/Button/Button';
@@ -20,14 +21,11 @@ import talents from '../../../../../data/talents';
 class UserProfileCard extends React.Component {
 
   fbShare = () => {
-    if (!window.location.origin) {
-      window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-    }
     FB.ui({
       method: 'feed',
-      link: window.location.origin,
+      link: domainAddress(),
       caption: 'enQounter',
-      picture: `${window.location.origin}/api/users/${this.props.user.cuid}/sm_post_picture`
+      picture: `${domainAddress()}/api/users/${this.props.user.cuid}/sm_post_picture`
     }, (response) => {
       console.log(response);
     });
