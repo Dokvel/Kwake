@@ -32,10 +32,10 @@ export function getPronoun(gender, person = 'third', pronoun_case = 'subjective'
         'reflexive': 'himself'
       },
       'unknown': {
-        'subjective': 'he/she/they',
-        'objective': 'him/her/them',
-        'possessive': 'his/her/their',
-        'reflexive': 'himself/herself/themself'
+        'subjective': 'he/she',
+        'objective': 'him/her',
+        'possessive': 'his/her',
+        'reflexive': 'himself/herself'
       }
     }
   };

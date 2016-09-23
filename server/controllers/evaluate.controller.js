@@ -7,7 +7,6 @@ import { generateRandomToken } from '../util/security';
 import _ from 'lodash';
 import { sendEvaluateRequest } from '../../emails';
 import { getPersonalityType } from '../../utils/disc_helpers';
-import { getPronoun } from '../../utils/textHelpers';
 
 export function getTokenInfo(req, res) {
   if (!req.params.token) {

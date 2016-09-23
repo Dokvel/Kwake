@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 
-import { getPronoun } from '../../../../../utils/textHelpers';
+import { getPronoun, indefiniteArticle } from '../../../../../utils/textHelpers';
 import { PERSONALITY_STATEMENT, TEAM_STATEMENT, TROUBLESHOOTING_STATEMENT } from '../../../../../utils/disc_helpers';
 
 // Import Style
@@ -41,7 +41,7 @@ export class EvaluateTalentsForm extends Component {
           <div key="personality" className={styles['statement-row']}>
             <RateItemStatement statementKey={PERSONALITY_STATEMENT} value={this.state[PERSONALITY_STATEMENT]}
                                onRate={this.onRate.bind(this, PERSONALITY_STATEMENT)}>
-              <span><b>{this.props.evaluate.givenName}</b>’ overall profile says that {getPronoun(this.props.evaluate.gender)}’s an <b>{this.props.personalityType.name}</b>.
+              <span><b>{this.props.evaluate.givenName}</b>’ overall profile says that {getPronoun(this.props.evaluate.gender)}’s {indefiniteArticle(this.props.personalityType.name)} <b>{this.props.personalityType.name}</b>.
                 That means {this.props.personalityType.description} <b>How correct is this?</b></span>
             </RateItemStatement>
           </div>
