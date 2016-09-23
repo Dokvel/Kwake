@@ -18,6 +18,7 @@ const config = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || googleCreds.client_id,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || googleCreds.client_secret,
   GOOGLE_SCOPES: googleCreds.scopes,
+  GOOGLE_ANALYTICS_ID: googleCreds.analyticsID,
   admin: {
     username: process.env.ADMIN_USERNAME || 'admin',
     password: process.env.ADMIN_PASSWORD || 'secretSecretPassword'

@@ -16,6 +16,7 @@ import cn from 'classnames';
 
 import CustomScrollbar from '../../../../components/CustomScrollbar/CustomScrollbar';
 import Loader from '../../../../components/Loader/Loader';
+import { gaLogReviewRequestSent } from '../../../../../utils/gaHelpers';
 
 class RequestReviewModal extends Component {
   constructor(props) {
@@ -67,7 +68,8 @@ class RequestReviewModal extends Component {
       setTimeout(() => {
         this.setState({ isSent: false });
       }, 5000);
-    })
+    });
+    gaLogReviewRequestSent();
   };
 
   onSelect = (email)=> {

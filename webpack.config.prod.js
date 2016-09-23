@@ -65,14 +65,14 @@ module.exports = {
         loader: 'babel'
       }, {
         test: /\.(jpe?g|gif|png|svg)$/i,
-        exclude: [path.resolve(__dirname, "vendor/fonts")],
+        exclude: [path.resolve(__dirname, "vendor/fonts"), path.resolve(__dirname, "vendor/bootstrap/fonts")],
         loader: 'url-loader?limit=10000'
       }, {
         test: /\.json$/,
         loader: 'json-loader'
       }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
-        include: [path.resolve(__dirname, "vendor/fonts")],
+        include: [path.resolve(__dirname, "vendor/fonts"), path.resolve(__dirname, "vendor/bootstrap/fonts")],
         loader: 'file?name=public/fonts/[name].[ext]'
       }
     ],
