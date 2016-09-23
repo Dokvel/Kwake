@@ -1,33 +1,36 @@
 @import "../modules/config";
 
 .kwake-tooltip {
-  font-size: $baseFontSize-S !important;
-  color: $grey !important;
+  font-size: $baseFontSize-M !important;
+  color: $light-black !important;
   font-family: $baseFontFamily !important;
   font-weight: 300 !important;
   max-width: 320px !important;
-  background-color: black !important;
+  background-color: $grey !important;
   height: auto !important;
   line-height: normal !important;
   padding: 15px !important;
+  border-radius: 2px !important;
+  box-shadow:0 0 5px $darkGreyBorderColor !important;
+  text-align: center !important;
   &.place-top {
     &:after {
-      border-top: 6px solid black !important;
+      border-top: 6px solid $grey !important;
     }
   }
   &.place-left {
     &:after {
-      border-left: 6px solid black !important;
+      border-left: 6px solid $grey !important;
     }
   }
   &.place-right {
     &:after {
-      border-right: 6px solid black !important;
+      border-right: 6px solid $grey !important;
     }
   }
   &.place-bottom {
     &:after {
-      border-bottom: 6px solid black !important;
+      border-bottom: 6px solid $grey !important;
     }
   }
 }

@@ -1,0 +1,119 @@
+@import "../../../../../stylesheets/modules/config";
+
+.overlay {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  margin: 0 auto;
+  max-height: 25%;
+  max-width: 400px;
+  padding: 10px;
+  background: $grey;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0.95; /* make things invisible upon start */
+  border-radius: 2px;
+  box-shadow:0 0 5px $darkGreyBorderColor;
+  animation: fadeIn cubic-bezier(0.4, 0.0, 0.2, 1) 1;
+  animation-fill-mode: forwards;
+  animation-duration: 225ms;
+}
+
+.hide {
+  opacity: 0;
+  animation: fadeOut cubic-bezier(0.4, 0.0, 0.2, 1) 1;
+  animation-fill-mode: forwards;
+  animation-duration: 150ms;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    top: -30%;
+  }
+  to {
+    opacity: 0.95;
+    top: 10px;
+  }
+
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+
+    top: -30%;
+  }
+  to {
+    opacity: 0.95;
+    top: 10px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+
+    top: -30%;
+  }
+  to {
+    opacity: 0.95;
+    top: 10px;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  to {
+    opacity: 0;
+    top: -30%;
+  }
+  from {
+    opacity: 0.95;
+    top: 10px;
+  }
+
+}
+
+@-moz-keyframes fadeOut {
+  to {
+    opacity: 0;
+
+    top: -30%;
+  }
+  from {
+    opacity: 0.95;
+    top: 10px;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    top: -30%;
+  }
+  from {
+    opacity: 0.95;
+    top: 10px;
+  }
+}
+
+.mobile-message {
+  color: $light-black;
+  font-size: $baseFontSize-M;
+  font-family: $baseFontFamily;
+  padding: 5px;
+  text-align: center;
+}
+
+.mobile-title {
+  padding-bottom: 10px;
+  color: $light-black;
+  text-align: center;
+  font-size: $baseFontSize-M;
+  font-family: $futuraFontFamily;
+  text-transform: uppercase;
+}

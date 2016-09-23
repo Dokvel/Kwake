@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 import dateFormat from 'dateformat';
+
+import { browserHistory } from 'react-router';
+
 // Import Style
 import styles from './UserDetailPage.scss';
 
@@ -12,13 +15,26 @@ import { fetchUsers, fetchTokens } from '../../AdminActions';
 // Import Selectors
 import { getUser, getUserTokens, getUsers } from '../../AdminReducer';
 
+import { callAdminApi } from '../../../../util/apiCaller';
+
 const dateMask = 'mm/dd/yyyy, HH:MM:ss';
 
 export function UserDetailPage(props) {
+
+  const resetProfile = ()=> {
+    return callAdminApi(`users/${props.user.cuid}/reset_profile`).then((response)=> {
+      browserHistory.push('/admin/users');
+    });
+  };
+
   return (
     <div className={styles.container}>
       <Helmet title={`${props.user.givenName} ${props.user.familyName}`}/>
-      <div>{props.user.givenName} {props.user.familyName}</div>
+      <div>
+        {props.user.givenName} {props.user.familyName}
+        <button onClick={resetProfile}>Reset Profile</button>
+      </div>
+
       <table className={styles.tokens}>
         <thead>
         <tr>

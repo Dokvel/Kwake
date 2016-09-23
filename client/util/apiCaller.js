@@ -58,6 +58,10 @@ export default function callApi(endpoint, method = 'get', body) {
 
   const unauthorizedCallback = () => {
     localStorage.removeItem('authentication_token');
+    window.flashMessage = {
+      title: 'Authentication error',
+      text: 'You need to re-login in app for renew Google access, thank you.'
+    };
     browserHistory.push('/');
   };
 

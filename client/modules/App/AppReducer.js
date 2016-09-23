@@ -1,6 +1,7 @@
 // Import Actions
-import { AUTHENTICATED, NOT_AUTHENTICATED } from './AppActions';
+import { AUTHENTICATED, NOT_AUTHENTICATED, UPDATE_FLASH_MESSAGE, DESTROY_FLASH_MESSAGE } from './AppActions';
 import { getUser } from '../User/UserReducer';
+import cuid from 'cuid';
 
 // Initial State
 const initialState = {};
@@ -12,6 +13,12 @@ const AppReducer = (state = initialState, action) => {
         ...state,
         currentUser: action.user.cuid,
       };
+    case UPDATE_FLASH_MESSAGE:
+      window.flashMessage = { title: action.title, text: action.text };
+      return { ...state, flashMessageId: cuid() };
+    case DESTROY_FLASH_MESSAGE:
+      window.flashMessage = undefined;
+      return { ...state, flashMessageId: cuid() };
     case NOT_AUTHENTICATED:
       return initialState;
     default:

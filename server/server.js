@@ -100,17 +100,46 @@ mongoose.connect(serverConfig.mongoURL, (error) => {
   //dummyData();
 });
 
+var OAuth2 = google.auth.OAuth2;
+var oauth2Client = new OAuth2(serverConfig.GOOGLE_CLIENT_ID, serverConfig.GOOGLE_CLIENT_SECRET, 'postmessage');
+
 //TODO: Make JWT auth strategy
 passport.use(new BearerStrategy(
   (token, done) => {
     User.findOne({ authenticationToken: token }, (err, user) => {
       if (err) {
         return done(err);
+      } else {
+        if (!user) {
+          return done(null, false);
+        } else {
+
+          let tokens = getGoogleCredentials(user);//Get current tokens
+          oauth2Client.setCredentials(tokens);
+
+          let isTokenExpired = tokens.expiry_date ? tokens.expiry_date <= (new Date()).getTime() : false;
+
+          if (!isTokenExpired) {
+            return done(null, user, { scope: 'all' });
+          } else if (tokens.refresh_token && isTokenExpired) {
+            oauth2Client.refreshToken_(tokens.refresh_token, (err, newTokens)=> {
+              if (err) {
+                oauth2Client.revokeCredentials(result => done(null, false))
+              } else {
+                user.googleExpiryDate = newTokens.expiry_date;
+                user.googleAccessToken = newTokens.access_token;
+                user.save().then((saved)=> {
+                  return done(null, saved, { scope: 'all' });
+                }).catch((err) => {
+                  oauth2Client.revokeCredentials(result => done(null, false))
+                });
+              }
+            });
+          } else {
+            oauth2Client.revokeCredentials(result => done(null, false))
+          }
+        }
       }
-      if (!user) {
-        return done(null, false);
-      }
-      return done(null, user, { scope: 'all' });
     });
   }
 ));

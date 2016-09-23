@@ -47,7 +47,7 @@ export class EvaluateTalentsForm extends Component {
             this.props.talents.map((talent)=> (
               <div key={talent} className={styles['talent-row']}>
                 <div className={styles.talent}>
-                  <Tooltip tip={talents[talent].description}>
+                  <Tooltip tip={talents[talent].description} title={talents[talent].name}>
                     <div className={styles.name}>{talents[talent].name}</div>
                   </Tooltip>
                   <MediaQuery query='(max-width: 767px)'>
@@ -79,10 +79,10 @@ export class EvaluateTalentsForm extends Component {
 
 EvaluateTalentsForm.propTypes = {
   talents: PropTypes.array.isRequired
-}
+};
 
 EvaluateTalentsForm.defaultProps = {
   talents: []
-}
+};
 
 export default EvaluateTalentsForm;
