@@ -42,20 +42,32 @@ class UserProfileCard extends React.Component {
       troubleshootingColorRange = getColorRange(this.props.summary.statements.troubleshooting);
     }
 
-    let cardStyles = cn(styles.card, {
-      [styles['locked--margin-top']]: this.props.isCurrentUser && !this.props.summary,
-      [styles['unlocked--margin-top']]: this.props.isCurrentUser && this.props.summary
+    let positionHelperCN = cn({
+      [styles['position-helper--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0,
+      [styles['position-helper--locked']]: this.props.isCurrentUser && !this.props.summary && this.props.feedbackRates.talents.length !== 0,
+      [styles['position-helper--unlocked']]: this.props.isCurrentUser && this.props.summary
+    });
+
+    let cardCN = cn(styles.card, {
+      [styles['card--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0,
+      [styles['card--locked']]: this.props.isCurrentUser && !this.props.summary && this.props.feedbackRates.talents.length !== 0,
+      [styles['card--unlocked']]: this.props.isCurrentUser && this.props.summary
+    });
+
+    let chartCN = cn(styles.card_chart, {
+      [styles['chart--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0
     });
 
     return (
-      <div className={cardStyles}>
+      <div className={cardCN}>
+        <div className={positionHelperCN}></div>
         { this.props.isCurrentUser && !this.props.summary &&
         <div className={styles.limitInfo}>
           <span className={styles.icon}><i className="icon-36-info" aria-hidden="true"/></span>
           Get <b>{user.scoreLimit - this.props.feedbackRates.talents.length} more</b> reviews to unlock your scores!
         </div>
         }
-        <div className={styles.card_chart}>
+        <div className={chartCN}>
           <RadarChart
             image={user.image}
             limit={user.scoreLimit}
