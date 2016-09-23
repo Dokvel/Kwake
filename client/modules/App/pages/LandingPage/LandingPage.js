@@ -11,7 +11,6 @@ import RadarChart from '../../../../components/RadarChart/RadarChart';
 
 // Import Functions
 import { generateAVG } from '../../../../util/feedbackHelpers';
-import { problemWithFilters } from '../../../../util/generalHelpers';
 
 // Import Styles
 import styles from './LandingPage.scss';
@@ -46,16 +45,13 @@ export class LandingPage extends Component {
       { 1: 3, 2: 4, 3: 5, 4: 4, 5: 3 },
       { 1: 4, 2: 3, 3: 4, 4: 3, 5: 4 }
     ];
-    let summary = problemWithFilters() ? generateAVG(keys, talentRates) : { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    let summary = generateAVG(keys, talentRates);
     return (
       <div className={styles.container}>
         <div className={styles['mobile-header']}>enQounter</div>
         <div className={styles.content}>
           <div className={styles['column-left']}>
             <div className={styles['radar-chart']}>
-              <div className={styles['main-star']}>
-                { problemWithFilters() ? undefined : <Loader /> }
-              </div>
               <RadarChart
                 image=''
                 limit={3} // just for unlocked scoreRadial propgress-border

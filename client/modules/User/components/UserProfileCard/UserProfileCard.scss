@@ -1,28 +1,92 @@
 @import "../../../../../stylesheets/modules/config";
 
+.chart--unrated {
+  margin: -50px -20px !important;
+}
+
+@media (max-width: 480px) {
+  .position-helper--unrated {
+    margin-top: -60% !important;
+  }
+
+  .position-helper--locked {
+    margin-top: -75%;
+  }
+
+  .position-helper--unlocked {
+    margin-top: -65%;
+  }
+
+  .card--unrated {
+    margin-top: 45% !important;
+  }
+
+  .card--locked {
+    margin-top: 55% !important;
+  }
+}
+
+@media (min-width: 481px) {
+  .position-helper--unrated {
+    margin-top: -200px;
+  }
+
+  .position-helper--locked {
+    margin-top: -250px;
+  }
+
+  .position-helper--unlocked {
+    margin-top: -230px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card--unrated {
+    margin-top: 142px;
+  }
+
+  .card--locked {
+    margin-top: 192px;
+  }
+
+  .card--unlocked {
+    margin-top: 172px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .card--unrated {
+    margin-top: 82px;
+  }
+
+  .card--locked {
+    margin-top: 132px;
+  }
+
+  .card--unlocked {
+    margin-top: 112px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .card--unrated {
+    margin-top: 67px !important;
+  }
+
+  .card--locked {
+    margin-top: 117px;
+  }
+
+  .card--unlocked {
+    margin-top: 97px;
+  }
+}
+
 $scoreSize: 74px;
 
 .limitInfo {
   .icon {
     padding-right: 10px;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 1024px) {
-  .unlocked--margin-top {
-    margin-top: 77px !important;
-  }
-}
-
-@media (min-width: $desktopMinWidth) and (max-width: 600px) {
-  .locked--margin-top {
-    margin-top: 155px !important;
-  }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) {
-  .locked--margin-top {
-    margin-top: 102px !important;
   }
 }
 
@@ -44,14 +108,6 @@ $scoreSize: 74px;
 }
 
 @media (min-width: $desktopMinWidth) {
-  .unlocked--margin-top {
-    margin-top: 62px;
-  }
-
-  .locked--margin-top {
-    margin-top: 88px;
-  }
-
   .card {
     margin-bottom: 65px;
     box-sizing: border-box;
@@ -67,11 +123,7 @@ $scoreSize: 74px;
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
     .limitInfo {
-      position: absolute;
       margin: 0 auto;
-      left: 0;
-      right: 0;
-      top: -180px;
       font-weight: 300;
       text-align: center;
 
@@ -84,7 +136,7 @@ $scoreSize: 74px;
       position: relative;
       height: 380px;
       width: 380px;
-      margin: -195px -20px -20px -20px;
+      margin: 0 -20px -20px -20px;
 
       font-family: $futuraFontFamily;
       text-transform: uppercase;
@@ -256,25 +308,6 @@ $scoreSize: 74px;
 }
 
 @media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
-  .unlocked--margin-top {
-    margin-top: 125px;
-  }
-
-  .locked--margin-top {
-    margin-top: 155px;
-  }
-
-  .limitInfo {
-    padding-bottom: 20px;
-
-    font-weight: 300;
-    text-align: center;
-
-    .more {
-      font-weight: 600;
-    }
-  }
-
   .card {
     box-sizing: border-box;
     position: relative;
@@ -290,11 +323,7 @@ $scoreSize: 74px;
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.5);
 
     .limitInfo {
-      position: absolute;
       margin: 0 auto;
-      left: 0;
-      right: 0;
-      top: -180px;
       font-weight: 300;
       text-align: center;
 
@@ -306,7 +335,7 @@ $scoreSize: 74px;
     &_chart {
       position: relative;
       width: 110%;
-      margin: -57.5% -5% -20px -5%;
+      margin: 0 -5% -20px -5%;
 
       font-family: $futuraFontFamily;
       text-transform: uppercase;

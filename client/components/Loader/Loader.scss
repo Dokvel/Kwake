@@ -1,150 +1,53 @@
 @import "../../../stylesheets/modules/config";
 
-$radius: 60px;
-$max: 100%;
-$mid: 50%;
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes top {
-    0% { transform: rotate(-90deg) translate(2em); }
-  100% { transform: rotate(-90deg) translate(6em); }
-}
-
-@keyframes right-top {
-    0% { transform: rotate(-18deg) translate(2em); }
-  100% { transform: rotate(-18deg) translate(5.5em); }
-}
-
-@keyframes right-bot {
-    0% { transform: rotate(54deg) translate(2em); }
-  100% { transform: rotate(54deg) translate(5em); }
-}
-
-@keyframes left-bot {
-    0% { transform: rotate(126deg) translate(2em); }
-  100% { transform: rotate(126deg) translate(4.5em); }
-}
-@keyframes left-top {
-    0% { transform: rotate(198deg) translate(2em); }
-  100% { transform: rotate(198deg) translate(5em); }
-}
-
 .container {
   height: 100%;
   width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   overflow: hidden;
 
-  svg {
-    height: 0px;
-    width: 0px;
+  .spinner {
+    width: 70px;
+    text-align: center;
   }
 
-  .wrapper {
-    height: 100%;
-    width: 100%;
-    filter: url('#filter');
+  .spinner > div {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(45deg, #FFAC52 0%, #FF3C57 100%);
 
-    animation: spin 5s infinite linear;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
   }
 
-  .ball {
-    height: $radius;
-    width: $radius;
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    top: calc(#{$mid} - #{$radius / 2});
-
-    &:before {
-      content: '';
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      top: 0;
-      background: #FF7555;
-      border-radius: 100%;
-    }
-
-    &:nth-child(1) {
-      &:before {
-        height: $radius * 2;
-        width: $radius * 2;
-        left: -$radius / 2;
-        top: -$radius / 2;
-      }
-    }
-
-    &:nth-child(2) {
-      &:before {
-        animation: top 1.5s infinite alternate ease-in-out;
-      }
-    }
-
-    &:nth-child(3) {
-      &:before {
-        animation: right-top 1.5s infinite alternate ease-in-out;
-      }
-    }
-
-   &:nth-child(4) {
-      &:before {
-        animation: right-bot 1.5s infinite alternate ease-in-out;
-      }
-    }
-
-   &:nth-child(5) {
-      &:before {
-        animation: left-bot 1.5s infinite alternate ease-in-out;
-      }
-    }
-
-   &:nth-child(6) {
-      &:before {
-        animation: left-top 1.5s infinite 0.1s alternate ease-in-out;
-      }
-    }
+  .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
   }
 
-  .apple-wrapper {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      background-color: #FF7555;
+  @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
+  }
 
-      margin: 0 auto;
-      -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
-      animation: sk-rotateplane 1.2s infinite ease-in-out;
-    }
-
-    @-webkit-keyframes sk-rotateplane {
-      0% { -webkit-transform: perspective(120px) }
-      50% { -webkit-transform: perspective(120px) rotateY(180deg) }
-      100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
-    }
-
-    @keyframes sk-rotateplane {
-      0% {
-        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
-      } 50% {
-        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
-      } 100% {
-        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-      }
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 40% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
     }
   }
 }
