@@ -1,31 +1,20 @@
 import React, { Component, PropTypes }from 'react';
 import { isTouchDevice } from '../../util/generalHelpers';
-import cn from 'classnames';
 import ReactTooltip from 'react-tooltip';
+import { connect } from 'react-redux';
 
-import styles from './Tooltip.scss';
+import { showFlashMessage } from '../../modules/App/AppActions';
 
 class Tooltip extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { showMobile: false };
-  };
 
-  showMobileTooltip = (event) => {
-    this.setState({ showMobile: true });
-    setTimeout(() => {
-      this.setState({ showMobile: false });
-    }, 5000);
+  setFlashMessage = (e)=> {
+    this.props.dispatch(showFlashMessage(this.props.title, this.props.tip));
   };
 
   renderTouchable = (children) => {
     return (
-      <div onClick={this.showMobileTooltip}>
+      <div onClick={this.setFlashMessage}>
         {children}
-        <div className={cn(styles.overlay, { [styles['overlay--visible']]: this.state.showMobile })}>
-          <span className={styles['mobile-title']}>{this.props.title}</span>
-          <span className={styles['mobile-message']}>{this.props.tip}</span>
-        </div>
       </div>
     )
   };
@@ -60,4 +49,8 @@ Tooltip.defaultProps = {
   disabled: false
 };
 
-export default Tooltip;
+function mapStateToProps(store) {
+  return {};
+}
+
+export default connect(mapStateToProps)(Tooltip);

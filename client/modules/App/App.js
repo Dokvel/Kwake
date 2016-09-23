@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import cn from 'classnames';
 
 // Import Actions
-import { authenticated } from './AppActions';
+import { authenticated, notAuthenticated } from './AppActions';
 import callApi, { isLoggedIn } from '../../util/apiCaller';
 
 // Import Components
@@ -26,6 +25,12 @@ export class App extends Component {
       callApi('users/me', 'get').then(userInfo => {
         this.props.dispatch(authenticated(userInfo.user));
       });
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (!isLoggedIn()) {
+      this.props.dispatch(notAuthenticated())
     }
   }
 

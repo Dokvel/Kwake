@@ -59,6 +59,7 @@ export function dropAll(req, res) {
     email: "demo.kwake@gmail.com",
     image: "https://lh4.googleusercontent.com/-9GtzGQSWlcY/AAAAAAAAAAI/AAAAAAAAAAs/rQ3kmKyAtVo/photo.jpg",
     givenName: "Kwake", familyName: "Demo",
+    scoreLimit: 10,
     talents: demoTalents,
     ...personalityTypeKeyObj,
     googleAccessToken: 'demo_access_token',
@@ -75,65 +76,51 @@ export function dropAll(req, res) {
     token: "demo_token"
   });
 
-  User.remove({}).exec((err, result) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      user.save((err, saved) => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          Token.remove({}).exec((err, result) => {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              evaluateToken.save((err, savedToken) => {
-                if (err) {
-                  res.status(500).send(err);
-                } else {
-                  Evaluate.remove({}).exec((err, result) => {
-                    if (err) {
-                      res.status(500).send(err);
-                    } else {
-                      let evaluates = [];
-                      let personalityKey = getPersonalityType(personalityTypeKeyObj).key;
+  User.find().then(users => {
+    users.forEach((user)=> {
+      let tokens = getGoogleCredentials(user);
+      oauth2Client.setCredentials(tokens);
+      oauth2Client.revokeCredentials(result => {
+        console.log('Google removed creds: ' + user.cuid);
+      })
+    });
+    return User.remove()
+  }).then(result => {
+    return user.save();
+  }).then(saved => {
+    return Token.remove();
+  }).then(result => {
+    return evaluateToken.save();
+  }).then(savedToken => {
+    return Evaluate.remove();
+  }).then(result => {
+    let evaluates = [];
+    let personalityKey = getPersonalityType(personalityTypeKeyObj).key;
 
-                      _.times(10, () => {
-                        let talents = {};
-                        _.each(demoTalents, (talentKey) => {
-                          talents[talentKey] = _.random(1, 5, true);
-                        });
-                        evaluates.push({
-                          cuid: cuid(),
-                          requester: user.cuid,
-                          responderEmail: evaluateToken.responderEmail,
-                          personalityKey,
-                          statements: {
-                            personality: _.random(1, 5, true),
-                            troubleshooting: _.random(1, 5, true),
-                            team: _.random(1, 5, true)
-                          },
-                          talents
-                        });
-                      });
-
-                      Evaluate.collection.insert(evaluates, (err, savedEvaluates) => {
-                        if (err) {
-                          res.status(500).send(err);
-                        } else {
-                          res.redirect('/');
-                        }
-                      });
-                    }
-                  });
-                }
-              });
-            }
-          });
-        }
+    _.times(10, () => {
+      let talents = {};
+      _.each(demoTalents, (talentKey) => {
+        talents[talentKey] = _.random(1, 5, true);
       });
-    }
-  });
+      let evaluateObj = {
+        cuid: cuid(),
+        requester: user.cuid,
+        responderEmail: evaluateToken.responderEmail,
+        personalityKey,
+        statements: {
+          personality: _.random(1, 5, true),
+          troubleshooting: _.random(1, 5, true),
+          team: _.random(1, 5, true)
+        },
+        talents
+      };
+      evaluates.push(new Evaluate(evaluateObj));
+    });
+
+    return Evaluate.create(evaluates);
+  }).then(savedEvaluates => {
+    res.redirect('/');
+  }).catch(err => res.status(500).send(err));
 }
 
 export function getUser(req, res) {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import FlashMessage from './modules/App/components/FlashMessage/FlashMessage';
+import { connect } from 'react-redux';
 
 // Base stylesheet
 require('../stylesheets/static/layout.scss');
@@ -38,10 +40,18 @@ export class Base extends Component {
             }
           ]}
         />
+        { typeof window !== 'undefined' && window.flashMessage &&
+        <FlashMessage message={window.flashMessage.text} title={window.flashMessage.title}/>
+        }
         {this.props.children}
       </div>
     );
   }
 }
 
-export default Base;
+function mapStateToProps(store) {
+  return { flashMessageId: store.app.flashMessageId };
+}
+
+export default connect(mapStateToProps)(Base);
+

@@ -25,6 +25,7 @@ export default function (router) {
     });
 
   router.get('/users', ensureLoggedIn, UserController.getUsers);
+  router.get('/users/:user_cuid/reset_profile', ensureLoggedIn, UserController.resetProfileUser);
   router.get('/users/tokens', ensureLoggedIn, UserController.getTokens);
 
   return router;
