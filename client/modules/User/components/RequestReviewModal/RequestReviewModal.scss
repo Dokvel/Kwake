@@ -164,13 +164,13 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $mobileMaxWidth) {
   .container {
     width: 100%;
   }
 }
 
-@media (min-width: 481px) and (max-width: $tabletMaxWidth) {
+@media (min-width: $desktopMinWidth) and (max-width: $tabletMaxWidth) {
   .container {
     max-width: 450px;
   }

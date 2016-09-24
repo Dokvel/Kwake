@@ -17,7 +17,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $mobileMaxWidth) {
   .dialog {
     left: 0 !important;
   }
