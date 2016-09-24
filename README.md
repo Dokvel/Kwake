@@ -1,7 +1,7 @@
 # enQounter
 
-- [production](http://enqpunter.io)
-- [staging](http://staging.enqpunter.io)
+- [production](http://enqounter.co)
+- [staging](http://staging.enqounter.co)
 
 ## Quickstart
 
