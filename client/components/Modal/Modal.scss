@@ -6,6 +6,7 @@
   color: $grey !important;
   padding: 0 !important;
   a[class^="closeButton"] {
+    cursor: pointer;
     left: initial !important;
     right: -50px !important;
     svg {
@@ -16,8 +17,13 @@
   }
 }
 
-@media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth) {
+@media (max-width: 480px) {
+  .dialog {
+    left: 0 !important;
+  }
+}
 
+@media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth) {
   .dialog {
     a[class^="closeButton"] {
       right: 10px !important;

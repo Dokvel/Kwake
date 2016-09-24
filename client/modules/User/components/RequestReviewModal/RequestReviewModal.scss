@@ -164,7 +164,13 @@
   }
 }
 
-@media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth) {
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 481px) and (max-width: $tabletMaxWidth) {
   .container {
     max-width: 450px;
   }
