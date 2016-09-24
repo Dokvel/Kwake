@@ -7,6 +7,7 @@ import { domainAddress } from '../../../../util/generalHelpers';
 import Button from '../../../../components/Button/Button';
 import RadarChart from '../../../../components/RadarChart/RadarChart';
 import ScoreRadial from '../../../../components/ScoreRadial/ScoreRadial';
+import Tooltip from '../../../../components/Tooltip/Tooltip';
 
 // Import Functions
 import { getPersonalityType } from '../../../../../utils/disc_helpers';
@@ -58,6 +59,8 @@ class UserProfileCard extends React.Component {
       [styles['chart--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0
     });
 
+    let limitMessage = `Get ${user.scoreLimit - this.props.feedbackRates.talents.length} more reviews to unlock your scores!`;
+
     return (
       <div className={cardCN}>
         <div className={positionHelperCN}></div>
@@ -100,11 +103,15 @@ class UserProfileCard extends React.Component {
         <div className={styles.card_desc}>
           <div className={styles.card_desc_score}>
             {
-              this.props.summary && this.props.summary.statements ?
-                <span className={styles.card_desc_score_summary}>
+              this.props.summary && this.props.summary.statements
+              ?
+              <span className={styles.card_desc_score_summary}>
                 {this.props.summary.statements.personality.toFixed(1)}
-              </span> :
+              </span>
+              :
+              <Tooltip tip={limitMessage}>
                 <i className="icon-35-lock"/>
+              </Tooltip>
             }
           </div>
           <div className={styles.card_desc_text}>
@@ -131,21 +138,26 @@ class UserProfileCard extends React.Component {
           <div className={styles.card_info_score}>
             {
               this.props.summary && this.props.summary.statements
-                ?
-                <div className={styles.card_info_score_radial}>
-                  <ScoreRadial
-                    id={'team'}
-                    colorStart={teamColorRange[0]}
-                    colorEnd={teamColorRange[1]}
-                    contentType={'text'}
-                    content={this.props.summary.statements.team.toFixed(1)}
-                    maxValue={5}
-                    value={this.props.summary.statements.team}
-                    strokeWidth={1}
-                    strokeDistance={2}
-                    progressStrokeWidth={5}/>
-                </div> :
-                <div className={styles.card_info_score_icon}><i className="icon-35-lock"/></div>
+              ?
+              <div className={styles.card_info_score_radial}>
+                <ScoreRadial
+                  id={'team'}
+                  colorStart={teamColorRange[0]}
+                  colorEnd={teamColorRange[1]}
+                  contentType={'text'}
+                  content={this.props.summary.statements.team.toFixed(1)}
+                  maxValue={5}
+                  value={this.props.summary.statements.team}
+                  strokeWidth={1}
+                  strokeDistance={2}
+                  progressStrokeWidth={5}/>
+                </div>
+                :
+                <div className={styles.card_info_score_icon}>
+                  <Tooltip tip={limitMessage}>
+                    <i className="icon-35-lock"/>
+                  </Tooltip>
+                </div>
             }
           </div>
           <div className={styles.card_info_desc}>
@@ -157,7 +169,9 @@ class UserProfileCard extends React.Component {
         <div className={cn(styles.card_info, styles.card_info_troubleshooting)}>
           <div className={styles.card_info_title}>Troubleshooting</div>
           <div className={styles.card_info_score}>
-            { this.props.summary && this.props.summary.statements ?
+            {
+              this.props.summary && this.props.summary.statements
+              ?
               <div className={styles.card_info_score_radial}>
                 <ScoreRadial
                   id={'troubleshooting'}
@@ -170,8 +184,13 @@ class UserProfileCard extends React.Component {
                   strokeWidth={1}
                   strokeDistance={2}
                   progressStrokeWidth={5}/>
-              </div> :
-              <div className={styles.card_info_score_icon}><i className="icon-35-lock"/></div>
+              </div>
+              :
+              <div className={styles.card_info_score_icon}>
+                <Tooltip tip={limitMessage}>
+                  <i className="icon-35-lock"/>
+                </Tooltip>
+              </div>
             }
           </div>
           <div className={styles.card_info_desc}>
