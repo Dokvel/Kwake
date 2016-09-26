@@ -3,6 +3,7 @@ import cn from 'classnames';
 import _ from 'lodash';
 
 // Import Components
+import Loader from '../Loader/Loader';
 import ScoreRadial from '../ScoreRadial/ScoreRadial';
 
 // Import Functions
@@ -15,8 +16,48 @@ import styles from './RadarChart.scss';
 import dataTalents from '../../../data/talents';
 
 export default class RadarChart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { userPhotoLoadStatus: false };
+  }
+
+  componentWillMount() {
+    let image = document.createElement('img');
+    image.src = this.props.image;
+    image.onload = () => {
+      this.setState({ userPhotoLoadStatus: true });
+    };
+  }
+
   componentDidMount() {
     this.renderChart();
+  }
+
+  renderUserPhoto() {
+    let userPhotoStyle = {
+      backgroundImage: 'url(' + this.props.image + ')'
+    };
+
+    if (this.props.summary) {
+      return (
+        <div id="userPhoto" className={styles.userPhoto} style={userPhotoStyle}></div>
+      );
+    } else {
+      return (
+        <div className={styles.userPhoto}>
+          <ScoreRadial
+            colorStart={'#0060ff'}
+            colorEnd={'#0060ff'}
+            contentType={'image'}
+            content={this.props.image}
+            maxValue={this.props.limit}
+            value={this.props.talentRates.length}
+            strokeWidth={5}
+            strokeDistance={0}
+            progressStrokeWidth={5} />
+        </div>
+      );
+    }
   }
 
   renderChart() {
@@ -174,40 +215,19 @@ export default class RadarChart extends Component {
   }
 
   render() {
-    let userPhotoStyle = {
-      backgroundImage: 'url(' + this.props.image + ')'
-    };
+    let chartID = cn(styles.radarChart, {
+      [styles.chart]: _.isEmpty(this.props.talentRates)
+    });
 
     if (typeof window !== 'undefined') {
       this.renderChart();
     }
 
-    let chartID = cn(styles.radarChart, {
-       [styles.chart]: _.isEmpty(this.props.talentRates)
-     });
-
     return (
       <div className={styles.radarChartContainer}>
         <div id={chartID} className="radarChart">
         </div>
-        {
-          this.props.summary
-          ?
-          <div className={styles.userPhoto} style={userPhotoStyle}></div>
-          :
-          <div className={styles.userPhoto}>
-            <ScoreRadial
-              colorStart={'#0060ff'}
-              colorEnd={'#0060ff'}
-              contentType={'image'}
-              content={this.props.image}
-              maxValue={this.props.limit}
-              value={this.props.talentRates.length}
-              strokeWidth={5}
-              strokeDistance={0}
-              progressStrokeWidth={5} />
-          </div>
-        }
+        { this.state.userPhotoLoadStatus ? this.renderUserPhoto() : <Loader /> }
       </div>
     );
   }
