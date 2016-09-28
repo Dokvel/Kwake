@@ -7,6 +7,12 @@ import { connect } from 'react-redux';
 import callApi from '../../../../util/apiCaller';
 import { browserHistory } from 'react-router';
 
+import {
+  gaLogReviewRequestOpened,
+  gaLogReviewRequestPassed,
+  gaLogUserScoreUnlocked
+} from '../../../../../utils/gaHelpers';
+
 import styles from './UserEvaluatePage.scss';
 
 import { getPersonalityType } from '../../../../../utils/disc_helpers';
@@ -32,10 +38,19 @@ class UserEvaluatePage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { type: props.location.query.sign_in === 'true' ? TYPE_SIGN_IN : TYPE_TALENTS, statements: {}, talents: {} }
+    this.state = {
+      type: this.isSignIn() ? TYPE_SIGN_IN : TYPE_TALENTS,
+      statements: {},
+      talents: {}
+    }
+  }
+
+  isSignIn() {
+    return this.props.location.query.sign_in === 'true';
   }
 
   componentDidMount() {
+    gaLogReviewRequestOpened(this.isSignIn());
     this.props.dispatch(fetchTokenInfo(this.props.params.token));
   }
 
@@ -51,6 +66,10 @@ class UserEvaluatePage extends Component {
         talents: this.state.talents
       }).then(res => {
         browserHistory.push('/thanks');
+        gaLogReviewRequestPassed();
+        if (res.isUnlocked) {
+          gaLogUserScoreUnlocked();
+        }
       });
     }
   }

@@ -63,46 +63,50 @@ export function addEvaluate(req, res) {
   if (!req.params.token || !req.body.talents || !req.body.statements || !req.body.personalityKey) {
     res.status(403).end();
   } else {
-    Token.findOne({ token: req.params.token, type: TYPE_EVALUATE }).exec((err, token) => {
-      if (err) {
-        res.status(500).send(err);
-      } else if (!token) {
-        res.status(403).end();
-      } else {
-        if (token.dateUsed) {
+    let savedEvaluate, evaluateToken, tokenUser;
+    Token.findOne({ token: req.params.token, type: TYPE_EVALUATE })
+      .then(token => {
+        if (!token) {
+          res.status(403).end();
+        } else if (token.dateUsed) {
           res.status(403).end();
         } else {
+          evaluateToken = token;
           let evaluate = new Evaluate({
             cuid: cuid(),
-            requester: token.requester,
-            responderEmail: token.responderEmail,
+            requester: evaluateToken.requester,
+            responderEmail: evaluateToken.responderEmail,
             personalityKey: req.body.personalityKey,
             talents: req.body.talents,
             statements: req.body.statements
           });
-
-          let savedEvaluate;
-
-          evaluate.save((err, saved) => {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              savedEvaluate = saved;
-              if (token.token != 'demo_token') {
-                token.dateUsed = Date.now();
-              }
-              token.save((err, saved) => {
-                if (err) {
-                  res.status(500).send(err);
-                } else {
-                  res.json({ evaluate: savedEvaluate });
-                }
-              });
-            }
-          });
+          return evaluate.save();
         }
-      }
-    });
+      })
+      .then((saved) => {
+        savedEvaluate = saved;
+        if (evaluateToken.token != 'demo_token') {
+          evaluateToken.dateUsed = Date.now();
+        }
+        return evaluateToken.save();
+      })
+      .then((saved) => {
+        return User.findOne({ cuid: evaluateToken.requester })
+      })
+      .then((requester) => {
+        if (requester) {
+          tokenUser = requester;
+          return Evaluate.count({ requester: requester.cuid })
+        } else {
+          res.json({ evaluate: savedEvaluate });
+        }
+      })
+      .then((evaluateCount) => {
+        res.json({ evaluate: savedEvaluate, isUnlocked: evaluateCount === tokenUser.scoreLimit });
+      })
+      .catch(err=> {
+        res.status(500).send(err);
+      });
   }
 }
 

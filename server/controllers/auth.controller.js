@@ -1,4 +1,5 @@
 import User from '../models/user';
+import Evaluate from '../models/evaluate';
 import cuid from 'cuid';
 import google from 'googleapis';
 import serverConfig from '../config';
@@ -32,10 +33,13 @@ export function signIn(req, res) {
                 gender: userInfo.gender,
               });
 
+              let isNewUser = true;
+              let createdUser;
               User.findOne({ googleId: user.googleId })
                 .then((existUser) => {
                   if (existUser) {
                     user = existUser;
+                    isNewUser = false;
                   }
 
                   user.googleAccessToken = tokens.access_token;
@@ -61,7 +65,15 @@ export function signIn(req, res) {
                   return user.save();
                 })
                 .then(saved => {
-                  res.json({ authenticationToken: saved.authenticationToken });
+                  createdUser = saved;
+                  return Evaluate.count({ responderEmail: createdUser.email });
+                })
+                .then(evaluateCount => {
+                  res.json({
+                    authenticationToken: createdUser.authenticationToken,
+                    isNewUser,
+                    havePassedRequest: evaluateCount > 0
+                  });
                 })
                 .catch(err => {
                   res.status(500).send(err);
