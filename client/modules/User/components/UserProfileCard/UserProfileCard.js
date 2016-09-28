@@ -19,6 +19,8 @@ import styles from './UserProfileCard.scss';
 // Import Static Data
 import talents from '../../../../../data/talents';
 
+import { gaLogSocialNetworkShare } from '../../../../../utils/gaHelpers';
+
 class UserProfileCard extends React.Component {
 
   fbShare = () => {
@@ -28,7 +30,9 @@ class UserProfileCard extends React.Component {
       caption: 'enQounter',
       picture: `${domainAddress()}/api/users/${this.props.user.cuid}/sm_post_picture`
     }, (response) => {
-      console.log(response);
+      if (response && response.post_id) {
+        gaLogSocialNetworkShare();
+      }
     });
   };
 

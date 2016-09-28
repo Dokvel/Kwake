@@ -7,7 +7,11 @@ import { connect } from 'react-redux';
 import callApi from '../../../../util/apiCaller';
 import { browserHistory } from 'react-router';
 
-import { gaLogReviewRequestOpened, gaLogReviewRequestPassed } from '../../../../../utils/gaHelpers';
+import {
+  gaLogReviewRequestOpened,
+  gaLogReviewRequestPassed,
+  gaLogUserScoreUnlocked
+} from '../../../../../utils/gaHelpers';
 
 import styles from './UserEvaluatePage.scss';
 
@@ -62,8 +66,11 @@ class UserEvaluatePage extends Component {
         talents: this.state.talents
       }).then(res => {
         browserHistory.push('/thanks');
+        gaLogReviewRequestPassed();
+        if (res.isUnlocked) {
+          gaLogUserScoreUnlocked();
+        }
       });
-      gaLogReviewRequestPassed();
     }
   }
 

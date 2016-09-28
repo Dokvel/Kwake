@@ -69,7 +69,7 @@ class RequestReviewModal extends Component {
         this.setState({ isSent: false });
       }, 5000);
     });
-    gaLogReviewRequestSent();
+    gaLogReviewRequestSent(this.state.selected.length === 0);
   };
 
   onSelect = (email)=> {
