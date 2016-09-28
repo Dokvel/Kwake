@@ -7,7 +7,6 @@ import styles from './AdminLoginPage.scss';
 
 import { callAdminApi } from '../../../../util/apiCaller';
 
-
 export class AdminLoginPage extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +31,7 @@ export class AdminLoginPage extends Component {
   render() {
     return (
       <div className={styles.container}>
+        {process.env.NODE_ENV}
         <form className={styles.form} onSubmit={this.onSend}>
           <span>Username</span>
           <input value={this.state.credentials.username} type="text" name="username"
