@@ -227,7 +227,7 @@ export default class RadarChart extends Component {
       <div className={styles.radarChartContainer}>
         <div id={chartID} className="radarChart">
         </div>
-        { this.state.userPhotoLoadStatus ? this.renderUserPhoto() : <Loader /> }
+        { (this.state.userPhotoLoadStatus || this.props.image === '') ? this.renderUserPhoto() : <Loader /> }
       </div>
     );
   }
