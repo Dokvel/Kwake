@@ -16,7 +16,7 @@ export default [
   },
   {
     key: 'conscientiousness',
-    name: "Conscientiousness",
+    name: "Compliance",
     description: "Thoughtful, orderly, cautious, accurate"
   }
 ]
