@@ -5,43 +5,67 @@
   to { transform: rotate(360deg); }
 }
 
-svg {
-  width: 100%;
-  height: 100%;
-}
-
-#radarChart {
+.container {
   height: 100%;
   width: 100%;
   display:flex;
   align-items:center;
   justify-content:center;
-}
 
-#chart {
-  animation: rotation 30s linear infinite;
-}
+  svg {
+    height: 100%;
+    width: 100%;
+  }
 
-.radarChartContainer {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
+  .hidden {
+    display: none;
+  }
 
-.userPhoto {
-  width: 75px;
-  height: 75px;
-  margin-top: -37px;
-  margin-left: -37px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  background-size: contain;
-}
+  .active {
+    fill: url(#fgradient);
+  }
 
-@media (min-width: $mobileMinWidth) and (max-width: $mobileMaxWidth) {
-  .moveDown {
-    margin-top: 110px;
+  .haze {
+    fill: #B2C4FF;
+    opacity: 0.15;
+  }
+
+  .legend {
+    fill: #fefefe;
+    font-family: "futura-pt", sans-serif;
+    font-size: 14px;
+  }
+
+  .loader {
+    position: absolute;
+  }
+
+  .userPhoto {
+    width: 75px;
+    height: 75px;
+    margin-top: -37px;
+    margin-left: -37px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    background-size: contain;
+  }
+
+  .guide-box {
+    position: absolute;
+
+    .guide-line {
+      stroke: rgba(254,254,254, .5);
+      stroke-dasharray: 100%;
+      stroke-dashoffset: -5%;
+      stroke-width: 1;
+    }
+
+    .guide-text {
+      fill: $grey;
+      font-family: $futuraFontFamily;
+      text-transform: uppercase;
+    }
   }
 }

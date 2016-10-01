@@ -1,27 +1,37 @@
-import React, { Component } from 'react';
-import cn from 'classnames';
+import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 
-// Import Components
 import Loader from '../Loader/Loader';
 import ScoreRadial from '../ScoreRadial/ScoreRadial';
 
-// Import Functions
-import { RadarChartFunc } from '../../util/charts/RadarChart';
+import { FluidD3 } from '../../util/charts/RadarChart';
+import { ratesToDataArray } from '../../util/feedbackHelpers';
 
-// Import Style
 import styles from './RadarChart.scss';
+import talents from '../../../data/talents';
+import personalityTypes from '../../../data/personalityTypes';
 
-// Import Static Data
-import dataTalents from '../../../data/talents';
-
-export default class RadarChart extends Component {
+class RadarChart extends Component {
   constructor(props) {
     super(props);
-    this.state = { userPhotoLoadStatus: false };
+    this.state = { data: undefined, score: undefined, userPhotoLoadStatus: false };
   }
 
   componentWillMount() {
+    if (!this.props.special) {
+      if (this.props.score) {
+        let data = ratesToDataArray(this.props.data);
+        let score = ratesToDataArray(this.props.score);
+        this.setState({ data: data, score: score });
+      } else {
+        let data = ratesToDataArray(this.props.data);
+        this.setState({ data: data });
+      }
+    } else {
+      this.specialRandomize(this.props.special);
+      this.loadInterval = setInterval(() => this.specialRandomize(this.props.special), 5000);
+    }
+
     let image = document.createElement('img');
     image.src = this.props.image;
     image.onload = () => {
@@ -29,8 +39,86 @@ export default class RadarChart extends Component {
     };
   }
 
+  componentWillUnmount() {
+    clearInterval(this.loadInterval);
+  }
+
   componentDidMount() {
-    this.renderChart();
+    let el = document.getElementById('svg');
+    this.d3obj = new Array();
+
+    let parent = this;
+    this.state.data.forEach(function(val, index) {
+      let active = index === parent.state.data.length - 1;
+      parent.d3obj.push(new FluidD3(el, parent.props, {data: val, type: styles.haze}));
+    });
+
+    let scoreType = this.state.score !== undefined ? styles.active : styles.hidden;
+    this.scoreSchart = new FluidD3(el, parent.props, {data: this.state.score, type: scoreType});
+  }
+
+  componentDidUpdate() {
+    let parent = this;
+    this.state.data.forEach(function(data, index) {
+      parent.d3obj[index].update({data: data, type: styles.haze});
+    });
+
+    if (this.state.score !== undefined) {
+      this.scoreSchart.update({data: this.state.score, type: styles.active});
+    }
+  }
+
+  specialRandomize(special) {
+    if (special === 'randomize') {
+      let randomData = [[]];
+      for (var i = 0; i < 5; i++) {
+        randomData[0].push(_.random(0, 100));
+      }
+      let randomScore = [];
+      for (var i = 0; i < 5; i++) {
+        randomScore.push(_.random(0, 100));
+      }
+      this.setState({ data: randomData, score: randomScore });
+    } else if (special === 'empty') {
+      let randomData = [[]];
+      for (var i = 0; i < 5; i++) {
+        randomData[0].push(_.random(0, 75));
+      }
+      this.setState({ data: randomData });
+    }
+  }
+
+  renderLegends() {
+    let talentsObj = _.keyBy(talents, 'key');
+    let legendPositions = [[200,30], [380,150], [300,350], [100,350], [20,150]];
+    let legends = [];
+    for (var i = 0; i < this.props.talents.length; i++) {
+      legends.push({position: legendPositions[i], title: talentsObj[this.props.talents[i]].abbreviation});
+    }
+    return (
+      <g className={styles.legend}>
+        {
+          legends.map((legend) => {
+            return (
+              <text key={legend.title} x={legend.position[0]} y={legend.position[1]} textAnchor="middle">{legend.title}</text>
+            );
+          })
+        }
+      </g>
+    );
+  }
+
+  renderGuides() {
+    let position = [];
+    position.push(_.random(100, 300));
+    position.push(_.random(0, 125));
+
+    return (
+      <svg className={styles['guide-box']} viewBox="0 0 400 400">
+        <line className={styles['guide-line']} x1={position[0]} y1={position[1]} x2="200" y2="200" />
+        <text className={styles['guide-text']} x={position[0]} y={position[1]} textAnchor="middle">{personalityTypes[_.random(0, 13)].name}</text>
+      </svg>
+    );
   }
 
   renderUserPhoto() {
@@ -38,7 +126,7 @@ export default class RadarChart extends Component {
       backgroundImage: 'url(' + this.props.image + ')'
     };
 
-    if (this.props.summary) {
+    if (this.props.score) {
       return (
         <div id="userPhoto" className={styles.userPhoto} style={userPhotoStyle}></div>
       );
@@ -51,7 +139,7 @@ export default class RadarChart extends Component {
             contentType={'image'}
             content={this.props.image}
             maxValue={this.props.limit}
-            value={this.props.talentRates.length}
+            value={this.props.data.length}
             strokeWidth={5}
             strokeDistance={0}
             progressStrokeWidth={5} />
@@ -60,175 +148,47 @@ export default class RadarChart extends Component {
     }
   }
 
-  renderChart() {
-    let talentsObj = _.keyBy(dataTalents, 'key');
-    let {summary, talentRates, talents} = this.props;
-    let votes = [];
-
-    if (_.isEmpty(this.props.talentRates)) {
-      talents = 'none';
-      votes.push([3,3,3,3,3]);
-    } else {
-      _.each(talentRates, talentRate => {
-        votes.push(_.toArray(talentRate));
-      });
-
-      if (summary) {
-        votes.push(_.toArray(summary))
-      }
-    }
-
-    let data = new Array(votes.length);
-    let animationArray = [];
-    let colorArray = [];
-    let filterArray = [];
-    let opacityArray = [];
-
-    for (var i = 0; i < votes.length; i++) {
-      if (_.isEmpty(this.props.talentRates)) {
-        animationArray.push("morphing");
-        colorArray.push("#B2C4FF");
-        filterArray.push("none");
-        opacityArray.push(".15");
-      } else if (summary && i === (votes.length - 1)) {
-        animationArray.push("morphing");
-        colorArray.push("url(#gradient)");
-        filterArray.push("url(#glow)");
-        opacityArray.push("1");
-      } else {
-        animationArray.push("none");
-        colorArray.push("#B2C4FF");
-        filterArray.push("none");
-        opacityArray.push(".15");
-      }
-
-      data[i] = [];
-    }
-
-    let animation = d3.scale.ordinal().range(animationArray);
-    let color = d3.scale.ordinal().range(colorArray);
-    let filter = d3.scale.ordinal().range(filterArray);
-    let opacity = d3.scale.ordinal().range(opacityArray);
-
-    let baseMult = 3;
-
-    for (let v = 0; v < votes.length; v++) {
-      let points = votes[v];
-      let subPoints = [];
-      let subPoint = null;
-
-      for (let i = 0; i < points.length; i++) {
-        if (i === (points.length - 1)) {
-          subPoint = (points[i] + points[0]) / baseMult;
-          // 1 | 5
-          if ((baseMult / 1.8 <= subPoint && subPoint <= baseMult / 1.5) && (points[i] > baseMult * 1.6 || points[0] > baseMult * 1.6)) {
-            subPoint = subPoint * (baseMult / 3.61);
-          }
-          // 1 | 4
-          if ((baseMult / 2.24 <= subPoint && subPoint < baseMult / 1.799) && (points[i] > baseMult * 1.3 || points[0] > baseMult * 1.3)) {
-            subPoint = subPoint * (baseMult / 3.7);
-          }
-          // 1 | 3
-          if (baseMult / baseMult < subPoint && subPoint < baseMult / 2.24) {
-            subPoint = subPoint * (baseMult / 3.16);
-          }
-          // 1 | 2
-          if (baseMult / 4.48 <= subPoint && subPoint <= baseMult / baseMult) {
-            subPoint = subPoint * (baseMult / 2.5);
-          }
-          // 1 | 1
-          if (subPoint < baseMult / 4.48) {
-            subPoint = subPoint * (baseMult / 2);
-          }
-
-          subPoints.push(subPoint);
-        } else {
-          subPoint = (points[i] + points[i + 1]) / baseMult;
-          // 1 | 5
-          if ((baseMult / 1.8 <= subPoint && subPoint <= baseMult / 1.5) && (points[i + 1] > baseMult * 1.6 || points[0] > baseMult * 1.6)) {
-            subPoint = subPoint * (baseMult / 3.61);
-          }
-          // 1 | 4
-          if ((baseMult / 2.24 <= subPoint && subPoint < baseMult / 1.799) && (points[i + 1] > baseMult * 1.3 || points[0] > baseMult * 1.3)) {
-            subPoint = subPoint * (baseMult / 3.7);
-          }
-          // 1 | 3
-          if (baseMult / baseMult < subPoint && subPoint < baseMult / 2.24) {
-            subPoint = subPoint * (baseMult / 3.16);
-          }
-          // 1 | 2
-          if (baseMult / 4.48 <= subPoint && subPoint <= baseMult / baseMult) {
-            subPoint = subPoint * (baseMult / 2.5);
-          }
-          // 1 | 1
-          if (subPoint < baseMult / 4.48) {
-            subPoint = subPoint * (baseMult / 2);
-          }
-
-          subPoints.push(subPoint);
-        }
-      }
-
-      if (talents === 'none') {
-        for (let i = 0; i < 5; i++) {
-          let item = {};
-
-          item = {
-            axis: "",
-            value: points[i]
-          }
-          data[v].push(item);
-
-          item = {
-            axis: "",
-            value: subPoints[i]
-          }
-          data[v].push(item);
-        }
-      } else {
-        for (let i = 0; i < talents.length; i++) {
-          let item = {};
-
-          item = {
-            axis: talentsObj[talents[i]].abbreviation,
-            value: points[i]
-          }
-          data[v].push(item);
-
-          item = {
-            axis: "",
-            value: subPoints[i]
-          }
-          data[v].push(item);
-        }
-      }
-    }
-
-    let radarChartOptions = {
-      animation: animation,
-      color: color,
-      filter: filter,
-      opacity: opacity
-    };
-
-    RadarChartFunc(".radarChart", data, radarChartOptions);
-  }
-
   render() {
-    let chartID = cn(styles.radarChart, {
-      [styles.chart]: _.isEmpty(this.props.talentRates)
-    });
-
-    if (typeof window !== 'undefined') {
-      this.renderChart();
-    }
-
     return (
-      <div className={styles.radarChartContainer}>
-        <div id={chartID} className="radarChart">
-        </div>
-        { (this.state.userPhotoLoadStatus || this.props.image === '') ? this.renderUserPhoto() : <Loader /> }
+      <div className={styles.container}>
+        <svg id="svg" viewBox="0 0 400 400">
+          <defs>
+            <linearGradient id="fgradient" x1="0" x2="1" y1="1" y2="0">
+              <stop offset="0%" stopColor="#ffac52" />
+              <stop offset="100%" stopColor="#ff3c57" />
+            </linearGradient>
+          </defs>
+          {this.props.talents && !this.props.special ? this.renderLegends() : undefined}
+        </svg>
+        {this.props.special === 'randomize' ? this.renderGuides() : undefined}
+        {
+          (this.state.userPhotoLoadStatus || this.props.image === undefined)
+          ?
+          this.renderUserPhoto()
+          :
+          <div className={styles.loader}><Loader /></div>
+        }
       </div>
     );
   }
 }
+
+RadarChart.propTypes = {
+  data: React.PropTypes.array,
+  image: React.PropTypes.string,
+  limit: React.PropTypes.number,
+  score: React.PropTypes.object,
+  special: React.PropTypes.string,
+  talents: React.PropTypes.array
+};
+
+RadarChart.defaultProps = {
+  data: [],
+  image: undefined,
+  limit: 0,
+  score: undefined,
+  special: undefined,
+  talents: undefined
+};
+
+export default RadarChart;

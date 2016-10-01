@@ -8,6 +8,18 @@ export function generateAVG(keys, rates) {
   return result;
 }
 
+export function ratesToDataArray(rates) {
+  let data = [];
+  if (_.isArray(rates)) {
+    _.each(rates, rate => {
+      data.push(_.toArray(_.flatMap(rate, (x) => [x * 20])));
+    });
+  } else {
+    data = _.toArray(_.flatMap(rates, (x) => [x * 20]));
+  }
+  return data;
+}
+
 export function getColorRange(rate) {
   const colorRanges = [
     ['#ff3d4f', '#ff6c3f'],
