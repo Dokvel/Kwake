@@ -131,7 +131,7 @@ class UserProfileCard extends React.Component {
                 <span className={styles.score}>
               { this.props.summary ?
                 <span className={styles.value}>{this.props.summary.talents[talent].toFixed(1)}</span> :
-                <i className="fa fa-lock"/> }
+                <Tooltip tip={limitMessage}><i className="icon-35-lock"/></Tooltip> }
               </span>
               </li>
             )

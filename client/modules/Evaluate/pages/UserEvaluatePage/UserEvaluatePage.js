@@ -6,6 +6,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import callApi from '../../../../util/apiCaller';
 import { browserHistory } from 'react-router';
+import cn from 'classnames';
 
 import {
   gaLogReviewRequestOpened,
@@ -86,12 +87,18 @@ class UserEvaluatePage extends Component {
   }
 
   render() {
+    let is_iPad = navigator.userAgent.match(/iPad/i) !== null;
+    let iosHelperBlockStyles = cn({
+      [styles['ios-margin-top']]: is_iPad
+    });
+
     return (
       <div className={styles.wrapper}>
         <Header {...this.props.evaluate}/>
         <div className={styles.container}>
           {this.props.evaluate && this.renderForm()}
         </div>
+        <div className={iosHelperBlockStyles}></div>
         <Footer/>
       </div>
     );

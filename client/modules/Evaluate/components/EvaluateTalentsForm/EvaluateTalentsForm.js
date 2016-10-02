@@ -50,11 +50,11 @@ export class EvaluateTalentsForm extends Component {
                   <Tooltip tip={talents[talent].description} title={talents[talent].name}>
                     <div className={styles.name}>{talents[talent].name}</div>
                   </Tooltip>
-                  <MediaQuery query='(max-width: 767px)'>
+                  <MediaQuery query='(max-width: 768px)'>
                     <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}
                                 talentName={talents[talent].name}/>
                   </MediaQuery>
-                  <MediaQuery query='(min-width: 768px)'>
+                  <MediaQuery query='(min-width: 769px)'>
                     <TalentIcon name={talents[talent].icon} tip={talents[talent].description} talentKey={talent}
                                 talentName={talents[talent].name} circled={true}/>
                   </MediaQuery>
