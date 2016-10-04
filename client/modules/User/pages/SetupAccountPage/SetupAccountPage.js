@@ -81,12 +81,4 @@ SetupAccountPage.contextTypes = {
   router: React.PropTypes.object,
 };
 
-SetupAccountPage.willTransitionFrom = (transition, component) => {
-  console.log(transition)
-  if (this.state.currentStage > 1) {
-    this.setState({ currentStage: this.state.currentStage - 1 });
-    transition.abort();
-  }
-}
-
 export default connect(mapStateToProps)(SetupAccountPage);
