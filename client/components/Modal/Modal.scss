@@ -5,6 +5,9 @@
   border-radius: 5px !important;
   color: $grey !important;
   padding: 0 !important;
+
+  padding-left: 30px !important;
+  padding-right: 30px !important;
   a[class^="closeButton"] {
     cursor: pointer;
     left: initial !important;
@@ -20,10 +23,11 @@
 @media (max-width: $mobileMaxWidth) {
   .dialog {
     left: 0 !important;
+    right: 0 !important;
   }
 }
 
-@media (min-width: $mobileMinWidth) and (max-width: $tabletMaxWidth) {
+@media (max-width: $tabletMaxWidth) {
   .dialog {
     a[class^="closeButton"] {
       right: 10px !important;

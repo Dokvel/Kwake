@@ -58,8 +58,10 @@ class UserEvaluatePage extends Component {
   onCompleted(result) {
     if (this.state.type === TYPE_SIGN_IN) {
       this.setState({ type: TYPE_TALENTS })
+      window.scrollTo(0, 0)
     } else if (this.state.type === TYPE_TALENTS) {
       this.setState({ type: TYPE_STATEMENT, talents: result })
+      window.scrollTo(0, 0)
     } else if (this.state.type === TYPE_STATEMENT) {
       callApi(`evaluate/${this.props.params.token}`, 'post', {
         personalityKey: this.props.personalityType.key,

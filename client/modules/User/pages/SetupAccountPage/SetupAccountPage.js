@@ -19,7 +19,7 @@ import { getCurrentUser, hasProfileCompleted } from '../../../App/AppReducer';
 class SetupAccountPage extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = { currentStage: 1, amountStage: 2, disc: {}, talents: {} }
   }
 
@@ -37,7 +37,8 @@ class SetupAccountPage extends Component {
 
   onCompleted(result) {
     if (this.state.currentStage === 1) {
-      this.setState({ currentStage: this.state.currentStage + 1, disc: result })
+      this.setState({ currentStage: this.state.currentStage + 1, disc: result });
+      window.scrollTo(0, 0);
     } else if (this.state.currentStage === 2) {
       this.setState({ talents: result })
       this.props.dispatch(setupProfileRequest({ talents: result, ...this.state.disc }));
@@ -79,5 +80,13 @@ SetupAccountPage.propTypes = {
 SetupAccountPage.contextTypes = {
   router: React.PropTypes.object,
 };
+
+SetupAccountPage.willTransitionFrom = (transition, component) => {
+  console.log(transition)
+  if (this.state.currentStage > 1) {
+    this.setState({ currentStage: this.state.currentStage - 1 });
+    transition.abort();
+  }
+}
 
 export default connect(mapStateToProps)(SetupAccountPage);

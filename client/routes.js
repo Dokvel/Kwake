@@ -34,7 +34,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
 
-  <Route path="/" component={Base}>
+  <Route path="/" component={Base} onUpdate={() => window.scrollTo(0, 0)}>
     <Route
       path="/terms"
       getComponent={(nextState, cb) => {
