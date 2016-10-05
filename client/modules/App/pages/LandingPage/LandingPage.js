@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import MediaQuery from 'react-responsive';
-import { getFirstUserPageLink } from '../../../../util/generalHelpers';
 
 // Import Components
 import Loader from '../../../../components/Loader/Loader';
@@ -10,7 +9,7 @@ import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
 import RadarChart from '../../../../components/RadarChart/RadarChart';
 
 // Import Functions
-import { generateAVG } from '../../../../util/feedbackHelpers';
+import { getFirstUserPageLink } from '../../../../util/generalHelpers';
 
 // Import Styles
 import styles from './LandingPage.scss';
@@ -39,25 +38,13 @@ export class LandingPage extends Component {
   }
 
   render() {
-    let keys = [1, 2, 3, 4, 5];
-    let talentRates = [
-      { 1: 5, 2: 4, 3: 3, 4: 4, 5: 5 },
-      { 1: 3, 2: 4, 3: 5, 4: 4, 5: 3 },
-      { 1: 4, 2: 3, 3: 4, 4: 3, 5: 4 }
-    ];
-    let summary = generateAVG(keys, talentRates);
     return (
       <div className={styles.container}>
         <div className={styles['mobile-header']}>enQounter</div>
         <div className={styles.content}>
           <div className={styles['column-left']}>
             <div className={styles['radar-chart']}>
-              <RadarChart
-                image=''
-                limit={3} // just for unlocked scoreRadial propgress-border
-                talents='none' // if there are no titles for axes
-                talentRates={talentRates}
-                summary={summary}/>
+              <RadarChart special='randomize' />
               <div className={styles['user-photo']}></div>
             </div>
           </div>

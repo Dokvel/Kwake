@@ -22,6 +22,14 @@ import talents from '../../../../../data/talents';
 import { gaLogSocialNetworkShare } from '../../../../../utils/gaHelpers';
 
 class UserProfileCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { nextPropsReceived: false };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ nextPropsReceived: true });
+  }
 
   fbShare = () => {
     FB.ui({
@@ -75,12 +83,17 @@ class UserProfileCard extends React.Component {
         </div>
         }
         <div className={chartCN}>
-          <RadarChart
+          {
+            this.state.nextPropsReceived
+            &&
+            <RadarChart
+            special={this.props.feedbackRates.talents.length === 0 ? 'empty' : undefined}
             image={user.image}
             limit={user.scoreLimit}
             talents={user.talents}
-            talentRates={this.props.feedbackRates.talents}
-            summary={this.props.summary && this.props.summary.talents}/>
+            data={this.props.feedbackRates.talents}
+            score={this.props.summary && this.props.summary.talents ? this.props.summary.talents : undefined} />
+          }
         </div>
         <div className={styles.card_user}>
           {`${user.givenName} ${user.familyName}`} <span className={styles.card_user_isa}>is a</span>

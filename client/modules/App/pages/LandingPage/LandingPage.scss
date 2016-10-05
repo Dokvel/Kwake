@@ -2,10 +2,15 @@
 
 @keyframes userPhotoChanger {
   0%   { background-image: url('../../../../../vendor/fake_avatars/avatar_1.jpg'); }
+  19%  { background-image: url('../../../../../vendor/fake_avatars/avatar_1.jpg'); }
   20%  { background-image: url('../../../../../vendor/fake_avatars/avatar_2.jpg'); }
+  39%  { background-image: url('../../../../../vendor/fake_avatars/avatar_2.jpg'); }
   40%  { background-image: url('../../../../../vendor/fake_avatars/avatar_3.jpg'); }
+  59%  { background-image: url('../../../../../vendor/fake_avatars/avatar_3.jpg'); }
   60%  { background-image: url('../../../../../vendor/fake_avatars/avatar_4.jpg'); }
+  79%  { background-image: url('../../../../../vendor/fake_avatars/avatar_4.jpg'); }
   80%  { background-image: url('../../../../../vendor/fake_avatars/avatar_5.jpg'); }
+  99%  { background-image: url('../../../../../vendor/fake_avatars/avatar_5.jpg'); }
   100% { background-image: url('../../../../../vendor/fake_avatars/avatar_1.jpg'); }
 }
 
