@@ -110,8 +110,8 @@ class RadarChart extends Component {
 
   renderGuides() {
     let position = [];
-    position.push(_.random(100, 300));
-    position.push(_.random(0, 125));
+    position.push(_.random(150, 250));
+    position.push(_.random(20, 100));
 
     return (
       <svg className={styles['guide-box']} viewBox="0 0 400 400">
@@ -184,11 +184,7 @@ RadarChart.propTypes = {
 
 RadarChart.defaultProps = {
   data: [],
-  image: undefined,
-  limit: 0,
-  score: undefined,
-  special: undefined,
-  talents: undefined
+  limit: 0
 };
 
 export default RadarChart;

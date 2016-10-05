@@ -85,7 +85,7 @@ class UserProfileCard extends React.Component {
         <div className={chartCN}>
           {
             this.state.nextPropsReceived
-            ?
+            &&
             <RadarChart
             special={this.props.feedbackRates.talents.length === 0 ? 'empty' : undefined}
             image={user.image}
@@ -93,8 +93,6 @@ class UserProfileCard extends React.Component {
             talents={user.talents}
             data={this.props.feedbackRates.talents}
             score={this.props.summary && this.props.summary.talents ? this.props.summary.talents : undefined} />
-            :
-            undefined
           }
         </div>
         <div className={styles.card_user}>
