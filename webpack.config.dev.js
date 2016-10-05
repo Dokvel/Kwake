@@ -5,7 +5,7 @@ var postcssReporter = require('postcss-reporter');
 var path = require('path');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
 
   entry: {
     app: [

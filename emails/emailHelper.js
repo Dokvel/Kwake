@@ -38,7 +38,7 @@ export function emailsSender(templatePath, data = [], senderEmail) {
           },
             {
               'filename': 'logo.png',
-              path: path.join(vendorDir, 'KWAKE-email.png'),
+              path: path.join(vendorDir, 'enQounter.png'),
               'cid': 'logo'
             }]
         };

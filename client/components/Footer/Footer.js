@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 import styles from './Footer.scss';
 
-let logoSrc = require("./../../../vendor/KWAKE.svg");
+let logoSrc = require("./../../../vendor/enQounter.svg");
 
 function Footer(props) {
   return (

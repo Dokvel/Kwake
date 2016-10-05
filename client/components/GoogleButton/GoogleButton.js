@@ -3,6 +3,9 @@ import { authenticated } from '../../modules/App/AppActions';
 import Button from '../Button/Button';
 import callApi from '../../util/apiCaller';
 
+import { browserHistory } from 'react-router';
+import { getFirstUserPageLink } from '../../util/generalHelpers';
+
 import { gaLogUserRegistered } from '../../../utils/gaHelpers';
 
 import Loader from '../Loader/Loader';
@@ -15,11 +18,11 @@ export default class GoogleButton extends Component {
 
   onGoogleSignIn() {
     if (window.auth2) {
-      this.setState({ processing: true });
       window.auth2.grantOfflineAccess({ 'redirect_uri': 'postmessage' }).then((authResult)=> {
         if (authResult['code']) {
           let isNewUser = false;
           let havePassedRequest = false;
+          this.setState({ processing: true });
           callApi('auth/google/callback', 'post', { code: authResult['code'] })
             .then(res => {
               if (res.authenticationToken) {
@@ -30,28 +33,48 @@ export default class GoogleButton extends Component {
               }
             }).then(userInfo => {
             this.props.dispatch(authenticated(userInfo.user));
-            this.props.onSuccess && this.props.onSuccess(userInfo.user);
+            this.props.onSuccessAuth && this.props.onSuccessAuth(userInfo.user);
             if (isNewUser) {
               gaLogUserRegistered(havePassedRequest);
             }
+          }).catch(err => {
+            this.setState({ processing: false });
           });
         } else {
-          this.setState({ processing: false });
           // There was an error.
         }
-      });
+      })
     }
   }
+
+  loggedBehavior = () => {
+    browserHistory.push(getFirstUserPageLink(this.props.currentUser));
+  };
+
+  _renderLoader = () => {
+    return (<Button color={Button.COLOR_TRANSPARENT} disabled={true}> <Loader/> </Button>)
+  };
+
+  _renderActionButton = ()=> {
+    if (this.props.currentUser) {
+      return (
+        <Button onClick={this.props.onContinue || this.loggedBehavior}>
+          {`Continue as ${this.props.currentUser.givenName} ${this.props.currentUser.familyName}`}
+        </Button>
+      )
+    } else {
+      return (
+        <Button color={Button.COLOR_RED} onClick={this.onGoogleSignIn.bind(this)} rightIcon="icon-37-arrow">
+          Log in with Google
+        </Button>
+      )
+    }
+  };
 
   render() {
     return (
       <div>
-        {!this.state.processing ?
-          <Button color={Button.COLOR_RED}
-                  onClick={this.onGoogleSignIn.bind(this)}
-                  rightIcon="icon-37-arrow">
-            Log in with Google </Button> : <Button color={Button.COLOR_TRANSPARENT} disabled={true}> <Loader/> </Button>
-        }
+        {!this.state.processing ? this._renderActionButton() : this._renderLoader() }
       </div>
     );
   }

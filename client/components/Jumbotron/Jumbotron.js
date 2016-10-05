@@ -1,22 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { browserHistory } from 'react-router';
-import { getFirstUserPageLink } from '../../util/generalHelpers';
 import { Link } from 'react-router';
 
 // Import Components
 import GoogleButton from '../GoogleButton/GoogleButton';
-import Button from '../Button/Button';
 
 // Import Style
 import styles from './Jumbotron.scss';
 
 class Jumbotron extends Component {
-
-  loggedBehavior = () => {
-    if (this.props.currentUser) {
-      browserHistory.push(getFirstUserPageLink(this.props.currentUser));
-    }
-  };
 
   render() {
     let titleStyle = {
@@ -36,11 +27,10 @@ class Jumbotron extends Component {
           {this.props.text}
         </div>
         <div className={styles['button-section']}>
-          {!this.props.currentUser ?
-            <GoogleButton {...this.props} onSuccess={this.props.onGoogleSuccess} /> :
-            <Button
-              onClick={this.props.onContinue || this.loggedBehavior}>{`Continue as ${this.props.currentUser.givenName} ${this.props.currentUser.familyName}`}</Button>
-          }
+          <GoogleButton dispatch={this.props.dispatch}
+                        onSuccessAuth={this.props.onGoogleSuccess}
+                        currentUser={this.props.currentUser}
+                        onContinue={this.props.onContinue }/>
           <Link to="/terms">
             Terms and Conditions
           </Link>

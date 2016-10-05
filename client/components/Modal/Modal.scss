@@ -24,10 +24,14 @@
   .dialog {
     left: 0 !important;
     right: 0 !important;
+    a[class^="closeButton"] {
+      right: 5px !important;
+      top: 5px !important;
+    }
   }
 }
 
-@media (max-width: $tabletMaxWidth) {
+@media (min-width: $mobileMaxWidth) and (max-width: $tabletMaxWidth) {
   .dialog {
     a[class^="closeButton"] {
       right: 10px !important;
