@@ -1,18 +1,27 @@
 @import "../../../stylesheets/modules/config";
 
 @keyframes rotation {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .container {
   height: 100%;
   width: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   svg {
+    height: 100%;
+    width: 100%;
+  }
+
+  #chart {
     height: 100%;
     width: 100%;
   }
@@ -21,17 +30,12 @@
     display: none;
   }
 
-  .active {
-    fill: url(#fgradient);
-  }
-
   .haze {
-    fill: #B2C4FF;
     opacity: 0.15;
   }
 
   .legend {
-    fill: #fefefe;
+    fill: $grey;
     font-family: "futura-pt", sans-serif;
     font-size: 14px;
   }
@@ -40,32 +44,89 @@
     position: absolute;
   }
 
-  .userPhoto {
+  .randomize-photo {
+    height: 0;
+    opacity: 0;
+    top: 51% !important;
+  }
+
+  .randomize-photo.animate-show, .randomize-photo.animate-reset {
+    transition: 0.3s;
+    height: 75px;
+    opacity: 1;
+    top: 50% !important;
+  }
+
+  .randomize-photo.animate-hide {
+    transition: ease-out-in;
+    transition-duration: 0.2s;
+    transition-delay: 1s;
+    height: 0;
+    opacity: 0;
+    top: 52% !important;
+  }
+
+  .user-photo {
     width: 75px;
     height: 75px;
-    margin-top: -37px;
-    margin-left: -37px;
+    margin-top: -37.5px;
+    margin-left: -37.5px;
     position: absolute;
     top: 50%;
     left: 50%;
     border-radius: 50%;
     background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .guide-box {
     position: absolute;
-
+    z-index: 1;
+    top: 0;
+    left: 0;
     .guide-line {
-      stroke: rgba(254,254,254, .5);
-      stroke-dasharray: 100%;
-      stroke-dashoffset: -5%;
-      stroke-width: 1;
+      stroke: rgba(254, 254, 254, 0.7);
+      stroke-dasharray: 100% 100%;
+      stroke-dashoffset: 100%;
+      stroke-width: 2;
+      transition: stroke-dashoffset 0.5s ease-in-out;
     }
 
     .guide-text {
+      opacity: 0;
+      transition: opacity 0.5s 0.3s;
       fill: $grey;
       font-family: $futuraFontFamily;
       text-transform: uppercase;
+      font-size: $baseFontSize-M;
+    }
+  }
+}
+
+@media (min-width: $mobileMaxWidth) and (max-width: $desktopLgWidth) {
+  .container {
+    .randomize-photo {
+      width: 60px;
+      height: 60px;
+      margin-top: -30px;
+      margin-left: -30px;
+    }
+    .randomize-photo.animate-show, .randomize-photo.animate-reset {
+      height: 60px;
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: $mobileMaxWidth) {
+  .container {
+    .user-photo, .randomize-photo {
+      width: 60px;
+      height: 60px;
+      margin-top: -30px;
+      margin-left: -30px;
+    }
+    .randomize-photo.animate-show, .randomize-photo.animate-reset {
+      height: 60px;
     }
   }
 }

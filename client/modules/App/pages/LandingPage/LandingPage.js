@@ -4,7 +4,6 @@ import { browserHistory } from 'react-router';
 import MediaQuery from 'react-responsive';
 
 // Import Components
-import Loader from '../../../../components/Loader/Loader';
 import Jumbotron from '../../../../components/Jumbotron/Jumbotron';
 import RadarChart from '../../../../components/RadarChart/RadarChart';
 
@@ -45,7 +44,6 @@ export class LandingPage extends Component {
           <div className={styles['column-left']}>
             <div className={styles['radar-chart']}>
               <RadarChart special='randomize' />
-              <div className={styles['user-photo']}></div>
             </div>
           </div>
           <div className={styles['column-right']}>

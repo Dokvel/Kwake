@@ -1,19 +1,5 @@
 @import "../../../../../stylesheets/modules/config";
 
-@keyframes userPhotoChanger {
-  0%   { background-image: url('../../../../../vendor/fake_avatars/avatar_1.jpg'); }
-  19%  { background-image: url('../../../../../vendor/fake_avatars/avatar_1.jpg'); }
-  20%  { background-image: url('../../../../../vendor/fake_avatars/avatar_2.jpg'); }
-  39%  { background-image: url('../../../../../vendor/fake_avatars/avatar_2.jpg'); }
-  40%  { background-image: url('../../../../../vendor/fake_avatars/avatar_3.jpg'); }
-  59%  { background-image: url('../../../../../vendor/fake_avatars/avatar_3.jpg'); }
-  60%  { background-image: url('../../../../../vendor/fake_avatars/avatar_4.jpg'); }
-  79%  { background-image: url('../../../../../vendor/fake_avatars/avatar_4.jpg'); }
-  80%  { background-image: url('../../../../../vendor/fake_avatars/avatar_5.jpg'); }
-  99%  { background-image: url('../../../../../vendor/fake_avatars/avatar_5.jpg'); }
-  100% { background-image: url('../../../../../vendor/fake_avatars/avatar_1.jpg'); }
-}
-
 .container {
   background-color: $landingBackgroundColor;
   background-image: url("../../../../../vendor/landingPageBackgroundImage.png");
@@ -35,66 +21,52 @@
           width: 100%;
           position: absolute;
         }
-
-        .user-photo {
-          width: 75px;
-          height: 75px;
-          margin-top: -37px;
-          margin-left: -37px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          border-radius: 50%;
-          background-size: contain;
-          background-image: url('../../../../../vendor/fake_avatars/avatar_1.jpg');
-          animation: userPhotoChanger 25s infinite ease;
-        }
       }
     }
   }
 }
 
 @media (min-width: $desktopMidWidth) and (max-width: $desktopLgWidth) {
- .container {
-   .mobile-header {
-     display: none;
-   }
+  .container {
+    .mobile-header {
+      display: none;
+    }
 
-   .content {
-     height: 100%;
-     max-width: 720px !important;
-     margin: 0 auto;
+    .content {
+      height: 100%;
+      max-width: 720px !important;
+      margin: 0 auto;
 
-     .column-left {
-       width: 40%;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-     }
+      .column-left {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
 
-     .column-right {
-       width: 60%;
-       display: flex;
-       flex-direction: column;
-       justify-content: space-between;
+      .column-right {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
-       .header {
-         font-family: $futuraFontFamily;
-         font-size: 30px;
-         font-weight: 400;
-         letter-spacing: 0.1em;
-         text-transform: uppercase;
-       }
+        .header {
+          font-family: $futuraFontFamily;
+          font-size: 30px;
+          font-weight: 400;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
 
-       .footer {
-         font-family: $landingFooterFont;
-         font-size: $baseFontSize-S;
-         font-weight: 600;
-         opacity: 0.25;
-       }
-     }
-   }
- }
+        .footer {
+          font-family: $landingFooterFont;
+          font-size: $baseFontSize-S;
+          font-weight: 600;
+          opacity: 0.25;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: $desktopMidWidth) {
@@ -114,11 +86,11 @@
       flex-direction: row;
 
       .column-left {
-         width: 34%;
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-       }
+        width: 34%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
 
       .column-right {
         width: 66%;
@@ -146,6 +118,12 @@
   }
 }
 
+@media (min-width: $desktopMinWidth) and (max-width: $tabletMaxWidth) {
+  .container {
+    height: 100%;
+  }
+}
+
 @media (min-width: 0px) and (max-width: $tabletMaxWidth) {
   .container {
     width: 100%;
@@ -163,9 +141,10 @@
 
     .content {
       .column-left {
-        height: 320px;
-        width: 320px;
+        max-height: 440px;
+        max-width: 320px;
         margin: 0 auto;
+        padding: 0 10px;
       }
 
       .column-right {
