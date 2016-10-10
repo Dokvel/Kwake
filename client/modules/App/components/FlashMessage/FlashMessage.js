@@ -35,8 +35,8 @@ class FlashMessage extends Component {
   render() {
     return (
       <div className={cn(styles.overlay, { [styles.hide]: this.state.willHide })}>
-        { this.props.title && <span className={styles['mobile-title']}>{this.props.title}</span>}
-        <span className={styles['mobile-message']}>{this.props.message}</span>
+        { this.props.title && <div className={styles['mobile-title']}>{this.props.title}</div>}
+        <div className={styles['mobile-message']}>{this.props.message}</div>
       </div>
     )
   }
