@@ -70,3 +70,8 @@
   }
 }
 
+@media (min-width: $mobileMinWidth) and (max-width: $mobileMidWidth) {
+  .user-photo {
+    margin: 0;
+  }
+}

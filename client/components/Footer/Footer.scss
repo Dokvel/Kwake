@@ -3,23 +3,19 @@
 .container {
   max-width: 610px;
   width: 100%;
-  display: inline-flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 30px;
   font-size: $baseFontSize-XS;
   font-family: $baseFontFamily;
   font-weight: 300;
   margin-bottom: 40px;
+  text-align: center;
   a {
     text-decoration: underline;
     color: white;
     opacity: 0.15;
   }
   .info {
-    flex: 1;
     color: $grey;
     opacity: 0.15;
     text-align: center;
@@ -30,8 +26,12 @@
     margin-bottom: 20px;
     opacity: 0.05;
     width: 100%;
-    max-width: 200px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
     img {
+      max-width: 200px;
       width: 100%;
       height: 100%;
     }
