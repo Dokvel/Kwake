@@ -28,13 +28,14 @@ export class SignInStepPage extends Component {
         <div className={styles.container}>
           <Jumbotron
             {...this.props}
-            title='enQounter &mdash; professional profiles that don’t suck!'
+            title="KWAKE &mdash; professional profiles that don’t suck!"
             titleSize={56}
-            text='With enQounter you can quickly create and share you psychological profile and let others review it.'
+            text="With KWAKE you can quickly create and share you psychological profile and let others review it."
             textSize={18}
-            onContinue={()=> {
+            onContinue={() => {
               this.props.onCompleted();
-            }}/>
+            }}
+          />
         </div>
       </div>
     );
@@ -42,7 +43,7 @@ export class SignInStepPage extends Component {
 }
 
 SignInStepPage.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 // Retrieve data from store as props

@@ -20,10 +20,10 @@ export class Base extends Component {
 
   render() {
     return (
-      <div className='main'>
+      <div className="main">
         <Helmet
-          title="ENQOUNTER"
-          titleTemplate="%s - enQounter App"
+          title="KWAKE"
+          titleTemplate="%s - KWAKE App"
           meta={[
             { charset: 'utf-8' },
             {
@@ -35,13 +35,13 @@ export class Base extends Component {
               content: 'width=device-width, initial-scale=1',
             },
             {
-              property: "og:title",
-              content: `ENQOUNTER - enQounter App`
-            }
+              property: 'og:title',
+              content: 'KWAKE - KWAKE App',
+            },
           ]}
         />
-        { typeof window !== 'undefined' && window.flashMessage &&
-        <FlashMessage message={window.flashMessage.text} title={window.flashMessage.title}/>
+        {typeof window !== 'undefined' && window.flashMessage &&
+        <FlashMessage message={window.flashMessage.text} title={window.flashMessage.title} />
         }
         {this.props.children}
       </div>

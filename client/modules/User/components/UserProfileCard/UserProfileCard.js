@@ -35,8 +35,8 @@ class UserProfileCard extends React.Component {
     FB.ui({
       method: 'feed',
       link: domainAddress(),
-      caption: 'enQounter',
-      picture: `${domainAddress()}/api/users/${this.props.user.cuid}/sm_post_picture`
+      caption: 'KWAKE',
+      picture: `${domainAddress()}/api/users/${this.props.user.cuid}/sm_post_picture`,
     }, (response) => {
       if (response && response.post_id) {
         gaLogSocialNetworkShare();
@@ -58,17 +58,17 @@ class UserProfileCard extends React.Component {
     let positionHelperCN = cn({
       [styles['position-helper--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0,
       [styles['position-helper--locked']]: this.props.isCurrentUser && !this.props.summary && this.props.feedbackRates.talents.length !== 0,
-      [styles['position-helper--unlocked']]: this.props.isCurrentUser && this.props.summary
+      [styles['position-helper--unlocked']]: this.props.isCurrentUser && this.props.summary,
     });
 
     let cardCN = cn(styles.card, {
       [styles['card--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0,
       [styles['card--locked']]: this.props.isCurrentUser && !this.props.summary && this.props.feedbackRates.talents.length !== 0,
-      [styles['card--unlocked']]: this.props.isCurrentUser && this.props.summary
+      [styles['card--unlocked']]: this.props.isCurrentUser && this.props.summary,
     });
 
     let chartCN = cn(styles.card_chart, {
-      [styles['chart--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0
+      [styles['chart--unrated']]: this.props.isCurrentUser && this.props.feedbackRates.talents.length === 0,
     });
 
     let limitMessage = `Get ${user.scoreLimit - this.props.feedbackRates.talents.length} more reviews to unlock your scores!`;
@@ -76,9 +76,9 @@ class UserProfileCard extends React.Component {
     return (
       <div className={cardCN}>
         <div className={positionHelperCN}></div>
-        { this.props.isCurrentUser && !this.props.summary &&
+        {this.props.isCurrentUser && !this.props.summary &&
         <div className={styles.limitInfo}>
-          <span className={styles.icon}><i className="icon-36-info" aria-hidden="true"/></span>
+          <span className={styles.icon}><i className="icon-36-info" aria-hidden="true" /></span>
           Get <b>{user.scoreLimit - this.props.feedbackRates.talents.length} more</b> reviews to unlock your scores!
         </div>
         }
@@ -87,12 +87,13 @@ class UserProfileCard extends React.Component {
             this.state.nextPropsReceived
             &&
             <RadarChart
-            special={this.props.feedbackRates.talents.length === 0 ? 'empty' : undefined}
-            image={user.image}
-            limit={user.scoreLimit}
-            talents={user.talents}
-            data={this.props.feedbackRates.talents}
-            score={this.props.summary && this.props.summary.talents ? this.props.summary.talents : undefined} />
+              special={this.props.feedbackRates.talents.length === 0 ? 'empty' : undefined}
+              image={user.image}
+              limit={user.scoreLimit}
+              talents={user.talents}
+              data={this.props.feedbackRates.talents}
+              score={this.props.summary && this.props.summary.talents ? this.props.summary.talents : undefined}
+            />
           }
         </div>
         <div className={styles.card_user}>
@@ -107,12 +108,13 @@ class UserProfileCard extends React.Component {
             rightIcon="icon-37-arrow"
             // {!props.summary && Button.COLOR_BLUE} throws error
             color={!this.props.summary ? Button.COLOR_BLUE : undefined}
-            onClick={this.props.showRequestModal}>
+            onClick={this.props.showRequestModal}
+          >
             Ask for a review
           </Button>
           <div className={styles['share-links']}>
             <div className={styles['fb-share-link']} onClick={this.fbShare.bind(this)}>
-              <span className="fa fa-facebook-square" aria-hidden="true"/> share
+              <span className="fa fa-facebook-square" aria-hidden="true" /> share
             </div>
           </div>
         </div>
@@ -127,7 +129,7 @@ class UserProfileCard extends React.Component {
               </span>
               :
               <Tooltip tip={limitMessage}>
-                <i className="icon-35-lock"/>
+                <i className="icon-35-lock" />
               </Tooltip>
             }
           </div>
@@ -136,19 +138,19 @@ class UserProfileCard extends React.Component {
           </div>
         </div>
         <ul className={styles.card_talentsList}>
-          { user.talents.map((talent) => {
+          {user.talents.map((talent) => {
             return (
               <li key={talent}>
-                <span className={styles.talent}><i className={talentsObj[talent].icon}/></span>
+                <span className={styles.talent}><i className={talentsObj[talent].icon} /></span>
                 {`${talentsObj[talent].name} (${talentsObj[talent].abbreviation})`}
                 <span className={styles.score}>
-              { this.props.summary ?
+              {this.props.summary ?
                 <span className={styles.value}>{this.props.summary.talents[talent].toFixed(1)}</span> :
-                <Tooltip tip={limitMessage}><i className="icon-35-lock"/></Tooltip> }
+                <Tooltip tip={limitMessage}><i className="icon-35-lock" /></Tooltip>}
               </span>
               </li>
-            )
-          }) }
+            );
+          })}
         </ul>
         <div className={styles.card_info}>
           <div className={styles.card_info_title}>Team</div>
@@ -167,12 +169,13 @@ class UserProfileCard extends React.Component {
                   value={this.props.summary.statements.team}
                   strokeWidth={1}
                   strokeDistance={2}
-                  progressStrokeWidth={5}/>
+                  progressStrokeWidth={5}
+                />
                 </div>
                 :
                 <div className={styles.card_info_score_icon}>
                   <Tooltip tip={limitMessage}>
-                    <i className="icon-35-lock"/>
+                    <i className="icon-35-lock" />
                   </Tooltip>
                 </div>
             }
@@ -200,12 +203,13 @@ class UserProfileCard extends React.Component {
                   value={this.props.summary.statements.troubleshooting}
                   strokeWidth={1}
                   strokeDistance={2}
-                  progressStrokeWidth={5}/>
+                  progressStrokeWidth={5}
+                />
               </div>
               :
               <div className={styles.card_info_score_icon}>
                 <Tooltip tip={limitMessage}>
-                  <i className="icon-35-lock"/>
+                  <i className="icon-35-lock" />
                 </Tooltip>
               </div>
             }

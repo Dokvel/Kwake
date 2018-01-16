@@ -15,7 +15,7 @@ import { getCurrentUser } from '../../AppReducer';
 // Import Styles
 import styles from './ThanxPage.scss';
 
-let atom = require("./../../../../../vendor/atom.svg");
+let atom = require('./../../../../../vendor/atom.svg');
 
 export class ThanxPage extends Component {
 
@@ -23,15 +23,16 @@ export class ThanxPage extends Component {
     return (
       <Jumbotron
         {...this.props}
-        title='enQounter &mdash; professional profiles that don’t suck!'
+        title="KWAKE &mdash; professional profiles that don’t suck!"
         titleSize={titleSize}
-        text='With enQounter you can quickly create and share you psychological profile and let others review it.'
+        text="With KWAKE you can quickly create and share you psychological profile and let others review it."
         textSize={textSize}
-        onGoogleSuccess={(user)=> {
+        onGoogleSuccess={(user) => {
           if (isLoggedIn()) {
-            browserHistory.push(getFirstUserPageLink(user))
+            browserHistory.push(getFirstUserPageLink(user));
           }
-        }}/>
+        }}
+      />
     );
   }
 
@@ -41,22 +42,22 @@ export class ThanxPage extends Component {
         <div className={styles.container}>
           <div className={styles.header}>
             <div className={styles.image}>
-              <img src={atom}/>
+              <img src={atom} />
             </div>
             <div className={styles['thanks-message']}>
               THANKS FOR THE REVIEW!
             </div>
           </div>
           <div className={styles.jumbotron}>
-            <MediaQuery query='(max-width: 767px)'>
+            <MediaQuery query="(max-width: 767px)">
               <div className={styles.poweredBy}>REVIEW POWERED BY:</div>
               {this.renderJumbotron(30, 16)}
             </MediaQuery>
-            <MediaQuery query='(min-width: 768px)'>
+            <MediaQuery query="(min-width: 768px)">
               {this.renderJumbotron(56, 18)}
             </MediaQuery>
           </div>
-          <Footer/>
+          <Footer />
         </div>
       </div>
     );
@@ -64,7 +65,7 @@ export class ThanxPage extends Component {
 }
 
 ThanxPage.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 // Retrieve data from store as props

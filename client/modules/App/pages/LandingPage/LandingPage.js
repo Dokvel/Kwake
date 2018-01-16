@@ -24,40 +24,41 @@ export class LandingPage extends Component {
     return (
       <Jumbotron
         {...this.props}
-        title='enQounter &mdash; professional profiles that don’t suck!'
+        title="KWAKE &mdash; professional profiles that don’t suck!"
         titleSize={titleSize}
-        text='With enQounter, you can quickly create and share your unique type and talent, grow personal Superpower Scores via invited, but anonymous, encounter reviews, and always be ready to play to your best at work.'
+        text="With KWAKE, you can quickly create and share your unique type and talent, grow personal Superpower Scores via invited, but anonymous, encounter reviews, and always be ready to play to your best at work."
         textSize={textSize}
-        onGoogleSuccess={(user)=>{
+        onGoogleSuccess={(user) => {
           if (isLoggedIn()) {
-            browserHistory.push(getFirstUserPageLink(user))
+            browserHistory.push(getFirstUserPageLink(user));
           }
-        }}/>
+        }}
+      />
     );
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles['mobile-header']}>enQounter</div>
+        <div className={styles['mobile-header']}>KWAKE</div>
         <div className={styles.content}>
           <div className={styles['column-left']}>
             <div className={styles['radar-chart']}>
-              <RadarChart special='randomize' />
+              <RadarChart special="randomize" />
             </div>
           </div>
           <div className={styles['column-right']}>
-            <div className={styles.header}>enQounter</div>
+            <div className={styles.header}>KWAKE</div>
             <div className={styles.jumbotron}>
-              <MediaQuery query='(max-width: 1280px)'>
+              <MediaQuery query="(max-width: 1280px)">
                 {this.renderJumbotron(30, 16)}
               </MediaQuery>
-              <MediaQuery query='(min-width: 1281px)'>
+              <MediaQuery query="(min-width: 1281px)">
                 {this.renderJumbotron(56, 18)}
               </MediaQuery>
             </div>
             <div className={styles.footer}>
-              Copyright &copy; {new Date().getFullYear()} enQounter. All rights reserved.
+              Copyright &copy; {new Date().getFullYear()} KWAKE. All rights reserved.
             </div>
           </div>
         </div>
@@ -67,13 +68,13 @@ export class LandingPage extends Component {
 }
 
 LandingPage.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
-    currentUser: getCurrentUser(store)
+    currentUser: getCurrentUser(store),
   };
 }
 
