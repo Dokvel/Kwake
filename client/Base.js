@@ -36,7 +36,7 @@ export class Base extends Component {
             },
             {
               property: 'og:title',
-              content: 'KWAKE - KWAKE App',
+              content: 'KWAKE',
             },
           ]}
         />
